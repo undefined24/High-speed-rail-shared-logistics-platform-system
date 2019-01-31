@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xmlns:context="http://www.springframework.org/schema/context"
+xmlns:mvc="http://www.springframework.org/schema/mvc"
+xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+<!--Spring自动扫描base-package下有Spring注解的类，然后注册为Spring的bean  -->
+<context:component-scan base-package="com.undefined24.ssm.controller" />
+<!-- 代替处理映射器和处理适配器的功能 -->
+<!--自定义消息转换器的编码,解决后台传输json回前台时，中文乱码问题-->
+    <mvc:annotation-driven >
+       <!--  <mvc:message-converters register-defaults="true">
+            <bean class="org.springframework.http.converter.StringHttpMessageConverter" >
+                <property name = "supportedMediaTypes">
+                    <list>
+                        <value>application/json;charset=utf-8</value>
+                        <value>text/html;charset=utf-8</value>
+                        application 可以在任意 form 表单里面 enctype 属性默认找到
+                        <value>application/x-www-form-urlencoded</value>
+                    </list>
+                </property>
+            </bean>
+            <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" ></bean>
+        </mvc:message-converters> -->
+    </mvc:annotation-driven>
+
+
+<!-- 视图解析器 -->
+<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+<property name="prefix" value="/WEB-INF/pages/"></property>
+<property name="suffix" value=".jsp"></property>
+</bean>
+<!-- UploadResolver -->
+<bean id = "multipartResolver" class = "org.springframework.web.multipart.commons.CommonsMultipartResolver">
+<property name="maxUploadSize" value="1000000"/>
+<property name="defaultEncoding" value="UTF-8"/>
+</bean>
+
+<!-- 将springmvc不能处理的请求交给tomcat -->
+<mvc:default-servlet-handler/>
+
+</beans>
