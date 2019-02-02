@@ -18,7 +18,7 @@ create table user(
 	userID int(32) primary key auto_increment,
     username varchar(20) not null,
     userphone char(11) not null,
-    usernumber char(18) not null,
+    usernumber char(20) not null,
     usersex char(8) not null
 );
 create table user_info(
