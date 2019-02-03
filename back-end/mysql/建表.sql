@@ -22,7 +22,7 @@ create table user(
     usersex char(8) not null
 );
 create table user_info(
-	userID int(32) primary key,
+	userID int(32) primary key auto_increment,
     nickname varchar(32) not null,
     userpwd char(20) not null,
     useraddress varchar(50) not null,
