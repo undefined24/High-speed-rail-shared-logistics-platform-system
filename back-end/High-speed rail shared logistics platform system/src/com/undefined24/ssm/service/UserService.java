@@ -1,10 +1,13 @@
 package com.undefined24.ssm.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.undefined24.ssm.dao.UserMapper;
+import com.undefined24.ssm.vo.History;
 import com.undefined24.ssm.vo.User;
 
 @Service
@@ -41,5 +44,17 @@ public class UserService {
 	@Transactional
 	public int ChangeProfile(User user){
 		return userMapper.ChangeProfile(user);
+	}
+	
+	//下单用户历史订单
+	@Transactional
+	public List<History> giveUserHistory(int userID){
+		return userMapper.giveUserHistory(userID);
+	}
+	
+	//接单用户历史订单
+	@Transactional
+	public List<History> acceptUserHistory(int userID){
+		return userMapper.acceptUserHistory(userID);
 	}
 }

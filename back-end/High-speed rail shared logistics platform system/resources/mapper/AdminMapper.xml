@@ -11,4 +11,16 @@ select * from administrator where adminname=#{adminname} and adminpwd=#{adminpwd
 <update id="adminChangePwd" parameterType="administrator" >
 update administrator set adminpwd=#{adminpwd} where adminID = #{adminID}
 </update>
+
+<insert id="addWorker" parameterType="worker" useGeneratedKeys="true">
+insert into worker(workername,workerposition,workersex,workersalary,workercheckcard) values(#{workername},#{workerposition},#{workersex},#{workersalary},#{workercheckcard})
+</insert>
+
+<select id="checkWorker" resultType="worker" parameterType="worker">
+select * from worker where workername=#{workername}
+</select>
+
+<select id="showWorker" resultType="worker">
+select * from worker order by workerID
+</select>
 </mapper>

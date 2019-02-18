@@ -4,13 +4,12 @@ public class User {
 	private int userID;
 	private String nickname;
 	private String userpwd;
-	private String useraddress;
-	private String usersex;
-	private String userbirthday;
-	private String note;
 	private String username;
 	private String userphone;
+	private String useraddress;
+	private String usersex;
 	private String usernumber;
+	private String note;
 	public int getUserID() {
 		return userID;
 	}
@@ -41,12 +40,6 @@ public class User {
 	public void setUsersex(String usersex) {
 		this.usersex = usersex;
 	}
-	public String getUserbirthday() {
-		return userbirthday;
-	}
-	public void setUserbirthday(String userbirthday) {
-		this.userbirthday = userbirthday;
-	}
 	public String getNote() {
 		return note;
 	}
@@ -74,7 +67,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [userID=" + userID + ", nickname=" + nickname + ", userpwd=" + userpwd + ", useraddress="
-				+ useraddress + ", usersex=" + usersex + ", userbirthday=" + userbirthday + ", note=" + note
+				+ useraddress + ", usersex=" + usersex + ", note=" + note
 				+ ", username=" + username + ", userphone=" + userphone + ", usernumber=" + usernumber + "]";
 	}
 	

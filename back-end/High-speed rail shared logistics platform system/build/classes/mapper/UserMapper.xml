@@ -5,7 +5,7 @@
 <mapper namespace="com.undefined24.ssm.dao.UserMapper">
 
 <insert id="Register" parameterType="user" useGeneratedKeys="true">
-insert into user_info(nickname,userpwd,useraddress,usersex) values(#{nickname},#{userpwd},#{useraddress},#{usersex})
+insert into user_info(nickname,userpwd,userphone,useraddress,usersex,usernumber) values(#{nickname},#{userpwd},#{userphone},#{useraddress},#{usersex},#{usernumber})
 </insert>
 
 <select id="Login" resultType="user" parameterType="user">
@@ -30,4 +30,12 @@ update user_info
 </set>
 where userID = #{userID}
 </update>
+
+<select id="giveUserHistory" parameterType="int">
+select * from history where giveUserID=#{giveUserID}
+</select>
+
+<select id="acceptUserHistory" parameterType="int">
+select * from history where acceptUserID=#{acceptUserID}
+</select>
 </mapper>
