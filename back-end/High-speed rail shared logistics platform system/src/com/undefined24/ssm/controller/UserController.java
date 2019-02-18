@@ -37,9 +37,11 @@ public class UserController {
 	 */
 	@RequestMapping(value="/register",method=RequestMethod.POST)
 	public ModelAndView Register(@RequestParam("nickname") String nickname,
-			@RequestParam("userpwd") String userpwd,
-			@RequestParam("useraddress") String useraddress,
 			@RequestParam("usersex") String usersex,
+			@RequestParam("userphone") String userphone,
+			@RequestParam("userpwd") String userpwd,
+			@RequestParam("usernumber") String usernumber,
+			@RequestParam("useraddress") String useraddress,
 			HttpServletRequest req) {
 		//获取用户输入
 		User user = new User();
@@ -49,28 +51,30 @@ public class UserController {
 		boolean isLegal = Pattern.matches(pattern, nickname);
 		if(isLegal) {
 			user.setNickname(nickname);
-			user.setUserpwd(userpwd);
-			user.setUseraddress(useraddress);
 			user.setUsersex(usersex);
-			if(userService.CheckUser(user)==null) {
-				req.setAttribute("name-legal-msg","用户名已被使用，请更改");
+			user.setUserphone(userphone);
+			user.setUserpwd(userpwd);
+			user.setUsernumber(usernumber);
+			user.setUseraddress(useraddress);
+			if(userService.CheckUser(user)!=null) {
+				req.setAttribute("register-msg","用户名已被使用，请更改");
 				mv.setViewName("register");
 			}else {
-				req.setAttribute("name-legal-msg","用户名可用");
+				int result = userService.Register(user);
+				if(result==0) {
+					req.setAttribute("register-msg", "注册失败，请重试");
+					mv.setViewName("register");
+				}else {
+					req.setAttribute("register-msg", "注册成功");
+					mv.setViewName("register");
+					mv.addObject("attr1", user.getNickname());
+					mv.addObject("attr2", user.getUserpwd());
+				 }
 			}
 		}else {
-			req.setAttribute("name-legal-msg", "用户名非法，请更改");
+			req.setAttribute("register-msg", "用户名非法，请更改");
 			mv.setViewName("register");
 		}
-		int result = userService.Register(user);
-		if(result==0) {
-			req.setAttribute("register-msg", "注册失败，请重试");
-			mv.setViewName("register");
-		}else {
-			mv.setViewName("profile");
-			mv.addObject("attr1", user.getNickname());
-			mv.addObject("attr2", user.getUserpwd());
-		 }
 		return mv;
 	}
 	
@@ -78,15 +82,14 @@ public class UserController {
 	 * 前往登录页面
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public ModelAndView gotoLogin(@ModelAttribute("attr1")String attr1,
-			@ModelAttribute("attr2")String attr2) {
+	public ModelAndView gotoLogin() {
 		ModelAndView mv = new ModelAndView();
 		//如果没有登录
-		if(attr1==null) {
-			mv.setViewName("login");
-		}else {
-			mv.setViewName("profile");
-		}
+//		if(attr1==null) {
+//			mv.setViewName("login");
+//		}else {
+			mv.setViewName("login");//修改
+//		}
 		return mv;	
 	}
 	
@@ -95,7 +98,8 @@ public class UserController {
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ModelAndView Login(@RequestParam("nickname") String nickname,
-			@RequestParam("userpwd") String userpwd,HttpServletRequest req) {
+			@RequestParam("userpwd") String userpwd,
+			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		User user = new User();
 		user.setNickname(nickname);
@@ -179,7 +183,6 @@ public class UserController {
 		}else {
 			current_user.setUseraddress(useraddress);
 			current_user.setUsersex(usersex);
-			current_user.setUserbirthday(userbirthday);
 			current_user.setNote(note);
 			try {
 				int result = userService.ChangeProfile(current_user);
@@ -217,4 +220,8 @@ public class UserController {
 		}
 		return mv;
 	}
+	
+	/*
+	 * 跳转去
+	 */
 }

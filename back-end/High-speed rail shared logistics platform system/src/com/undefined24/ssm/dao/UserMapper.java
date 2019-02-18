@@ -1,5 +1,8 @@
 package com.undefined24.ssm.dao;
 
+import java.util.List;
+
+import com.undefined24.ssm.vo.History;
 import com.undefined24.ssm.vo.User;
 
 public interface UserMapper {
@@ -8,4 +11,6 @@ public interface UserMapper {
 	public User Login(User user);
 	public int ChangePwd(User user);
 	public int ChangeProfile(User user);
+	public List<History> giveUserHistory(int userID);
+	public List<History> acceptUserHistory(int userID);
 }

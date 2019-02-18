@@ -1,0 +1,91 @@
+.header{
+    position: fixed;
+    width: 100%;
+    height: 60px;
+    background-color: rgba(255,255,255,0.9);
+    z-index: 1;
+}
+.list{
+    position: fixed;
+    height: 100%;
+    background-color: #222;
+    z-index: 2;
+    padding: 0;
+    color: white;
+    font-weight: bold;
+}
+.m_nav{
+    /*background-color: #c4e3f3;*/
+    margin-top: 60px;
+    list-style: none;
+    clear: both;
+}
+.navbar{
+    border-radius: 0;
+    border: 0;
+}
+.m_nav ul li{
+    clear: both;
+}
+.list .container-fluid{
+    padding: 0;
+}
+.list ul,li{
+    width: 100%;
+    margin-right: 0;
+}
+.staff_info,.admin_info{
+    margin-top: 80px;
+    margin-left: auto;
+}
+.staff_info img,.admin_info img{
+    width: 40%;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+.container{
+    margin-top: 100px;
+    margin-bottom: 30px;
+    background-color: rgba(255,255,255,0.5);
+}
+.modal-dialog{
+    margin-top: 140px;
+}
+.modal-footer{
+    border-top: none;
+}
+.goods_search, .staff_search,.vip_search{
+    margin-top: 60px;
+}
+.goods_search .form-group, .staff_search .form-group, .vip_search .form-group{
+    float: right;
+    margin-bottom: 30px;
+}
+.goods_search .form-group input, .staff_search .form-group input,.vip_search .form-group input{
+    width: 280px;
+}
+.goods_search .form-group button,.staff_search .form-group button,.vip_search .form-group button{
+    width: 70px;
+}
+.turnover,.sale,.discount,.goods{
+    margin-top: 50px;
+}
+.pagination_m{
+    margin-top: 10px;
+    margin-bottom: 50px;
+}
+table.profit{
+    margin-bottom: 100px;
+}
+span[data-toggle='modal']:hover{
+    cursor: pointer;
+    font-weight: bold;
+
+}
+.add_discount{
+    float: right;
+}
+.add_discount:hover,.add_discount:hover:link,.add_discount:visited,.add_discount:active {
+    background-color: white;
+
+}
