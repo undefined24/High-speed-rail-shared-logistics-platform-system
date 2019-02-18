@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>admin_staff</title>
+    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="../css/1.css">
+    <script src="../js/1.js"></script>
+    <link rel="stylesheet" href="../css/staff&admin.css">
+</head>
+<body>
+<div class="header"></div>
+<div class="col-md-2 list">
+    <div class="admin_info">
+        <img class="center-block" src="../image/2089312254@chatroom_1486356859619_63.jpg" />
+        <div class="text-center">
+            <span>工号：</span><span>163136</span><br/>
+            <span>Dick</span><span>，欢迎你</span>
+        </div>
+
+    </div>
+    <nav class="navbar navbar-inverse  m_nav text-center" role="navigation">
+        <div class="container-fluid">
+            <div>
+                <ul class="nav navbar-nav navbar-inverse" >
+                    <li><a href="#">员工管理</a></li>
+                    <li ><a href="#">寄件管理</a></li>
+                    <li class="active"><a href="#">用户管理</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+<div class="container col-md-8 col-md-offset-3">
+    <div class="col-md-11">
+        <form role="form" class="form-inline vip_search">
+
+            <div class="form-group">
+                <input class="form-control " type="text" placeholder="请输入需要查找的会员ID">
+                <button class="form-control btn btn-default">搜索</button>
+            </div>
+        </form>
+        <table class="table table-hover staff col-md-12" style="margin-top: 30px;">
+            <thead>
+            <tr>
+                <th>用户ID</th>
+                <th>姓名</th>
+                <th>性别</th>
+                <th>电话号码</th>
+				<th>身份证号码</th>
+				<th>常用住址</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>000001</td>
+                <td>maxy</td>
+                <td>女</td>
+                <td>152xxxx5908</td>
+				<td>440702xxxxxxxx1521</td>
+				<td>广东-江门</td>
+				<td><span data-toggle="modal" data-target="#vip_edit">修改</span></td>
+                <td><span data-toggle="modal" data-target="#vip_delete">删除</span></td>
+            </tr>
+            <tr>
+                <td>000002</td>
+                <td>lucy</td>
+                <td>女</td>
+                <td>152xxxx5908</td>
+				<td>440702xxxxxxxx1521</td>
+				<td>广东-江门</td>
+				<td><span data-toggle="modal" data-target="#vip_edit">修改</span></td>
+                <td><span data-toggle="modal" data-target="#vip_delete">删除</span></td>
+            </tr>
+            <tr>
+                <td>000003</td>
+                <td>john</td>
+                <td>男</td>
+                <td>152xxxx5908</td>
+				<td>440702xxxxxxxx1521</td>
+				<td>广东-江门</td>
+				<td><span data-toggle="modal" data-target="#vip_edit">修改</span></td>
+                <td><span data-toggle="modal" data-target="#vip_delete">删除</span></td>
+            </tr>
+            <tr>
+                <td>000004</td>
+                <td>johnson</td>
+                <td>男</td>
+                <td>152xxxx5908</td>
+				<td>440702xxxxxxxx1521</td>
+				<td>广东-江门</td>
+				<td><span data-toggle="modal" data-target="#vip_edit">修改</span></td>
+                <td><span data-toggle="modal" data-target="#vip_delete">删除</span></td>
+            </tr>
+
+            </tbody>
+        </table>
+        <div class="col-md-6 col-md-offset-3 pagination_m">
+            <ul class="pagination center-block">
+                <li><a href="#">&laquo;</a></li>
+                <li class="active"><a href="#">1</a></li>
+                <li><a href="#">2</a></li>
+                <li><a href="#">3</a></li>
+                <li><a href="#">4</a></li>
+                <li><a href="#">5</a></li>
+                <li><a href="#">&raquo;</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- 模态框（Modal）修改 -->
+<div class="modal fade" id="vip_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="edit1">用户信息修改</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="#" method="post">
+                    <div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="vip_ID">用户ID</label>
+                        <div class="col-md-8">
+                            <input class="form-control" id="vip_ID" value="fyw" >
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="vip_name">姓名</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4 disabled" id="vip_name" value="gao">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="sex">性别</label>
+                        <div class="col-md-8">
+                            <select class="form-control col-md-4" id="sex">
+                                <option value="male">男</option>
+                                <option value="female">女</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="phone_num">电话号码</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4" id="phone_num" value="">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="pin">身份证号码</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4" id="pin" value="">
+                        </div>
+                    </div>
+					<div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="address">常用住址</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4" id="address" value="广东-江门">
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="submit" class="btn btn-primary" onClick="vip_editSub()">提交更改</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+<!-- 模态框（Modal）确认删除 -->
+<div class="modal fade" id="vip_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="delete1">删除员工</h4>
+            </div>
+            <div class="modal-body">
+                您是否确定要删除？
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
+                <button type="button" class="btn btn-primary">是</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
+
+</body>
+</html>

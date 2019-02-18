@@ -1,0 +1,136 @@
+.container{
+    background-color: rgba(255,255,255,0.9);
+}
+.btn-default:hover,.btn-default:link,.btn-default:visited,.btn-default:focus{
+    background-color: white;
+}
+.goods{
+    margin-top: 70px;
+}
+.good{
+    margin-bottom: 50px;
+}
+.good img{
+    width: 90%;
+    height: 90%;
+    margin-bottom:10px;
+}
+.good button{
+    margin-top: 10px;
+}
+
+.cart{
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 450px;
+    height:100%;
+    background-color: rgba(255,255,255,1);
+    display: none;
+    border: 5px solid #c4e3f3;
+}
+.cart_button{
+    position: fixed;
+    right:0;
+    top:  50%;
+    height:40px;
+    width: 50px;
+    background: #ffffff;
+    float: left;
+    line-height: 40px;
+    font-size: 16px;
+    opacity: 0.9;
+}
+.cart_list{
+    width: 100%;
+    height: 100%;
+
+}
+.cart .user{
+    margin: 10px 0;
+    height: 60px;
+    /*background-color: #ac2925;*/
+}
+.cart .user .icon{
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-left:0;
+    background-color: #2aabd2;
+    float: left;
+}
+.cart .user .icon img{
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+.cart .username{
+    padding-left: 30px;
+    float: left;
+    height: 100%;
+    font-size: 24px;
+    line-height: 60px;
+}
+.cart .list{
+    margin-top: 30px;
+    max-height: 450px;
+    overflow: scroll;
+}
+.cart .list::-webkit-scrollbar{
+    display: none;
+}
+.list .good{
+    /*background-color: #b2dba1;*/
+    padding-top: 10px;
+    border-top: 1px solid #ccc;
+}
+.list .btn{
+    margin-top: 5px;
+    background: transparent;
+    border: none;
+}
+
+.total{
+    margin-top: 30px;
+}
+.total *{
+    text-align: center;
+    padding: 0;
+}
+.loc_search input{
+    width: 600px;
+    height: 40px;
+    float: left;
+}
+.loc_search button{
+    margin-left: 20px;
+    width: 100px;
+    height: 40px;
+    float: left;
+}
+.navbar-nav{
+    margin-top: 10px;
+}
+.navbar-default .navbar-nav>.active>a{
+    background-color: transparent;
+    color: #0084ff;
+    font-size: 15px;
+    font-weight: bold;
+}
+.navbar-default .navbar-nav>.active>a:hover,.navbar-default .navbar-nav>li>a:hover{
+    color: white;
+    background: #0084ff;
+    font-size: 15px;
+}
+.navbar-default .navbar-nav>li>a{
+    color: #7bb9ff;
+    font-weight: bold;
+    font-size: 15px;
+
+}
+.ads,#well_sold{
+    margin-top: 30px;
+}
+.carousel-inner img{
+    background-size: cover;
+}
