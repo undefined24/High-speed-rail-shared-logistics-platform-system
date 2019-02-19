@@ -14,21 +14,14 @@ create table administrator(
   adminname varchar(20) not null,
   adminpwd char(16) not null
 );
-create table user(
-	userID int(32) primary key auto_increment,
-    username varchar(20) not null,
-    userphone char(11) not null,
-    usernumber char(18) not null,
-    usersex char(8) not null
-);
 create table user_info(
 	userID int(32) primary key auto_increment,
     nickname varchar(32) not null,
     userpwd char(20) not null,
+	userphone char(11) not null,
     useraddress varchar(50) not null,
     usersex char(8) not null,
-    userbirthday varchar(32),
-    note varchar(100)
+    usernumber char(18) not null
 );
 create table bill(
 	trackingID int(32) primary key auto_increment,
@@ -71,7 +64,10 @@ create table history(
 create table worker(
 	workerID int(32) primary key auto_increment,
     workername varchar(20) not null,
-    workerpwd char(16) not null
+    workersex char(8) not null,
+    workerposition varchar(20) not null,
+    workersalary int (32) not null,
+    workercheckcard int(32) not null
 );
 create table message (
     wordID int(32) primary key auto_increment,
