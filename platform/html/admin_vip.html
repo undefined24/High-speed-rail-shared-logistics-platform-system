@@ -4,7 +4,7 @@
     <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>admin_staff</title>
+    <title>admin_vip</title>
     <link rel="stylesheet" href="../bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="../js/jquery-3.2.1.min.js"></script>
     <script src="../bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -161,13 +161,14 @@
                             <input class="form-control col-md-4" id="address" value="广东-江门">
                         </div>
                     </div>
-
-
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" class="btn btn-primary" onClick="vip_editSub()">提交更改</button>
+					</div>
+	
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" onClick="vip_editSub()">提交更改</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->

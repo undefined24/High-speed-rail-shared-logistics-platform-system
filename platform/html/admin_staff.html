@@ -111,12 +111,6 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="staff_id">员工工号</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="staff_id" value="123456">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_pos">职务</label>
                         <div class="col-md-8">
                             <input class="form-control col-md-4 disabled" id="staff_pos" value="收银员">
@@ -143,13 +137,14 @@
                             <input class="form-control col-md-4" id="card" value="1234567891011">
                         </div>
                     </div>
-
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
+					</div>
 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -188,10 +183,10 @@
                             <input class="form-control" id="staff_name_1" value="" >
                         </div>
                     </div>
-                    <div class="form-group col-md-12">
+					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_id_1">员工工号</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="staff_id_1" value="">
+                            <input class="form-control" id="staff_id_1" value="" >
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -221,13 +216,14 @@
                             <input class="form-control col-md-4" id="card_1" value="">
                         </div>
                     </div>
-
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" class="btn btn-primary" onClick="staff_addSub()">增加员工</button>
+					</div>
 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" onClick="staff_addSub()">增加员工</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
