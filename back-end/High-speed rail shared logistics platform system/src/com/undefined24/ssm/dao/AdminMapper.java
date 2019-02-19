@@ -13,4 +13,6 @@ public interface AdminMapper {
 	public int addWorker(Worker worker);
 	public Worker checkWorker(Worker worker);
 	public List<Worker> showWorker();
+	public int editWorker(Worker worker);
+	public int deleteWorker(Worker worker);
 }

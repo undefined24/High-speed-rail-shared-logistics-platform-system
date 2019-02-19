@@ -23,4 +23,20 @@ select * from worker where workername=#{workername}
 <select id="showWorker" resultType="worker">
 select * from worker order by workerID
 </select>
+
+<update id="editWorker" parameterType="worker">
+update worker
+<set>
+<if test="workername!=null">workername=#{workername},</if>
+<if test="workerposition!=null">workerposition=#{workerposition},</if>
+<if test="workersex!=null">workersex=#{workersex},</if>
+<if test="workersalary!=null">workersalary=#{workersalary},</if>
+<if test="workercheckcard!=null">workercheckcard=#{workercheckcard}</if>
+</set>
+where workerID = #{workerID}
+</update>
+
+<delete id="deleteWorker" parameterType="worker">
+delete from worker where workerID = #{workerID}
+</delete>
 </mapper>

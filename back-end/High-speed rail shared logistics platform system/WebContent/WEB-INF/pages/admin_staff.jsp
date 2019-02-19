@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/1.css">
+    <link rel="stylesheet" href="css/1.css">
     <script src="js/1.js"></script>
     <link rel="stylesheet" href="css/staff&admin.css">
 </head>
@@ -67,32 +67,13 @@
             <td>${worker.workerID}</td>
             <td>${worker.workername}</td>
             <td>${worker.workersex}</td>
+            <td>${worker.workerposition}</td>
             <td>${worker.workersalary}</td>
             <td>${worker.workercheckcard}</td>
-            <td><span data-toggle="modal" data-target="#myModal">修改</span></td>
-            <td><span data-toggle="modal" data-target="#staff_delete">删除</span></td>
+            <td><a href="editworker?edit_workerID=${worker.workerID}" data-toggle="modal" data-target="#myModal">修改</a></td>
+            <td><a data-toggle="modal" data-target="#staff_delete">删除</a></td>
             </tr>
             </c:forEach>
-            <!-- <tr>
-                <td>352132</td>
-                <td>fying</td>
-                <td>女</td>
-                <td>客服</td>
-                <td>5300</td>
-                <td>123456789101112</td>
-                <td><span data-toggle="modal" data-target="#myModal">修改</span></td>
-                <td><span data-toggle="modal" data-target="#staff_delete">删除</span></td>
-            </tr>
-            <tr>
-                <td>236135</td>
-                <td>pujess</td>
-                <td>男</td>
-                <td>客服</td>
-                <td>5300</td>
-                <td>123456789101112</td>
-                <td><span data-toggle="modal" data-target="#myModal">修改</span></td>
-                <td><span data-toggle="modal" data-target="#staff_delete">删除</span></td>
-            </tr> -->
             </tbody>
         </table>
         <div class="col-md-6 col-md-offset-3 pagination_m">
@@ -116,30 +97,31 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">员工信息修改</h4>
             </div>
+            <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="editworker" method="post">
             <div class="modal-body">
-                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="#" method="post">
+                <!-- <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="editworker" method="post"> -->
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name">员工姓名</label>
                         <div class="col-md-8">
-                            <input class="form-control"  id="staff_name" value="fyw" >
+                            <input class="form-control" name="edit_worker_name" id="staff_name" value="" >
                         </div>
                     </div>
-                    <div class="form-group col-md-12">
+                 	<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_id">员工工号</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="staff_id" value="123456">
+                            <input class="form-control col-md-4 disabled" name="edit_workerID" id="staff_id" value="">
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_pos">职务</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="staff_pos" >
+                            <input class="form-control col-md-4 disabled" name="edit_worker_position" id="staff_pos" >
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="sex">性别</label>
                         <div class="col-md-8">
-                            <select class="form-control col-md-4"  id="sex">
+                            <select class="form-control col-md-4" name="edit_worker_sex" id="sex">
                                 <option value="male">男</option>
                                 <option value="female">女</option>
                             </select>
@@ -148,23 +130,22 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="salary">工资</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="salary" >
+                            <input class="form-control col-md-4" name="edit_worker_salary" id="salary" >
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="card">卡号</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="card" >
+                            <input class="form-control col-md-4" name="edit_worker_checkcard" id="card" >
                         </div>
                     </div>
-
-
-                </form>
+                <!-- </form> -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
             </div>
+            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
@@ -181,7 +162,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
-                <button type="button" class="btn btn-primary">是</button>
+                <a href="deleteworker"><button type="button" class="btn btn-primary">是</button></a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -194,25 +175,25 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="add">添加员工</h4>
             </div>
+            <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="addworker" method="post">
             <div class="modal-body">
-                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="addworker" method="post">
-                    <span style="color:red;margin-left:45px"><%=request.getAttribute("addworker-msg")==null?"":request.getAttribute("addworker-msg") %></span>
+                <!-- <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="addworker" method="post"> -->
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name_1">员工姓名</label>
                         <div class="col-md-8">
-                            <input class="form-control" id="staff_name_1" name="workername" >
+                            <input class="form-control" name="workername" id="staff_name_1" value="" >
                         </div>
                     </div>
-                    <!-- <div class="form-group col-md-12">
+                    <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_id_1">员工工号</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="workernumber" id="staff_id_1" value="">
+                            <input class="form-control col-md-4 disabled" id="staff_id_1" value="">
                         </div>
-                    </div> -->
+                    </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_pos_1">职务</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="workerposition" id="staff_pos_1">
+                            <input class="form-control col-md-4 disabled" name="workerposition" id="staff_pos_1" value="">
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -227,23 +208,22 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="salary_1">工资</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="workersalary" id="salary_1">
+                            <input class="form-control col-md-4" name="workersalary" id="salary_1"  value="">
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="card_1">卡号</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="workercheckcard" id="card_1">
+                            <input class="form-control col-md-4" name="workercheckcard" id="card_1" value="">
                         </div>
                     </div>
-
-
-                </form>
+                <!-- </form> -->
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                 <button type="submit" class="btn btn-primary" onClick="staff_addSub()">增加员工</button>
             </div>
+            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>

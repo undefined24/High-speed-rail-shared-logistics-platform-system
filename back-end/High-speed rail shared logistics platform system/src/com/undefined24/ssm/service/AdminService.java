@@ -45,4 +45,16 @@ public class AdminService {
 	public List<Worker> showWorker(){
 		return adminMapper.showWorker();
 	}
+	
+	//修改员工
+	@Transactional
+	public int editWorker(Worker worker){
+		return adminMapper.editWorker(worker);
+	}
+	
+	//删除员工
+	@Transactional
+	public int deleteWorker(Worker worker){
+		return adminMapper.deleteWorker(worker);
+	}
 }
