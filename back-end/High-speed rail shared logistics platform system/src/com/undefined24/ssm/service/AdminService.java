@@ -57,4 +57,10 @@ public class AdminService {
 	public int deleteWorker(Worker worker){
 		return adminMapper.deleteWorker(worker);
 	}
+	
+	//搜索员工
+	@Transactional
+	public List<Worker> searchWorker(String search){
+		return adminMapper.searchWorker(search);
+	}
 }

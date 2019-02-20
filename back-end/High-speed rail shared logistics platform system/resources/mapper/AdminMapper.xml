@@ -39,4 +39,11 @@ where workerID = #{workerID}
 <delete id="deleteWorker" parameterType="worker">
 delete from worker where workerID = #{workerID}
 </delete>
+
+<select id="searchWorker" resultType="worker" parameterType="string">
+select * from worker where workerID in
+    (select workerID from worker where workerID REGEXP #{search})
+    union
+select * from worker where workername REGEXP #{search}
+</select>
 </mapper>

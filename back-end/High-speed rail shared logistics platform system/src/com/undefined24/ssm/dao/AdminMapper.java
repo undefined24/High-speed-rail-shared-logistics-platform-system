@@ -15,4 +15,5 @@ public interface AdminMapper {
 	public List<Worker> showWorker();
 	public int editWorker(Worker worker);
 	public int deleteWorker(Worker worker);
+	public List<Worker> searchWorker(String search);
 }

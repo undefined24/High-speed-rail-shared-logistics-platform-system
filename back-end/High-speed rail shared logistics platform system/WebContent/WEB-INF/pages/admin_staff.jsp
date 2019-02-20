@@ -43,11 +43,11 @@
 </div>
 <div class="container col-md-8 col-md-offset-3">
     <div class="col-md-11">
-        <form role="form" class="form-inline staff_search">
+        <form role="form" class="form-inline staff_search" action="searchWorker">
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#staff_add">添加员工</button>
             <div class="form-group">
-                <input class="form-control " type="text" placeholder="请输入需要查找的员工姓名">
-                <button class="form-control btn btn-default">搜索</button>
+                <input class="form-control" name="search" type="text" placeholder="请输入需要查找的员工姓名或ID">
+                <button type="submit" class="form-control btn btn-default">搜索</button>
             </div>
         </form>
         <table class="table table-hover staff col-md-12">
@@ -79,22 +79,18 @@
         <div class="col-md-6 col-md-offset-3 pagination_m">
             <ul class="pagination center-block">
             <c:if test="${workerlist.hasPreviousPage}">
-                <li><a href="adminstaff?pn=${workerlist.prePage}">&laquo;</a></li>
+                <li><a href="adminstaff?pn=${workerlist.prePage}&search=${requestScope.search}">&laquo;</a></li>
             </c:if>
             <c:forEach items="${workerlist.navigatepageNums}" var="page">
             <c:if test="${page==workerlist.pageNum}">
-                <li class="active"><a href="adminstaff?pn=${page}">${page}</a></li>
+                <li class="active"><a href="adminstaff?pn=${page}&search=${requestScope.search}">${page}</a></li>
             </c:if>
             <c:if test="${page!=workerlist.pageNum}">
-            	<li><a href="adminstaff?pn=${page}">${page}</a></li>
+            	<li><a href="adminstaff?pn=${page}&search=${requestScope.search}">${page}</a></li>
             </c:if>
             </c:forEach>
-                <!-- <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li> -->
             <c:if test="${workerlist.hasNextPage}">
-                <li><a href="adminstaff?pn=${workerlist.nextPage}">&raquo;</a></li>
+                <li><a href="adminstaff?pn=${workerlist.nextPage}&search=${requestScope.search}">&raquo;</a></li>
             </c:if>
             </ul>
         </div>

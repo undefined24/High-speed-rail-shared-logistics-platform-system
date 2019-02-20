@@ -1,6 +1,7 @@
 package com.undefined24.ssm.controller;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -161,7 +162,8 @@ public class AdminController {
 	 * 前往员工管理页面
 	 */
 	@RequestMapping(value="/adminstaff",method=RequestMethod.GET)
-	public ModelAndView gotoAdminStaff(Model model,@RequestParam(value="pn",defaultValue="1") int pn,
+	public ModelAndView gotoAdminStaff(@RequestParam(value="pn",defaultValue="1") int pn,
+			@RequestParam("search") String search,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		if(this.isHave_admin()==false) {
@@ -169,9 +171,14 @@ public class AdminController {
 		}else {
 			PageHelper.startPage(pn, page_show);
 			mv.addObject("login_admin",this.getCurrent_admin());
-			List<Worker> workerlist = adminService.showWorker();
+			List<Worker> workerlist = new ArrayList<>();
+			if(search==""){
+				workerlist = adminService.showWorker();
+			}else {
+				workerlist = adminService.searchWorker(search);
+			}
 			PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
-			model.addAttribute("workerlist", page);
+			mv.addObject("workerlist", page);
 			mv.setViewName("admin_staff");
 		}
 		return mv;	
@@ -219,7 +226,6 @@ public class AdminController {
 			@RequestParam("workercheckcard") int workercheckcard,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
-		PageHelper.startPage(pn, page_show);
 		Worker new_worker = new Worker();
 		new_worker.setWorkername(workername);
 		new_worker.setWorkerposition(workerposition);
@@ -236,6 +242,7 @@ public class AdminController {
 				req.setAttribute("addworker-msg", "员工添加成功！");
 			}
 		}
+		PageHelper.startPage(pn, page_show);
 		mv.addObject("login_admin",this.getCurrent_admin());
 		List<Worker> workerlist = adminService.showWorker();
 		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
@@ -263,9 +270,9 @@ public class AdminController {
 			@RequestParam("edit_worker_sex") String sex,
 			@RequestParam("edit_worker_salary") int salary,
 			@RequestParam("edit_worker_checkcard") int checkcard,
+			@RequestParam("search") String search,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
-		PageHelper.startPage(pn, page_show);
 		System.out.println(this.getEdit_worker_id());
 		
 		Worker edit_worker = new Worker();
@@ -279,15 +286,26 @@ public class AdminController {
 		if(adminService.checkWorker(edit_worker)!=null) {
 			req.setAttribute("editworker-msg","此员工已存在！");
 		}else {
-			int result = adminService.editWorker(edit_worker);
-			if(result==0) {
-				req.setAttribute("editworker-msg", "修改失败");
-			}else {
-				req.setAttribute("editworker-msg", "修改成功");
+			try {
+				int result = adminService.editWorker(edit_worker);
+				if(result==0) {
+					System.out.println(1);
+					req.setAttribute("editworker-msg", "修改失败");
+				}else {
+					req.setAttribute("editworker-msg", "修改成功");
+				}
+			}catch(Exception e) {
+				System.out.println("error");
 			}
 		}
+		PageHelper.startPage(pn, page_show);
 		mv.addObject("login_admin",this.getCurrent_admin());
-		List<Worker> workerlist = adminService.showWorker();
+		List<Worker> workerlist = new ArrayList<>();
+		if(search==""){
+			workerlist = adminService.showWorker();
+		}else {
+			workerlist = adminService.searchWorker(search);
+		}
 		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
 		mv.addObject("workerlist",page);
 		mv.setViewName("admin_staff");
@@ -299,9 +317,9 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/deleteworker",method=RequestMethod.GET)
 	public ModelAndView deleteWorker(@RequestParam(value="pn",defaultValue="1") int pn,
+			@RequestParam("search") String search,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
-		PageHelper.startPage(pn, page_show);
 		Worker delete_worker = new Worker();
 		delete_worker.setWorkerID(this.getEdit_worker_id());
 		System.out.println(this.getEdit_worker_id());
@@ -311,11 +329,40 @@ public class AdminController {
 		}else { 
 			req.setAttribute("deleteworker-msg", "删除成功");
 		}
+		PageHelper.startPage(pn, page_show);
 		mv.addObject("login_admin",this.getCurrent_admin());
-		List<Worker> workerlist = adminService.showWorker();
+		List<Worker> workerlist = new ArrayList<>();
+		if(search==""){
+			workerlist = adminService.showWorker();
+		}else {
+			workerlist = adminService.searchWorker(search);
+		}
 		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
 		mv.addObject("workerlist",page);
 		mv.setViewName("admin_staff");
 		return mv;
+	}
+	
+	/*
+	 * 搜索员工
+	 */
+	@RequestMapping(value="/searchWorker")
+	public ModelAndView searchWorker(@RequestParam(value="pn",defaultValue="1") int pn,
+			@RequestParam("search") String search) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println(1);
+		PageHelper.startPage(pn, page_show);
+		mv.addObject("login_admin",this.getCurrent_admin());
+		List<Worker> workerlist = new ArrayList<>();
+		if(search==""){
+			workerlist = adminService.showWorker();
+		}else {
+			workerlist = adminService.searchWorker(search);
+		}
+		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
+		mv.addObject("workerlist",page);
+		mv.addObject("search",search);
+		mv.setViewName("admin_staff");
+		return mv;	
 	}
 }
