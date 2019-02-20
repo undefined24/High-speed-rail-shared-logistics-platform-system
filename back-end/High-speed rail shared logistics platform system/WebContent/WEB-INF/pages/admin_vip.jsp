@@ -7,7 +7,7 @@
     <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>admin_staff</title>
+    <title>admin_vip</title>
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -16,13 +16,10 @@
     <link rel="stylesheet" href="css/staff&admin.css">
 </head>
 <body>
-<script>
-	
-</script>
 <div class="header"></div>
 <div class="col-md-2 list">
     <div class="admin_info">
-        <img class="center-block" src="../image/2089312254@chatroom_1486356859619_63.jpg" />
+        <img class="center-block" src="image/2089312254@chatroom_1486356859619_63.jpg" />
         <div class="text-center">
             <span>工号：</span><span>${login_admin.adminID}</span><br/>
             <span>${login_admin.adminname}</span><span>，欢迎你</span>
@@ -33,9 +30,9 @@
         <div class="container-fluid">
             <div>
                 <ul class="nav navbar-nav navbar-inverse" >
-                    <li class="active"><a href="adminstaff">员工管理</a></li>
+                    <li><a href="adminstaff">员工管理</a></li>
                     <li ><a href="admingoods">寄件管理</a></li>
-                    <li ><a href="adminvip">用户管理</a></li>
+                    <li class="active"><a href="adminvip">用户管理</a></li>
                 </ul>
             </div>
         </div>
@@ -43,197 +40,138 @@
 </div>
 <div class="container col-md-8 col-md-offset-3">
     <div class="col-md-11">
-        <form role="form" class="form-inline staff_search">
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#staff_add">添加员工</button>
+        <form role="form" class="form-inline vip_search" action="searchUser">
+
             <div class="form-group">
-                <input class="form-control " type="text" placeholder="请输入需要查找的员工姓名">
-                <button class="form-control btn btn-default">搜索</button>
+                <input class="form-control " name="userSearch" type="text" placeholder="请输入需要查找的会员ID">
+                <button type="submit" class="form-control btn btn-default">搜索</button>
             </div>
         </form>
-        <table class="table table-hover staff col-md-12">
+        <table class="table table-hover staff col-md-12" style="margin-top: 30px;">
             <thead>
             <tr>
-                <th>员工工号</th>
+                <th>用户ID</th>
                 <th>姓名</th>
                 <th>性别</th>
-                <th>职务</th>
-                <th>工资</th>
-                <th>卡号</th>
+                <th>电话号码</th>
+				<th>身份证号码</th>
+				<th>常用住址</th>
             </tr>
             </thead>
             <tbody>
+            <c:forEach items="${userlist.list}" var="user">
             <tr>
-                <td>352132</td>
-                <td>fying</td>
-                <td>女</td>
-                <td>客服</td>
-                <td>5300</td>
-                <td>123456789101112</td>
-                <td><span data-toggle="modal" data-target="#myModal">修改</span></td>
-                <td><span data-toggle="modal" data-target="#staff_delete">删除</span></td>
+                <td>${user.userID}</td>
+                <td>${user.nickname }</td>
+                <td>${user.usersex }</td>
+                <td>${user.userphone}</td>
+				<td>${user.usernumber}</td>
+				<td>${user.useraddress}</td>
+				<td><a href="gotoEditUser?edit_userID=${user.userID }" data-toggle="modal" data-target="#vip_edit">修改</a></td>
+                <td><a href="gotoDeleteUser?delete_userID=${user.userID}" data-toggle="modal" data-target="#vip_delete">删除</a></td>
             </tr>
-            <tr>
-                <td>236135</td>
-                <td>pujess</td>
-                <td>男</td>
-                <td>客服</td>
-                <td>5300</td>
-                <td>123456789101112</td>
-                <td><span data-toggle="modal" data-target="#myModal">修改</span></td>
-                <td><span data-toggle="modal" data-target="#staff_delete">删除</span></td>
-            </tr>
+			</c:forEach>
             </tbody>
         </table>
         <div class="col-md-6 col-md-offset-3 pagination_m">
             <ul class="pagination center-block">
-                <li><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
+           		<c:if test="${userlist.hasPreviousPage}">
+                <li><a href="adminvip?pn=${userlist.prePage}&userSearch=${requestScope.userSearch}">&laquo;</a></li>
+                </c:if>
+                <c:forEach items="${userlist.navigatepageNums}" var="page">
+                <c:if test="${page==userlist.pageNum}">
+                <li class="active"><a href="adminvip?pn=${page}&userSearch=${requestScope.userSearch}">${page}</a></li>
+                </c:if>
+                <c:if test="${page!=userlist.pageNum}">
+                <li><a href="adminvip?pn=${page}&userSearch=${requestScope.userSearch}">${page }</a></li>
+                </c:if>
+                </c:forEach>
+                <c:if test="${userlist.hasNextPage}">
+                <li><a href="adminstaff?pn=${userlist.nextPage}&userSearch=${requestScope.userSearch}">&raquo;</a></li>
+                </c:if>
             </ul>
         </div>
     </div>
 </div>
 <!-- 模态框（Modal）修改 -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="vip_edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">员工信息修改</h4>
+                <h4 class="modal-title" id="edit1">用户信息修改</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="#" method="post">
+                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="editUser" method="post">
                     <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="staff_name">员工姓名</label>
+                        <label class="control-label col-md-4" for="vip_ID">用户ID</label>
                         <div class="col-md-8">
-                            <input class="form-control" id="staff_name" value="fyw" >
+                            <input class="form-control" id="vip_ID" value="fyw" >
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="staff_id">员工工号</label>
+                        <label class="control-label col-md-4" for="vip_name">姓名</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="staff_id" value="123456">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="staff_pos">职务</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="staff_pos" value="收银员">
+                            <input class="form-control col-md-4 disabled" name="nickname" id="vip_name" value="gao">
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="sex">性别</label>
                         <div class="col-md-8">
-                            <select class="form-control col-md-4" id="sex">
+                            <select class="form-control col-md-4" name="usersex" id="sex">
                                 <option value="male">男</option>
                                 <option value="female">女</option>
                             </select>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="salary">工资</label>
+                        <label class="control-label col-md-4" for="phone_num">电话号码</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="salary" value="5300">
+                            <input class="form-control col-md-4" name="userphone" id="phone_num" value="">
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="card">卡号</label>
+                        <label class="control-label col-md-4" for="pin">身份证号码</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="card" value="1234567891011">
+                            <input class="form-control col-md-4" name="usernumber" id="pin" value="">
                         </div>
                     </div>
-
-
+					<div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="address">常用住址</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4" name="useraddress" id="address" value="广东-江门">
+                        </div>
+                    </div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" class="btn btn-primary" onClick="vip_editSub()">提交更改</button>
+					</div>
+	
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
 <!-- 模态框（Modal）确认删除 -->
-<div class="modal fade" id="staff_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+<div class="modal fade" id="vip_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel3">删除员工</h4>
+                <h4 class="modal-title" id="delete1">删除员工</h4>
             </div>
             <div class="modal-body">
                 您是否确定要删除？
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
-                <button type="button" class="btn btn-primary">是</button>
+                <a href="deleteUser"><button type="button" class="btn btn-primary">是</button></a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-<!-- 模态框（Modal）添加 -->
-<div class="modal fade" id="staff_add" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="add">添加员工</h4>
-            </div>
-            <div class="modal-body">
-                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="#" method="post">
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="staff_name_1">员工姓名</label>
-                        <div class="col-md-8">
-                            <input class="form-control" id="staff_name_1" value="" >
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="staff_id_1">员工工号</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="staff_id_1" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="staff_pos_1">职务</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="staff_pos_1" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="sex_1">性别</label>
-                        <div class="col-md-8">
-                            <select class="form-control col-md-4" id="sex_1">
-                                <option value="male">男</option>
-                                <option value="female">女</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="salary_1">工资</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4" id="salary_1" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="card_1">卡号</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4" id="card_1" value="">
-                        </div>
-                    </div>
 
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" onClick="staff_addSub()">增加员工</button>
-            </div>
-        </div><!-- /.modal-content -->
-    </div><!-- /.modal -->
-</div>
 </body>
 </html>

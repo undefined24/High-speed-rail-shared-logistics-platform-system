@@ -71,7 +71,7 @@
             <td>${worker.workersalary}</td>
             <td>${worker.workercheckcard}</td>
             <td><a href="editworker?edit_workerID=${worker.workerID}" data-toggle="modal" data-target="#myModal">修改</a></td>
-            <td><a href="gotodeleteworker?delete_workerID=${worker.workerID}" data-toggle="modal" data-target="#staff_delete">删除</a></td>
+            <td><a href="gotoDeleteWorker?delete_workerID=${worker.workerID}" data-toggle="modal" data-target="#staff_delete">删除</a></td>
             </tr>
             </c:forEach>
             </tbody>
@@ -113,12 +113,6 @@
                             <input class="form-control" name="edit_worker_name" id="staff_name" value="" >
                         </div>
                     </div>
-                 	<div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="staff_id">员工工号</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="edit_workerID" id="staff_id" value="">
-                        </div>
-                    </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_pos">职务</label>
                         <div class="col-md-8">
@@ -146,16 +140,17 @@
                             <input class="form-control col-md-4" name="edit_worker_checkcard" id="card" >
                         </div>
                     </div>
-                <!-- </form> -->
+                    </div>
+                    <div class="modal-footer">
+		                <a href="adminstaff"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button></a>
+		                <button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
+		            </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <a href="adminstaff"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button></a>
-                <button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
             </div>
-            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
-</div>
 <!-- 模态框（Modal）确认删除 -->
 <div class="modal fade" id="staff_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -192,12 +187,6 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="staff_id_1">员工工号</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="staff_id_1" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_pos_1">职务</label>
                         <div class="col-md-8">
                             <input class="form-control col-md-4 disabled" name="workerposition" id="staff_pos_1" value="">
@@ -224,16 +213,17 @@
                             <input class="form-control col-md-4" name="workercheckcard" id="card_1" value="">
                         </div>
                     </div>
-                <!-- </form> -->
+                    </div>
+                    <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		                <button type="submit" class="btn btn-primary" onClick="staff_addSub()">增加员工</button>
+		            </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" onClick="staff_addSub()">增加员工</button>
             </div>
-            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
-</div>
 <%--添加员工时提示--%>
     <%String addworker_msg=(String)request.getAttribute("addworker-msg");
         if(addworker_msg!=null){%>

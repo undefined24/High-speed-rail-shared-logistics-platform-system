@@ -46,4 +46,35 @@ select * from worker where workerID in
     union
 select * from worker where workername REGEXP #{search}
 </select>
+
+<select id="showUser" resultType="user">
+select * from user_info order by userID
+</select>
+
+<select id="searchUser" resultType="user" parameterType="string">
+select * from user_info where userID in
+    (select userID from user_info where userID REGEXP #{search})
+    union
+select * from user_info where nickname REGEXP #{search}
+</select>
+
+<delete id="deleteUser" parameterType="user">
+delete from user_info where userID = #{userID}
+</delete>
+
+<select id="checkUser" resultType="user" parameterType="user">
+select * from user_info where nickname=#{nickname}
+</select>
+
+<update id="editUser" parameterType="user">
+update user_info
+<set>
+<if test="nickname!=null">nickname=#{nickname},</if>
+<if test="usersex!=null">usersex=#{usersex},</if>
+<if test="userphone!=null">userphone=#{userphone},</if>
+<if test="usernumber!=null">usernumber=#{usernumber},</if>
+<if test="useraddress!=null">useraddress=#{useraddress}</if>
+</set>
+where userID = #{userID}
+</update>
 </mapper>
