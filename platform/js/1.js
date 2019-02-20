@@ -9,7 +9,6 @@ $("document").ready(function () {
 
 function staff_addSub(){
 	var staffName = document.getElementById("staff_name_1").value;
-	var staffID = document.getElementById("staff_id_1").value;
 	var staffPos = document.getElementById("staff_pos_1").value;
 	var staffSex = document.getElementById("sex_1").value;
 	var staffSalary = document.getElementById("salary_1").value;
@@ -17,10 +16,6 @@ function staff_addSub(){
 	
 	if (staffName == ""){
 		alert("员工姓名不能为空！");
-		return false;
-	}
-	else if (staffID == ""){
-		alert("员工工号不能为空！");
 		return false;
 	}
 	else if (staffPos == ""){
