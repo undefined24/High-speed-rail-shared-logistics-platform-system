@@ -35,7 +35,6 @@ function staff_addSub(){
 
 function staff_editSub(){
 	var staffName = document.getElementById("staff_name").value;
-	var staffID = document.getElementById("staff_id").value;
 	var staffPos = document.getElementById("staff_pos").value;
 	var staffSex = document.getElementById("sex").value;
 	var staffSalary = document.getElementById("salary").value;
@@ -43,10 +42,6 @@ function staff_editSub(){
 	
 	if (staffName == ""){
 		alert("员工姓名不能为空！");
-		return false;
-	}
-	else if (staffID == ""){
-		alert("员工工号不能为空！");
 		return false;
 	}
 	else if (staffPos == ""){
