@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.undefined24.ssm.service.AdminService;
 import com.undefined24.ssm.vo.Administrator;
 import com.undefined24.ssm.vo.Worker;
@@ -27,6 +29,7 @@ public class AdminController {
 	private int edit_worker_id;
 	private Administrator current_admin;
 	private boolean have_admin=false;
+	public int page_show = 6;
 	
 	public boolean isHave_admin() {
 		return have_admin;
@@ -58,14 +61,16 @@ public class AdminController {
 	 * 前往登录页面
 	 */
 	@RequestMapping(value="/adminlogin",method=RequestMethod.GET)
-	public ModelAndView gotoLogin(HttpServletRequest req) {
+	public ModelAndView gotoLogin(@RequestParam(value="pn",defaultValue="1") int pn) {
 		ModelAndView mv = new ModelAndView();
+		PageHelper.startPage(pn, page_show);
 		//如果没有登录
 		if(this.isHave_admin()==false) {
 			mv.setViewName("admin_login");
 		}else {
 			List<Worker> workerlist = adminService.showWorker();
-			mv.addObject("workerlist",workerlist);
+			PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
+			mv.addObject("workerlist",page);
 			mv.addObject("login_admin",this.getCurrent_admin());
 			mv.setViewName("admin_staff");
 		}
@@ -76,7 +81,8 @@ public class AdminController {
 	 * 登录
 	 */
 	@RequestMapping(value="/adminlogin",method=RequestMethod.POST)
-	public ModelAndView Login(@RequestParam("adminname") String adminname,
+	public ModelAndView Login(@RequestParam(value="pn",defaultValue="1") int pn,
+			@RequestParam("adminname") String adminname,
 			@RequestParam("adminpwd") String adminpwd,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
@@ -93,8 +99,10 @@ public class AdminController {
 		}else {
 			this.setHave_admin(true);
 			this.setCurrent_admin(login_admin);
+			PageHelper.startPage(pn, page_show);
 			List<Worker> workerlist = adminService.showWorker();
-			mv.addObject("workerlist",workerlist);
+			PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
+			mv.addObject("workerlist", page);
 			mv.addObject("attr1",login_admin.getAdminname());
 			mv.addObject("attr2", login_admin.getAdminpwd());
 			mv.addObject("login_admin",login_admin);
@@ -153,14 +161,17 @@ public class AdminController {
 	 * 前往员工管理页面
 	 */
 	@RequestMapping(value="/adminstaff",method=RequestMethod.GET)
-	public ModelAndView gotoAdminStaff(HttpServletRequest req) {
+	public ModelAndView gotoAdminStaff(Model model,@RequestParam(value="pn",defaultValue="1") int pn,
+			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		if(this.isHave_admin()==false) {
 			mv.setViewName("admin_login");
 		}else {
+			PageHelper.startPage(pn, page_show);
 			mv.addObject("login_admin",this.getCurrent_admin());
 			List<Worker> workerlist = adminService.showWorker();
-			mv.addObject("workerlist",workerlist);
+			PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
+			model.addAttribute("workerlist", page);
 			mv.setViewName("admin_staff");
 		}
 		return mv;	
@@ -200,14 +211,15 @@ public class AdminController {
 	 * 增加员工
 	 */
 	@RequestMapping(value="/addworker",method=RequestMethod.POST)
-	public ModelAndView addWorker(@RequestParam("workername") String workername,
+	public ModelAndView addWorker(@RequestParam(value="pn",defaultValue="1") int pn,
+			@RequestParam("workername") String workername,
 			@RequestParam("workerposition") String workerposition,
 			@RequestParam("workersex") String workersex,
 			@RequestParam("workersalary") int workersalary,
 			@RequestParam("workercheckcard") int workercheckcard,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println(1);
+		PageHelper.startPage(pn, page_show);
 		Worker new_worker = new Worker();
 		new_worker.setWorkername(workername);
 		new_worker.setWorkerposition(workerposition);
@@ -222,12 +234,13 @@ public class AdminController {
 				req.setAttribute("addworker-msg", "员工添加失败，请重试");
 			}else {
 				req.setAttribute("addworker-msg", "员工添加成功！");
-				mv.addObject("login_admin",this.getCurrent_admin());
-				List<Worker> workerlist = adminService.showWorker();
-				mv.addObject("workerlist",workerlist);
-				mv.setViewName("admin_staff");
 			}
 		}
+		mv.addObject("login_admin",this.getCurrent_admin());
+		List<Worker> workerlist = adminService.showWorker();
+		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
+		mv.addObject("workerlist", page);
+		mv.setViewName("admin_staff");
 		return mv;
 	}
 	
@@ -235,23 +248,24 @@ public class AdminController {
 	 * 打开修改员工界面
 	 */
 	@RequestMapping(value="/editworker",method=RequestMethod.GET)
-	public ModelAndView gotoEditWorker(@RequestParam(value="edit_workerID") int edit_workerID) {
-		ModelAndView mv = new ModelAndView();
+	public void gotoEditWorker(@RequestParam(value="edit_workerID") int edit_workerID) {
 		System.out.println(this.getEdit_worker_id());
 		this.setEdit_worker_id(edit_workerID);
-		return mv;
 	}
 	
 	/*
 	 * 修改员工
 	 */
 	@RequestMapping(value="/editworker",method=RequestMethod.POST)
-	public ModelAndView editWorker(@RequestParam("edit_worker_name") String name,
+	public ModelAndView editWorker(@RequestParam(value="pn",defaultValue="1") int pn,
+			@RequestParam("edit_worker_name") String name,
 			@RequestParam("edit_worker_position") String position,
 			@RequestParam("edit_worker_sex") String sex,
 			@RequestParam("edit_worker_salary") int salary,
-			@RequestParam("edit_worker_checkcard") int checkcard) {
+			@RequestParam("edit_worker_checkcard") int checkcard,
+			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
+		PageHelper.startPage(pn, page_show);
 		System.out.println(this.getEdit_worker_id());
 		
 		Worker edit_worker = new Worker();
@@ -262,15 +276,20 @@ public class AdminController {
 		edit_worker.setWorkersalary(salary);
 		edit_worker.setWorkercheckcard(checkcard);
 		
-		int result = adminService.editWorker(edit_worker);
-		if(result==0) {
-			System.out.print("修改失败");
+		if(adminService.checkWorker(edit_worker)!=null) {
+			req.setAttribute("editworker-msg","此员工已存在！");
 		}else {
-			System.out.println("修改成功");
+			int result = adminService.editWorker(edit_worker);
+			if(result==0) {
+				req.setAttribute("editworker-msg", "修改失败");
+			}else {
+				req.setAttribute("editworker-msg", "修改成功");
+			}
 		}
 		mv.addObject("login_admin",this.getCurrent_admin());
 		List<Worker> workerlist = adminService.showWorker();
-		mv.addObject("workerlist",workerlist);
+		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
+		mv.addObject("workerlist",page);
 		mv.setViewName("admin_staff");
 		return mv;
 	}
@@ -279,20 +298,23 @@ public class AdminController {
 	 * 删除员工
 	 */
 	@RequestMapping(value="/deleteworker",method=RequestMethod.GET)
-	public ModelAndView deleteWorker() {
+	public ModelAndView deleteWorker(@RequestParam(value="pn",defaultValue="1") int pn,
+			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
+		PageHelper.startPage(pn, page_show);
 		Worker delete_worker = new Worker();
 		delete_worker.setWorkerID(this.getEdit_worker_id());
 		System.out.println(this.getEdit_worker_id());
 		int result = adminService.deleteWorker(delete_worker);
 		if(result==0) {
-			System.out.println("删除失败");
+			req.setAttribute("deleteworker-msg", "删除失败");
 		}else { 
-			System.out.println("删除成功");
+			req.setAttribute("deleteworker-msg", "删除成功");
 		}
 		mv.addObject("login_admin",this.getCurrent_admin());
 		List<Worker> workerlist = adminService.showWorker();
-		mv.addObject("workerlist",workerlist);
+		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
+		mv.addObject("workerlist",page);
 		mv.setViewName("admin_staff");
 		return mv;
 	}

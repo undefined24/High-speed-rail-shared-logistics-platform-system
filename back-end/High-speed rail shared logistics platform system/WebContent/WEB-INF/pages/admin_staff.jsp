@@ -62,7 +62,7 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${workerlist}" var="worker">
+            <c:forEach items="${workerlist.list}" var="worker">
             <tr>
             <td>${worker.workerID}</td>
             <td>${worker.workername}</td>
@@ -71,20 +71,31 @@
             <td>${worker.workersalary}</td>
             <td>${worker.workercheckcard}</td>
             <td><a href="editworker?edit_workerID=${worker.workerID}" data-toggle="modal" data-target="#myModal">修改</a></td>
-            <td><a data-toggle="modal" data-target="#staff_delete">删除</a></td>
+            <td><a href="gotodeleteworker?delete_workerID=${worker.workerID}" data-toggle="modal" data-target="#staff_delete">删除</a></td>
             </tr>
             </c:forEach>
             </tbody>
         </table>
         <div class="col-md-6 col-md-offset-3 pagination_m">
             <ul class="pagination center-block">
-                <li><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
+            <c:if test="${workerlist.hasPreviousPage}">
+                <li><a href="adminstaff?pn=${workerlist.prePage}">&laquo;</a></li>
+            </c:if>
+            <c:forEach items="${workerlist.navigatepageNums}" var="page">
+            <c:if test="${page==workerlist.pageNum}">
+                <li class="active"><a href="adminstaff?pn=${page}">${page}</a></li>
+            </c:if>
+            <c:if test="${page!=workerlist.pageNum}">
+            	<li><a href="adminstaff?pn=${page}">${page}</a></li>
+            </c:if>
+            </c:forEach>
+                <!-- <li><a href="#">2</a></li>
                 <li><a href="#">3</a></li>
                 <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
-                <li><a href="#">&raquo;</a></li>
+                <li><a href="#">5</a></li> -->
+            <c:if test="${workerlist.hasNextPage}">
+                <li><a href="adminstaff?pn=${workerlist.nextPage}">&raquo;</a></li>
+            </c:if>
             </ul>
         </div>
     </div>
@@ -142,7 +153,7 @@
                 <!-- </form> -->
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <a href="adminstaff"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button></a>
                 <button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
             </div>
             </form>
@@ -227,5 +238,28 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+<%--添加员工时提示--%>
+    <%String addworker_msg=(String)request.getAttribute("addworker-msg");
+        if(addworker_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=addworker_msg%>");
+    </script>
+    <%}%>
+</body>
+<%--修改员工时提示--%>
+    <%String editworker_msg=(String)request.getAttribute("editworker-msg");
+        if(editworker_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=editworker_msg%>");
+    </script>
+    <%}%>
+<%--删除课程失败时提示--%>
+    <%String deleteworker_msg=(String)request.getAttribute("deleteworker-msg");
+        if(deleteworker_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=deleteworker_msg%>");
+    </script>
+    <%}%>
+</body>
 </body>
 </html>
