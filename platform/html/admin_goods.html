@@ -13,7 +13,12 @@
     <link rel="stylesheet" href="../css/staff&admin.css">
 </head>
 <body>
-<div class="header"></div>
+<div class="header">
+	<div class="back">
+        <a href="#">回到首页</a>
+        <a href="#">注销</a>
+    </div>
+</div>
 <div class="col-md-2 list">
     <div class="admin_info">
         <img class="center-block" src="../image/2089312254@chatroom_1486356859619_63.jpg" />
@@ -48,49 +53,53 @@
             <thead>
             <tr>
                 <th>物品ID</th>
+				<th>下单用户ID</th>
+				<th>接单用户ID</th>
                 <th>类型</th>
                 <th>重量</th>
-                <th>高铁出发点（省份-站点）</th>
 				<th>车次</th>
-                <th>高铁出发时间（年-月-日-时-分）</th>
                 <th>运费</th>
 				<th>是否接单</th>
+				<th>是否完成订单</th>
             </tr>
             </thead>
             <tbody>
             <tr>
                 <td>000001</td>
+				<td>666666</td>
+				<td>111111</td>
                 <td>食品</td>
                 <td>1kg</td>
-                <td>广东-江门东</td>
 				<td>C71000</td>
-                <td>2019-02-17-21-33</td>
                 <td>5.40</td>
+				<td>否</td>
 				<td>否</td>
 				<td><span data-toggle="modal" data-target="#goods_edit">修改</span></td>
                 <td><span data-toggle="modal" data-target="#goods_delete">删除</span></td>
             </tr>
             <tr>
                 <td>000006</td>
+				<td>666666</td>
+				<td>111111</td>
                 <td>文件</td>
                 <td>0.1kg</td>
-                <td>广东-江门东</td>
 				<td>C71000</td>
-                <td>2019-02-17-21-33</td>
                 <td>15.40</td>
+				<td>否</td>
 				<td>否</td>
 				<td><span data-toggle="modal" data-target="#goods_edit">修改</span></td>
                 <td><span data-toggle="modal" data-target="#goods_delete">删除</span></td>
             </tr>
             <tr>
                 <td>000232</td>
+				<td>666666</td>
+				<td>111111</td>
                 <td>饮料</td>
                 <td>2kg</td>
-                <td>广东-江门东</td>
 				<td>C71000</td>
-                <td>2019-02-17-21-33</td>
                 <td>15.40</td>
 				<td>是</td>
+				<td>否</td>
 				<td><span data-toggle="modal" data-target="#goods_edit">修改</span></td>
                 <td><span data-toggle="modal" data-target="#goods_delete">删除</span></td>
             </tr>
@@ -127,6 +136,18 @@
                             <input class="form-control" id="goods_id" value="" >
                         </div>
                     </div>
+					<div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="sender_id">下单用户ID</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4 disabled" id="sender_id" value="">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="receiver_id">接单用户ID</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4" id="receiver_id" value="">
+                        </div>
+                    </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="goods_type">类型</label>
                         <div class="col-md-8">
@@ -147,21 +168,9 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="start_pos">高铁出发点</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="start_pos" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="train_num">车次</label>
                         <div class="col-md-8">
                             <input class="form-control col-md-4 disabled" id="train_num" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="start_time">高铁出发时间</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4" id="start_time" value="">
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -174,6 +183,15 @@
                         <label class="control-label col-md-4" for="order">是否接单</label>
                         <div class="col-md-8">
                             <select class="form-control col-md-4" id="order">
+                                <option value="yes">是</option>
+                                <option value="no">否</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="order_finished">是否完成订单</label>
+                        <div class="col-md-8">
+                            <select class="form-control col-md-4" id="order_finished">
                                 <option value="yes">是</option>
                                 <option value="no">否</option>
                             </select>
@@ -227,6 +245,18 @@
                             <input class="form-control" id="goods_id_1" value="" >
                         </div>
                     </div>
+					<div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="sender_id_1">下单用户ID</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4 disabled" id="sender_id_1" value="">
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="receiver_id_1">接单用户ID</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4" id="receiver_id_1" value="">
+                        </div>
+                    </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="goods_type_1">类型</label>
                         <div class="col-md-8">
@@ -247,21 +277,9 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="start_pos_1">高铁出发点</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="start_pos_1" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="train_num_1">车次</label>
                         <div class="col-md-8">
                             <input class="form-control col-md-4 disabled" id="train_num_1" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="start_time_1">高铁出发时间</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4" id="start_time_1" value="">
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -274,6 +292,15 @@
                         <label class="control-label col-md-4" for="order_1">是否接单</label>
                         <div class="col-md-8">
                             <select class="form-control col-md-4" id="order_1">
+                                <option value="yes">是</option>
+                                <option value="no">否</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="order_finished_1">是否完成订单</label>
+                        <div class="col-md-8">
+                            <select class="form-control col-md-4" id="order_finished_1">
                                 <option value="yes">是</option>
                                 <option value="no">否</option>
                             </select>

@@ -215,3 +215,7 @@ function MySub2(){
 	var trainNum=document.getElementById("train_num").value;
 	var startTime=document.getElementById("start_time").value;
 }
+
+function goToWhere(){
+	document.body.scrollTop = document.documentElement.scrollTop = 0;
+}
