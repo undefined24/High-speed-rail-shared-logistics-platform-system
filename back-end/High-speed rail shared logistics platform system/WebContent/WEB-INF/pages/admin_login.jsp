@@ -30,7 +30,6 @@
 			}
 			
 			else{
-				alert("提交成功！");
 				return true;
 			}
 		}
@@ -42,7 +41,6 @@
             <div class="col-md-5">
                 <div id="login">
                     <form class="form-horizontal" name="logform" action="adminlogin" role="form" method="post">
-                    <span style="color:red;margin-left:45px"><%=request.getAttribute("admin-login-msg")==null?"":request.getAttribute("admin-login-msg") %></span>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-md-offset-1" for="name">Name</label>
                             <div class="col-md-6">
@@ -65,5 +63,12 @@
                 </div>
             </div>
     </div>
+    <%--登录错误时提示--%>
+    <%String adminlogin_msg=(String)request.getAttribute("admin-login-msg");
+        if(adminlogin_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=adminlogin_msg%>");
+    </script>
+    <%}%>
 </body>
 </html>

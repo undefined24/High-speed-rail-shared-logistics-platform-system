@@ -84,25 +84,6 @@ public class AdminController {
 	AdminService adminService;
 	
 	/*
-	 * 前往员工管理页面
-	 */
-	@RequestMapping(value="/adminstaff",method=RequestMethod.GET)
-	public ModelAndView gotoAdminStaff(@RequestParam(value="pn",defaultValue="1") int pn,
-			HttpServletRequest req) {
-		ModelAndView mv = new ModelAndView();
-		if(this.isHave_admin()==false) {
-			mv.setViewName("admin_login");
-		}else {
-			PageHelper.startPage(pn, page_show);
-			mv.addObject("login_admin",this.getCurrent_admin());
-			List<Worker> workerlist = adminService.showWorker();
-			PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
-			mv.addObject("workerlist", page);
-			mv.setViewName("admin_staff");
-		}
-		return mv;	
-	}
-	/*
 	 * 前往登录页面
 	 */
 	@RequestMapping(value="/adminlogin",method=RequestMethod.GET)
@@ -200,6 +181,27 @@ public class AdminController {
 			}
 		}
 		return mv;
+	}
+	
+	/*
+	 * 前往员工管理页面
+	 */
+	@RequestMapping(value="/adminstaff",method=RequestMethod.GET)
+	public ModelAndView gotoAdminStaff(@RequestParam(value="pn",defaultValue="1") int pn,
+			HttpServletRequest req) {
+		ModelAndView mv = new ModelAndView();
+		if(this.isHave_admin()==false) {
+			mv.setViewName("admin_login");
+		}else {
+			PageHelper.startPage(pn, page_show);
+			mv.addObject("login_admin",this.getCurrent_admin());
+			List<Worker> workerlist = adminService.showWorker();
+			PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
+			mv.addObject("workerlist", page);
+			mv.addObject("page","adminstaff");
+			mv.setViewName("admin_staff");
+		}
+		return mv;	
 	}
 	
 	/*
@@ -331,7 +333,6 @@ public class AdminController {
 	public ModelAndView searchWorker(@RequestParam(value="pn",defaultValue="1") int pn,
 			@RequestParam("search") String search) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println(1);
 		PageHelper.startPage(pn, page_show);
 		mv.addObject("login_admin",this.getCurrent_admin());
 		List<Worker> workerlist = new ArrayList<>();
@@ -343,6 +344,7 @@ public class AdminController {
 		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
 		mv.addObject("workerlist",page);
 		mv.addObject("search",search);
+		mv.addObject("page","searchWorker");
 		mv.setViewName("admin_staff");
 		return mv;	
 	}
@@ -376,6 +378,7 @@ public class AdminController {
 			PageInfo<User> page = new PageInfo<User>(userlist);
 			mv.addObject("userlist",page);
 			mv.addObject("login_admin",this.getCurrent_admin());
+			mv.addObject("page", "adminvip");
 			mv.setViewName("admin_vip");
 		}
 		return mv;	
@@ -453,7 +456,7 @@ public class AdminController {
 		int result = adminService.deleteUser(delete_user);
 		if(result==0) {
 			req.setAttribute("deleteuser-msg", "删除失败");
-		}else { 
+		}else {
 			req.setAttribute("deleteuser-msg", "删除成功");
 		}
 		PageHelper.startPage(pn, page_show);
@@ -483,6 +486,7 @@ public class AdminController {
 		mv.addObject("userlist",page);
 		mv.addObject("userSearch",userSearch);
 		mv.addObject("login_admin",this.getCurrent_admin());
+		mv.addObject("page", "searchUser");
 		mv.setViewName("admin_vip");
 		return mv;	
 	}

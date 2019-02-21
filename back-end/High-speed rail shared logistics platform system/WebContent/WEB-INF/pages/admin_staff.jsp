@@ -79,18 +79,18 @@
         <div class="col-md-6 col-md-offset-3 pagination_m">
             <ul class="pagination center-block">
             <c:if test="${workerlist.hasPreviousPage}">
-                <li><a href="adminstaff?pn=${workerlist.prePage}&search=${requestScope.search}">&laquo;</a></li>
+                <li><a href="${requestScope.page}?pn=${workerlist.prePage}&search=${requestScope.search}">&laquo;</a></li>
             </c:if>
             <c:forEach items="${workerlist.navigatepageNums}" var="page">
             <c:if test="${page==workerlist.pageNum}">
-                <li class="active"><a href="adminstaff?pn=${page}&search=${requestScope.search}">${page}</a></li>
+                <li class="active"><a href="${requestScope.page}?pn=${page}&search=${requestScope.search}">${page}</a></li>
             </c:if>
             <c:if test="${page!=workerlist.pageNum}">
-            	<li><a href="adminstaff?pn=${page}&search=${requestScope.search}">${page}</a></li>
+            	<li><a href="${requestScope.page}?pn=${page}&search=${requestScope.search}">${page}</a></li>
             </c:if>
             </c:forEach>
             <c:if test="${workerlist.hasNextPage}">
-                <li><a href="adminstaff?pn=${workerlist.nextPage}&search=${requestScope.search}">&raquo;</a></li>
+                <li><a href="${requestScope.page}?pn=${workerlist.nextPage}&search=${requestScope.search}">&raquo;</a></li>
             </c:if>
             </ul>
         </div>
@@ -142,7 +142,7 @@
                     </div>
                     </div>
                     <div class="modal-footer">
-		                <a href="adminstaff"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button></a>
+		                <button type="button" class="btn btn-default" data-dismiss="modal" onClick="reset()">关闭</button>
 		                <button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
 		            </div>
                 </form>
@@ -163,8 +163,8 @@
                 您是否确定要删除？
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
-                <a href="deleteworker"><button type="button" class="btn btn-primary">是</button></a>
+                <a href="adminstaff?pn=${workerlist.pageNum}"><button type="button" class="btn btn-default" data-dismiss="modal">否</button></a>
+                <a href="deleteworker?pn=${workerlist.pageNum}"><button type="button" class="btn btn-primary">是</button></a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -239,7 +239,7 @@
         alert("<%=editworker_msg%>");
     </script>
     <%}%>
-<%--删除课程失败时提示--%>
+<%--删除员工时提示--%>
     <%String deleteworker_msg=(String)request.getAttribute("deleteworker-msg");
         if(deleteworker_msg!=null){%>
     <script type="text/javascript">
