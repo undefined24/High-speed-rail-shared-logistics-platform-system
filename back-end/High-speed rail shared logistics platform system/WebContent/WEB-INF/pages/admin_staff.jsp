@@ -142,7 +142,7 @@
                     </div>
                     </div>
                     <div class="modal-footer">
-		                <button type="button" class="btn btn-default" data-dismiss="modal" onClick="reset()">关闭</button>
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 		                <button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
 		            </div>
                 </form>
