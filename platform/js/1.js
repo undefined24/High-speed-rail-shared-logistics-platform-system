@@ -169,3 +169,7 @@ function vip_editSub(){
 		return true;
 	}
 }
+
+function My_Order_Sub(){
+	orderNum = document.getElementById("order_num").value;
+}
