@@ -76,18 +76,18 @@
         <div class="col-md-6 col-md-offset-3 pagination_m">
             <ul class="pagination center-block">
            		<c:if test="${userlist.hasPreviousPage}">
-                <li><a href="adminvip?pn=${userlist.prePage}&userSearch=${requestScope.userSearch}">&laquo;</a></li>
+                <li><a href="${requestScope.page}?pn=${userlist.prePage}&userSearch=${requestScope.userSearch}">&laquo;</a></li>
                 </c:if>
                 <c:forEach items="${userlist.navigatepageNums}" var="page">
                 <c:if test="${page==userlist.pageNum}">
-                <li class="active"><a href="adminvip?pn=${page}&userSearch=${requestScope.userSearch}">${page}</a></li>
+                <li class="active"><a href="${requestScope.page}?pn=${page}&userSearch=${requestScope.userSearch}">${page}</a></li>
                 </c:if>
                 <c:if test="${page!=userlist.pageNum}">
-                <li><a href="adminvip?pn=${page}&userSearch=${requestScope.userSearch}">${page }</a></li>
+                <li><a href="${requestScope.page}?pn=${page}&userSearch=${requestScope.userSearch}">${page }</a></li>
                 </c:if>
                 </c:forEach>
                 <c:if test="${userlist.hasNextPage}">
-                <li><a href="adminstaff?pn=${userlist.nextPage}&userSearch=${requestScope.userSearch}">&raquo;</a></li>
+                <li><a href="${requestScope.page}?pn=${userlist.nextPage}&userSearch=${requestScope.userSearch}">&raquo;</a></li>
                 </c:if>
             </ul>
         </div>
@@ -172,6 +172,19 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
-
+<%--修改用户时提示--%>
+    <%String edituser_msg=(String)request.getAttribute("edituser-msg");
+        if(edituser_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=edituser_msg%>");
+    </script>
+    <%}%>
+<%--删除用户时提示--%>
+    <%String deleteuser_msg=(String)request.getAttribute("deleteuser-msg");
+        if(deleteuser_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=deleteuser_msg%>");
+    </script>
+    <%}%>
 </body>
 </html>

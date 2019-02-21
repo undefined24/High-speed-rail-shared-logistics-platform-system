@@ -62,11 +62,17 @@
                             </div>
 
                         </div>
-
-
                     </form>
                 </div>
             </div>
     </div>
+    <%--登录错误时提示--%>
+    <%String register_msg=(String)request.getAttribute("register-msg");
+        if(register_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=register_msg%>");
+    </script>
+    <%}%>
+</body>
 </body>
 </html>
