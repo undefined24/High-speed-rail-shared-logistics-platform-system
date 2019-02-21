@@ -84,7 +84,7 @@ public class AdminController {
 	AdminService adminService;
 	
 	/*
-	 * 前往员工管理页面
+	 * 鍓嶅線鍛樺伐绠＄悊椤甸潰
 	 */
 	@RequestMapping(value="/adminstaff",method=RequestMethod.GET)
 	public ModelAndView gotoAdminStaff(@RequestParam(value="pn",defaultValue="1") int pn,
@@ -103,13 +103,13 @@ public class AdminController {
 		return mv;	
 	}
 	/*
-	 * 前往登录页面
+	 * 鍓嶅線鐧诲綍椤甸潰
 	 */
 	@RequestMapping(value="/adminlogin",method=RequestMethod.GET)
 	public ModelAndView gotoLogin(@RequestParam(value="pn",defaultValue="1") int pn) {
 		ModelAndView mv = new ModelAndView();
 		PageHelper.startPage(pn, page_show);
-		//如果没有登录
+		//濡傛灉娌℃湁鐧诲綍
 		if(this.isHave_admin()==false) {
 			mv.setViewName("admin_login");
 		}else {
@@ -123,7 +123,7 @@ public class AdminController {
 	}
 	
 	/*
-	 * 登录
+	 * 鐧诲綍
 	 */
 	@RequestMapping(value="/adminlogin",method=RequestMethod.POST)
 	public ModelAndView Login(@RequestParam(value="pn",defaultValue="1") int pn,
@@ -137,7 +137,7 @@ public class AdminController {
 		admin.setAdminpwd(adminpwd);
 		login_admin = adminService.adminLogin(admin);
 		if(login_admin==null) {
-			req.setAttribute("admin-login-msg", "用户名或密码错误");
+			req.setAttribute("admin-login-msg", "鐢ㄦ埛鍚嶆垨瀵嗙爜閿欒");
 			this.setHave_admin(false);
 			this.setCurrent_admin(null);
 			mv.setViewName("admin_login");
@@ -157,7 +157,7 @@ public class AdminController {
 	}
 	
 	/*
-	 * 用户登出
+	 * 鐢ㄦ埛鐧诲嚭
 	 */
 	@RequestMapping(value="/adminlogout",method=RequestMethod.GET)
 	public ModelAndView Logout(SessionStatus status) {
@@ -167,7 +167,7 @@ public class AdminController {
 	}
 	
 	/*
-	 * 修改密码
+	 * 淇敼瀵嗙爜
 	 */
 	@RequestMapping(value="/adminchangepwd",method=RequestMethod.POST)
 	public ModelAndView changePwd(@RequestParam("oldpassword") String oldpassword,
@@ -177,12 +177,12 @@ public class AdminController {
 			@ModelAttribute("attr2")String attr2,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
-		//如果输入密码错误
+		//濡傛灉杈撳叆瀵嗙爜閿欒
 		if(oldpassword.equals(attr2)==false) {
-			req.setAttribute("admin-check-pwd-msg","输入密码错误，请重试");
+			req.setAttribute("admin-check-pwd-msg","杈撳叆瀵嗙爜閿欒锛岃閲嶈瘯");
 		}
 		else if(newpassword.equals(confirmpassword)==false) {
-			req.setAttribute("admin-check-pwd-msg","两次输入不一致，请重试");
+			req.setAttribute("admin-check-pwd-msg","涓ゆ杈撳叆涓嶄竴鑷达紝璇烽噸璇�");
 		}else {
 			Administrator admin = new Administrator();
 			Administrator current_admin = null;
@@ -191,9 +191,9 @@ public class AdminController {
 			current_admin = adminService.adminLogin(admin);
 			current_admin.setAdminpwd(newpassword);
 			int result = adminService.adminChangePwd(current_admin);
-			//数据库插入失败
+			//鏁版嵁搴撴彃鍏ュけ璐�
 			if(result==0) {
-				req.setAttribute("admin-check-pwd-msg", "更改密码失败，请重试");
+				req.setAttribute("admin-check-pwd-msg", "鏇存敼瀵嗙爜澶辫触锛岃閲嶈瘯");
 			}else {
 				mv.addObject("attr2",current_admin.getAdminpwd());
 				mv.setViewName("adminprofile");
@@ -203,7 +203,7 @@ public class AdminController {
 	}
 	
 	/*
-	 * 增加员工
+	 * 澧炲姞鍛樺伐
 	 */
 	@RequestMapping(value="/addworker",method=RequestMethod.POST)
 	public ModelAndView addWorker(@RequestParam(value="pn",defaultValue="1") int pn,
@@ -221,13 +221,13 @@ public class AdminController {
 		new_worker.setWorkersalary(workersalary);
 		new_worker.setWorkercheckcard(workercheckcard);
 		if(adminService.checkWorker(new_worker)!=null) {
-			req.setAttribute("addworker-msg","此员工已存在！");
+			req.setAttribute("addworker-msg","姝ゅ憳宸ュ凡瀛樺湪锛�");
 		}else {
 			int result = adminService.addWorker(new_worker);
 			if(result==0) {
-				req.setAttribute("addworker-msg", "员工添加失败，请重试");
+				req.setAttribute("addworker-msg", "鍛樺伐娣诲姞澶辫触锛岃閲嶈瘯");
 			}else {
-				req.setAttribute("addworker-msg", "员工添加成功！");
+				req.setAttribute("addworker-msg", "鍛樺伐娣诲姞鎴愬姛锛�");
 			}
 		}
 		PageHelper.startPage(pn, page_show);
@@ -240,7 +240,7 @@ public class AdminController {
 	}
 	
 	/*
-	 * 打开修改员工界面
+	 * 鎵撳紑淇敼鍛樺伐鐣岄潰
 	 */
 	@RequestMapping(value="/editworker",method=RequestMethod.GET)
 	public void gotoEditWorker(@RequestParam(value="edit_workerID") int edit_workerID) {
@@ -249,7 +249,7 @@ public class AdminController {
 	}
 	
 	/*
-	 * 修改员工
+	 * 淇敼鍛樺伐
 	 */
 	@RequestMapping(value="/editworker",method=RequestMethod.POST)
 	public ModelAndView editWorker(@RequestParam(value="pn",defaultValue="1") int pn,
@@ -271,15 +271,15 @@ public class AdminController {
 		edit_worker.setWorkercheckcard(checkcard);
 		
 		if(adminService.checkWorker(edit_worker)!=null) {
-			req.setAttribute("editworker-msg","此员工已存在！");
+			req.setAttribute("editworker-msg","姝ゅ憳宸ュ凡瀛樺湪锛�");
 		}else {
 			try {
 				int result = adminService.editWorker(edit_worker);
 				if(result==0) {
 					System.out.println(1);
-					req.setAttribute("editworker-msg", "修改失败");
+					req.setAttribute("editworker-msg", "淇敼澶辫触");
 				}else {
-					req.setAttribute("editworker-msg", "修改成功");
+					req.setAttribute("editworker-msg", "淇敼鎴愬姛");
 				}
 			}catch(Exception e) {
 				System.out.println("error");
@@ -294,14 +294,14 @@ public class AdminController {
 		return mv;
 	}
 	/*
-	 * 打开删除用户界面
+	 * 鎵撳紑鍒犻櫎鐢ㄦ埛鐣岄潰
 	 */
 	@RequestMapping(value="/gotoDeleteWorker",method=RequestMethod.GET)
 	public void gotoDeleteWorker(@RequestParam("delete_workerID") int delete_workerID) {
 		this.setDelete_worker_id(delete_workerID);
 	}
 	/*
-	 * 删除员工
+	 * 鍒犻櫎鍛樺伐
 	 */
 	@RequestMapping(value="/deleteworker",method=RequestMethod.GET)
 	public ModelAndView deleteWorker(@RequestParam(value="pn",defaultValue="1") int pn,
@@ -311,9 +311,9 @@ public class AdminController {
 		delete_worker.setWorkerID(this.getDelete_worker_id());
 		int result = adminService.deleteWorker(delete_worker);
 		if(result==0) {
-			req.setAttribute("deleteworker-msg", "删除失败");
+			req.setAttribute("deleteworker-msg", "鍒犻櫎澶辫触");
 		}else { 
-			req.setAttribute("deleteworker-msg", "删除成功");
+			req.setAttribute("deleteworker-msg", "鍒犻櫎鎴愬姛");
 		}
 		PageHelper.startPage(pn, page_show);
 		mv.addObject("login_admin",this.getCurrent_admin());
@@ -325,7 +325,7 @@ public class AdminController {
 	}
 	
 	/*
-	 * 搜索员工
+	 * 鎼滅储鍛樺伐
 	 */
 	@RequestMapping(value="/searchWorker")
 	public ModelAndView searchWorker(@RequestParam(value="pn",defaultValue="1") int pn,
@@ -348,7 +348,7 @@ public class AdminController {
 	}
 	
 	/*
-	 * 前往寄件管理页面
+	 * 鍓嶅線瀵勪欢绠＄悊椤甸潰
 	 */
 	@RequestMapping(value="/admingoods",method=RequestMethod.GET)
 	public ModelAndView gotoAdminGoods(HttpServletRequest req) {
@@ -363,7 +363,7 @@ public class AdminController {
 	}
 	
 	/*
-	 * 前往用户管理页面
+	 * 鍓嶅線鐢ㄦ埛绠＄悊椤甸潰
 	 */
 	@RequestMapping(value="/adminvip",method=RequestMethod.GET)
 	public ModelAndView gotoAdminVip(@RequestParam(value="pn",defaultValue="1") int pn) {
@@ -382,14 +382,14 @@ public class AdminController {
 	}
 	
 	/*
-	 * 打开修改用户界面
+	 * 鎵撳紑淇敼鐢ㄦ埛鐣岄潰
 	 */
 	@RequestMapping(value="/gotoEditUser",method=RequestMethod.GET)
 	public void gotoEditUser(@RequestParam("edit_userID") int edit_userID) {
 		this.setEdit_user_id(edit_userID);
 	}
 	/*
-	 * 修改用户
+	 * 淇敼鐢ㄦ埛
 	 */
 	@RequestMapping(value="/editUser",method=RequestMethod.POST)
 	public ModelAndView editWorker(@RequestParam(value="pn",defaultValue="1") int pn,
@@ -411,17 +411,17 @@ public class AdminController {
 		System.out.println(edit_user);
 		
 		if(adminService.checkUser(edit_user)!=null) {
-			req.setAttribute("edituser-msg","此员工已存在！");
+			req.setAttribute("edituser-msg","姝ゅ憳宸ュ凡瀛樺湪锛�");
 		}else {
 			try {
 				int result = adminService.editUser(edit_user);
 				if(result==0) {
-					req.setAttribute("edituser-msg", "修改失败");
+					req.setAttribute("edituser-msg", "淇敼澶辫触");
 				}else {
-					req.setAttribute("edituser-msg", "修改成功");
+					req.setAttribute("edituser-msg", "淇敼鎴愬姛");
 				}
 			}catch(Exception e) {
-				req.setAttribute("edituser-msg", "修改失败");
+				req.setAttribute("edituser-msg", "淇敼澶辫触");
 				System.out.println("error");
 			}
 		}
@@ -435,14 +435,14 @@ public class AdminController {
 	}
 	
 	/*
-	 * 打开删除用户界面
+	 * 鎵撳紑鍒犻櫎鐢ㄦ埛鐣岄潰
 	 */
 	@RequestMapping(value="/gotoDeleteUser",method=RequestMethod.GET)
 	public void gotoDeleteUser(@RequestParam("delete_userID") int delete_userID) {
 		this.setDelete_user_id(delete_userID);
 	}
 	/*
-	 * 删除用户
+	 * 鍒犻櫎鐢ㄦ埛
 	 */
 	@RequestMapping(value="/deleteUser",method=RequestMethod.GET)
 	public ModelAndView deleteUser(@RequestParam(value="pn",defaultValue="1") int pn,
@@ -452,9 +452,9 @@ public class AdminController {
 		delete_user.setUserID(this.getDelete_user_id());
 		int result = adminService.deleteUser(delete_user);
 		if(result==0) {
-			req.setAttribute("deleteuser-msg", "删除失败");
+			req.setAttribute("deleteuser-msg", "鍒犻櫎澶辫触");
 		}else { 
-			req.setAttribute("deleteuser-msg", "删除成功");
+			req.setAttribute("deleteuser-msg", "鍒犻櫎鎴愬姛");
 		}
 		PageHelper.startPage(pn, page_show);
 		mv.addObject("login_admin",this.getCurrent_admin());
@@ -466,7 +466,7 @@ public class AdminController {
 	}
 	
 	/*
-	 * 搜索用户
+	 * 鎼滅储鐢ㄦ埛
 	 */
 	@RequestMapping(value="/searchUser")
 	public ModelAndView searchUser(@RequestParam(value="pn",defaultValue="1") int pn,
