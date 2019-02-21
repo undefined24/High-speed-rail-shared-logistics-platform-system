@@ -43,11 +43,11 @@
 </div>
 <div class="container col-md-8 col-md-offset-3">
     <div class="col-md-11">
-        <form role="form" class="form-inline staff_search">
+        <form role="form" class="form-inline staff_search" action="searchWorker">
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#staff_add">添加员工</button>
             <div class="form-group">
-                <input class="form-control " type="text" placeholder="请输入需要查找的员工姓名">
-                <button class="form-control btn btn-default">搜索</button>
+                <input class="form-control" name="search" type="text" placeholder="请输入需要查找的员工姓名或ID">
+                <button type="submit" class="form-control btn btn-default">搜索</button>
             </div>
         </form>
         <table class="table table-hover staff col-md-12">
@@ -71,7 +71,7 @@
             <td>${worker.workersalary}</td>
             <td>${worker.workercheckcard}</td>
             <td><a href="editworker?edit_workerID=${worker.workerID}" data-toggle="modal" data-target="#myModal">修改</a></td>
-            <td><a href="gotodeleteworker?delete_workerID=${worker.workerID}" data-toggle="modal" data-target="#staff_delete">删除</a></td>
+            <td><a href="gotoDeleteWorker?delete_workerID=${worker.workerID}" data-toggle="modal" data-target="#staff_delete">删除</a></td>
             </tr>
             </c:forEach>
             </tbody>
@@ -79,22 +79,18 @@
         <div class="col-md-6 col-md-offset-3 pagination_m">
             <ul class="pagination center-block">
             <c:if test="${workerlist.hasPreviousPage}">
-                <li><a href="adminstaff?pn=${workerlist.prePage}">&laquo;</a></li>
+                <li><a href="adminstaff?pn=${workerlist.prePage}&search=${requestScope.search}">&laquo;</a></li>
             </c:if>
             <c:forEach items="${workerlist.navigatepageNums}" var="page">
             <c:if test="${page==workerlist.pageNum}">
-                <li class="active"><a href="adminstaff?pn=${page}">${page}</a></li>
+                <li class="active"><a href="adminstaff?pn=${page}&search=${requestScope.search}">${page}</a></li>
             </c:if>
             <c:if test="${page!=workerlist.pageNum}">
-            	<li><a href="adminstaff?pn=${page}">${page}</a></li>
+            	<li><a href="adminstaff?pn=${page}&search=${requestScope.search}">${page}</a></li>
             </c:if>
             </c:forEach>
-                <!-- <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li> -->
             <c:if test="${workerlist.hasNextPage}">
-                <li><a href="adminstaff?pn=${workerlist.nextPage}">&raquo;</a></li>
+                <li><a href="adminstaff?pn=${workerlist.nextPage}&search=${requestScope.search}">&raquo;</a></li>
             </c:if>
             </ul>
         </div>
@@ -115,12 +111,6 @@
                         <label class="control-label col-md-4" for="staff_name">员工姓名</label>
                         <div class="col-md-8">
                             <input class="form-control" name="edit_worker_name" id="staff_name" value="" >
-                        </div>
-                    </div>
-                 	<div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="staff_id">员工工号</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="edit_workerID" id="staff_id" value="">
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -150,16 +140,17 @@
                             <input class="form-control col-md-4" name="edit_worker_checkcard" id="card" >
                         </div>
                     </div>
-                <!-- </form> -->
+                    </div>
+                    <div class="modal-footer">
+		                <a href="adminstaff"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button></a>
+		                <button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
+		            </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <a href="adminstaff"><button type="button" class="btn btn-default" data-dismiss="modal">关闭</button></a>
-                <button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
             </div>
-            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
-</div>
 <!-- 模态框（Modal）确认删除 -->
 <div class="modal fade" id="staff_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -196,12 +187,6 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="staff_id_1">员工工号</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="staff_id_1" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_pos_1">职务</label>
                         <div class="col-md-8">
                             <input class="form-control col-md-4 disabled" name="workerposition" id="staff_pos_1" value="">
@@ -228,16 +213,17 @@
                             <input class="form-control col-md-4" name="workercheckcard" id="card_1" value="">
                         </div>
                     </div>
-                <!-- </form> -->
+                    </div>
+                    <div class="modal-footer">
+		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+		                <button type="submit" class="btn btn-primary" onClick="staff_addSub()">增加员工</button>
+		            </div>
+                </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" onClick="staff_addSub()">增加员工</button>
             </div>
-            </form>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
-</div>
 <%--添加员工时提示--%>
     <%String addworker_msg=(String)request.getAttribute("addworker-msg");
         if(addworker_msg!=null){%>

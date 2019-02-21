@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.undefined24.ssm.dao.AdminMapper;
 import com.undefined24.ssm.vo.Administrator;
+import com.undefined24.ssm.vo.User;
 import com.undefined24.ssm.vo.Worker;
 
 @Service
@@ -56,5 +57,41 @@ public class AdminService {
 	@Transactional
 	public int deleteWorker(Worker worker){
 		return adminMapper.deleteWorker(worker);
+	}
+	
+	//搜索员工
+	@Transactional
+	public List<Worker> searchWorker(String search){
+		return adminMapper.searchWorker(search);
+	}
+	
+	//显示用户
+	@Transactional
+	public List<User> showUser(){
+		return adminMapper.showUser();
+	}
+	
+	//搜索用户
+	@Transactional
+	public List<User> searchUser(String userSearch){
+		return adminMapper.searchUser(userSearch);
+	}
+	
+	//删除用户
+	@Transactional
+	public int deleteUser(User user){
+		return adminMapper.deleteUser(user);
+	}
+	
+	//用户查重
+	@Transactional
+	public User checkUser(User user){
+		return adminMapper.checkUser(user);
+	}
+	
+	//修改用户
+	@Transactional
+	public int editUser(User user){
+		return adminMapper.editUser(user);
 	}
 }

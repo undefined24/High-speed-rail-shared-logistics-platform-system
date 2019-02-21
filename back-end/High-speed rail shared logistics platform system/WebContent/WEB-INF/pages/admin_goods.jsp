@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../../css/1.css">
+    <link rel="stylesheet" href="css/1.css">
     <script src="js/1.js"></script>
     <link rel="stylesheet" href="css/staff&admin.css">
 </head>
@@ -19,7 +19,7 @@
 <div class="header"></div>
 <div class="col-md-2 list">
     <div class="admin_info">
-        <img class="center-block" src="../image/2089312254@chatroom_1486356859619_63.jpg" />
+        <img class="center-block" src="image/2089312254@chatroom_1486356859619_63.jpg" />
         <div class="text-center">
            <span>工号：</span><span>${login_admin.adminID}</span><br/>
             <span>${login_admin.adminname}</span><span>，欢迎你</span>
@@ -30,8 +30,8 @@
         <div class="container-fluid">
             <div>
                 <ul class="nav navbar-nav navbar-inverse" >
-                    <li class="active"><a href="adminstaff">员工管理</a></li>
-                    <li ><a href="admingoods">寄件管理</a></li>
+                    <li ><a href="adminstaff">员工管理</a></li>
+                    <li class="active"><a href="admingoods">寄件管理</a></li>
                     <li ><a href="adminvip">用户管理</a></li>
                 </ul>
             </div>
