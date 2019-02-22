@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
@@ -24,6 +25,72 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
+	private User current_user;
+	private boolean have_user = false;
+	private boolean same_name = false;
+	
+	public boolean isSame_name() {
+		return same_name;
+	}
+
+	public void setSame_name(boolean same_name) {
+		this.same_name = same_name;
+	}
+
+	public User getCurrent_user() {
+		return current_user;
+	}
+
+	public void setCurrent_user(User current_user) {
+		this.current_user = current_user;
+	}
+
+	public boolean isHave_user() {
+		return have_user;
+	}
+
+	public void setHave_user(boolean have_user) {
+		this.have_user = have_user;
+	}
+
+	/*
+	 * 前往登录页面homepage.jsp
+	 */
+	@RequestMapping(value="/gotoHomepage",method=RequestMethod.GET)
+	public String gotoHomepage() {
+		return "homepage";
+	}
+	
+	/*
+	 * 前往个人中心user_center.jsp
+	 */
+	@RequestMapping(value="/gotoUserCenter",method=RequestMethod.GET)
+	public String gotoUserCenter() {
+		if(this.isHave_user()==false) {
+			return "homepage";
+		}else {
+			return "homepage";
+		}
+	}
+	
+	/*
+	 * 用户名查重
+	 */
+	@RequestMapping(value="/checkuser",method=RequestMethod.POST,produces="text/plain;charset=utf-8")
+	@ResponseBody
+	public String checkUser(@RequestParam("nickname") String nickname) {
+		User user = new User();
+		this.setSame_name(false);
+		String msg = "";
+		user.setNickname(nickname);
+		User user1 = null;
+		user1 = userService.CheckUser(user);
+		if(user1!=null) {
+			msg= "此用户名已被占用";
+			this.setSame_name(true);
+		}
+		return msg;
+	}
 	/*
 	 * 前往注册页面
 	 */
@@ -56,7 +123,7 @@ public class UserController {
 			user.setUserpwd(userpwd);
 			user.setUsernumber(usernumber);
 			user.setUseraddress(useraddress);
-			if(userService.CheckUser(user)!=null) {
+			if(this.isSame_name()==true) {
 				req.setAttribute("register-msg","用户名已被使用，请更改");
 				mv.setViewName("register");
 			}else {
@@ -67,8 +134,6 @@ public class UserController {
 				}else {
 					req.setAttribute("register-msg", "注册成功");
 					mv.setViewName("register");
-					mv.addObject("attr1", user.getNickname());
-					mv.addObject("attr2", user.getUserpwd());
 				 }
 			}
 		}else {

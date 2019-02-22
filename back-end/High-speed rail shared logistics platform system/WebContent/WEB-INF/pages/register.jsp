@@ -65,11 +65,11 @@
     <div class="container">
         <div class="col-md-8 col-md-offset-2">
             <form class="form-horizontal" name="regform" id="register" role="form" action="register" method="post">
-                <span style="color:red;margin-left:120px"><%=request.getAttribute("register-msg")==null?"":request.getAttribute("register-msg") %></span>
+                <span style="color:red;margin-left:120px"><%=request.getAttribute("check-name-msg")==null?"":request.getAttribute("check-name-msg") %></span>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="name">用户名</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="nickname" id="name" placeholder="请输入3-6位用户名">
+                        <input type="text" class="form-control" name="nickname" id="name" placeholder="请输入3-6位用户名" onblur="checkUser()">
                     	<span id="isCan" style="color: red;"></span>
 					</div>
                 </div>
@@ -125,6 +125,26 @@
             </form>
         </div>
     </div>
-	
+<%--用户注册时提示--%>
+    <%String register_msg=(String)request.getAttribute("register-msg");
+        if(register_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=register_msg%>");
+    </script>
+    <%}%>	
+    <script type="text/javascript">
+    function checkUser(){
+    	$.ajax({
+    		type: "post",
+    		url: "checkuser",
+    		data: {
+    			"nickname": ${"nickname"}.val()
+    		},
+    		success: function(data){
+    			${"check-name-msg"}.text(data);
+    		}
+    	});
+    }
+    </script>
 </body>
 </html>

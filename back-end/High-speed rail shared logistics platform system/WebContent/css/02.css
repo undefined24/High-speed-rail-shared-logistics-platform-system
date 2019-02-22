@@ -1,0 +1,418 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+html,body{
+	width:100%;
+	height:100%;
+}
+.container{
+	height:100%;
+}
+@font-face {
+    font-family:"yw";
+    src: url("../font/禹卫书法行书简体.ttf");
+}
+
+body{
+    background-image: url("../image/bg.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-attachment:fixed
+}
+.col-md-6{
+    height: 100%;
+}
+.col-md-6 a{
+    font-family: "yw" , sans-serif;
+    font-size:4rem;
+    font-weight: bold;
+    line-height: 300px;
+    background-size: cover;
+}
+.title{
+    font-family: "Bradley Hand ITC", sans-serif;
+    display: block;
+    text-align: center;
+    line-height: 58px;
+    color: white;
+    font-size:48px;
+    /*letter-spacing: 5px;*/
+    font-weight: bold;
+    margin-top: 70px;
+}
+a:hover{
+    cursor: pointer;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+.func,.gly{
+    color: rgba(255,250,240,0.85);
+}
+.func:hover{
+    cursor: pointer;
+    color:rgba(255,255,255,0.5);
+}
+
+.nav-m {
+    height: 70px;
+    min-height:70px;
+    border-radius: 0;
+    background-color: transparent;
+    border: none;
+}
+.nav-header{
+    height:100%;
+    width: auto;
+}
+.nav-m img{
+    height:40%;
+    padding:0 0 0 20px;
+}
+.nav-m a img{
+    height: 100%;
+    padding: 10px 0 10px 0;
+}
+ul{
+    padding:10px;
+}
+.text{
+    height:90%;
+    width:80%;
+    margin:auto;
+}
+.up{
+    margin-left:0;
+}
+.down{
+    margin-top:60px;
+    margin-right: 0;
+}
+.text{
+    width:90%;
+}
+.form-m{
+    height:100%;
+    border:none;
+}
+.form-control{
+    background: transparent;
+    border: none;
+    resize: none;
+}
+form button{
+    float: right;
+    margin-left:6px;
+}
+#text{
+    background-color: rgba(176, 146, 116, 0.53);
+    color: white;
+    border-radius: 0;
+    outline:0;
+}
+textarea:focus {
+    outline: 0;
+    border-color: #cfdc00;
+    box-shadow: 0 0 5px rgba(207, 220, 0, 0.4);
+    border-radius: 5px;
+}
+#text:focus,#text:active:focus{
+    outline: 0;
+}
+.btn{
+    margin-top:5px;
+    margin-bottom:5px;
+    color: rgba(255,255,255,0.8);
+    background-color: rgba(0, 0, 0,0.9);
+}
+.btn-m:hover{
+    cursor:auto;
+    color: rgba(255,255,255,0.8);
+}
+.btn:hover{
+    color: rgba(255,255,255,0.8);
+}
+.btn:focus,.btn:active:focus{
+    outline: none;
+    color: rgba(255,255,255,0.8);
+}
+#result{
+    background-color: rgba(176, 146, 116, 0.53);
+    color: white;
+    height:80%;
+    padding:6px 12px;
+    word-wrap:break-word;
+    overflow: auto;
+}
+.info{
+    color: white;
+}
+.navbar-default .navbar-nav>li>a {
+    color: #ccc;
+    border-bottom: 2px solid rgba(255,255,255,0);
+}
+.navbar-default .navbar-nav>li>a:hover {
+    color: white;
+    border-bottom: 2px solid rgba(255,255,255,0.9);
+    transition: border-bottom 1s;
+}
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color:white;
+    font-weight:bold;
+    background-color: transparent;
+}
+.info a,.info a:hover{
+    color: rgba(255,255,255,0.8);
+	 
+}
+.col-md-6>a{
+    display: block;
+    height: 100%;
+    /*line-height: 100%;*/
+}
+
+.container_user_center{
+    top: 0;
+    background-color: rgba(0,0,0,0.5);
+    height: 500%;
+}
+.container_api_apply{
+    top: 0;
+    background-color: rgba(0,0,0,0.5);
+    height: 100%;
+    position: fixed;
+}
+.user_info{
+    text-align: center;
+    margin-top: 90px;
+    height: 210px;
+    margin-bottom: 60px;
+
+}
+#user_icon{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 30px;
+}
+.user_info span.user_name,.user_name+span{
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    font-size: 24px ;
+}
+.user_info img.user_icon:hover{
+	cursor:pointer;
+}
+	
+.container_user_center .func_nav{
+    height: 120px;
+    border-radius: 10px;
+    background-color: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.5);
+    color: white;
+    font-size: 24px;
+    line-height: 120px;
+    text-align: center;
+    margin-top: 40px;
+    margin-bottom: 60px;
+    font-family: sans-serif;
+    font-weight: normal;
+
+}
+.func_nav:hover{
+    cursor: pointer;
+    background-color: rgba(255,255,255,0.3);
+}
+.line{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    height: 1px;
+    border: 1px solid rgba(255,255,255,0.5);
+}
+.revise,.search,.send,.receive{
+    color: #e6e6e6;
+}
+.revise h4,.search h4,.send h4,.receive h4{
+    margin-bottom: 20px;
+}
+
+.revise .form-group button{
+    width: 80px;
+    float: left;
+    margin-left: 15px;
+    background-color: transparent;
+}
+.revise .form-group button:hover{
+    background-color: rgba(255,255,255,0.3);
+}
+.revise .form-horizontal .control-label{
+    text-align: left;
+}
+.revise .form-control{
+    /*background-color: rgb(255, 253, 224);*/
+    border: 1px solid rgba(255,255,255,0.5);
+    color: white;
+}
+.revise form{
+    margin-bottom: 30px;
+}
+.revise .user_icon{
+    clear: both;;
+    width: 65px;
+    height: 65px;
+    float: left;
+}
+.revise #icon{
+    float: left;
+}
+.select1{
+	color: black;
+}
+.search1{
+	margin-bottom: 50px;
+}
+
+.send .form-group button{
+    width: 80px;
+    float: left;
+    margin-left: 15px;
+    background-color: transparent;
+}
+.send .form-group button:hover{
+    background-color: rgba(255,255,255,0.3);
+}
+.send .form-horizontal .control-label{
+    text-align: left;
+}
+.send .form-control{
+    /*background-color: rgb(255, 253, 224);*/
+    border: 1px solid rgba(255,255,255,0.5);
+    color: white;
+}
+.send form{
+    margin-bottom: 30px;
+}
+.send .user_icon{
+    clear: both;;
+    width: 65px;
+    height: 65px;
+    float: left;
+}
+.send #icon{
+    float: left;
+}
+
+.receive .form-group button{
+    width: 80px;
+    float: left;
+    margin-left: 15px;
+    background-color: transparent;
+}
+.receive .form-group button:hover{
+    background-color: rgba(255,255,255,0.3);
+}
+.receive .form-horizontal .control-label{
+    text-align: left;
+}
+.receive .form-control{
+    /*background-color: rgb(255, 253, 224);*/
+    border: 1px solid rgba(255,255,255,0.5);
+    color: white;
+}
+.receive form{
+    margin-bottom: 30px;
+}
+.receive .user_icon{
+    clear: both;;
+    width: 65px;
+    height: 65px;
+    float: left;
+}
+.receive #icon{
+    float: left;
+}
+.form-group *{
+    vertical-align: middle;
+    /*text-align: center;*/
+}
+#icon{
+    border: none;
+}
+#save{
+    margin-top: 160px;
+}
+#save .modal-footer button{
+    margin-bottom: 0;
+}
+#save .modal-footer button:hover{
+    background-color: #865d3f;
+    border-color: #e6e6e6;
+}
+#save .modal-footer button:active,#save .modal-footer button:link{
+    background-color: black;
+    border-color: #e6e6e6;
+}
+.back{
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+.back>a {
+    /*width: 100px;*/
+    color: #e6e6e6;
+    font-size: 14px;
+    font-weight: normal;
+    font-family: sans-serif;
+    float: left;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.qrcode{
+    width: 250px;
+    height: 250px;
+    background-color:white;
+}
+#revise_part{
+	height:450px;
+}
+#myModal_reset{
+    margin-top: 100px;
+}
+#myModal_reset input{
+    width: 300px;
+    border: 1px solid #ccc;
+    box-shadow: none;
+}
+#myModal_reset .btn{
+    margin-bottom: 5px;
+}
+body>.info{
+	width:100%;
+	position:absolute;
+	bottom:5px;
+	text-align:center;
+}
+.navbar-default .navbar-nav>li>a.hp_icon:hover{
+	border:none;
+	clear:both;
+}
+.navbar-right{
+	margin-right:9px;
+}
+#register a{
+	color:#ccc;
+	text-align:center;
+}
+.back_hp{
+	width:100%;
+	position:absolute;
+	bottom:5px;
+	text-align:center;
+}
+

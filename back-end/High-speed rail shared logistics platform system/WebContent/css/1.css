@@ -118,3 +118,19 @@ caption{
 .table>thead>tr>th{
     border-top: none;
 }
+
+.content {
+    vertical-align: middle;
+    display: table-cell;
+    text-align: center;
+}
+.content-button{
+	color: #0084ff;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.content-button:hover{
+	background-color: #0084ff; 
+    color: white;
+}

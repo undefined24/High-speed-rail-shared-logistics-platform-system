@@ -8,6 +8,7 @@ $("document").ready(function () {
 });
 
 function staff_addSub(){
+	var staffName = document.getElementById("staff_name_1").value;
 	var staffPos = document.getElementById("staff_pos_1").value;
 	var staffSex = document.getElementById("sex_1").value;
 	var staffSalary = document.getElementById("salary_1").value;
@@ -15,10 +16,6 @@ function staff_addSub(){
 	
 	if (staffName == ""){
 		alert("员工姓名不能为空！");
-		return false;
-	}
-	else if (staffID == ""){
-		alert("员工工号不能为空！");
 		return false;
 	}
 	else if (staffPos == ""){
@@ -33,14 +30,23 @@ function staff_addSub(){
 
 function staff_editSub(){
 	var staffName = document.getElementById("staff_name").value;
-//	var staffID = document.getElementById("staff_id").value;
 	var staffPos = document.getElementById("staff_pos").value;
 	var staffSex = document.getElementById("sex").value;
 	var staffSalary = document.getElementById("salary").value;
 	var staffCard = document.getElementById("card").value;
 	
+	if (staffName == ""){
+		alert("员工姓名不能为空！");
+		return false;
+	}
+	else if (staffPos == ""){
+		alert("员工职务不能为空！");
+		return false;
+	}
+	else {
 		alert("提交成功！");
 		return true;
+	}
 }
 
 function goods_editSub(){
@@ -162,4 +168,8 @@ function vip_editSub(){
 		alert("提交成功！");
 		return true;
 	}
+}
+
+function My_Order_Sub(){
+	orderNum = document.getElementById("order_num").value;
 }

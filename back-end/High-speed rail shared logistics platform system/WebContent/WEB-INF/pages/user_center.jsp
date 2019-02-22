@@ -1,0 +1,257 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!doctype html>
+<html>
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <title>user_center</title>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/02.css">
+	<script src="js/2.js"></script>
+
+</head>
+	<div class="container container_user_center col-md-10 col-md-offset-1">
+        <div class="back">
+            <a href="#">回到首页</a>
+            <a href="#">注销</a>
+        </div>
+		<div class="user_info col-md-6 col-md-offset-3">
+			<img class='user_icon' title='点击更换头像' style='border-radius: 50%;width: 150px;height: 150px; margin-bottom: 30px;' src=../image/2089312254@chatroom_1486356859619_63.jpg onclick='#save' data-toggle='modal' data-target='#save'/>
+			<br/>
+            <span class="user_name">Dick<span class="user_name">，欢迎您</span></span>
+            <br/>
+		</div>
+		<div class="col-md-8 col-md-offset-2 ">
+            <div class="col-md-6">
+                <a href="#revise_part" class="func_nav">修改资料</a>
+				<a href="#send_part" class="func_nav">我要寄件</a>
+            </div>
+			<div class="col-md-6">
+                <a href="#search_part" class="func_nav">物流查询</a>
+				<a href="#receive_part" class="func_nav">我要接件</a>
+            </div>
+        </div>
+		
+		<div class="col-md-10 col-md-offset-1">
+
+
+            <div class="revise" id="revise_part">
+				<h3 class="col-md-10">资料修改</h4>
+                <div class="line col-md-12  "></div>
+                <br/>
+                
+                 <form method="post" action="#" class="form-horizontal col-md-10" id="user_center_edit" role="form" onSubmit="return on_submit()">
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="name">用户名</label>
+                        <div class="col-md-6">
+                            <input type="text" onblur="checkName()" class="form-control" id="name" placeholder="请输入3-6位用户名" name="username" value="fyw">
+                            <div id="name_prompt"></div>
+						</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="tel">手机号</label>
+                        <div class="col-md-6">
+                            <input type="text" onblur="checkTel()" class="form-control" id="tel" placeholder="请输入手机号" name="userphone" value="13431762210">
+                            <div id="number_prompt"></div>
+						</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="password">密码</label>
+                        <div class="col-md-6">
+                            <input type="password" onblur="checkPwd()" class="form-control" id="password" placeholder="请输入密码(不少于6位)" name="userpwd" value="aaaaaa1">
+                            <div id="pwd_prompt"></div>
+						</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="password_confirm">确认密码</label>
+                        <div class="col-md-6">
+                            <input type="password" class="form-control" id="password_1" placeholder="请再次输入密码" name="re_userpwd" value="aaaaaa1">
+                        </div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-2" for="pin">身份证号</label>
+                        <div class="col-md-6">
+                            <input type="text" onblur="checkPin()" class="form-control" id="pin" placeholder="请输入身份证号" name="userpin" value="440702xxxxxxxx1521">
+							<div id="pin_prompt"></div>
+                        </div>
+                    </div>
+					 <div class="form-group">
+                        <label class="control-label col-md-2" for="address">常用住址</label>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control" id="address" placeholder="请输入常用住址" name="useraddress" value="广东-江门">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> </label>
+                        <button class="btn btn-default " type="submit" onClick="mySub()">保存</button>
+                    </div>
+                </form>
+            </div>
+		</div>
+		
+		<div class="col-md-10 col-md-offset-1 search1">
+			<div class="search" id="search_part">
+				<h3 class="col-md-10">物流查询</h4>
+                <div class="line col-md-12  "></div>
+                <br/>
+                
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="name">该账号暂无物流信息</label>
+            	</div>
+			</div>
+		</div>
+		
+		<div class="col-md-10 col-md-offset-1">
+            <div class="send" id="send_part">
+				<h3 class="col-md-10">我要寄件</h4>
+                <div class="line col-md-12  "></div>
+                <br/>
+                
+                 <form method="post" action="#" class="form-horizontal col-md-10" id="user_center_sender" role="form">
+					 <div class="form-group">
+                        <label class="control-label col-md-2" for="type">物品类型</label>
+                        <div class="col-md-6">
+                            <select class="form-control select1" id="type">
+                                <option value="1" style="color: black">文件</option>
+                                <option value="2" style="color: black">数码产品</option>
+								<option value="3" style="color: black">生活用品</option>
+                                <option value="4" style="color: black">服饰</option>
+								<option value="5" style="color: black">食品</option>
+                                <option value="6" style="color: black">其他</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-2" for="weight">物品估重</label>
+                       	<div class="col-md-6">
+                            <select class="form-control select1" id="weight">
+                                <option value="1" style="color: black">小于1kg</option>
+                                <option value="2" style="color: black">1kg</option>
+								<option value="3" style="color: black">2kg</option>
+                                <option value="4" style="color: black">3kg</option>
+								<option value="5" style="color: black">4kg</option>
+                                <option value="6" style="color: black">大于4kg</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="form-group">
+                        <label class="control-label col-md-2" for="sender_name">寄件人姓名</label>
+                        <div class="col-md-6">
+                            <input type="text" onblur="checkSenderName()" class="form-control" id="sender_name" placeholder="请输入寄件人姓名" name="sendername">
+                            <div id="sendername_prompt"></div>
+						</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="sender_tel">寄件人手机号</label>
+                        <div class="col-md-6">
+                            <input type="text" onblur="checkSenderTel()" class="form-control" id="sender_tel" placeholder="请输入寄件人手机号" name="senderphone">
+                            <div id="sendernumber_prompt"></div>
+						</div>
+                    </div>
+					 <div class="form-group">
+                        <label class="control-label col-md-2" for="sender_address">寄件人地址</label>
+                        <div class="col-md-6">
+                            <input type="text" onblur="checkSenderAddress()" class="form-control" id="sender_address" placeholder="请输入寄件人地址" name="senderaddress" >
+							<div id="senderadderss_prompt"></div>
+                        </div>
+                    </div>
+					 <div class="form-group">
+                        <label class="control-label col-md-2" for="receiver_name">收件人姓名</label>
+                        <div class="col-md-6">
+                            <input type="text" onblur="checkReceiverName()" class="form-control" id="receiver_name" placeholder="请输入收件人姓名" name="receivername">
+                            <div id="receivername_prompt"></div>
+						</div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="receiver_tel">收件人手机号</label>
+                        <div class="col-md-6">
+                            <input type="text" onblur="checkReceiverTel()" class="form-control" id="receiver_tel" placeholder="请输入寄件人手机号" name="receiverphone">
+                            <div id="receivernumber_prompt"></div>
+						</div>
+                    </div>
+					 <div class="form-group">
+                        <label class="control-label col-md-2" for="receiver_address">收件人地址</label>
+                        <div class="col-md-6">
+                            <input type="text" onblur="checkReceiverAddress()" class="form-control" id="receiver_address" placeholder="请输入寄件人地址" name="receiveraddress" >
+							<div id="receiveradderss_prompt"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> </label>
+                        <button class="btn btn-default " type="submit" onClick="mySub1()">提交</button>
+                    </div>
+                </form>
+            </div>
+		</div>
+		
+		<div class="col-md-10 col-md-offset-1">
+            <div class="receive" id="receive_part">
+				<h3 class="col-md-10">我要接件</h4>
+                <div class="line col-md-12"></div>
+                <br/>
+                
+                 <form method="post" action="#" class="form-horizontal col-md-10" id="user_center_receiver" role="form">
+					 <div class="form-group">
+                        <label class="control-label col-md-2" for="start_pos">高铁出发点</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4 disabled" onblur="checkStartPos()" placeholder="请输入高铁出发点" id="start_pos" value="">
+							<div id="startpos_prompt"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="train_num">车次</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4 disabled" onblur="checkTrainNum()" placeholder="请输入车次" id="train_num" value="">
+							<div id="trainnum_prompt"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-2" for="start_time">高铁出发时间</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4" onblur="checkStartTime()" placeholder="请输入高铁出发时间" id="start_time" value="">
+							<div id="starttime_prompt"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="control-label col-md-2"> </label>
+                        <button class="btn btn-default " type="submit" onClick="mySub2()">查询</button>
+                    </div>
+                </form>
+            </div>
+		</div>
+<!-- 模态框（Modal） -->
+    <div class="modal fade" id="save" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close btn btn-default" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">修改头像</h4>
+                </div>
+                <div class="modal-body">
+				<form  method="post" class="form-horizontal" action="#" enctype="multipart/form-data" role="form">
+                 
+			    <input type="file" id="file" name="file" >
+				
+				<div class="modal-footer">
+				<input type="submit" class="btn btn-success save" value="保存"/>
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+                <br />
+                
+                </form>
+				</div>
+                
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+    </div>
+<body>
+</body>
+</html>
+    
