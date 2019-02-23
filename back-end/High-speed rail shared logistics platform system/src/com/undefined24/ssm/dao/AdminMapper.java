@@ -3,6 +3,8 @@ package com.undefined24.ssm.dao;
 import java.util.List;
 
 import com.undefined24.ssm.vo.Administrator;
+import com.undefined24.ssm.vo.Bill;
+import com.undefined24.ssm.vo.Goods;
 import com.undefined24.ssm.vo.User;
 import com.undefined24.ssm.vo.Worker;
 
@@ -23,4 +25,7 @@ public interface AdminMapper {
 	public int deleteUser(User user);
 	public User checkUser(User user);
 	public int editUser(User user);
+	
+	public Bill selectBill(int trackingID);
+	public List<Goods> goodsManage(int trackingid);
 }

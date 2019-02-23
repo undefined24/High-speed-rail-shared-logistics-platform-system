@@ -29,6 +29,7 @@ create table bill(
     acceptUserID int(32) not null,
     sendaddress varchar(50) not null,
     arriveaddress varchar(50) not null,
+    trainnumber varchar(10) not null,
     cost float(10,2) not null
 );
 create table receiver_info(
@@ -39,9 +40,9 @@ create table receiver_info(
     address varchar(50) not null
 );
 create table goods_info(
-	trackingID int(32) primary key,
+	trackingID int(32) primary key auto_increment,
     weight float(10,2) not null,
-    volume float(10,2) not null,
+    type varchar(10) not null,
     name varchar(50) not null,
     note varchar(100)
 );

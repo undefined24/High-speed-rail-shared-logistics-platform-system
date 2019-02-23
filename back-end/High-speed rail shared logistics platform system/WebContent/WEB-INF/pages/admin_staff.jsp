@@ -21,8 +21,7 @@
 </script>
 <div class="header">
 	<div class="back">
-        <a href="#">回到首页</a>
-        <a href="#">注销</a>
+        <a href="adminlogout">注销</a>
     </div>
 </div>
 <div class="col-md-2 list">

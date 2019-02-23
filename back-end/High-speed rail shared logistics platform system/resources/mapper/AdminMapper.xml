@@ -77,4 +77,20 @@ update user_info
 </set>
 where userID = #{userID}
 </update>
+
+<select id="selectBill" resultType="bill" parameterType="int">
+select * from bill where trackingID=#{trackingID}
+</select>
+
+<select id="goodsManage" parameterType="int" resultMap="goodsResult">
+select * from goods_info where trackingID=#{trackingID}
+</select>
+<resultMap type="goods" id="goodsResult">
+<id property="trackingID" column="trackingID"/>
+<result property="weight" column="weight"/>
+<result property="type" column="type"/>
+<result property="name" column="name"/>
+<result property="note" column="note"/>
+<association property="bill" column="trackingID" select="com.undefined24.dao.AdminMapper.selectBill" javaType="bill"></association>
+</resultMap>
 </mapper>

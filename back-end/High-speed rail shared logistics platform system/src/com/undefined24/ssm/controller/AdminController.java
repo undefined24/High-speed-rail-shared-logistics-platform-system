@@ -141,45 +141,11 @@ public class AdminController {
 	 * 用户登出
 	 */
 	@RequestMapping(value="/adminlogout",method=RequestMethod.GET)
-	public ModelAndView Logout(SessionStatus status) {
-		ModelAndView mv=new ModelAndView("adminlogin");
-		status.setComplete();
-		return mv;
-	}
-	
-	/*
-	 * 修改密码
-	 */
-	@RequestMapping(value="/adminchangepwd",method=RequestMethod.POST)
-	public ModelAndView changePwd(@RequestParam("oldpassword") String oldpassword,
-			@RequestParam("newpassword") String newpassword,
-			@RequestParam("confirmpassword") String confirmpassword,
-			@ModelAttribute("attr1")String attr1, 
-			@ModelAttribute("attr2")String attr2,
-			HttpServletRequest req) {
-		ModelAndView mv = new ModelAndView();
-		//如果输入密码错误
-		if(oldpassword.equals(attr2)==false) {
-			req.setAttribute("admin-check-pwd-msg","输入密码错误，请重试");
-		}
-		else if(newpassword.equals(confirmpassword)==false) {
-			req.setAttribute("admin-check-pwd-msg","两次输入不一致，请重试");
-		}else {
-			Administrator admin = new Administrator();
-			Administrator current_admin = null;
-			admin.setAdminname(attr1);
-			admin.setAdminpwd(attr2);
-			current_admin = adminService.adminLogin(admin);
-			current_admin.setAdminpwd(newpassword);
-			int result = adminService.adminChangePwd(current_admin);
-			//数据库插入失败
-			if(result==0) {
-				req.setAttribute("admin-check-pwd-msg", "更改密码失败，请重试");
-			}else {
-				mv.addObject("attr2",current_admin.getAdminpwd());
-				mv.setViewName("adminprofile");
-			}
-		}
+	public ModelAndView Logout() {
+		ModelAndView mv=new ModelAndView();
+		this.setHave_admin(false);
+		this.setCurrent_admin(null);
+		mv.setViewName("homepage");
 		return mv;
 	}
 	

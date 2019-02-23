@@ -8,6 +8,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.undefined24.ssm.dao.AdminMapper;
 import com.undefined24.ssm.vo.Administrator;
+import com.undefined24.ssm.vo.Bill;
+import com.undefined24.ssm.vo.Goods;
 import com.undefined24.ssm.vo.User;
 import com.undefined24.ssm.vo.Worker;
 
@@ -93,5 +95,17 @@ public class AdminService {
 	@Transactional
 	public int editUser(User user){
 		return adminMapper.editUser(user);
+	}
+	
+	//根据商品id搜查商品
+	@Transactional
+	public Bill selectBill(int id){
+		return adminMapper.selectBill(id);
+	}
+	
+	//寄件管理陈列
+	@Transactional
+	public List<Goods> goodsManage(int id){
+		return adminMapper.goodsManage(id);
 	}
 }

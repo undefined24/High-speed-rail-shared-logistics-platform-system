@@ -18,8 +18,7 @@
 <body>
 <div class="header">
 	<div class="back">
-        <a href="#">回到首页</a>
-        <a href="#">注销</a>
+        <a href="adminlogout">注销</a>
     </div>
 </div>
 <div class="col-md-2 list">
@@ -56,13 +55,14 @@
             <thead>
             <tr>
                 <th>物品ID</th>
+                <th>下单用户ID</th>
+				<th>接单用户ID</th>
                 <th>类型</th>
                 <th>重量</th>
-                <th>高铁出发点（省份-站点）</th>
 				<th>车次</th>
-                <th>高铁出发时间（年-月-日-时-分）</th>
                 <th>运费</th>
 				<th>是否接单</th>
+				<th>是否完成订单</th>
             </tr>
             </thead>
             <tbody>
