@@ -13,13 +13,39 @@ function staff_addSub(){
 	var staffSex = document.getElementById("sex_1").value;
 	var staffSalary = document.getElementById("salary_1").value;
 	var staffCard = document.getElementById("card_1").value;
-	
+	var reg_num = /^\d+$/;
+
+	console.log(!reg_num.test(staffCard) + "dick")
 	if (staffName == ""){
 		alert("员工姓名不能为空！");
 		return false;
 	}
+	else if (staffName.length > 10){
+		alert("员工姓名长度过长！");
+		return false;
+	}
 	else if (staffPos == ""){
 		alert("员工职务不能为空！");
+		return false;
+	}
+	else if (staffPos.length > 10){
+		alert("员工职务长度过长！");
+		return false;
+	}
+	else if (staffSalary == ""){
+		alert("员工薪水不能为空！");
+		return false;
+	}
+	else if (staffCard == ""){
+		alert("员工银行卡不能为空！");
+		return false;
+	}
+	else if (!reg_num.test(staffSalary)){
+		alert("员工工资不为整数！");
+		return false;
+	}
+	else if (!reg_num.test(staffCard)){
+		alert("员工卡号不正确！");
 		return false;
 	}
 	else {
@@ -51,30 +77,31 @@ function staff_editSub(){
 
 function goods_editSub(){
 	var goodsID = document.getElementById("goods_id").value;
+	var senderID = document.getElementById("sender_id").value;
+	var receiverID = document.getElementById("receiver_id").value;
 	var type = document.getElementById("goods_type").value;
-	var startPos = document.getElementById("start_pos").value;
 	var trainNum = document.getElementById("train_num").value;
-	var startTime = document.getElementById("start_time").value;
 	var fee = document.getElementById("fee").value;
 	var order = document.getElementById("order").value;
+	var orderFinished = document.getElementById("order_finished").value;
 	
 	if (goodsID == ""){
 		alert("物品ID不能为空！");
 		return false;
 	}
 	
-	else if (startPos == ""){
-		alert("高铁出发时间不能为空！");
+	else if (senderID == ""){
+		alert("下单用户ID不能为空！");
+		return false;
+	}
+	
+	else if (receiverID == ""){
+		alert("接单用户ID不能为空！");
 		return false;
 	}
 	
 	else if (trainNum == ""){
 		alert("车次不能为空！");
-		return false;
-	}
-	
-	else if (startTime == ""){
-		alert("出发时间不能为空！");
 		return false;
 	}
 	
@@ -92,30 +119,31 @@ function goods_editSub(){
 
 function goods_addSub(){
 	var goodsID = document.getElementById("goods_id_1").value;
+	var senderID = document.getElementById("sender_id_1").value;
+	var receiverID = document.getElementById("receiver_id_1").value;
 	var type = document.getElementById("goods_type_1").value;
-	var startPos = document.getElementById("start_pos_1").value;
 	var trainNum = document.getElementById("train_num_1").value;
-	var startTime = document.getElementById("start_time_1").value;
 	var fee = document.getElementById("fee_1").value;
 	var order = document.getElementById("order_1").value;
+	var orderFinished = document.getElementById("order_finished_1").value;
 	
 	if (goodsID == ""){
 		alert("物品ID不能为空！");
 		return false;
 	}
 	
-	else if (startPos == ""){
-		alert("高铁出发时间不能为空！");
+	else if (senderID == ""){
+		alert("下单用户ID不能为空！");
+		return false;
+	}
+	
+	else if (receiverID == ""){
+		alert("接单用户ID不能为空！");
 		return false;
 	}
 	
 	else if (trainNum == ""){
 		alert("车次不能为空！");
-		return false;
-	}
-	
-	else if (startTime == ""){
-		alert("出发时间不能为空！");
 		return false;
 	}
 	

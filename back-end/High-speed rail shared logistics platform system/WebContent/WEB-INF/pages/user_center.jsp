@@ -15,6 +15,11 @@
 	<script src="js/2.js"></script>
 
 </head>
+<body>
+	<div id="back-up" onclick="goToWhere()"
+        style=" height: 58px; width: 58px; position: fixed; cursor: pointer; right: 0px; bottom: 50px;">
+		<img src="image/b1.png" height="58px" width="58px">
+	</div>
 	<div class="container container_user_center col-md-10 col-md-offset-1">
         <div class="back">
             <a href="#">回到首页</a>
@@ -251,7 +256,6 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
-<body>
 </body>
 </html>
     
