@@ -21,6 +21,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.undefined24.ssm.service.AdminService;
 import com.undefined24.ssm.vo.Administrator;
+import com.undefined24.ssm.vo.Goods;
 import com.undefined24.ssm.vo.User;
 import com.undefined24.ssm.vo.Worker;
 
@@ -319,11 +320,15 @@ public class AdminController {
 	 * 前往寄件管理页面
 	 */
 	@RequestMapping(value="/admingoods",method=RequestMethod.GET)
-	public ModelAndView gotoAdminGoods(HttpServletRequest req) {
+	public ModelAndView gotoAdminGoods(@RequestParam(value="pn",defaultValue="1") int pn) {
 		ModelAndView mv = new ModelAndView();
 		if(this.isHave_admin()==false) {
 			mv.setViewName("admin_login");
 		}else {
+			PageHelper.startPage(pn, page_show);
+			List<Goods> goodslist = adminService.goodsManage();
+			PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
+			mv.addObject("goodslist",page);
 			mv.addObject("login_admin",this.getCurrent_admin());
 			mv.setViewName("admin_goods");
 		}

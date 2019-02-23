@@ -55,6 +55,7 @@
             <thead>
             <tr>
                 <th>物品ID</th>
+                <th>名称</th>
                 <th>下单用户ID</th>
 				<th>接单用户ID</th>
                 <th>类型</th>
@@ -66,43 +67,32 @@
             </tr>
             </thead>
             <tbody>
+            <c:forEach items="${goodslist.list}" var="goods">
             <tr>
-                <td>000001</td>
-                <td>食品</td>
-                <td>1kg</td>
-                <td>广东-江门东</td>
-				<td>C71000</td>
-                <td>2019-02-17-21-33</td>
-                <td>5.40</td>
-				<td>否</td>
-				<td><span data-toggle="modal" data-target="#goods_edit">修改</span></td>
-                <td><span data-toggle="modal" data-target="#goods_delete">删除</span></td>
-            </tr>
-            <tr>
-                <td>000006</td>
-                <td>文件</td>
-                <td>0.1kg</td>
-                <td>广东-江门东</td>
-				<td>C71000</td>
-                <td>2019-02-17-21-33</td>
-                <td>15.40</td>
-				<td>否</td>
-				<td><span data-toggle="modal" data-target="#goods_edit">修改</span></td>
-                <td><span data-toggle="modal" data-target="#goods_delete">删除</span></td>
-            </tr>
-            <tr>
-                <td>000232</td>
-                <td>饮料</td>
-                <td>2kg</td>
-                <td>广东-江门东</td>
-				<td>C71000</td>
-                <td>2019-02-17-21-33</td>
-                <td>15.40</td>
+                <td>${goods.trackingID}</td>
+                <td>${goods.name}</td>
+                <td>${goods.bill.giveUserID}</td>
+                <td>${goods.bill.acceptUserID}</td>
+				<td>${goods.type}</td>
+                <td>${goods.weight}</td>
+                <td>${goods.bill.trainnumber}</td>
+                <td>${goods.bill.cost}</td>
+                <c:if test="!Empty ${goods.bill}">
 				<td>是</td>
+				</c:if>
+				<c:if test="Empty ${goods.bill}">
+				<td>否</td>
+				</c:if>
+				<c:if test="${goods.bill.complete}==0">
+				<td>否</td>
+				</c:if>
+				<c:if test="${goods.bill.complete}==1">
+				<td>是</td>
+				</c:if>
 				<td><span data-toggle="modal" data-target="#goods_edit">修改</span></td>
                 <td><span data-toggle="modal" data-target="#goods_delete">删除</span></td>
             </tr>
-           
+            </c:forEach>
             </tbody>
         </table>
         <div class="col-md-6 col-md-offset-3 pagination_m col-lg-7">

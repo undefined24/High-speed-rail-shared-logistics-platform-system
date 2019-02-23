@@ -30,7 +30,8 @@ create table bill(
     sendaddress varchar(50) not null,
     arriveaddress varchar(50) not null,
     trainnumber varchar(10) not null,
-    cost float(10,2) not null
+    cost float(10,2) not null,
+    complete bool not null default false
 );
 create table receiver_info(
 	trackingID int(32) primary key,
@@ -42,9 +43,8 @@ create table receiver_info(
 create table goods_info(
 	trackingID int(32) primary key auto_increment,
     weight float(10,2) not null,
-    type varchar(10) not null,
-    name varchar(50) not null,
-    note varchar(100)
+    type varchar(20) not null,
+    name varchar(50) not null
 );
 create table accept_user_info(
 	userID int(32) primary key,
@@ -67,8 +67,8 @@ create table worker(
     workername varchar(20) not null,
     workersex char(8) not null,
     workerposition varchar(20) not null,
-    workersalary int (32) not null,
-    workercheckcard int(32) not null
+    workersalary varchar(10) not null,
+    workercheckcard varchar(20) not null
 );
 create table message (
     wordID int(32) primary key auto_increment,

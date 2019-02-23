@@ -5,7 +5,6 @@ public class Goods {
 	private float weight;
 	private String type;
 	private String name;
-	private String note;
 	private Bill bill;
 	public Bill getBill() {
 		return bill;
@@ -37,16 +36,11 @@ public class Goods {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getNote() {
-		return note;
-	}
-	public void setNote(String note) {
-		this.note = note;
-	}
+
 	@Override
 	public String toString() {
 		return "Goods [trackingID=" + trackingID + ", weight=" + weight + ", type=" + type + ", name=" + name
-				+ ", note=" + note + ", bill=" + bill + "]";
+				 + ", bill=" + bill + "]";
 	}
 	
 }

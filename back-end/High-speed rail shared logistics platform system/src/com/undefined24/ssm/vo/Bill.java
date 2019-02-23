@@ -7,7 +7,15 @@ public class Bill {
 	private String sendaddress;
 	private String arriveaddress;
 	private String trainnumber;
+	private int complete;
 	private float cost;
+	
+	public int getComplete() {
+		return complete;
+	}
+	public void setComplete(int complete) {
+		this.complete = complete;
+	}
 	public int getTrackingID() {
 		return trackingID;
 	}

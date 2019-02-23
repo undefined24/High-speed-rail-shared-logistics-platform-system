@@ -27,5 +27,5 @@ public interface AdminMapper {
 	public int editUser(User user);
 	
 	public Bill selectBill(int trackingID);
-	public List<Goods> goodsManage(int trackingid);
+	public List<Goods> goodsManage();
 }

@@ -105,7 +105,7 @@ public class AdminService {
 	
 	//寄件管理陈列
 	@Transactional
-	public List<Goods> goodsManage(int id){
-		return adminMapper.goodsManage(id);
+	public List<Goods> goodsManage(){
+		return adminMapper.goodsManage();
 	}
 }
