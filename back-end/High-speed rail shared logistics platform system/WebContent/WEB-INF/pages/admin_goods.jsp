@@ -126,10 +126,18 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="#" method="post">
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="goods_id">物品ID</label>
+					<div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="sender_id">下单用户ID</label>
                         <div class="col-md-8">
-                            <input class="form-control" id="goods_id" value="" >
+                            <input class="form-control col-md-4 disabled" id="sender_id" onBlur="checkSenderid()" value="">
+							<div id="senderid_prompt"></div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="receiver_id">接单用户ID</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4" id="receiver_id" onBlur="checkReceiverid()" value="">
+							<div id="receiverid_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -148,31 +156,22 @@
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="weight">重量</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="weight" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="start_pos">高铁出发点</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="start_pos" value="">
+                            <input class="form-control col-md-4 disabled" id="weight" onBlur="checkWeight()" value="">
+							<div id="weight_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="train_num">车次</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="train_num" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="start_time">高铁出发时间</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4" id="start_time" value="">
+                            <input class="form-control col-md-4 disabled" id="train_num" onBlur="checkTrainnum()" value="">
+							<div id="trainnum_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="fee">运费</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="fee" value="">
+                            <input class="form-control col-md-4" id="fee" onBlur="checkFee()" value="">
+							<div id="fee_prompt"></div>
                         </div>
                     </div>
 					<div class="form-group col-md-12">
@@ -184,13 +183,23 @@
                             </select>
                         </div>
                     </div>
-
+					<div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="order_finished">是否完成订单</label>
+                        <div class="col-md-8">
+                            <select class="form-control col-md-4" id="order_finished">
+                                <option value="yes">是</option>
+                                <option value="no">否</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" class="btn btn-primary" onClick="goods_editSub()">提交更改</button>
+					</div>
 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" onClick="goods_editSub()">提交更改</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -225,10 +234,18 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="#" method="post">
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="goods_id_1">物品ID</label>
+					<div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="sender_id_1">下单用户ID</label>
                         <div class="col-md-8">
-                            <input class="form-control" id="goods_id_1" value="" >
+                            <input class="form-control col-md-4 disabled" id="sender_id_1" onBlur="checkSenderid1()" value="">
+							<div id="sederid1_prompt"></div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="receiver_id_1">接单用户ID</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4" id="receiver_id_1" onBlur="checkReceiverid1()" value="">
+							<div id="receiverid1_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -247,31 +264,22 @@
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="weight_1">重量</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="weight_1" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="start_pos_1">高铁出发点</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="start_pos_1" value="">
+                            <input class="form-control col-md-4 disabled" id="weight_1" onBlur="checkWeight1()" value="">
+							<div id="weight1_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="train_num_1">车次</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="train_num_1" value="">
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="start_time_1">高铁出发时间</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4" id="start_time_1" value="">
+                            <input class="form-control col-md-4 disabled" id="train_num_1" onBlur="checkTrainnum1()" value="">
+							<div id="trainnum1_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="fee_1">运费</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="fee_1" value="">
+                            <input class="form-control col-md-4" id="fee_1" onBlur="checkFee1()" value="">
+							<div id="fee1_prompt"></div>
                         </div>
                     </div>
 					<div class="form-group col-md-12">
@@ -283,13 +291,23 @@
                             </select>
                         </div>
                     </div>
-
+					<div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="order_finished_1">是否完成订单</label>
+                        <div class="col-md-8">
+                            <select class="form-control col-md-4" id="order_finished_1">
+                                <option value="yes">是</option>
+                                <option value="no">否</option>
+                            </select>
+                        </div>
+                    </div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" class="btn btn-primary" onClick="goods_addSub()">增加物品</button>
+					</div>
 
                 </form>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="submit" class="btn btn-primary" onClick="goods_addSub()">增加物品</button>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->

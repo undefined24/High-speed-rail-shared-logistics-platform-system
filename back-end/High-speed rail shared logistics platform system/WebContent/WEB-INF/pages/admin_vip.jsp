@@ -110,13 +110,15 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="vip_ID">用户ID</label>
                         <div class="col-md-8">
-                            <input class="form-control" id="vip_ID" value="fyw" >
+                            <input class="form-control" id="vip_ID" onBlur="checkVipID()" value="fyw" >
+                            <div id="vipid_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="vip_name">姓名</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="nickname" id="vip_name" value="gao">
+                            <input class="form-control col-md-4 disabled" onBlur="checkVipName()" name="nickname" id="vip_name" value="gao">
+                        	<div id="vipname_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -131,19 +133,22 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="phone_num">电话号码</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="userphone" id="phone_num" value="">
+                            <input class="form-control col-md-4" name="userphone" onBlur="checkPhoneNum()"  id="phone_num" value="">
+                        	<div id="phonenum_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="pin">身份证号码</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="usernumber" id="pin" value="">
+                            <input class="form-control col-md-4" onBlur="checkPin()" name="usernumber" id="pin" value="">
+                        	<div id="pin_prompt"></div>
                         </div>
                     </div>
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="address">常用住址</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="useraddress" id="address" value="广东-江门">
+                            <input class="form-control col-md-4" name="useraddress" onBlur="checkAddress()" id="address" value="广东-江门">
+                        	<div id="add_prompt"></div>
                         </div>
                     </div>
 					<div class="modal-footer">

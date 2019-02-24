@@ -16,9 +16,6 @@
     <link rel="stylesheet" href="css/staff&admin.css">
 </head>
 <body>
-<script>
-	
-</script>
 <div class="header">
 	<div class="back">
         <a href="adminlogout">注销</a>
@@ -114,13 +111,15 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name">员工姓名</label>
                         <div class="col-md-8">
-                            <input class="form-control" name="edit_worker_name" id="staff_name" value="" >
+                            <input class="form-control" name="edit_worker_name" onBlur="checkStaffName()" id="staff_name" value="" >
+                        	<div id="staffname_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_pos">职务</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="edit_worker_position" id="staff_pos" >
+                            <input class="form-control col-md-4 disabled" name="edit_worker_position" onBlur="checkStaffPos()" id="staff_pos" >
+                        	<div id="staffpos_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -135,13 +134,15 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="salary">工资</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="edit_worker_salary" id="salary" >
+                            <input class="form-control col-md-4" name="edit_worker_salary" onBlur="checkSalary()" id="salary" >
+                        	<div id="salary_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="card">卡号</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="edit_worker_checkcard" id="card" >
+                            <input class="form-control col-md-4" onBlur="checkCard()" name="edit_worker_checkcard" id="card" >
+                        	<div id="card_prompt"></div>
                         </div>
                     </div>
                     </div>
@@ -187,13 +188,15 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name_1">员工姓名</label>
                         <div class="col-md-8">
-                            <input class="form-control" name="workername" id="staff_name_1" value="" >
+                            <input class="form-control" name="workername" onBlur="checkStaffName1()" id="staff_name_1" value="" >
+                        	<div id="staffname1_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_pos_1">职务</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="workerposition" id="staff_pos_1" value="">
+                            <input class="form-control col-md-4 disabled" name="workerposition" onBlur="checkStaffPos1()" id="staff_pos_1" value="">
+                        	<div id="staffpos1_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
@@ -208,13 +211,15 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="salary_1">工资</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="workersalary" id="salary_1"  value="">
+                            <input class="form-control col-md-4" name="workersalary" onBlur="checkSalary1()" id="salary_1"  value="">
+                        	<div id="salary1_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="card_1">卡号</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="workercheckcard" id="card_1" value="">
+                            <input class="form-control col-md-4" name="workercheckcard" onBlur="checkCard1()" id="card_1" value="">
+                        	<div id="card1_prompt"></div>
                         </div>
                     </div>
                     </div>
