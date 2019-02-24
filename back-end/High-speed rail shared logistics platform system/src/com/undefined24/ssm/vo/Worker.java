@@ -5,8 +5,8 @@ public class Worker {
 	private String workername;
 	private String workersex;
 	private String workerposition;
-	private int workersalary;
-	private int workercheckcard;
+	private String workersalary;
+	private String workercheckcard;
 	public int getWorkerID() {
 		return workerID;
 	}
@@ -31,16 +31,16 @@ public class Worker {
 	public void setWorkerposition(String workerposition) {
 		this.workerposition = workerposition;
 	}
-	public int getWorkersalary() {
+	public String getWorkersalary() {
 		return workersalary;
 	}
-	public void setWorkersalary(int workersalary) {
+	public void setWorkersalary(String workersalary) {
 		this.workersalary = workersalary;
 	}
-	public int getWorkercheckcard() {
+	public String getWorkercheckcard() {
 		return workercheckcard;
 	}
-	public void setWorkercheckcard(int workercheckcard) {
+	public void setWorkercheckcard(String workercheckcard) {
 		this.workercheckcard = workercheckcard;
 	}
 	@Override

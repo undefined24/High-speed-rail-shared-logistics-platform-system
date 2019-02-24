@@ -108,4 +108,10 @@ public class AdminService {
 	public List<Goods> goodsManage(){
 		return adminMapper.goodsManage();
 	}
+	
+	//搜索用户
+	@Transactional
+	public List<Goods> searchGoods(String goodsSearch){
+		return adminMapper.searchGoods(goodsSearch);
+	}
 }

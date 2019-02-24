@@ -47,7 +47,7 @@
 		<form role="form" class="form-inline goods_search">
             <button type="button" class="btn btn-default" data-toggle="modal" data-target="#add_goods">添加物品</button>
             <div class="form-group">
-                <input class="form-control " type="text" placeholder="请输入需要查找的物品ID">
+                <input class="form-control " type="text" name="search" placeholder="请输入需要查找的物品ID">
                 <button class="form-control btn btn-default">搜索</button>
             </div>
         </form>
@@ -77,16 +77,16 @@
                 <td>${goods.weight}</td>
                 <td>${goods.bill.trainnumber}</td>
                 <td>${goods.bill.cost}</td>
-                <c:if test="!Empty ${goods.bill}">
+                <c:if test="${goods.bill!=null}">
 				<td>是</td>
 				</c:if>
-				<c:if test="Empty ${goods.bill}">
+				<c:if test="${goods.bill==null}">
 				<td>否</td>
 				</c:if>
-				<c:if test="${goods.bill.complete}==0">
+				<c:if test="${goods.bill.complete==false}">
 				<td>否</td>
 				</c:if>
-				<c:if test="${goods.bill.complete}==1">
+				<c:if test="${goods.bill.complete==true}">
 				<td>是</td>
 				</c:if>
 				<td><span data-toggle="modal" data-target="#goods_edit">修改</span></td>
@@ -97,13 +97,20 @@
         </table>
         <div class="col-md-6 col-md-offset-3 pagination_m col-lg-7">
             <ul class="pagination center-block">
-                <li><a href="#">&laquo;</a></li>
-                <li class="active"><a href="#">1</a></li>
-                <li><a href="#">2</a></li>
-                <li><a href="#">3</a></li>
-                <li><a href="#">4</a></li>
-                <li><a href="#">5</a></li>
+             	<c:if test="${goodslist.hasPreviousPage}">
+                <li><a href="${requestScope.page}?pn=${goodslist.prePage}&search=${requestScope.search}">&laquo;</a></li>
+                </c:if>
+                 <c:forEach items="${goodslist.navigatepageNums}" var="page">
+                  <c:if test="${page==goodslist.pageNum}">
+                <li class="active"><a href="${requestScope.page}?pn=${page}&search=${requestScope.search}">${page}</a></li>
+                </c:if>
+                <c:if test="${page!=goodslist.pageNum}">
+                <li><a href="${requestScope.page}?pn=${page}&search=${requestScope.search}">${page}</a></li>
+                </c:if>
+                </c:forEach>
+                <c:if test="${goodslist.hasNextPage}">
                 <li><a href="#">&raquo;</a></li>
+                </c:if>
             </ul>
         </div>
     </div>

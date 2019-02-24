@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.github.pagehelper.PageHelper;
@@ -179,8 +178,8 @@ public class AdminController {
 			@RequestParam("workername") String workername,
 			@RequestParam("workerposition") String workerposition,
 			@RequestParam("workersex") String workersex,
-			@RequestParam("workersalary") int workersalary,
-			@RequestParam("workercheckcard") int workercheckcard,
+			@RequestParam("workersalary") String workersalary,
+			@RequestParam("workercheckcard") String workercheckcard,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		Worker new_worker = new Worker();
@@ -225,8 +224,8 @@ public class AdminController {
 			@RequestParam("edit_worker_name") String name,
 			@RequestParam("edit_worker_position") String position,
 			@RequestParam("edit_worker_sex") String sex,
-			@RequestParam("edit_worker_salary") int salary,
-			@RequestParam("edit_worker_checkcard") int checkcard,
+			@RequestParam("edit_worker_salary") String salary,
+			@RequestParam("edit_worker_checkcard") String checkcard,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(this.getEdit_worker_id());
@@ -336,6 +335,29 @@ public class AdminController {
 	}
 	
 	/*
+	 * 搜索物品
+	 */
+	@RequestMapping(value="/searchGoods")
+	public ModelAndView searchGoods(@RequestParam(value="pn",defaultValue="1") int pn,
+			@RequestParam("search") String search) {
+		ModelAndView mv = new ModelAndView();
+		PageHelper.startPage(pn, page_show);
+		mv.addObject("login_admin",this.getCurrent_admin());
+		List<Goods> goodslist = new ArrayList<>();
+		if(search==""){
+			goodslist = adminService.goodsManage();
+		}else {
+			goodslist = adminService.searchGoods(search);
+		}
+		PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
+		mv.addObject("goodslist",page);
+		mv.addObject("search",search);
+		mv.addObject("page","searchGoods");
+		mv.setViewName("admin_staff");
+		return mv;	
+	}
+	
+	/*
 	 * 前往用户管理页面
 	 */
 	@RequestMapping(value="/adminvip",method=RequestMethod.GET)
@@ -366,7 +388,7 @@ public class AdminController {
 	 * 修改用户
 	 */
 	@RequestMapping(value="/editUser",method=RequestMethod.POST)
-	public ModelAndView editWorker(@RequestParam(value="pn",defaultValue="1") int pn,
+	public ModelAndView editUser(@RequestParam(value="pn",defaultValue="1") int pn,
 			@RequestParam("nickname") String nickname,
 			@RequestParam("usersex") String usersex,
 			@RequestParam("usernumber") String usernumber,
