@@ -108,6 +108,11 @@
             <div class="modal-body">
                 <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="editUser" method="post">
                     <div class="form-group col-md-12">
+<<<<<<< HEAD
+                        <label class="control-label col-md-4" for="vip_name">姓名</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4 disabled" name="nickname" id="vip_name" value=${user.nickname}>
+=======
                         <label class="control-label col-md-4" for="vip_ID">用户ID</label>
                         <div class="col-md-8">
                             <input class="form-control" id="vip_ID" onBlur="checkVipID()" value="fyw" >
@@ -118,6 +123,7 @@
                         <label class="control-label col-md-4" for="vip_name">姓名</label>
                         <div class="col-md-8">
                             <input class="form-control col-md-4 disabled" onBlur="checkVipName()" name="nickname" id="vip_name" value="gao">
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
                         	<div id="vipname_prompt"></div>
                         </div>
                     </div>
@@ -133,21 +139,33 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="phone_num">电话号码</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4" name="userphone" id="phone_num" value=${user.userphone}>
+=======
                             <input class="form-control col-md-4" name="userphone" onBlur="checkPhoneNum()"  id="phone_num" value="">
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
                         	<div id="phonenum_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="pin">身份证号码</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4" name="usernumber" id="pin" value=${user.usernumber}>
+=======
                             <input class="form-control col-md-4" onBlur="checkPin()" name="usernumber" id="pin" value="">
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
                         	<div id="pin_prompt"></div>
                         </div>
                     </div>
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="address">常用住址</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4" name="useraddress" id="address" value=${user.useraddress}>
+=======
                             <input class="form-control col-md-4" name="useraddress" onBlur="checkAddress()" id="address" value="广东-江门">
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
                         	<div id="add_prompt"></div>
                         </div>
                     </div>

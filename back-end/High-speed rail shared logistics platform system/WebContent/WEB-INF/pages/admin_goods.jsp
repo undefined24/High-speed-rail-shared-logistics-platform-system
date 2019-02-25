@@ -129,14 +129,22 @@
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="sender_id">下单用户ID</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4 disabled" id="sender_id" onBlur="checkSenderid()" value=${goods.bill.giveUserID}>
+=======
                             <input class="form-control col-md-4 disabled" id="sender_id" onBlur="checkSenderid()" value="">
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
 							<div id="senderid_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="receiver_id">接单用户ID</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4" id="receiver_id" onBlur="checkReceiverid()" value=${goods.bill.acceptUserID}>
+=======
                             <input class="form-control col-md-4" id="receiver_id" onBlur="checkReceiverid()" value="">
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
 							<div id="receiverid_prompt"></div>
                         </div>
                     </div>
@@ -156,21 +164,33 @@
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="weight">重量</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4 disabled" id="weight" onBlur="checkWeight()" value=${goods.weight}>
+=======
                             <input class="form-control col-md-4 disabled" id="weight" onBlur="checkWeight()" value="">
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
 							<div id="weight_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="train_num">车次</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4 disabled" id="train_num" onBlur="checkTrainnum()" value=${goods.bill.trainnumber}>
+=======
                             <input class="form-control col-md-4 disabled" id="train_num" onBlur="checkTrainnum()" value="">
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
 							<div id="trainnum_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="fee">运费</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4" id="fee" onBlur="checkFee()" value=${goods.bill.cost}>
+=======
                             <input class="form-control col-md-4" id="fee" onBlur="checkFee()" value="">
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
 							<div id="fee_prompt"></div>
                         </div>
                     </div>

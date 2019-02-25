@@ -18,6 +18,7 @@
 <body>
 <div class="header">
 	<div class="back">
+		<a href="#">回到首页</a>
         <a href="adminlogout">注销</a>
     </div>
 </div>
@@ -105,27 +106,36 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="myModalLabel">员工信息修改</h4>
             </div>
-            <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="editworker" method="post">
             <div class="modal-body">
-                <!-- <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="editworker" method="post"> -->
+                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="#" method="post">
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name">员工姓名</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control" id="staff_name" onBlur="checkStaffName()" value=${worker.workername} >
+							<div id="staffname_prompt"></div>
+=======
                             <input class="form-control" name="edit_worker_name" onBlur="checkStaffName()" id="staff_name" value="" >
                         	<div id="staffname_prompt"></div>
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_pos">职务</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4 disabled" id="staff_pos" onBlur="checkStaffPos()" value=${worker.workerposition}>
+							<div id="staffpos_prompt"></div>
+=======
                             <input class="form-control col-md-4 disabled" name="edit_worker_position" onBlur="checkStaffPos()" id="staff_pos" >
                         	<div id="staffpos_prompt"></div>
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="sex">性别</label>
                         <div class="col-md-8">
-                            <select class="form-control col-md-4" name="edit_worker_sex" id="sex">
+                            <select class="form-control col-md-4" id="sex">
                                 <option value="male">男</option>
                                 <option value="female">女</option>
                             </select>
@@ -134,28 +144,39 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="salary">工资</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4" id="salary" onBlur="checkSalary()" value=${worker.workersalary}>
+							<div id="salary_prompt"></div>
+=======
                             <input class="form-control col-md-4" name="edit_worker_salary" onBlur="checkSalary()" id="salary" >
                         	<div id="salary_prompt"></div>
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="card">卡号</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4" id="card" onBlur="checkCard()" value=${worker.workercheckcard}>
+							<div id="card_prompt"></div>
+=======
                             <input class="form-control col-md-4" onBlur="checkCard()" name="edit_worker_checkcard" id="card" >
                         	<div id="card_prompt"></div>
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
                         </div>
                     </div>
-                    </div>
-                    <div class="modal-footer">
-		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		                <button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
-		            </div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
+					</div>
+
                 </form>
             </div>
             <div class="modal-footer">
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
+</div>
 <!-- 模态框（Modal）确认删除 -->
 <div class="modal fade" id="staff_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -182,27 +203,36 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 <h4 class="modal-title" id="add">添加员工</h4>
             </div>
-            <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="addworker" method="post">
             <div class="modal-body">
-                <!-- <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="addworker" method="post"> -->
+                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="#" method="post">
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name_1">员工姓名</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control" id="staff_name_1" onBlur="checkStaffName1()" value="" >
+							<div id="staffname1_prompt"></div>
+=======
                             <input class="form-control" name="workername" onBlur="checkStaffName1()" id="staff_name_1" value="" >
                         	<div id="staffname1_prompt"></div>
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_pos_1">职务</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4 disabled" id="staff_pos_1" onBlur="checkStaffPos1()" value="">
+							<div id="staffpos1_prompt"></div>
+=======
                             <input class="form-control col-md-4 disabled" name="workerposition" onBlur="checkStaffPos1()" id="staff_pos_1" value="">
                         	<div id="staffpos1_prompt"></div>
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="sex_1">性别</label>
                         <div class="col-md-8">
-                            <select class="form-control col-md-4" name="workersex" id="sex_1">
+                            <select class="form-control col-md-4" id="sex_1">
                                 <option value="male">男</option>
                                 <option value="female">女</option>
                             </select>
@@ -211,28 +241,39 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="salary_1">工资</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4" id="salary_1" onBlur="checkSalary1()" value="">
+							<div id="salary1_prompt"></div>
+=======
                             <input class="form-control col-md-4" name="workersalary" onBlur="checkSalary1()" id="salary_1"  value="">
                         	<div id="salary1_prompt"></div>
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="card_1">卡号</label>
                         <div class="col-md-8">
+<<<<<<< HEAD
+                            <input class="form-control col-md-4" id="card_1" onBlur="checkCard1()" value="">
+							<div id="card1_prompt"></div>
+=======
                             <input class="form-control col-md-4" name="workercheckcard" onBlur="checkCard1()" id="card_1" value="">
                         	<div id="card1_prompt"></div>
+>>>>>>> 2c388aecd56fdccc916a8a77f452e615c6cd89fd
                         </div>
                     </div>
-                    </div>
-                    <div class="modal-footer">
-		                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-		                <button type="submit" class="btn btn-primary" onClick="staff_addSub()">增加员工</button>
-		            </div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+						<button type="submit" class="btn btn-primary" onClick="staff_addSub()">增加员工</button>
+					</div>
+
                 </form>
             </div>
             <div class="modal-footer">
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
+</div>
 <%--添加员工时提示--%>
     <%String addworker_msg=(String)request.getAttribute("addworker-msg");
         if(addworker_msg!=null){%>
@@ -255,6 +296,5 @@
         alert("<%=deleteworker_msg%>");
     </script>
     <%}%>
-</body>
 </body>
 </html>
