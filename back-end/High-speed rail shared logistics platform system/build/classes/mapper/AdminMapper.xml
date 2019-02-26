@@ -107,4 +107,17 @@ select * from goods_info where trackingID in
     union
 select * from goods_info where name REGEXP #{search}
 </select>
+
+<select id="checkGoods" resultType="goods" parameterType="string">
+select * from goods_info where name=#{name}
+</select>
+
+<insert id="addGoods" parameterType="goods" useGeneratedKeys="true">
+insert into goods_info(name,weight,type) values(#{name},#{weight},#{type})
+</insert>
+
+<insert id="addBill" parameterType="bill" useGeneratedKeys="true">
+insert into bill(giveUserID,acceptUserID,trainnumber,cost,complete) values(#{giveUserID},#{acceptUserID},#{trainnumber},#{cost},#{complete})
+</insert>
+
 </mapper>

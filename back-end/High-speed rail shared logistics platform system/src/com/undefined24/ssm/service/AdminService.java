@@ -127,4 +127,22 @@ public class AdminService {
 	public List<Goods> searchGoods(String goodsSearch){
 		return adminMapper.searchGoods(goodsSearch);
 	}
+	
+	//物品查重
+	@Transactional
+	public Goods checkGoods(String name){
+		return adminMapper.checkGoods(name);
+	}
+	
+	//增加物品
+	@Transactional
+	public int addGoods(Goods goods){
+		return adminMapper.addGoods(goods);
+	}
+	
+	//增加订单
+	@Transactional
+	public int addBill(Bill bill){
+		return adminMapper.addBill(bill);
+	}
 }

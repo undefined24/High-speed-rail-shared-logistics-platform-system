@@ -31,4 +31,7 @@ public interface AdminMapper {
 	public Bill selectBill(int trackingID);
 	public List<Goods> goodsManage();
 	public List<Goods> searchGoods(String search);
+	public Goods checkGoods(String name);
+	public int addGoods(Goods goods);
+	public int addBill(Bill bill);
 }

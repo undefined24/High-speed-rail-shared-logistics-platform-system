@@ -20,6 +20,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.undefined24.ssm.service.AdminService;
 import com.undefined24.ssm.vo.Administrator;
+import com.undefined24.ssm.vo.Bill;
 import com.undefined24.ssm.vo.Goods;
 import com.undefined24.ssm.vo.User;
 import com.undefined24.ssm.vo.Worker;
@@ -362,6 +363,50 @@ public class AdminController {
 		mv.addObject("page","searchGoods");
 		mv.setViewName("admin_goods");
 		return mv;	
+	}
+	/*
+	 * 添加物品
+	 */
+	@RequestMapping(value="/addgoods",method=RequestMethod.POST)
+	public ModelAndView addGoods(@RequestParam(value="pn",defaultValue="1") int pn,
+			@RequestParam("name") String name,
+			@RequestParam("giveUserID") int giveUserID,
+			@RequestParam("acceptUserID") int acceptUserID,
+			@RequestParam("type") String type,
+			@RequestParam("weight") float weight,
+			@RequestParam("trainnumber") String trainnumber,
+			@RequestParam("cost") float cost,
+			@RequestParam("complete") boolean complete,
+			HttpServletRequest req) {
+		ModelAndView mv = new ModelAndView();
+		Goods new_goods = new Goods();
+		new_goods.setWeight(weight);
+		new_goods.setName(name);
+		new_goods.setType(type);
+		Bill new_bill = new Bill();
+		new_bill.setAcceptUserID(acceptUserID);
+		new_bill.setGiveUserID(giveUserID);
+		new_bill.setCost(cost);
+		new_bill.setComplete(complete);
+		new_bill.setTrainnumber(trainnumber);
+		try {
+			int result_1 = adminService.addGoods(new_goods);
+			int result_2 = adminService.addBill(new_bill);
+			if(result_1==0||result_2==0) {
+				req.setAttribute("addgoods-msg", "物品添加失败，请重试");
+			}else {
+				req.setAttribute("addgoods-msg", "物品添加成功！");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		PageHelper.startPage(pn, page_show);
+		mv.addObject("login_admin",this.getCurrent_admin());
+		List<Goods> goodslist = adminService.goodsManage();
+		PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
+		mv.addObject("goodslist", page);
+		mv.setViewName("admin_goods");
+		return mv;
 	}
 	
 	/*

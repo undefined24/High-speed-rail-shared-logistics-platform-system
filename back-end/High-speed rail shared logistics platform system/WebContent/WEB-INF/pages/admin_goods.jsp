@@ -77,10 +77,10 @@
                 <td>${goods.weight}</td>
                 <td>${goods.bill.trainnumber}</td>
                 <td>${goods.bill.cost}</td>
-                <c:if test="${goods.bill!=null}">
+                <c:if test="${goods.bill.acceptUserID!=null}">
 				<td>是</td>
 				</c:if>
-				<c:if test="${goods.bill==null}">
+				<c:if test="${goods.bill.acceptUserID==null}">
 				<td>否</td>
 				</c:if>
 				<c:if test="${goods.bill.complete==false}">
@@ -178,8 +178,8 @@
                         <label class="control-label col-md-4" for="order">是否接单</label>
                         <div class="col-md-8">
                             <select class="form-control col-md-4" id="order">
-                                <option value="yes">是</option>
-                                <option value="no">否</option>
+                                <option value="true">是</option>
+                                <option value="false">否</option>
                             </select>
                         </div>
                     </div>
@@ -233,25 +233,32 @@
                 <h4 class="modal-title" id="add">添加物品</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="#" method="post">
+                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="addgoods" method="post">
+                <div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="goods_name">名称</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4 disabled" name="name" id="goods_name_1" value="">
+							<div id="name_prompt"></div>
+                        </div>
+                    </div>
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="sender_id_1">下单用户ID</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="sender_id_1" onBlur="checkSenderid1()" value="">
+                            <input class="form-control col-md-4 disabled" name="giveUserID" id="sender_id_1" onBlur="checkSenderid1()" value="">
 							<div id="sederid1_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="receiver_id_1">接单用户ID</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="receiver_id_1" onBlur="checkReceiverid1()" value="">
+                            <input class="form-control col-md-4" name="acceptUserID" id="receiver_id_1" onBlur="checkReceiverid1()" value="">
 							<div id="receiverid1_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="goods_type_1">类型</label>
                         <div class="col-md-8">
-                            <select class="form-control col-md-4" id="goods_type_1">
+                            <select class="form-control col-md-4" name="type" id="goods_type_1">
                                 <option value="1">文件</option>
                                 <option value="2">数码产品</option>
 								<option value="3">生活用品</option>
@@ -264,39 +271,39 @@
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="weight_1">重量</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="weight_1" onBlur="checkWeight1()" value="">
+                            <input class="form-control col-md-4 disabled" name="weight" id="weight_1" onBlur="checkWeight1()" value="">
 							<div id="weight1_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="train_num_1">车次</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="train_num_1" onBlur="checkTrainnum1()" value="">
+                            <input class="form-control col-md-4 disabled" name="trainnumber" id="train_num_1" onBlur="checkTrainnum1()" value="">
 							<div id="trainnum1_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="fee_1">运费</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="fee_1" onBlur="checkFee1()" value="">
+                            <input class="form-control col-md-4" id="fee_1" name="cost" onBlur="checkFee1()" value="">
 							<div id="fee1_prompt"></div>
                         </div>
                     </div>
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="order_1">是否接单</label>
                         <div class="col-md-8">
-                            <select class="form-control col-md-4" id="order_1">
-                                <option value="yes">是</option>
-                                <option value="no">否</option>
+                            <select class="form-control col-md-4" id="order_1" >
+                                <option value="ture">是</option>
+                                <option value="false">否</option>
                             </select>
                         </div>
                     </div>
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="order_finished_1">是否完成订单</label>
                         <div class="col-md-8">
-                            <select class="form-control col-md-4" id="order_finished_1">
-                                <option value="yes">是</option>
-                                <option value="no">否</option>
+                            <select class="form-control col-md-4" id="order_finished_1" name="complete">
+                                <option value="true">是</option>
+                                <option value="false">否</option>
                             </select>
                         </div>
                     </div>
