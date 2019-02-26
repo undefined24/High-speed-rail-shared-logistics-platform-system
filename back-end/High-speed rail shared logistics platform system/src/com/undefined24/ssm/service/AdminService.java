@@ -69,7 +69,7 @@ public class AdminService {
 	
 	//显示修改的员工
 	public Worker showEidtWorker(int workerID){
-		return adminMapper.showEidtWorker(workerID);
+		return adminMapper.showEditWorker(workerID);
 	}
 	
 	
@@ -144,5 +144,35 @@ public class AdminService {
 	@Transactional
 	public int addBill(Bill bill){
 		return adminMapper.addBill(bill);
+	}
+	
+	//删除商品
+	@Transactional
+	public int deleteGoods(Goods goods){
+		return adminMapper.deleteGoods(goods);
+	}
+	
+	//删除订单
+	@Transactional
+	public int deleteBill(Bill bill){
+		return adminMapper.deleteBill(bill);
+	}
+	
+	//编辑商品时显示
+	@Transactional
+	public Goods showEditGoods(int trackingID){
+		return adminMapper.showEditGoods(trackingID);
+	}
+	
+	//修改商品
+	@Transactional
+	public int editGoods(Goods goods){
+		return adminMapper.editGoods(goods);
+	}
+	
+	//修改订单
+	@Transactional
+	public int editBill(Bill bill){
+		return adminMapper.editBill(bill);
 	}
 }

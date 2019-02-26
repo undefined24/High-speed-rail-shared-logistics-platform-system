@@ -120,4 +120,37 @@ insert into goods_info(name,weight,type) values(#{name},#{weight},#{type})
 insert into bill(giveUserID,acceptUserID,trainnumber,cost,complete) values(#{giveUserID},#{acceptUserID},#{trainnumber},#{cost},#{complete})
 </insert>
 
+<delete id="deleteGoods" parameterType="goods">
+delete from goods_info where trackingID = #{trackingID}
+</delete>
+
+<delete id="deleteBill" parameterType="bill">
+delete from bill where trackingID = #{trackingID}
+</delete>
+
+<select id="showEditGoods" resultMap="goodsResult" parameterType="int">
+select * from goods_info where trackingID=#{trackingID}
+</select>
+
+<update id="editGoods" parameterType="goods">
+update goods_info
+<set>
+<if test="type!='' and type!=null">type=#{type},</if>
+<if test="weight!=null and weight!=''">weight=#{weight}</if>
+</set>
+where trackingID = #{trackingID}
+</update>
+
+<update id="editBill" parameterType="bill">
+update bill
+<set>
+<if test="giveUserID!='' and giveUserID!=null">giveUserID=#{giveUserID},</if>
+<if test="acceptUserID!=null and acceptUserID!=''">acceptUserID=#{acceptUserID},</if>
+<if test="trainnumber!=null and trainnumber!=''">trainnumber=#{trainnumber},</if>
+<if test="cost!=null and cost!=''">cost=#{cost},</if>
+<if test="complete!=null and complete!=''">complete=#{complete}</if>
+</set>
+where trackingID = #{trackingID}
+</update>
+
 </mapper>

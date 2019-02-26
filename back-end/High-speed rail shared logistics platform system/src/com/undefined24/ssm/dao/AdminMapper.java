@@ -19,7 +19,7 @@ public interface AdminMapper {
 	public int editWorker(Worker worker);
 	public int deleteWorker(Worker worker);
 	public List<Worker> searchWorker(String search);
-	public Worker showEidtWorker(int workerID);
+	public Worker showEditWorker(int workerID);
 	
 	public List<User> showUser();
 	public List<User> searchUser(String search);
@@ -34,4 +34,9 @@ public interface AdminMapper {
 	public Goods checkGoods(String name);
 	public int addGoods(Goods goods);
 	public int addBill(Bill bill);
+	public int deleteGoods(Goods goods);
+	public int deleteBill(Bill bill);
+	public Goods showEditGoods(int trackingID);
+	public int editGoods(Goods goods);
+	public int editBill(Bill bill);
 }

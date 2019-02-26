@@ -17,7 +17,7 @@
 </head>
 <body>
 <div class="header">
-	<div class="back">回到首页</a>
+	<div class="back">
         <a href="adminlogout">注销</a>
     </div>
 </div>

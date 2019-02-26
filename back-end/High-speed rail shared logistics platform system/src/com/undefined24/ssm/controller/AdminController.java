@@ -34,9 +34,28 @@ public class AdminController {
 	private int edit_user_id;
 	private int delete_user_id;
 	private Administrator current_admin;
+	private int delete_trackingID;
+	private int edit_trackdingID;
 	private boolean have_admin=false;
 	public int page_show = 6;
 	
+	
+	public int getDelete_trackingID() {
+		return delete_trackingID;
+	}
+
+	public void setDelete_trackingID(int delete_trackingID) {
+		this.delete_trackingID = delete_trackingID;
+	}
+
+	public int getEdit_trackdingID() {
+		return edit_trackdingID;
+	}
+
+	public void setEdit_trackdingID(int edit_trackdingID) {
+		this.edit_trackdingID = edit_trackdingID;
+	}
+
 	public int getDelete_worker_id() {
 		return delete_worker_id;
 	}
@@ -262,9 +281,11 @@ public class AdminController {
 		List<Worker> workerlist = adminService.showWorker();
 		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
 		mv.addObject("workerlist",page);
+		mv.addObject("page","adminstaff");
 		mv.setViewName("admin_staff");
 		return mv;
 	}
+	
 	/*
 	 * 打开删除用户界面
 	 */
@@ -272,6 +293,7 @@ public class AdminController {
 	public void gotoDeleteWorker(@RequestParam("delete_workerID") int delete_workerID) {
 		this.setDelete_worker_id(delete_workerID);
 	}
+	
 	/*
 	 * 删除员工
 	 */
@@ -292,6 +314,7 @@ public class AdminController {
 		List<Worker> workerlist = adminService.showWorker();
 		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
 		mv.addObject("workerlist",page);
+		mv.addObject("page","adminstaff");
 		mv.setViewName("admin_staff");
 		return mv;
 	}
@@ -360,6 +383,7 @@ public class AdminController {
 		mv.setViewName("admin_goods");
 		return mv;	
 	}
+	
 	/*
 	 * 添加物品
 	 */
@@ -401,6 +425,112 @@ public class AdminController {
 		List<Goods> goodslist = adminService.goodsManage();
 		PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
 		mv.addObject("goodslist", page);
+		mv.setViewName("admin_goods");
+		return mv;
+	}
+	
+	/*
+	 * 打开删除物品界面
+	 */
+	@RequestMapping(value="/gotoDeleteGoods",method=RequestMethod.GET)
+	public void gotoDeleteGoods(@RequestParam("delete_trackingID") int delete_trackingID) {
+		this.setDelete_trackingID(delete_trackingID);
+	}
+	
+	/*
+	 * 删除物品
+	 */
+	@RequestMapping(value="/deletegoods",method=RequestMethod.GET)
+	public ModelAndView deleteGoods(@RequestParam(value="pn",defaultValue="1") int pn,
+			HttpServletRequest req) {
+		ModelAndView mv = new ModelAndView();
+		Goods delete_goods = new Goods();
+		Bill delete_bill = new Bill();
+		delete_goods.setTrackingID(this.getDelete_trackingID());
+		delete_bill.setTrackingID(this.getDelete_trackingID());
+		try {
+			int result_1 = adminService.deleteGoods(delete_goods);
+			int result_2 = adminService.deleteBill(delete_bill);
+			if(result_1==0||result_2==0) {
+				req.setAttribute("deletegoods-msg", "删除失败");
+			}else { 
+				req.setAttribute("deletegoods-msg", "删除成功");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		PageHelper.startPage(pn, page_show);
+		mv.addObject("login_admin",this.getCurrent_admin());
+		List<Goods> goodslist = adminService.goodsManage();
+		PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
+		mv.addObject("goodslist",page);
+		mv.addObject("page","admin_goods");
+		mv.setViewName("admin_goods");
+		return mv;
+	}
+	
+	/*
+	 * 打开修改物品
+	 */
+	@RequestMapping(value="/gotoEditGoods",method=RequestMethod.GET)
+	public ModelAndView gotoEditGoods(Model model,@RequestParam(value="edit_trackingID") int edit_trackingID) {
+		ModelAndView mv = new ModelAndView();
+		System.out.println(edit_trackingID);
+		try {
+			mv.addObject("edit_goods", adminService.showEditGoods(edit_trackingID));
+			model.addAttribute("edit_goods", adminService.showEditGoods(edit_trackingID));
+			System.out.println(adminService.showEditGoods(edit_trackingID));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		this.setEdit_trackdingID(edit_trackingID);
+		return mv;
+	}
+	
+	/*
+	 * 修改员工
+	 */
+	@RequestMapping(value="/editgoods",method=RequestMethod.POST)
+	public ModelAndView editGoods(@RequestParam(value="pn",defaultValue="1") int pn,
+			@RequestParam("giveUserID") int giveUserID,
+			@RequestParam("acceptUserID") int acceptUserID,
+			@RequestParam("type") String type,
+			@RequestParam("weight") float weight,
+			@RequestParam("trainnumber") String trainnumber,
+			@RequestParam("cost") float cost,
+			@RequestParam("complete") boolean complete,
+			HttpServletRequest req) {
+		ModelAndView mv = new ModelAndView();
+		Goods edit_goods = new Goods();
+		Bill edit_bill = new Bill();
+		edit_goods.setTrackingID(this.getEdit_trackdingID());
+		edit_goods.setType(type);
+		edit_goods.setWeight(weight);
+		edit_bill.setTrackingID(this.getEdit_trackdingID());
+		edit_bill.setGiveUserID(giveUserID);
+		edit_bill.setAcceptUserID(acceptUserID);
+		edit_bill.setTrainnumber(trainnumber);
+		edit_bill.setCost(cost);
+		edit_bill.setComplete(complete);
+		try {
+			int result_1 = adminService.editGoods(edit_goods);
+			int result_2 = adminService.editBill(edit_bill);
+			if(result_1==0||result_2==0) {
+				System.out.println(1);
+				req.setAttribute("editgoods-msg", "修改失败");
+			}else {
+				System.out.println(3);
+				req.setAttribute("editgoods-msg", "修改成功");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		PageHelper.startPage(pn, page_show);
+		mv.addObject("login_admin",this.getCurrent_admin());
+		List<Goods> goodslist = adminService.goodsManage();
+		PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
+		mv.addObject("goodslist",page);
+		mv.addObject("page","admin_goods");
 		mv.setViewName("admin_goods");
 		return mv;
 	}
