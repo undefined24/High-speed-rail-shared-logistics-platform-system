@@ -211,9 +211,16 @@ public class AdminController {
 	 * 打开修改员工界面
 	 */
 	@RequestMapping(value="/editworker",method=RequestMethod.GET)
-	public void gotoEditWorker(@RequestParam(value="edit_workerID") int edit_workerID) {
+	public ModelAndView gotoEditWorker(@RequestParam(value="edit_workerID") int edit_workerID) {
 		System.out.println(this.getEdit_worker_id());
+		ModelAndView mv = new ModelAndView();
+		try {
+		mv.addObject("edit_worker", adminService.showEidtWorker(edit_workerID));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		this.setEdit_worker_id(edit_workerID);
+		return mv;
 	}
 	
 	/*
@@ -381,8 +388,15 @@ public class AdminController {
 	 * 打开修改用户界面
 	 */
 	@RequestMapping(value="/gotoEditUser",method=RequestMethod.GET)
-	public void gotoEditUser(@RequestParam("edit_userID") int edit_userID) {
+	public ModelAndView gotoEditUser(@RequestParam("edit_userID") int edit_userID) {
+		ModelAndView mv = new ModelAndView();
+		try{
+			mv.addObject("edit_user", adminService.showEditUser(edit_userID));
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		this.setEdit_user_id(edit_userID);
+		return mv;
 	}
 	/*
 	 * 修改用户

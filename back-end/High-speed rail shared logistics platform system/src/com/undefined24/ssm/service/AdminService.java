@@ -67,6 +67,12 @@ public class AdminService {
 		return adminMapper.searchWorker(search);
 	}
 	
+	//显示修改的员工
+	public Worker showEidtWorker(int workerID){
+		return adminMapper.showEidtWorker(workerID);
+	}
+	
+	
 	//显示用户
 	@Transactional
 	public List<User> showUser(){
@@ -97,7 +103,14 @@ public class AdminService {
 		return adminMapper.editUser(user);
 	}
 	
-	//根据商品id搜查商品
+	//展示修改的用户
+	@Transactional
+	public User showEditUser(int userID){
+		return adminMapper.showEditUser(userID);
+	}
+	
+	
+	//根据物品id搜查物品
 	@Transactional
 	public Bill selectBill(int id){
 		return adminMapper.selectBill(id);
@@ -109,7 +122,7 @@ public class AdminService {
 		return adminMapper.goodsManage();
 	}
 	
-	//搜索用户
+	//搜索物品
 	@Transactional
 	public List<Goods> searchGoods(String goodsSearch){
 		return adminMapper.searchGoods(goodsSearch);

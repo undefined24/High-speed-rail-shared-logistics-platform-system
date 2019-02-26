@@ -19,12 +19,14 @@ public interface AdminMapper {
 	public int editWorker(Worker worker);
 	public int deleteWorker(Worker worker);
 	public List<Worker> searchWorker(String search);
+	public Worker showEidtWorker(int workerID);
 	
 	public List<User> showUser();
 	public List<User> searchUser(String search);
 	public int deleteUser(User user);
 	public User checkUser(User user);
 	public int editUser(User user);
+	public User showEditUser(int userID);
 	
 	public Bill selectBill(int trackingID);
 	public List<Goods> goodsManage();

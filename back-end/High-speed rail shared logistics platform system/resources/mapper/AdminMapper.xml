@@ -24,6 +24,10 @@ select * from worker where workername=#{workername}
 select * from worker order by workerID
 </select>
 
+<select id="showEidtWorker" parameterType="int" resultType="worker">
+select * from worker where workerID=#{workerID}
+</select>
+
 <update id="editWorker" parameterType="worker">
 update worker
 <set>
@@ -49,6 +53,10 @@ select * from worker where workername REGEXP #{search}
 
 <select id="showUser" resultType="user">
 select * from user_info order by userID
+</select>
+
+<select id="showEditUser" resultType="user" parameterType="int">
+select * from user_info where userID=#{userID}
 </select>
 
 <select id="searchUser" resultType="user" parameterType="string">

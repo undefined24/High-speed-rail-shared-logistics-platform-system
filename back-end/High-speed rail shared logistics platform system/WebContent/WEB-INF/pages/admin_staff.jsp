@@ -111,14 +111,14 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name">员工姓名</label>
                         <div class="col-md-8">
-                            <input class="form-control" id="staff_name" name="edit_worker_name" onBlur="checkStaffName()" value=${worker.workername} >
+                            <input class="form-control" id="staff_name" name="edit_worker_name" onBlur="checkStaffName()" value=${edit_worker.workername} >
 							<div id="staffname_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_pos">职务</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="edit_worker_position" id="staff_pos" onBlur="checkStaffPos()" value=${worker.workerposition}>
+                            <input class="form-control col-md-4 disabled" name="edit_worker_position" id="staff_pos" onBlur="checkStaffPos()" value=${edit_worker.workerposition}>
 							<div id="staffpos_prompt"></div>
                         </div>
                     </div>
@@ -134,14 +134,14 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="salary">工资</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="salary" name="edit_worker_salary" onBlur="checkSalary()" value=${worker.workersalary}>
+                            <input class="form-control col-md-4" id="salary" name="edit_worker_salary" onBlur="checkSalary()" value=${edit_worker.workersalary}>
 							<div id="salary_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="card">卡号</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="card" name="edit_worker_checkcard" onBlur="checkCard()" value=${worker.workercheckcard}>
+                            <input class="form-control col-md-4" id="card" name="edit_worker_checkcard" onBlur="checkCard()" value=${edit_worker.workercheckcard}>
 							<div id="card_prompt"></div>
                         </div>
                     </div>

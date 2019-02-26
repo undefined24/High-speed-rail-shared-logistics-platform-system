@@ -110,7 +110,7 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="vip_name">姓名</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="nickname" id="vip_name" onBlur="checkVipName()" value=${user.nickname}>
+                            <input class="form-control col-md-4 disabled" name="nickname" id="vip_name" onBlur="checkVipName()" value=${edit_user.nickname}>
                         <label class="control-label col-md-4" for="vip_ID">用户ID</label>
                         <div class="col-md-8">
                             <input class="form-control" id="vip_ID" onBlur="checkVipID()" value="fyw" >
@@ -129,21 +129,21 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="phone_num">电话号码</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="userphone" id="phone_num" onBlur="checkPhoneNum()" value=${user.userphone}>
+                            <input class="form-control col-md-4" name="userphone" id="phone_num" onBlur="checkPhoneNum()" value=${edit_user.userphone}>
                         	<div id="phonenum_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="pin">身份证号码</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="usernumber" id="pin" onBlur="checkPin()" value=${user.usernumber}>
+                            <input class="form-control col-md-4" name="usernumber" id="pin" onBlur="checkPin()" value=${edit_user.usernumber}>
                         	<div id="pin_prompt"></div>
                         </div>
                     </div>
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="address">常用住址</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="useraddress" id="address" onBlur="checkAddress()" value=${user.useraddress}>
+                            <input class="form-control col-md-4" name="useraddress" id="address" onBlur="checkAddress()" value=${edit_user.useraddress}>
                         	<div id="add_prompt"></div>
                         </div>
                     </div>
