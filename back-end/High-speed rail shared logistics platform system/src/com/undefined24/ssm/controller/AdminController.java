@@ -341,7 +341,6 @@ public class AdminController {
 	public ModelAndView searchGoods(@RequestParam(value="pn",defaultValue="1") int pn,
 			@RequestParam("search") String search) {
 		ModelAndView mv = new ModelAndView();
-		PageHelper.startPage(pn, page_show);
 		mv.addObject("login_admin",this.getCurrent_admin());
 		List<Goods> goodslist = new ArrayList<>();
 		if(search==""){
@@ -349,11 +348,12 @@ public class AdminController {
 		}else {
 			goodslist = adminService.searchGoods(search);
 		}
+		PageHelper.startPage(pn, page_show);
 		PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
 		mv.addObject("goodslist",page);
 		mv.addObject("search",search);
 		mv.addObject("page","searchGoods");
-		mv.setViewName("admin_staff");
+		mv.setViewName("admin_goods");
 		return mv;	
 	}
 	
