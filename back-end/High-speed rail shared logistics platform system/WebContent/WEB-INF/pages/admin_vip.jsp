@@ -110,8 +110,8 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="vip_name">姓名</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="nickname" id="vip_name" onBlur="checkVipName()" value=${edit_user.nickname}>
-                        </div>
+                            <input class="form-control col-md-4 disabled" name="nickname" id="vip_name" onBlur="checkVipName()" >
+                    	</div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="sex">性别</label>
