@@ -96,47 +96,13 @@ function checkCard(){
 }
 
 function staff_editSub(){
-	var staffName = document.getElementById("staff_name").value;
-	var staffPos = document.getElementById("staff_pos").value;
-	var staffSex = document.getElementById("sex").value;
-	var staffSalary = document.getElementById("salary").value;
-	var staffCard = document.getElementById("card").value;
-	var reg_num = /^\d+$/;
-
-	console.log(!reg_num.test(staffCard) + "dick")
-	if (staffName == ""){
-		return false;
-	}
-	else if (staffPos == ""){
-		return false;
-	}
-	else if (staffName.length > 10){
-		return false;
-	}
-	else if (staffPos.length > 10){
-		return false;
-	}
-	else if (staffSalary == ""){
-		return false;
-	}
-	else if (staffCard == ""){
-		return false;
-	}
-	else if (!reg_num.test(staffSalary)){
-		return false;
-	}
-	else if (!reg_num.test(staffCard)){
-		return false;
-	}
-	else if (staffSalary.length > 10){
-		return false;
-	}
-	else if (staffCard.length > 20){
-		return false;
-	}
-	else {
-		alert("提交成功！");
+	if(checkStaffName() && checkStaffPos() && checkSalary() && checkCard()){
+		alert("修改成功！");
 		return true;
+	}
+	else{
+		alert("修改失败！");
+		return false;
 	}
 }
 
@@ -229,47 +195,13 @@ function checkCard1(){
 }
 
 function staff_addSub(){
-	var staffName = document.getElementById("staff_name_1").value;
-	var staffPos = document.getElementById("staff_pos_1").value;
-	var staffSex = document.getElementById("sex_1").value;
-	var staffSalary = document.getElementById("salary_1").value;
-	var staffCard = document.getElementById("card_1").value;
-	var reg_num = /^\d+$/;
-
-	console.log(!reg_num.test(staffCard) + "dick")
-	if (staffName == ""){
-		return false;
-	}
-	else if (staffName.length > 10){
-		return false;
-	}
-	else if (staffPos == ""){
-		return false;
-	}
-	else if (staffPos.length > 10){
-		return false;
-	}
-	else if (staffSalary == ""){
-		return false;
-	}
-	else if (!reg_num.test(staffSalary)){
-		return false;
-	}
-	else if (staffSalary.length > 10){
-		return false;
-	}
-	else if (staffCard == ""){
-		return false;
-	}
-	else if (!reg_num.test(staffCard)){
-		return false;
-	}
-	else if (staffCard.length > 20){
-		return false;
-	}
-	else {
-		alert("提交成功！");
+	if(checkStaffName1() && checkStaffPos1() && checkSalary1() && checkCard1()){
+		alert("添加成功！");
 		return true;
+	}
+	else{
+		alert("添加失败！");
+		return false;
 	}
 }
 
@@ -390,65 +322,14 @@ function checkFee(){
 }
 
 function goods_editSub(){
-	var senderID = document.getElementById("sender_id").value;
-	var receiverID = document.getElementById("receiver_id").value;
-	var type = document.getElementById("goods_type").value;
-	var weight = document.getElementById("weight").value;
-	var trainNum = document.getElementById("train_num").value;
-	var fee = document.getElementById("fee").value;
-	var order = document.getElementById("order").value;
-	var orderFinished = document.getElementById("order_finished").value;
-	
-	var reg_num = /^\d+$/;
-	var reg_float = /^\d+(\.\d+)?$/;
-
-	if (senderID == ""){
-		return false;
-	}
-	else if (!reg_num.test(senderID)){
-		return false;
-	}
-	else if (senderID.length > 10) {
-		return false;
-	}
-	else if (receiverID == ""){
-		return false;
-	}
-	else if (!reg_num.test(receiverID)){
-		return false;
-	}
-	else if (receiverID.length > 10) {
-		return false;
-	}
-	else if (weight == ""){
-		return false;
-	}
-	else if (weight.length > 10){
-		return false;
-	}
-	else if (!reg_float.test(weight)){
-		return false;
-	}
-	else if (trainNum == ""){
-		return false;
-	}
-	else if (trainNum.length > 10) {
-		return false;
-	}
-	else if (fee == ""){
-		return false;
-	}
-	else if (!reg_float.test(fee)){
-		return false;
-	}
-	else if (fee.length > 10) {
-		return false;
-	}
-	else{
-		alert("提交成功！");
+	if(checkSenderid() && checkReceiverid() && checkWeight() && checkTrainnum() && checkFee()){
+		alert("修改成功！");
 		return true;
 	}
-	
+	else{
+		alert("修改失败！");
+		return false;
+	}
 }
 
 function checkSenderid1(){
@@ -568,72 +449,21 @@ function checkFee1(){
 }
 
 function goods_addSub(){
-	var senderID = document.getElementById("sender_id_1").value;
-	var receiverID = document.getElementById("receiver_id_1").value;
-	var weight = document.getElementById("weight_1").value;
-	var type = document.getElementById("goods_type_1").value;
-	var trainNum = document.getElementById("train_num_1").value;
-	var fee = document.getElementById("fee_1").value;
-	var order = document.getElementById("order_1").value;
-	var orderFinished = document.getElementById("order_finished_1").value;
-	
-	var reg_num = /^\d+$/;
-	var reg_float = /^\d+(\.\d+)?$/;
-	
-	if (senderID == ""){
-		return false;
-	}
-	else if (!reg_num.test(senderID)){
-		return false;
-	}
-	else if (senderID.length > 10) {
-		return false;
-	}
-	else if (receiverID == ""){
-		return false;
-	}
-	else if (!reg_num.test(receiverID)){
-		return false;
-	}
-	else if (receiverID.length > 10) {
-		return false;
-	}
-	else if (weight == ""){
-		return false;
-	}
-	else if (weight.length > 10){
-		return false;
-	}
-	else if (!reg_float.test(weight)){
-		return false;
-	}
-	else if (trainNum == ""){
-		return false;
-	}
-	else if (trainNum.length > 10) {
-		return false;
-	}
-	else if (fee == ""){
-		return false;
-	}
-	else if (!reg_float.test(fee)){
-		return false;
-	}
-	else if (fee.length > 10) {
-		return false;
-	}
-	else{
-		alert("提交成功！");
+	if(checkSenderid1() && checkReceiverid1() && checkWeight1() && checkTrainnum1() && checkFee1()){
+		alert("添加成功！");
 		return true;
 	}
-	
+	else{
+		alert("添加失败！");
+		return false;
+	}
 }
 
 function checkVipID(){
 	var vipID = document.getElementById("vip_ID").value;
 	var divVipID=document.getElementById("vipid_prompt");
 	divVipID.innerHTML="";
-	if (vipID == ""){
+	if (!vipID || vipID == ""){
 		vip_ID.value = "";
 		divVipID.innerHTML = "用户ID不能为空！"
 		return false;
@@ -647,7 +477,7 @@ function checkVipName(){
 	var divVipName=document.getElementById("vipname_prompt");
 	
 	divVipName.innerHTML="";
-	if (vipName == ""){
+	if (!vopName || vipName == ""){
 		vip_name.value = "";
 		divVipName.innerHTML = "用户姓名不能为空！"
 		return false;
@@ -667,7 +497,7 @@ function checkPhoneNum(){
 	
 	var reg_phone = /^1\d{10}$/
 	divPhoneNum.innerHTML="";
-	if (phoneNum == ""){
+	if (!phoneNum || phoneNum == ""){
 		phone_num.value = "";
 		divPhoneNum.innerHTML = "用户电话号码不能为空！"
 		return false;
@@ -687,7 +517,7 @@ function checkPin(){
 	
 	var reg_pin = /^\d{15}|\d{}18$/
 	divPin.innerHTML="";
-	if (Pin == ""){
+	if (!Pin || Pin == ""){
 		pin.value = "";
 		divPin.innerHTML = "用户身份证号码不能为空！"
 		return false;
@@ -706,7 +536,7 @@ function checkAddress(){
 	var divAdd=document.getElementById("add_prompt");
 	
 	divAdd.innerHTML="";
-	if (Address == ""){
+	if (!Address || Address == ""){
 		address.value = "";
 		divAdd.innerHTML = "用户地址不能为空！"
 		return false;
@@ -721,46 +551,13 @@ function checkAddress(){
 }
 
 function vip_editSub(){
-	var vipID = document.getElementById("vip_ID").value;
-	var vipName = document.getElementById("vip_name").value;
-	var sex = document.getElementById("sex").value;
-	var phoneNum = document.getElementById("phone_num").value;
-	var pin = document.getElementById("pin").value;
-	var address = document.getElementById("address").value;
-
-	var reg_pin = /^\d{15}|\d{}18$/
-	var reg_phone = /^1\d{10}$/
-	
-	if (vipID == ""){
-		return false;
-	}
-	else if (vipName == ""){
-		return false;
-	}
-	else if (vipName.length > 10){
-		return false;
-	}
-	else if (phoneNum == ""){
-		return false;
-	}
-	else if (!reg_phone.test(phoneNum)){
-		return false;
-	}
-	else if (pin == ""){
-		return false;
-	}
-	else if (!reg_pin.test(pin)){
-		return false;
-	}
-	else if (address == ""){
-		return false;
-	}
-	else if (address.length > 25){
-		return false;
+	if(checkVipID() && checkVipName() && checkPhoneNum() && checkPin() && checkAddress()){
+		alert("修改成功dick test！");
+		return true;
 	}
 	else{
-		alert("提交成功！");
-		return true;
+		alert("修改失败！");
+		return false;
 	}
 }
 
