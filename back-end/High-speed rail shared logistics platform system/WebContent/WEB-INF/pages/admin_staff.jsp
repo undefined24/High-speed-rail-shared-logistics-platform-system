@@ -17,8 +17,7 @@
 </head>
 <body>
 <div class="header">
-	<div class="back">
-		<a href="#">回到首页</a>
+	<div class="back">回到首页</a>
         <a href="adminlogout">注销</a>
     </div>
 </div>
@@ -107,7 +106,7 @@
                 <h4 class="modal-title" id="myModalLabel">员工信息修改</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="#" method="post">
+                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="editworker" method="post">
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name">员工姓名</label>
                         <div class="col-md-8">
@@ -125,7 +124,7 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="sex">性别</label>
                         <div class="col-md-8">
-                            <select class="form-control col-md-4" id="sex">
+                            <select class="form-control col-md-4" id="sex" name="edit_worker_sex">
                                 <option value="male">男</option>
                                 <option value="female">女</option>
                             </select>
@@ -184,7 +183,7 @@
                 <h4 class="modal-title" id="add">添加员工</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="#" method="post">
+                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="addworker" method="post">
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name_1">员工姓名</label>
                         <div class="col-md-8">
@@ -200,9 +199,9 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="sex_1">性别</label>
+                        <label class="control-label col-md-4" for="sex_1" >性别</label>
                         <div class="col-md-8">
-                            <select class="form-control col-md-4" id="sex_1">
+                            <select class="form-control col-md-4" id="sex_1" name="workersex">
                                 <option value="male">男</option>
                                 <option value="female">女</option>
                             </select>

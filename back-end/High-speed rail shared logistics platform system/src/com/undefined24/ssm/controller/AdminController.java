@@ -204,6 +204,7 @@ public class AdminController {
 		List<Worker> workerlist = adminService.showWorker();
 		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
 		mv.addObject("workerlist", page);
+		mv.addObject("page","adminstaff");
 		mv.setViewName("admin_staff");
 		return mv;
 	}
@@ -245,21 +246,16 @@ public class AdminController {
 		edit_worker.setWorkersex(sex);
 		edit_worker.setWorkersalary(salary);
 		edit_worker.setWorkercheckcard(checkcard);
-		
-		if(adminService.checkWorker(edit_worker)!=null) {
-			req.setAttribute("editworker-msg","此员工已存在！");
-		}else {
-			try {
-				int result = adminService.editWorker(edit_worker);
-				if(result==0) {
-					System.out.println(1);
-					req.setAttribute("editworker-msg", "修改失败");
-				}else {
-					req.setAttribute("editworker-msg", "修改成功");
-				}
-			}catch(Exception e) {
-				System.out.println("error");
+		try {
+			int result = adminService.editWorker(edit_worker);
+			if(result==0) {
+				System.out.println(1);
+				req.setAttribute("editworker-msg", "修改失败");
+			}else {
+				req.setAttribute("editworker-msg", "修改成功");
 			}
+		}catch(Exception e) {
+			System.out.println("error");
 		}
 		PageHelper.startPage(pn, page_show);
 		mv.addObject("login_admin",this.getCurrent_admin());
@@ -465,26 +461,23 @@ public class AdminController {
 		edit_user.setUseraddress(useraddress);
 		System.out.println(edit_user);
 		
-		if(adminService.checkUser(edit_user)!=null) {
-			req.setAttribute("edituser-msg","此员工已存在！");
-		}else {
-			try {
-				int result = adminService.editUser(edit_user);
-				if(result==0) {
-					req.setAttribute("edituser-msg", "修改失败");
-				}else {
-					req.setAttribute("edituser-msg", "修改成功");
-				}
-			}catch(Exception e) {
+		try {
+			int result = adminService.editUser(edit_user);
+			if(result==0||(nickname==""||usersex==""||usernumber==""||userphone==""||useraddress=="")) {
 				req.setAttribute("edituser-msg", "修改失败");
-				System.out.println("error");
+			}else {
+				req.setAttribute("edituser-msg", "修改成功");
 			}
+		}catch(Exception e) {
+			req.setAttribute("edituser-msg", "修改失败");
+			System.out.println("error");
 		}
 		PageHelper.startPage(pn, page_show);
 		List<User> userlist = adminService.showUser();
 		PageInfo<User> page = new PageInfo<User>(userlist);
 		mv.addObject("userlist",page);
 		mv.addObject("login_admin",this.getCurrent_admin());
+		mv.addObject("page", "adminvip");
 		mv.setViewName("admin_vip");
 		return mv;
 	}
@@ -516,6 +509,7 @@ public class AdminController {
 		List<User> userlist = adminService.showUser();
 		PageInfo<User> page = new PageInfo<User>(userlist);
 		mv.addObject("userlist",page);
+		mv.addObject("page", "adminvip");
 		mv.setViewName("admin_vip");
 		return mv;
 	}

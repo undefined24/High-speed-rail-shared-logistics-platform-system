@@ -26,11 +26,11 @@ create table user_info(
 create table bill(
 	trackingID int(32) primary key auto_increment,
     giveUserID int(32) not null,
-    acceptUserID int(32) not null,
-    sendaddress varchar(50) not null,
-    arriveaddress varchar(50) not null,
-    trainnumber varchar(10) not null,
-    cost float(10,2) not null,
+    acceptUserID int(32) ,
+    sendaddress varchar(50) ,
+    arriveaddress varchar(50) ,
+    trainnumber varchar(10) ,
+    cost float(10,2) ,
     complete bool not null default false
 );
 create table receiver_info(

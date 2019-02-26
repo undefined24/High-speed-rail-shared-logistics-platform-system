@@ -77,11 +77,11 @@ select * from user_info where nickname=#{nickname}
 <update id="editUser" parameterType="user">
 update user_info
 <set>
-<if test="nickname!=null">nickname=#{nickname},</if>
-<if test="usersex!=null">usersex=#{usersex},</if>
-<if test="userphone!=null">userphone=#{userphone},</if>
-<if test="usernumber!=null">usernumber=#{usernumber},</if>
-<if test="useraddress!=null">useraddress=#{useraddress}</if>
+<if test="nickname!='' and nickname!=null">nickname=#{nickname},</if>
+<if test="usersex!=null and usersex!=''">usersex=#{usersex},</if>
+<if test="userphone!=null and userphone!=''">userphone=#{userphone},</if>
+<if test="usernumber!=null and usernumber!=''">usernumber=#{usernumber},</if>
+<if test="useraddress!=null and useraddress!=''">useraddress=#{useraddress}</if>
 </set>
 where userID = #{userID}
 </update>
