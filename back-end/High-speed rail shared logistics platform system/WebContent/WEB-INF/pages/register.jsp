@@ -14,53 +14,7 @@
     <link rel="stylesheet" href="css/1.css">
 </head>
 <body>
-	<script type="text/javascript">
-		function mySub(){
-			var userName = document.getElementById("name").value;
-			var sex = document.getElementById("sex").value;
-			var tel = document.getElementById("tel").value;
-			var password = document.getElementById("password").value;
-			var password_1 = document.getElementById("password_1").value;
-			var pin = document.getElementById("pin").value;
-			var address = document.getElementById("address").value;
-			
-			if (password != password_1){
-				alert("两次输入密码需一致");
-				return false;
-			}
-
-			if (userName.length<3 || userName.length>6){
-				alert("用户名必须为3-6位");
-				return false;
-			}
-
-			var tag = isName(userName);
-			if (tag){
-				document.getElementById("isCan").innerHTML = "用户名已存在";
-				return false;
-			}else{
-				document.getElementById("isCan").innerHTML = "";
-			}
-			if (password.length < 6){
-				alert("密码必须大于6位");
-				return false;
-			}
-
-			return true;
-		}
-		
-		//判断用户名，参数为判断的用户名
-        function isName(str){
-        	for(var i=0;i<names.length;i++){
-				if(names[i] == str){
-					return true;
-				}
-			}
-			return false;
-		}
-		
-	</script>
-	
+    <script src="js/1.js"></script>
 	
     <div class="container">
         <div class="col-md-8 col-md-offset-2">
@@ -69,8 +23,9 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="name">用户名</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="nickname" id="name" placeholder="请输入3-6位用户名" onblur="checkUser()">
+                        <input type="text" class="form-control" name="nickname" id="name" placeholder="请输入3-10位用户名" onblur="checkUser();checkName2()">
                     	<span id="isCan" style="color: red;"></span>
+                    	<div id="name_prompt"></div>
 					</div>
                 </div>
                 <div class="form-group">
@@ -86,37 +41,46 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="tel">手机号</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="userphone" id="tel" placeholder="请输入手机号">
+                        <input type="text" class="form-control" name="userphone" id="tel" placeholder="请输入手机号" onblur="checkPhoneNum3()">
+						<div id="phone_prompt"></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="password">密码</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="userpwd" id="password" placeholder="请输入密码">
+                        <input type="text" class="form-control" name="userpwd" id="password" placeholder="请输入密码" onblur="CheckPassowrdStrength()">
+                        <div id="pas_prompt"></div>
                     </div>
+                    
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="password_1">确认密码</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="password_1" id="password_1" placeholder="请再次输入密码">
+                        <input type="text" class="form-control" name="password_1" id="password_1" placeholder="请再次输入密码" onblur="CheckPassowrdStrength2()">
+                    	<div id="pas_prompt1"></div>
                     </div>
+                    
                 </div>
 				<div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="pin">身份证号</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="usernumber" id="pin" placeholder="请输入身份证号">
+                        <input type="text" class="form-control" name="usernumber" id="pin" placeholder="请输入身份证号" onblur="checkPin2()">
+                        <div id="pin_prompt"></div>
                     </div>
+                    
                 </div>
 				<div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="address">常用住址</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="useraddress" id="address" placeholder="请输入常用住址">
+                        <input type="text" class="form-control" name="useraddress" id="address" placeholder="请输入常用住址" onblur="checkAddress2()">
+                    	<div id="address_prompt"></div>
                     </div>
+                    
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1"> </label>
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-default col-md-12 " onClick="mySub()">注册</button>
+                        <button type="submit" class="btn btn-default col-md-12 " onClick="registerForm()">注册</button>
                     </div>
 
                 </div>
@@ -134,7 +98,8 @@
     <%}%>	
     <script type="text/javascript">
     function checkUser(){
-    	$.ajax({
+    	// zt叫我注释的
+    	/*$.ajax({
     		type: "post",
     		url: "checkuser",
     		data: {
@@ -143,7 +108,7 @@
     		success: function(data){
     			${"check-name-msg"}.text(data);
     		}
-    	});
+    	});*/
     }
     </script>
 </body>

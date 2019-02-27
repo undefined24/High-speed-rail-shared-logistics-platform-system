@@ -127,6 +127,13 @@
             <div class="modal-body">
                 <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="editgoods" method="post" name="goods_edit" onsubmit="return goods_editSub()">
 					<div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="goods_name">名称</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4 disabled" name="name" id="goods_name" onBlur="checkGoodName()" value="">
+							<div id="name_prompt"></div>
+                        </div>
+                    </div>
+					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="sender_id">下单用户ID</label>
                         <div class="col-md-8">
                             <input class="form-control col-md-4 disabled" id="sender_id" name="giveUserID" onBlur="checkSenderid()" value="<c:out value='${edit_goods.bill.giveUserID}'/>">
@@ -234,10 +241,10 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="addgoods" method="post">
-                <div class="form-group col-md-12">
+                	<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="goods_name">名称</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="name" id="goods_name_1" value="">
+                            <input class="form-control col-md-4 disabled" name="name" id="goods_name_1" onBlur="checkGoodName1()" value="">
 							<div id="name_prompt"></div>
                         </div>
                     </div>
