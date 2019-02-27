@@ -18,6 +18,7 @@
 <body>
 <div class="header">
 	<div class="back">
+		<a href="homepage">回到首页</a>
         <a href="adminlogout">注销</a>
     </div>
 </div>
@@ -106,7 +107,7 @@
                 <h4 class="modal-title" id="myModalLabel">员工信息修改</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="editworker" method="post">
+                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" name="staff_edit" action="editworker" method="post" onsubmit="return staff_editSub()">
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name">员工姓名</label>
                         <div class="col-md-8">
@@ -146,7 +147,7 @@
                     </div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="submit" class="btn btn-primary" onClick="staff_editSub()">提交更改</button>
+						<button type="submit" class="btn btn-primary" onClick="staff_editForm()">提交更改</button>
 					</div>
 
                 </form>
@@ -183,7 +184,7 @@
                 <h4 class="modal-title" id="add">添加员工</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="addworker" method="post">
+                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" name="staff_add" action="addworker" method="post" onsubmit="return staff_addSub()">
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name_1">员工姓名</label>
                         <div class="col-md-8">
@@ -223,7 +224,7 @@
                     </div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="submit" class="btn btn-primary" onClick="staff_addSub()">增加员工</button>
+						<button type="submit" class="btn btn-primary" onClick="staff_addsubForm();">增加员工</button>
 					</div>
 
                 </form>

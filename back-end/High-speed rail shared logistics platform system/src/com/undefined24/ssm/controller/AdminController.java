@@ -271,7 +271,7 @@ public class AdminController {
 				System.out.println(1);
 				req.setAttribute("editworker-msg", "修改失败");
 			}else {
-				req.setAttribute("editworker-msg", "修改成功");
+				//req.setAttribute("editworker-msg", "修改成功");
 			}
 		}catch(Exception e) {
 			System.out.println("error");
@@ -307,7 +307,7 @@ public class AdminController {
 		if(result==0) {
 			req.setAttribute("deleteworker-msg", "删除失败");
 		}else { 
-			req.setAttribute("deleteworker-msg", "删除成功");
+			//req.setAttribute("deleteworker-msg", "删除成功");
 		}
 		PageHelper.startPage(pn, page_show);
 		mv.addObject("login_admin",this.getCurrent_admin());
@@ -596,7 +596,7 @@ public class AdminController {
 			if(result==0||(nickname==""||usersex==""||usernumber==""||userphone==""||useraddress=="")) {
 				req.setAttribute("edituser-msg", "修改失败");
 			}else {
-				req.setAttribute("edituser-msg", "修改成功");
+				//req.setAttribute("edituser-msg", "修改成功");
 			}
 		}catch(Exception e) {
 			req.setAttribute("edituser-msg", "修改失败");

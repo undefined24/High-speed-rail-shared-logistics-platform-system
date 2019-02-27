@@ -11,6 +11,36 @@ function on_submit(){
 		pwd.focus();
 		return false;
 	}
+	else if((pwd.value==repwd.value) && checkName() && checkTel() && checkPwd() && checkPin()){
+		//alert("修改成功！");
+		return true;
+	}
+	else{
+		alert("修改失败！");
+		return false;
+	}
+}
+
+function on_submit1(){
+	if(checkSenderName() && checkSenderTel() && checkSenderAddress() && checkReceiverName() && checkReceiverTel() && checkReceiverAddress()){
+		alert("提交成功！");
+		return true;
+	}
+	else{
+		alert("提交失败！");
+		return false;
+	}
+}
+
+function on_submit2(){
+	if(checkStartPos() && checkTrainNum() && checkStartTime()){
+		alert("查询成功！");
+		return true;
+	}
+	else{
+		alert("查询失败！");
+		return false;
+	}
 }
 
 //手机号码验证
@@ -101,9 +131,16 @@ function checkPin(){
 	var userpin=document.getElementById("pin").value;
 	var divPinId=document.getElementById("pin_prompt");
 	divPinId.innerHTML="";
-	if(userpin.length != 18){
-		pin.value="";
-		divPinId.innerHTML="身份证号格式不正确，请重新输入";
+	var reg_pin = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/;
+	
+	if (userpin == ""){
+		pin.value = "";
+		divPinId.innerHTML = "用户身份证号码不能为空！"
+		return false;
+	}
+	else if (!reg_pin.test(userpin)){
+		pin.value = "";
+		divPinId.innerHTML = "用户身份证号码格式错误！"
 		return false;
 	}
 	divPinId.innerHTML="";
@@ -191,29 +228,33 @@ function checkStartTime(){
 }
 
 function MySub(){
-	var name=document.getElementById("name").value;
-	var tel=document.getElementById("tel").value;
-	var pwd=document.getElementById("password").value;
-	var pwd1=document.getElementById("password_1").value;
-	var pin=document.getElementById("pin").value;
-	var add=document.getElementById("address").value;
+	if (on_submit()){
+		document.userInfoEdit.submit();
+//		alert("添加成功！");
+	}
+	else{
+//		alert("添加失败！");
+	}
 }
 
 function MySub1(){
-	var type=document.getElementById("type").value;
-	var weight=document.getElementById("weight").value;
-	var senderName=document.getElementById("sender_name").value;
-	var senderTel=document.getElementById("sender_tel").value;
-	var senderAdd=document.getElementById("sender_address").value;
-	var receiverName=document.getElementById("receiver_name").value;
-	var receiverTel=document.getElementById("receiver_tel").value;
-	var receiverAddress=document.getElementById("receiver_address").value;
+	if (on_submit1()){
+		document.centerSender.submit();
+//		alert("添加成功！");
+	}
+	else{
+//		alert("添加失败！");
+	}
 }
 
 function MySub2(){
-	var startPos=document.getElementById("start_pos").value;
-	var trainNum=document.getElementById("train_num").value;
-	var startTime=document.getElementById("start_time").value;
+		if (on_submit2()){
+		document.centerReceiver.submit();
+//		alert("添加成功！");
+	}
+	else{
+//		alert("添加失败！");
+	}
 }
 
 function goToWhere(){

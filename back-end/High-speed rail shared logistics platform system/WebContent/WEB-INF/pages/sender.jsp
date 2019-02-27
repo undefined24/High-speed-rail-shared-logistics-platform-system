@@ -57,7 +57,7 @@
 				</div>
 			</nav>
 			
-            <form class="form-horizontal" name="regform" id="send" role="form" action="#" method="post">
+            <form class="form-horizontal" name="sender" id="send" role="form" onSubmit="return on_submit1()">
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="type">物品类型</label>
                     <div class="col-md-6">

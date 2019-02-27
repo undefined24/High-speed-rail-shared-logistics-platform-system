@@ -97,12 +97,20 @@ function checkCard(){
 
 function staff_editSub(){
 	if(checkStaffName() && checkStaffPos() && checkSalary() && checkCard()){
-		alert("修改成功！");
 		return true;
 	}
 	else{
-		alert("修改失败！");
 		return false;
+	}
+}
+
+function staff_editForm(){
+	if (staff_editSub()){
+		document.staff_edit.submit();
+		//alert("修改成功！");
+	}
+	else{
+		alert("修改失败！");
 	}
 }
 
@@ -196,13 +204,22 @@ function checkCard1(){
 
 function staff_addSub(){
 	if(checkStaffName1() && checkStaffPos1() && checkSalary1() && checkCard1()){
-		alert("添加成功！");
 		return true;
 	}
 	else{
-		alert("添加失败！");
 		return false;
 	}
+}
+
+function staff_addsubForm(){
+	if (staff_addSub()){
+		document.staff_add.submit();
+		alert("添加成功！");
+	}
+	else{
+		alert("添加失败！");
+	}
+	
 }
 
 function checkSenderid(){
@@ -323,12 +340,20 @@ function checkFee(){
 
 function goods_editSub(){
 	if(checkSenderid() && checkReceiverid() && checkWeight() && checkTrainnum() && checkFee()){
-		alert("修改成功！");
 		return true;
 	}
 	else{
-		alert("修改失败！");
 		return false;
+	}
+}
+
+function goods_editForm(){
+	if (goods_editSub()){
+		document.goods_edit.submit();
+		//alert("修改成功！");
+	}
+	else{
+		alert("修改失败！");
 	}
 }
 
@@ -450,12 +475,20 @@ function checkFee1(){
 
 function goods_addSub(){
 	if(checkSenderid1() && checkReceiverid1() && checkWeight1() && checkTrainnum1() && checkFee1()){
-		alert("添加成功！");
 		return true;
 	}
 	else{
-		alert("添加失败！");
 		return false;
+	}
+}
+
+function goods_addForm(){
+	if (goods_addSub()){
+		document.goods_add.submit();
+		alert("添加成功！");
+	}
+	else{
+		alert("添加失败！");
 	}
 }
 
@@ -463,7 +496,7 @@ function checkVipID(){
 	var vipID = document.getElementById("vip_ID").value;
 	var divVipID=document.getElementById("vipid_prompt");
 	divVipID.innerHTML="";
-	if (!vipID || vipID == ""){
+	if (vipID == ""){
 		vip_ID.value = "";
 		divVipID.innerHTML = "用户ID不能为空！"
 		return false;
@@ -477,14 +510,14 @@ function checkVipName(){
 	var divVipName=document.getElementById("vipname_prompt");
 	
 	divVipName.innerHTML="";
-	if (!vopName || vipName == ""){
+	if (vipName == ""){
 		vip_name.value = "";
 		divVipName.innerHTML = "用户姓名不能为空！"
 		return false;
 	}
 	else if (vipName.length > 10) {
 		vip_name.value = "";
-		divVipName.innerHTML = "用户姓名大于10！"
+		divVipName.innerHTML = "用户姓名长度大于10！"
 		return false;
 	}
 	divVipName.innerHTML="";
@@ -497,7 +530,7 @@ function checkPhoneNum(){
 	
 	var reg_phone = /^1\d{10}$/
 	divPhoneNum.innerHTML="";
-	if (!phoneNum || phoneNum == ""){
+	if (phoneNum == ""){
 		phone_num.value = "";
 		divPhoneNum.innerHTML = "用户电话号码不能为空！"
 		return false;
@@ -515,9 +548,9 @@ function checkPin(){
 	var Pin = document.getElementById("pin").value;
 	var divPin=document.getElementById("pin_prompt");
 	
-	var reg_pin = /^\d{15}|\d{}18$/
+	var reg_pin = /(^\d{15}$)|(^\d{18}$)|(^\d{17}(\d|X|x)$)/
 	divPin.innerHTML="";
-	if (!Pin || Pin == ""){
+	if (Pin == ""){
 		pin.value = "";
 		divPin.innerHTML = "用户身份证号码不能为空！"
 		return false;
@@ -536,7 +569,7 @@ function checkAddress(){
 	var divAdd=document.getElementById("add_prompt");
 	
 	divAdd.innerHTML="";
-	if (!Address || Address == ""){
+	if (Address == ""){
 		address.value = "";
 		divAdd.innerHTML = "用户地址不能为空！"
 		return false;
@@ -551,13 +584,21 @@ function checkAddress(){
 }
 
 function vip_editSub(){
-	if(checkVipID() && checkVipName() && checkPhoneNum() && checkPin() && checkAddress()){
-		alert("修改成功dick test！");
+	if(checkVipName() && checkPhoneNum() && checkPin() && checkAddress()){
 		return true;
 	}
 	else{
-		alert("修改失败！");
 		return false;
+	}
+}
+
+function vip_editForm(){
+	if (vip_editSub()){
+		document.vip_edit.submit();
+		//alert("修改成功！");
+	}
+	else{
+		alert("修改失败！");
 	}
 }
 

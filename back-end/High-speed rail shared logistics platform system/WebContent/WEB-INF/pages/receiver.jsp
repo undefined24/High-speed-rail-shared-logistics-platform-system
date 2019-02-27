@@ -57,7 +57,7 @@
 				</div>
 			</nav>
 			
-            <form class="form-horizontal" name="regform" id="receive" role="form" action="#" method="post">
+            <form class="form-horizontal" name="receiver" id="receive" role="form" action="#" method="post" onSubmit="return on_submit2()">
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="start_pos">高铁出发点</label>
 					<div class="col-md-6">

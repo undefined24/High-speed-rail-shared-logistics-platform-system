@@ -79,15 +79,25 @@ function checkReceiverAddress(){
 	return true;
 }
 
+function on_submit1(){
+	if(checkSenderName() && checkSenderTel() && checkSenderAddress() && checkReceiverName() && checkReceiverTel() && checkReceiverAddress()){
+		alert("提交成功！");
+		return true;
+	}
+	else{
+		alert("提交失败！");
+		return false;
+	}
+}
+
 function MySub1(){
-	var type=document.getElementById("type").value;
-	var weight=document.getElementById("weight").value;
-	var senderName=document.getElementById("sender_name").value;
-	var senderTel=document.getElementById("sender_tel").value;
-	var senderAdd=document.getElementById("sender_address").value;
-	var receiverName=document.getElementById("receiver_name").value;
-	var receiverTel=document.getElementById("receiver_tel").value;
-	var receiverAddress=document.getElementById("receiver_address").value;
+	if (on_submit1()){
+		document.sender.submit();
+//		alert("添加成功！");
+	}
+	else{
+//		alert("添加失败！");
+	}
 }
 
 function checkStartPos(){
@@ -129,8 +139,23 @@ function checkStartTime(){
 	return true;
 }
 
+function on_submit2(){
+	if(checkStartPos() && checkTrainNum() && checkStartTime()){
+		alert("查询成功！");
+		return true;
+	}
+	else{
+		alert("查询失败！");
+		return false;
+	}
+}
+
 function MySub2(){
-	var startPos=document.getElementById("start_pos").value;
-	var trainNum=document.getElementById("train_num").value;
-	var startTime=document.getElementById("start_time").value;
+		if (on_submit2()){
+		document.receiver.submit();
+//		alert("添加成功！");
+	}
+	else{
+//		alert("添加失败！");
+	}
 }

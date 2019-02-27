@@ -50,8 +50,7 @@
                 <div class="line col-md-12  "></div>
                 <br/>
                 
-                 <form method="post" action="#" class="form-horizontal col-md-10" id="user_center_edit" role="form" onSubmit="return on_submit()">
-                    <div class="form-group">
+                 <form method="post" action="#" class="form-horizontal col-md-10" id="user_center_edit" name="userInfoEdit" role="form" onSubmit="return on_submit()">
                         <label class="control-label col-md-2" for="name">用户名</label>
                         <div class="col-md-6">
                             <input type="text" onblur="checkName()" class="form-control" id="name" placeholder="请输入3-6位用户名" name="username" value="fyw">
@@ -118,7 +117,7 @@
                 <div class="line col-md-12  "></div>
                 <br/>
                 
-                 <form method="post" action="#" class="form-horizontal col-md-10" id="user_center_sender" role="form">
+                 <form method="post" action="#" class="form-horizontal col-md-10" name="centerSender" id="user_center_sender" role="form" onSubmit="return on_submit1()">
 					 <div class="form-group">
                         <label class="control-label col-md-2" for="type">物品类型</label>
                         <div class="col-md-6">
@@ -201,7 +200,7 @@
                 <div class="line col-md-12"></div>
                 <br/>
                 
-                 <form method="post" action="#" class="form-horizontal col-md-10" id="user_center_receiver" role="form">
+                 <form method="post" action="#" class="form-horizontal col-md-10" id="user_center_receiver" name="centerReceiver" role="form" onSubmit="return on_submit2()">
 					 <div class="form-group">
                         <label class="control-label col-md-2" for="start_pos">高铁出发点</label>
                         <div class="col-md-8">

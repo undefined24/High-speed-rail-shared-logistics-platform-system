@@ -18,6 +18,7 @@
 <body>
 <div class="header">
 	<div class="back">
+		<a href="homepage">回到首页</a>
         <a href="adminlogout">注销</a>
     </div>
 </div>
@@ -106,11 +107,12 @@
                 <h4 class="modal-title" id="edit1">用户信息修改</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="editUser" method="post">
+                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" name="vip_edit" action="editUser" method="post" onsubmit="return vip_editSub()">
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="vip_name">姓名</label>
                         <div class="col-md-8">
                             <input class="form-control col-md-4 disabled" name="nickname" id="vip_name" onBlur="checkVipName()" >
+                            <div id="vipname_prompt"></div>
                     	</div>
                     </div>
                     <div class="form-group col-md-12">
@@ -145,7 +147,8 @@
                     </div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="submit" class="btn btn-primary" onClick="vip_editSub()">提交更改</button>
+						<button type="submit" class="btn btn-primary" onClick="vip_editForm();">提交更改</button>
+						
 					</div>
 	
                 </form>
