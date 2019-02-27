@@ -158,7 +158,7 @@ public class AdminController {
 	}
 	
 	/*
-	 * 用户登出
+	 * 登出
 	 */
 	@RequestMapping(value="/adminlogout",method=RequestMethod.GET)
 	public ModelAndView Logout() {

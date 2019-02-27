@@ -28,16 +28,16 @@ public class UserService {
 		return userMapper.CheckUser(user);
 	}
 	
+	//注册身份证号查重
+	@Transactional
+	public User checkUserNumber(String usernumber){
+		return userMapper.checkUserNumber(usernumber);
+	}
+	
 	//登录
 	@Transactional
 	public User Login(User user){
 		return userMapper.Login(user);
-	}
-	
-	//修改密码
-	@Transactional
-	public int ChangePwd(User user){
-		return userMapper.ChangePwd(user);
 	}
 	
 	//修改个人资料

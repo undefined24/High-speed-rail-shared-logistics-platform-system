@@ -22,13 +22,13 @@
 	</div>
 	<div class="container container_user_center col-md-10 col-md-offset-1">
         <div class="back">
-            <a href="#">回到首页</a>
-            <a href="#">注销</a>
+            <a href="main">回到首页</a>
+            <a href="userLogout">注销</a>
         </div>
 		<div class="user_info col-md-6 col-md-offset-3">
-			<img class='user_icon' title='点击更换头像' style='border-radius: 50%;width: 150px;height: 150px; margin-bottom: 30px;' src=../image/2089312254@chatroom_1486356859619_63.jpg onclick='#save' data-toggle='modal' data-target='#save'/>
+			<img class='user_icon' title='点击更换头像' style='border-radius: 50%;width: 150px;height: 150px; margin-bottom: 30px;' src=image/2089312254@chatroom_1486356859619_63.jpg onclick='#save' data-toggle='modal' data-target='#save'/>
 			<br/>
-            <span class="user_name">Dick<span class="user_name">，欢迎您</span></span>
+            <span class="user_name">${user.nickname}<span class="user_name">，欢迎您</span></span>
             <br/>
 		</div>
 		<div class="col-md-8 col-md-offset-2 ">
@@ -50,10 +50,11 @@
                 <div class="line col-md-12  "></div>
                 <br/>
                 
-                 <form method="post" action="#" class="form-horizontal col-md-10" id="user_center_edit" name="userInfoEdit" role="form" onSubmit="return on_submit()">
+                 <form class="form-horizontal col-md-10" id="user_center_edit" name="userInfoEdit" role="form" onSubmit="return on_submit()" method="post" action="changeprofile">
+                     <div class="form-group"> 
                         <label class="control-label col-md-2" for="name">用户名</label>
                         <div class="col-md-6">
-                            <input type="text" onblur="checkName()" class="form-control" id="name" placeholder="请输入3-6位用户名" name="username" value="fyw">
+                            <input type="text" onblur="checkName()" class="form-control" id="name" placeholder="请输入3-6位用户名" name="nickname" value="fyw">
                             <div id="name_prompt"></div>
 						</div>
                     </div>
@@ -81,7 +82,7 @@
 					<div class="form-group">
                         <label class="control-label col-md-2" for="pin">身份证号</label>
                         <div class="col-md-6">
-                            <input type="text" onblur="checkPin()" class="form-control" id="pin" placeholder="请输入身份证号" name="userpin" value="440702xxxxxxxx1521">
+                            <input type="text" onblur="checkPin()" class="form-control" id="pin" placeholder="请输入身份证号" name="usernumber" value="440702xxxxxxxx1521">
 							<div id="pin_prompt"></div>
                         </div>
                     </div>
@@ -95,8 +96,9 @@
                         <label class="control-label col-md-2"> </label>
                         <button class="btn btn-default " type="submit" onClick="mySub()">保存</button>
                     </div>
+                    
                 </form>
-            </div>
+		</div>
 		</div>
 		
 		<div class="col-md-10 col-md-offset-1 search1">
@@ -255,6 +257,13 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
+<%--修改用户详情成功时提示--%>
+    <%String profile_success_msg=(String)request.getAttribute("profile-success-msg");
+        if(profile_success_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=profile_success_msg%>");
+    </script>
+    <%}%>
 </body>
 </html>
     

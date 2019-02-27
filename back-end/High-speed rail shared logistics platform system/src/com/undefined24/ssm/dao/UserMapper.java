@@ -9,8 +9,9 @@ public interface UserMapper {
 	public int Register(User user);
 	public User CheckUser(User user);
 	public User Login(User user);
-	public int ChangePwd(User user);
 	public int ChangeProfile(User user);
 	public List<History> giveUserHistory(int userID);
 	public List<History> acceptUserHistory(int userID);
+	
+	public User checkUserNumber(String usernumber);
 }

@@ -54,6 +54,14 @@ public class UserController {
 	}
 
 	/*
+	 * 前往主页
+	 */
+	@RequestMapping(value="/main",method=RequestMethod.GET)
+	public String gotoMain() {
+		return "../main";
+	}
+	
+	/*
 	 * 前往登录页面homepage.jsp
 	 */
 	@RequestMapping(value="/gotoHomepage",method=RequestMethod.GET)
@@ -91,6 +99,7 @@ public class UserController {
 		}
 		return msg;
 	}
+	
 	/*
 	 * 前往注册页面
 	 */
@@ -126,7 +135,11 @@ public class UserController {
 			if(this.isSame_name()==true) {
 				req.setAttribute("register-msg","用户名已被使用，请更改");
 				mv.setViewName("register");
-			}else {
+			}else if(userService.checkUserNumber(usernumber)!=null){
+				req.setAttribute("register-msg","身份证号已被使用，请更改");
+				mv.setViewName("register");
+			}
+			else {
 				int result = userService.Register(user);
 				if(result==0) {
 					req.setAttribute("register-msg", "注册失败，请重试");
@@ -138,7 +151,7 @@ public class UserController {
 			}
 		}else {
 			req.setAttribute("register-msg", "用户名非法，请更改");
-			mv.setViewName("register");
+			mv.setViewName("user_center");
 		}
 		return mv;
 	}
@@ -149,12 +162,11 @@ public class UserController {
 	@RequestMapping(value="/login",method=RequestMethod.GET)
 	public ModelAndView gotoLogin() {
 		ModelAndView mv = new ModelAndView();
-		//如果没有登录
-//		if(attr1==null) {
-//			mv.setViewName("login");
-//		}else {
-			mv.setViewName("login");//修改
-//		}
+			if(this.isHave_user()==false) {
+				mv.setViewName("login");
+			}else {
+				mv.setViewName("user_center");
+			}
 		return mv;	
 	}
 	
@@ -175,9 +187,10 @@ public class UserController {
 			req.setAttribute("login-msg", "用户名或密码错误");
 			mv.setViewName("login");
 		}else {
-			mv.addObject("attr1",login_user.getNickname());
-			mv.addObject("attr2", login_user.getUserpwd());
-			mv.setViewName("profile");
+			this.setCurrent_user(login_user);
+			this.setHave_user(true);
+			mv.addObject("user",login_user);
+			mv.setViewName("user_center");
 		}
 		return mv;
 	}
@@ -185,45 +198,11 @@ public class UserController {
 	/*
 	 * 用户登出
 	 */
-	@RequestMapping(value="/logout",method=RequestMethod.GET)
-	public ModelAndView Logout(SessionStatus status) {
-		ModelAndView mv=new ModelAndView("login");
-		status.setComplete();
-		return mv;
-	}
-	
-	/*
-	 * 修改密码
-	 */
-	@RequestMapping(value="/changepwd",method=RequestMethod.POST)
-	public ModelAndView changePwd(@RequestParam("oldpassword") String oldpassword,
-			@RequestParam("newpassword") String newpassword,
-			@RequestParam("confirmpassword") String confirmpassword,
-			@ModelAttribute("attr1")String nickname, 
-			@ModelAttribute("attr2")String userpwd,
-			HttpServletRequest req) {
-		ModelAndView mv = new ModelAndView();
-		//如果输入密码错误
-		if(oldpassword.equals(userpwd)==false) {
-			req.setAttribute("check-pwd-msg","输入密码错误，请重试");
-		}
-		else if(newpassword.equals(confirmpassword)==false) {
-			req.setAttribute("check-pwd-msg","两次输入不一致，请重试");
-		}else {
-			User user = new User();
-			User current_user = null;
-			user.setNickname(nickname);
-			current_user = userService.CheckUser(user);
-			current_user.setUserpwd(newpassword);
-			int result = userService.ChangePwd(current_user);
-			//数据库插入失败
-			if(result==0) {
-				req.setAttribute("check-pwd-msg", "更改密码失败，请重试");
-			}else {
-				mv.addObject("attr2",current_user.getUserpwd());
-				mv.setViewName("profile");
-			}
-		}
+	@RequestMapping(value="/userLogout",method=RequestMethod.GET)
+	public ModelAndView Logout() {
+		ModelAndView mv=new ModelAndView("homepage");
+		this.setHave_user(false);
+		this.setCurrent_user(null);
 		return mv;
 	}
 	
@@ -231,44 +210,50 @@ public class UserController {
 	 * 更改个人简介
 	 */
 	@RequestMapping(value="/changeprofile",method=RequestMethod.POST)
-	public ModelAndView changeProfile(@RequestParam("useraddress") String useraddress,
-			@RequestParam("usersex") String usersex,
-			@RequestParam("userbirthday") String userbirthday,
-			@RequestParam("note") String note,
-			@ModelAttribute("attr1")String attr1, 
-    		@ModelAttribute("attr2")String attr2,
+	public ModelAndView changeProfile(@RequestParam("nickname") String nickname,
+			@RequestParam("userphone") String userphone,
+			@RequestParam("userpwd") String userpwd,
+			@RequestParam("re_userpwd") String re_userpwd,
+			@RequestParam("usernumber") String usernumber,
+			@RequestParam("useraddress") String useraddress,
     		HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
-		User user = new User();
-		User current_user = null;
-		user.setNickname(attr1);
-		current_user = userService.CheckUser(user);
-		if(current_user==null) {
-			mv.setViewName("profile");
+		if(this.isHave_user()==false) {
+			mv.setViewName("homepage");
 		}else {
-			current_user.setUseraddress(useraddress);
-			current_user.setUsersex(usersex);
-			current_user.setNote(note);
-			try {
-				int result = userService.ChangeProfile(current_user);
-				//修改失败
-				if(result==0) {
-					req.setAttribute("profile-msg", "个人资料修改失败");
-				}else {
-					//显示资料
+			if(userpwd.equals(re_userpwd)==false) {
+				req.setAttribute("profile-msg", "确认密码错误");
+			}else {
+				User user = new User();
+				user.setUserID(this.getCurrent_user().getUserID());
+				user.setNickname(nickname);
+				user.setUserphone(userphone);
+				user.setUserpwd(userpwd);
+				user.setUsernumber(usernumber);
+				user.setUseraddress(useraddress);
+				try {
+					int result = userService.ChangeProfile(user);
+					if(result==0) {
+						req.setAttribute("profile-msg", "个人资料修改失败");
+					}else {
+						this.setCurrent_user(user);
+						mv.addObject("user",user);
+						req.setAttribute("profile-success-msg", "修改成功");
+						//显示资料
+					}
+				}catch(Exception e) {
+					req.setAttribute("profile-msg", "系统异常请重试");
 				}
-			}catch(Exception e) {
-				req.setAttribute("profile-msg", "系统异常请重试");
 			}
+			mv.setViewName("user_center");
 		}
-		mv.setViewName("profile");
 		return mv;
 	}
 	
 	/*
 	 * 跳转去个人资料页面
 	 */
-	@RequestMapping(value="/profile",method=RequestMethod.GET)
+	@RequestMapping(value="/user_center",method=RequestMethod.GET)
 	public ModelAndView gotoProfile(@ModelAttribute("attr1")String attr1, 
 			@ModelAttribute("attr2")String attr2,
 			HttpServletRequest req) {

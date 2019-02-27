@@ -16,17 +16,14 @@ select * from user_info where nickname=#{nickname} and userpwd=#{userpwd}
 select * from user_info where nickname=#{nickname}
 </select>
 
-<update id="ChangePwd" parameterType="user" >
-update user_info set userpwd=#{userpwd} where userID = #{userID}
-</update>
-
 <update id="ChangeProfile" parameterType="user" >
 update user_info
 <set>
-<if test="useraddress">useraddress=#{useraddress},</if>
-<if test="usersex!=null">usersex=#{usersex},</if>
-<if test="userbirthday!=null">userbirthday=#{userbirthday},</if>
-<if test="note!=null">note=#{note}</if>
+<if test="nickname!=null and nickname!=''">nickname=#{nickname},</if>
+<if test="useraddress!=null and useraddress!=''">useraddress=#{useraddress},</if>
+<if test="userphone!=null and userphone!=''">userphone=#{userphone},</if>
+<if test="userpwd!=null and userpwd!=''">userpwd=#{userpwd},</if>
+<if test="usernumber!=null and usernumber!=''">usernumber=#{usernumber}</if>
 </set>
 where userID = #{userID}
 </update>
@@ -38,4 +35,9 @@ select * from history where giveUserID=#{giveUserID}
 <select id="acceptUserHistory" parameterType="int">
 select * from history where acceptUserID=#{acceptUserID}
 </select>
+
+<select id="checkUserNumber" parameterType="string" resultType="user">
+select * from user_info where usernumber=#{usernumber}
+</select>
+
 </mapper>
