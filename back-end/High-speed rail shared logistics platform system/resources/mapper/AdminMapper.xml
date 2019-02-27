@@ -148,7 +148,7 @@ update bill
 <if test="acceptUserID!=null and acceptUserID!=''">acceptUserID=#{acceptUserID},</if>
 <if test="trainnumber!=null and trainnumber!=''">trainnumber=#{trainnumber},</if>
 <if test="cost!=null and cost!=''">cost=#{cost},</if>
-<if test="complete!=null and complete!=''">complete=#{complete}</if>
+<if test="complete!=null">complete=#{complete}</if>
 </set>
 where trackingID = #{trackingID}
 </update>

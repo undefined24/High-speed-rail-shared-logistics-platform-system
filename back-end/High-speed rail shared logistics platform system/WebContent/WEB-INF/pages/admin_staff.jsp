@@ -18,7 +18,6 @@
 <body>
 <div class="header">
 	<div class="back">
-		<a href="homepage">回到首页</a>
         <a href="adminlogout">注销</a>
     </div>
 </div>

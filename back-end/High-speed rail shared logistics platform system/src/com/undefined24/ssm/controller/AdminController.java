@@ -272,6 +272,7 @@ public class AdminController {
 				req.setAttribute("editworker-msg", "修改失败");
 			}else {
 				//req.setAttribute("editworker-msg", "修改成功");
+				System.out.println("修改成功");
 			}
 		}catch(Exception e) {
 			System.out.println("error");
@@ -308,6 +309,7 @@ public class AdminController {
 			req.setAttribute("deleteworker-msg", "删除失败");
 		}else { 
 			//req.setAttribute("deleteworker-msg", "删除成功");
+			System.out.println("删除成功");
 		}
 		PageHelper.startPage(pn, page_show);
 		mv.addObject("login_admin",this.getCurrent_admin());
@@ -415,7 +417,8 @@ public class AdminController {
 			if(result_1==0||result_2==0) {
 				req.setAttribute("addgoods-msg", "物品添加失败，请重试");
 			}else {
-				req.setAttribute("addgoods-msg", "物品添加成功！");
+				//req.setAttribute("addgoods-msg", "物品添加成功！");
+				System.out.println("物品添加成功");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -454,7 +457,8 @@ public class AdminController {
 			if(result_1==0||result_2==0) {
 				req.setAttribute("deletegoods-msg", "删除失败");
 			}else { 
-				req.setAttribute("deletegoods-msg", "删除成功");
+				//req.setAttribute("deletegoods-msg", "删除成功");
+				System.out.println("删除成功");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -488,7 +492,7 @@ public class AdminController {
 	}
 	
 	/*
-	 * 修改员工
+	 * 修改物品
 	 */
 	@RequestMapping(value="/editgoods",method=RequestMethod.POST)
 	public ModelAndView editGoods(@RequestParam(value="pn",defaultValue="1") int pn,
@@ -512,15 +516,15 @@ public class AdminController {
 		edit_bill.setTrainnumber(trainnumber);
 		edit_bill.setCost(cost);
 		edit_bill.setComplete(complete);
+		System.out.println(complete);
 		try {
 			int result_1 = adminService.editGoods(edit_goods);
 			int result_2 = adminService.editBill(edit_bill);
 			if(result_1==0||result_2==0) {
-				System.out.println(1);
 				req.setAttribute("editgoods-msg", "修改失败");
 			}else {
-				System.out.println(3);
-				req.setAttribute("editgoods-msg", "修改成功");
+				//req.setAttribute("editgoods-msg", "修改成功");
+				System.out.println("修改成功");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -597,6 +601,7 @@ public class AdminController {
 				req.setAttribute("edituser-msg", "修改失败");
 			}else {
 				//req.setAttribute("edituser-msg", "修改成功");
+				System.out.println("修改成功");
 			}
 		}catch(Exception e) {
 			req.setAttribute("edituser-msg", "修改失败");
@@ -632,7 +637,8 @@ public class AdminController {
 		if(result==0) {
 			req.setAttribute("deleteuser-msg", "删除失败");
 		}else {
-			req.setAttribute("deleteuser-msg", "删除成功");
+			//req.setAttribute("deleteuser-msg", "删除成功");
+			System.out.println("删除成功");
 		}
 		PageHelper.startPage(pn, page_show);
 		mv.addObject("login_admin",this.getCurrent_admin());

@@ -18,7 +18,6 @@
 <body>
 <div class="header">
 	<div class="back">
-		<a href="homepage">回到首页</a>
         <a href="adminlogout">注销</a>
     </div>
 </div>
@@ -90,8 +89,8 @@
 				<c:if test="${goods.bill.complete==true}">
 				<td>是</td>
 				</c:if>
-				<td><span data-toggle="modal" data-target="#goods_edit">修改</span></td>
-                <td><span data-toggle="modal" data-target="#goods_delete">删除</span></td>
+				<td><a data-toggle="modal" data-target="#goods_edit" href="gotoEditGoods?edit_trackingID=${goods.trackingID}">修改</a></td>
+                <td><a data-toggle="modal" data-target="#goods_delete" href="gotoDeleteGoods?delete_trackingID=${goods.trackingID}">删除</a></td>
             </tr>
             </c:forEach>
             </tbody>
@@ -126,25 +125,25 @@
                 <h4 class="modal-title" id="edit">物品信息修改</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" name="goods_edit" action="#" method="post" onsubmit="return goods_editSub()">
+                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="editgoods" method="post" name="goods_edit" onsubmit="return goods_editSub()">
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="sender_id">下单用户ID</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="sender_id" onBlur="checkSenderid()" value=${edit_goods.bill.giveUserID}>
+                            <input class="form-control col-md-4 disabled" id="sender_id" name="giveUserID" onBlur="checkSenderid()" value="<c:out value='${edit_goods.bill.giveUserID}'/>">
 							<div id="senderid_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="receiver_id">接单用户ID</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="receiver_id" onBlur="checkReceiverid()" value=${edit_goods.bill.acceptUserID}>
+                            <input class="form-control col-md-4" id="receiver_id" name="acceptUserID" onBlur="checkReceiverid()" value=${edit_goods.bill.acceptUserID}>
 							<div id="receiverid_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="goods_type">类型</label>
                         <div class="col-md-8">
-                            <select class="form-control col-md-4" id="goods_type">
+                            <select class="form-control col-md-4" id="goods_type" name="type">
                                 <option value="1">文件</option>
                                 <option value="2">数码产品</option>
 								<option value="3">生活用品</option>
@@ -157,21 +156,21 @@
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="weight">重量</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="weight" onBlur="checkWeight()" value=${edit_goods.weight}>
+                            <input class="form-control col-md-4 disabled" id="weight" name="weight" onBlur="checkWeight()" value=${edit_goods.weight}>
 							<div id="weight_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="train_num">车次</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="train_num" onBlur="checkTrainnum()" value=${edit_goods.bill.trainnumber}>
+                            <input class="form-control col-md-4 disabled" id="train_num" name="trainnumber" onBlur="checkTrainnum()" value=${edit_goods.bill.trainnumber}>
 							<div id="trainnum_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="fee">运费</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="fee" onBlur="checkFee()" value=${edit_goods.bill.cost}>
+                            <input class="form-control col-md-4" id="fee" name="cost" onBlur="checkFee()" value=${edit_goods.bill.cost}>
 							<div id="fee_prompt"></div>
                         </div>
                     </div>
@@ -187,9 +186,9 @@
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="order_finished">是否完成订单</label>
                         <div class="col-md-8">
-                            <select class="form-control col-md-4" id="order_finished">
-                                <option value="yes">是</option>
-                                <option value="no">否</option>
+                            <select class="form-control col-md-4" id="order_finished" name="complete">
+                                <option value="true">是</option>
+                                <option value="false">否</option>
                             </select>
                         </div>
                     </div>
@@ -219,7 +218,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">否</button>
-                <button type="button" class="btn btn-primary">是</button>
+                <a href="deletegoods?pn=${goodslist.pageNum}"><button type="button" class="btn btn-primary">是</button></a>
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
@@ -234,7 +233,14 @@
                 <h4 class="modal-title" id="add">添加物品</h4>
             </div>
             <div class="modal-body">
-                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" name="goods_add" action="addgoods" method="post" onsubmit="return goods_addSub()">
+                <form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="addgoods" method="post">
+                <div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="goods_name">名称</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4 disabled" name="name" id="goods_name_1" value="">
+							<div id="name_prompt"></div>
+                        </div>
+                    </div>
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="sender_id_1">下单用户ID</label>
                         <div class="col-md-8">
@@ -303,7 +309,7 @@
                     </div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-						<button type="submit" class="btn btn-primary" onClick="goods_addForm()">增加物品</button>
+						<button type="submit" class="btn btn-primary" onClick="goods_addSub()">增加物品</button>
 					</div>
 
                 </form>
@@ -313,5 +319,27 @@
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
 </div>
+<%--添加物品时提示--%>
+    <%String addgoods_msg=(String)request.getAttribute("addgoods-msg");
+        if(addgoods_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=addgoods_msg%>");
+    </script>
+    <%}%>
+</body>
+<%--修改物品时提示--%>
+    <%String editgoods_msg=(String)request.getAttribute("editgoods-msg");
+        if(editgoods_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=editgoods_msg%>");
+    </script>
+    <%}%>
+<%--删除物品时提示--%>
+    <%String deletegoods_msg=(String)request.getAttribute("deletegoods-msg");
+        if(deletegoods_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=deletegoods_msg%>");
+    </script>
+    <%}%>
 </body>
 </html>
