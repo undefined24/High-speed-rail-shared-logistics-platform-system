@@ -11,7 +11,7 @@ html,body{
 }
 @font-face {
     font-family:"yw";
-    src: url("../font/ç¦¹å«ä¹¦æ³•è¡Œä¹¦ç®€ä½“.ttf");
+    src: url("../font/ÓíÎÀÊé·¨ĞĞÊé¼òÌå.ttf");
 }
 
 body{
@@ -19,6 +19,9 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment:fixed
+}
+.kuang{
+	border-bottom:1px solid rgba(255,250,240,0.85);
 }
 .col-md-6{
     height: 100%;
@@ -175,7 +178,7 @@ textarea:focus {
 .container_user_center{
     top: 0;
     background-color: rgba(0,0,0,0.5);
-    height: 500%;
+    height: 400%;
 }
 .container_api_apply{
     top: 0;

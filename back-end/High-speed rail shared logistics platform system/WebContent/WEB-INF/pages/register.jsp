@@ -15,6 +15,26 @@
 </head>
 <body>
     <script src="js/1.js"></script>
+    <script>
+    function checkTrueName(){
+    	var trueName = document.getElementById("truename").value;
+    	var divTrueName=document.getElementById("truename_prompt");
+    	
+    	divTrueName.innerHTML="";
+    	if (trueName == ""){
+    		truename.value = "";
+    		divTrueName.innerHTML = "真实姓名不能为空！"
+    		return false;
+    	}
+    	else if (trueName.length > 10 || trueName.length < 2) {
+    		truename.value = "";
+    		divTrueName.innerHTML = "真实姓名长度要2~10位！"
+    		return false;
+    	}
+    	divTrueName.innerHTML="";
+    	return true;
+    }
+    </script>
 	
     <div class="container">
         <div class="col-md-8 col-md-offset-2">
@@ -60,13 +80,12 @@
                     	<div id="pas_prompt1"></div>
                     </div>
                 </div>
-                 <div class="form-group">
-                    <label class="control-label col-md-2 col-md-offset-1" for="username">真实姓名</label>
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-md-offset-1" for="truename">真实姓名</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="username" id="username" placeholder="请输入真实姓名" onblur="">
-                    	<span id="isCan" style="color: red;"></span>
-                    	<!-- <div id="name_prompt"></div> -->
-					</div>
+                        <input type="text" class="form-control" name="truename" id="truename" placeholder="请输入真实姓名" onblur="checkTrueName()">
+                    	<div id="truename_prompt"></div>
+                    </div>
                 </div>
 				<div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="pin">身份证号</label>

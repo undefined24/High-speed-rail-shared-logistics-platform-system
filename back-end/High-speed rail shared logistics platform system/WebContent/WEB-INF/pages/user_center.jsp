@@ -107,8 +107,107 @@
                 <div class="line col-md-12  "></div>
                 <br/>
                 
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="name">该账号暂无物流信息</label>
+                <div class="form-group ">
+					<h4 class="col-md-10"><strong>我的寄件</strong></h4>
+                    <table class="table col-md-12 kuang" style="margin-top: 30px;">
+						<thead>
+						<tr>
+							<th>账单号</th>
+							<th>物品id</th>
+							<th>物品名称</th>
+							<th>发送的地址</th>
+							<th>接受的地址</th>
+							<th>车次</th>
+							<th>花费</th>
+							<th>是否接单</th>
+							<th>是否到达</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>000001</td>
+							<td>0003</td>
+							<td>怡宝</td>
+							<td>Shenzhen</td>
+							<td>Guangzhou</td>
+							<td>C7300</td>
+							<td>10</td>
+							<th>是</th>
+							<td>是</td>
+						<tr>
+							<td>000010</td>
+							<td>0002</td>
+							<td>强生</td>
+							<td>Shenzhen</td>
+							<td>Jiangmen</td>
+							<td>C7500</td>
+							<td>15</td>
+							<th>是</th>
+							<td>否</td>
+						<tr>
+							<td>000001</td>
+							<td>0003</td>
+							<td>mac</td>
+							<td>Guangzhou</td>
+							<td>Jiangmen</td>
+							<td>C7100</td>
+							<td>20</td>
+							<th>否</th>
+							<td>否</td>
+						</tr>
+
+						</tbody>
+					</table>
+            	</div>
+				
+				
+				<div class="form-group">
+					<h4 class="col-md-10"><strong>我的收件</strong></h4>
+                    <table class="table col-md-12 kuang" style="margin-top: 30px;">
+						<thead>
+						<tr>
+							<th>账单号</th>
+							<th>物品id</th>
+							<th>物品名称</th>
+							<th>发送的地址</th>
+							<th>接受的地址</th>
+							<th>车次</th>
+							<th>花费</th>
+							<th>是否到达</th>
+						</tr>
+						</thead>
+						<tbody>
+						<tr>
+							<td>000001</td>
+							<td>0003</td>
+							<td>怡宝</td>
+							<td>Shenzhen</td>
+							<td>Guangzhou</td>
+							<td>C7300</td>
+							<td>10</td>
+							<td>是</td>
+						<tr>
+							<td>000010</td>
+							<td>0002</td>
+							<td>强生</td>
+							<td>Shenzhen</td>
+							<td>Jiangmen</td>
+							<td>C7500</td>
+							<td>15</td>
+							<td>否</td>
+						<tr>
+							<td>000001</td>
+							<td>0003</td>
+							<td>mac</td>
+							<td>Guangzhou</td>
+							<td>Jiangmen</td>
+							<td>C7100</td>
+							<td>20</td>
+							<td>是</td>
+						</tr>
+
+						</tbody>
+					</table>
             	</div>
 			</div>
 		</div>

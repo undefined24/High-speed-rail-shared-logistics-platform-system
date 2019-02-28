@@ -45,7 +45,8 @@
 <div class="container col-md-8 col-md-offset-3">
     <div class="col-md-11">
 		<form role="form" class="form-inline goods_search" action="searchGoods">
-            <button type="button" class="btn btn-default" data-toggle="modal" data-target="#add_goods">添加物品</button>
+			<!-- 取消物品添加功能 -->
+            <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#add_goods">添加物品</button> -->
             <div class="form-group">
                 <input class="form-control " type="text" name="search" placeholder="请输入需要查找的物品ID">
                 <button class="form-control btn btn-default">搜索</button>

@@ -768,9 +768,9 @@ function checkName2(){
 	return true;
 }
 
-
 function registerSub(){
-	if(checkPhoneNum3() && CheckPassowrdStrength() && CheckPassowrdStrength2() && checkPin2() && checkAddress2() && checkName2()){
+	if(checkPhoneNum3() && CheckPassowrdStrength() && CheckPassowrdStrength2() 
+			&& checkPin2() && checkAddress2() && checkName2()){
 		return true;
 	}
 	else{
