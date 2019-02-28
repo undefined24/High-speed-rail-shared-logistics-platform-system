@@ -135,6 +135,7 @@ select * from goods_info where trackingID=#{trackingID}
 <update id="editGoods" parameterType="goods">
 update goods_info
 <set>
+<if test="name!='' and name!=null">name=#{name},</if>
 <if test="type!='' and type!=null">type=#{type},</if>
 <if test="weight!=null and weight!=''">weight=#{weight}</if>
 </set>

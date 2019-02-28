@@ -59,7 +59,14 @@
                         <input type="text" class="form-control" name="password_1" id="password_1" placeholder="请再次输入密码" onblur="CheckPassowrdStrength2()">
                     	<div id="pas_prompt1"></div>
                     </div>
-                    
+                </div>
+                 <div class="form-group">
+                    <label class="control-label col-md-2 col-md-offset-1" for="username">真实姓名</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control" name="username" id="username" placeholder="请输入真实姓名" onblur="">
+                    	<span id="isCan" style="color: red;"></span>
+                    	<!-- <div id="name_prompt"></div> -->
+					</div>
                 </div>
 				<div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="pin">身份证号</label>

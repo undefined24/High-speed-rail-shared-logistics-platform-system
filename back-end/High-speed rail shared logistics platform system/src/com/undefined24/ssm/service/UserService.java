@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.undefined24.ssm.dao.UserMapper;
+import com.undefined24.ssm.vo.Bill;
+import com.undefined24.ssm.vo.Goods;
 import com.undefined24.ssm.vo.History;
+import com.undefined24.ssm.vo.Receiver;
 import com.undefined24.ssm.vo.User;
 
 @Service
@@ -56,5 +59,23 @@ public class UserService {
 	@Transactional
 	public List<History> acceptUserHistory(int userID){
 		return userMapper.acceptUserHistory(userID);
+	}
+	
+	//下单时添加物品
+	@Transactional
+	public int addGoods(Goods goods){
+		return userMapper.addGoods(goods);
+	}
+	
+	//下单时添加订单
+	@Transactional
+	public int addBill(Bill bill){
+		return userMapper.addBill(bill);
+	}
+	
+	//下单时添加收件人
+	@Transactional
+	public int addReceiver(Receiver rec){
+		return userMapper.addReceiver(rec);
 	}
 }

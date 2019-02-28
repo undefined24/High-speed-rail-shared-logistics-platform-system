@@ -1,5 +1,4 @@
 drop table if exists administrator;	#管理员表
-drop table if exists user;	#用户表
 drop table if exists user_info;	#用户信息表
 drop table if exists bill;	#运单表
 drop table if exists receiver_info;	#收件人信息表
@@ -8,6 +7,7 @@ drop table if exists accept_user_info;	#接单用户信息表
 drop table if exists history;	#历史记录表
 drop table if exists worker;	#客服人员表
 drop table if exists message;	#反馈留言表
+drop table if exists bill;
 
 create table administrator(
   adminID int(32) primary key auto_increment,
@@ -36,7 +36,6 @@ create table bill(
 create table receiver_info(
 	trackingID int(32) primary key,
     name varchar(50) not null,
-    sex varchar(10) not null,
     phone varchar(11) not null,
     address varchar(50) not null
 );

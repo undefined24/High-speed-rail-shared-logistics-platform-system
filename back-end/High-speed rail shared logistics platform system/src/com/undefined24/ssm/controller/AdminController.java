@@ -496,6 +496,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/editgoods",method=RequestMethod.POST)
 	public ModelAndView editGoods(@RequestParam(value="pn",defaultValue="1") int pn,
+			@RequestParam("name") String name,
 			@RequestParam("giveUserID") int giveUserID,
 			@RequestParam("acceptUserID") int acceptUserID,
 			@RequestParam("type") String type,
@@ -507,6 +508,7 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		Goods edit_goods = new Goods();
 		Bill edit_bill = new Bill();
+		edit_goods.setName(name);
 		edit_goods.setTrackingID(this.getEdit_trackdingID());
 		edit_goods.setType(type);
 		edit_goods.setWeight(weight);

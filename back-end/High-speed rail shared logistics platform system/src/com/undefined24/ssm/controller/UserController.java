@@ -16,6 +16,9 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.undefined24.ssm.service.UserService;
+import com.undefined24.ssm.vo.Bill;
+import com.undefined24.ssm.vo.Goods;
+import com.undefined24.ssm.vo.Receiver;
 import com.undefined24.ssm.vo.User;
 
 @Controller
@@ -58,7 +61,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/main",method=RequestMethod.GET)
 	public String gotoMain() {
-		return "../main";
+		return "main";
 	}
 	
 	/*
@@ -70,15 +73,90 @@ public class UserController {
 	}
 	
 	/*
+	 * 前往接件页面receiver.jsp
+	 */
+	@RequestMapping(value="/gotoReceiver",method=RequestMethod.GET)
+	public String gotoReceiver() {
+		return "receiver";
+	}
+	
+	/*
+	 * 前往寄件页面sender.jsp
+	 */
+	@RequestMapping(value="/gotoSender",method=RequestMethod.GET)
+	public ModelAndView gotoSender() {
+		ModelAndView mv = new ModelAndView();
+		if(this.isHave_user()==false) {
+			mv.setViewName("login");
+		}else {
+			mv.setViewName("sender");
+		}
+		return mv;
+	}
+	
+	/*
+	 * 寄件
+	 */
+	@RequestMapping(value="/send",method=RequestMethod.POST)
+	public ModelAndView send(@RequestParam("name") String name,
+			@RequestParam("type") String type,
+			@RequestParam("weight") float weight,
+			@RequestParam("receivername") String receivername,
+			@RequestParam("receiverphone") String receiverphone,
+			@RequestParam("receiveraddress") String receiveraddress,
+			HttpServletRequest req) {
+		ModelAndView mv = new ModelAndView();
+		if(this.isHave_user()==false) {
+			mv.setViewName("login");
+		}else {
+			Goods goods = new Goods();
+			Bill bill = new Bill();
+			Receiver rec = new Receiver();
+			goods.setName(name);
+			goods.setType(type);
+			goods.setWeight(weight);
+			bill.setGiveUserID(this.getCurrent_user().getUserID());
+			bill.setArriveaddress(receiveraddress);
+			bill.setSendaddress(this.getCurrent_user().getUseraddress());
+			rec.setName(receivername);
+			rec.setPhone(receiverphone);
+			rec.setAddress(receiveraddress);
+			try {
+				if(name==""||type==""||weight==0||receivername==""||receiverphone==""||receiveraddress=="") {
+					req.setAttribute("send-msg", "下单失败，请重试");
+					mv.setViewName("sender");
+					return mv;
+				}
+				int result_1 = userService.addGoods(goods);
+				int result_2 = userService.addBill(bill);
+				int result_3 = userService.addReceiver(rec);
+				if(result_1==0||result_2==0||result_3==0) {
+					req.setAttribute("send-msg", "下单失败，请重试");
+				}else {
+					req.setAttribute("send-msg","下单成功");
+				}
+			}catch(Exception e) {
+				req.setAttribute("send-msg", "下单失败，请重试");
+				e.printStackTrace();
+			}
+			mv.setViewName("sender");
+		}
+		return mv;
+	}
+	
+	/*
 	 * 前往个人中心user_center.jsp
 	 */
 	@RequestMapping(value="/gotoUserCenter",method=RequestMethod.GET)
-	public String gotoUserCenter() {
+	public ModelAndView gotoUserCenter() {
+		ModelAndView mv = new ModelAndView();
 		if(this.isHave_user()==false) {
-			return "homepage";
+			mv.setViewName("homepage");
 		}else {
-			return "homepage";
+			mv.addObject("user",this.getCurrent_user());
+			mv.setViewName("user_center");
 		}
+		return mv;
 	}
 	
 	/*
@@ -113,6 +191,7 @@ public class UserController {
 	 */
 	@RequestMapping(value="/register",method=RequestMethod.POST)
 	public ModelAndView Register(@RequestParam("nickname") String nickname,
+			@RequestParam("username") String username,
 			@RequestParam("usersex") String usersex,
 			@RequestParam("userphone") String userphone,
 			@RequestParam("userpwd") String userpwd,
@@ -127,6 +206,7 @@ public class UserController {
 		boolean isLegal = Pattern.matches(pattern, nickname);
 		if(isLegal) {
 			user.setNickname(nickname);
+			user.setUsername(username);
 			user.setUsersex(usersex);
 			user.setUserphone(userphone);
 			user.setUserpwd(userpwd);
@@ -146,12 +226,12 @@ public class UserController {
 					mv.setViewName("register");
 				}else {
 					req.setAttribute("register-msg", "注册成功");
-					mv.setViewName("register");
+					mv.setViewName("user_center");
 				 }
 			}
 		}else {
 			req.setAttribute("register-msg", "用户名非法，请更改");
-			mv.setViewName("user_center");
+			mv.setViewName("register");
 		}
 		return mv;
 	}
@@ -165,6 +245,7 @@ public class UserController {
 			if(this.isHave_user()==false) {
 				mv.setViewName("login");
 			}else {
+				mv.addObject("user",this.getCurrent_user());
 				mv.setViewName("user_center");
 			}
 		return mv;	

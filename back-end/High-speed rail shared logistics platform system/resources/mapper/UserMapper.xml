@@ -5,7 +5,7 @@
 <mapper namespace="com.undefined24.ssm.dao.UserMapper">
 
 <insert id="Register" parameterType="user" useGeneratedKeys="true">
-insert into user_info(nickname,userpwd,userphone,useraddress,usersex,usernumber) values(#{nickname},#{userpwd},#{userphone},#{useraddress},#{usersex},#{usernumber})
+insert into user_info(nickname,username,userpwd,userphone,useraddress,usersex,usernumber) values(#{nickname},#{username},#{userpwd},#{userphone},#{useraddress},#{usersex},#{usernumber})
 </insert>
 
 <select id="Login" resultType="user" parameterType="user">
@@ -40,4 +40,15 @@ select * from history where acceptUserID=#{acceptUserID}
 select * from user_info where usernumber=#{usernumber}
 </select>
 
+<insert id="addGoods" parameterType="goods" useGeneratedKeys="true">
+insert into goods_info(name,type,weight) values(#{name},#{type},#{weight})
+</insert>
+
+<insert id="addBill" parameterType="bill" useGeneratedKeys="true">
+insert into bill(giveUserID,sendaddress,arriveaddress) values(#{giveUserID},#{sendaddress},#{arriveaddress})
+</insert>
+
+<insert id="addReceiver" parameterType="receiver" useGeneratedKeys="true">
+insert into receiver_info(name,phone,address) values(#{name},#{phone},#{address})
+</insert>
 </mapper>

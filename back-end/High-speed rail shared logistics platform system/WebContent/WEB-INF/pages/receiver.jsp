@@ -25,7 +25,7 @@
 			<div>
 				<ul class="nav navbar-nav ">
 
-					<li class="active" id="crftag"><a href="#">首页</a></li>
+					<li class="active" id="crftag"><a href="main">首页</a></li>
 					<li id="crftag"><a href="#">服务支持</a></li>
 					<li id="crftag"><a href="#">金融</a></li>
 					<li id="crftag"><a href="#">加盟合作</a></li>
@@ -35,8 +35,8 @@
 			</div>
 			<div>
 				<ul class="nav navbar-nav navbar-right">
-					<li id="crftag"><a href="#">快速登录/注册</a></li>
-					<li id="crftag"><a href="#">个人中心</a></li>
+					<li id="crftag"><a href="login">快速登录/注册</a></li>
+					<li id="crftag"><a href="gotoUserCenter">个人中心</a></li>
 				</ul>
 			</div>
 		</div>

@@ -25,7 +25,7 @@
 			<div>
 				<ul class="nav navbar-nav ">
 
-					<li class="active" id="crftag"><a href="#">首页</a></li>
+					<li class="active" id="crftag"><a href="main">首页</a></li>
 					<li id="crftag"><a href="#">服务支持</a></li>
 					<li id="crftag"><a href="#">金融</a></li>
 					<li id="crftag"><a href="#">加盟合作</a></li>
@@ -35,8 +35,8 @@
 			</div>
 			<div>
 				<ul class="nav navbar-nav navbar-right">
-					<li id="crftag"><a href="#">快速登录/注册</a></li>
-					<li id="crftag"><a href="#">个人中心</a></li>
+					<li id="crftag"><a href="login">快速登录/注册</a></li>
+					<li id="crftag"><a href="gotoUserCenter">个人中心</a></li>
 				</ul>
 			</div>
 		</div>
@@ -49,19 +49,26 @@
 					</div>
 					<div>
 						<ul class="nav navbar-nav navbar-right">
-							<li class="active" id="crftag"><a href="#">我要寄件</a></li>
-							<li id="crftag"><a href="#">我要收件</a></li>
+							<li class="active" id="crftag"><a href="gotoSender">我要寄件</a></li>
+							<li id="crftag"><a href="gotoReceiver">我要收件</a></li>
 							<li id="crftag"><a href="#">服务支持</a></li>
 						</ul>
 					</div>
 				</div>
 			</nav>
 			
-            <form class="form-horizontal" name="sender" id="send" role="form" onSubmit="return on_submit1()">
+            <form class="form-horizontal" name="sender" id="send" action="send" method="post" role="form" onSubmit="return on_submit1()">
+				<div class="form-group">
+					<label class="control-label col-md-2 col-md-offset-1" for="name">物品名称</label>
+					<div class="col-md-6">
+						<input type="text" onblur="" class="form-control" id="name" placeholder="请输入物品名称" name="name">
+						<div id="name_prompt"></div>
+					</div>
+				</div>
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="type">物品类型</label>
                     <div class="col-md-6">
-						<select class="form-control select1" id="type">
+						<select class="form-control select1" id="type" name="type">
 							<option value="1" style="color: black">文件</option>
                             <option value="2" style="color: black">数码产品</option>
 							<option value="3" style="color: black">生活用品</option>
@@ -74,7 +81,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="weight">物品估重</label>
                     <div class="col-md-6">
-						<select class="form-control select1" id="weight">
+						<select class="form-control select1" id="weight" name="weight">
 							<option value="1" style="color: black">小于1kg</option>
                             <option value="2" style="color: black">1kg</option>
 							<option value="3" style="color: black">2kg</option>
@@ -82,27 +89,6 @@
 							<option value="5" style="color: black">4kg</option>
                             <option value="6" style="color: black">大于4kg</option>
 						</select>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-2 col-md-offset-1" for="sender_name">寄件人姓名</label>
-					<div class="col-md-6">
-						<input type="text" onblur="checkSenderName()" class="form-control" id="sender_name" placeholder="请输入寄件人姓名" name="sendername">
-						<div id="sendername_prompt"></div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-2 col-md-offset-1" for="sender_tel">寄件人手机号</label>
-					<div class="col-md-6">
-						<input type="text" onblur="checkSenderTel()" class="form-control" id="sender_tel" placeholder="请输入寄件人手机号" name="senderphone">
-						<div id="sendernumber_prompt"></div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-md-2 col-md-offset-1" for="sender_address">寄件人地址</label>
-					<div class="col-md-6">
-						<input type="text" onblur="checkSenderAddress()" class="form-control" id="sender_address" placeholder="请输入寄件人地址" name="senderaddress" >
-						<div id="senderadderss_prompt"></div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -136,6 +122,12 @@
             </form>
         </div>
     </div>
-	
+<%--寄件时提示--%>
+    <%String send_msg=(String)request.getAttribute("send-msg");
+        if(send_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=send_msg%>");
+    </script>
+    <%}%>
 </body>
 </html>
