@@ -11,7 +11,7 @@ html,body{
 }
 @font-face {
     font-family:"yw";
-    src: url("../font/”ÌŒ¿ È∑®–– ÈºÚÃÂ.ttf");
+    src: url("../font/Á¶πÂç´‰π¶Ê≥ïË°å‰π¶ÁÆÄ‰Ωì.ttf");
 }
 
 body{
@@ -233,6 +233,24 @@ textarea:focus {
     margin-bottom: 40px;
     height: 1px;
     border: 1px solid rgba(255,255,255,0.5);
+}
+.line1{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    height: 1px;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+.line2{
+    margin-top: 0px;
+    margin-bottom: 40px;
+    height: 1px;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+.line3{
+    margin-top: 40px;
+    margin-bottom: 0px;
+    height: 1px;
+    border: 1px solid rgba(255,255,255,0.3);
 }
 .revise,.search,.send,.receive{
     color: #e6e6e6;

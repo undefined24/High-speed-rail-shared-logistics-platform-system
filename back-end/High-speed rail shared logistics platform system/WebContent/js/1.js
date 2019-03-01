@@ -768,9 +768,28 @@ function checkName2(){
 	return true;
 }
 
+function checkTrueName(){
+	var trueName = document.getElementById("truename").value;
+	var divTrueName=document.getElementById("truename_prompt");
+	
+	divTrueName.innerHTML="";
+	if (trueName == ""){
+		truename.value = "";
+		divTrueName.innerHTML = "真实姓名不能为空！"
+		return false;
+	}
+	else if (trueName.length > 10 || trueName.length < 2) {
+		truename.value = "";
+		divTrueName.innerHTML = "真实姓名长度要2~10位！"
+		return false;
+	}
+	divTrueName.innerHTML="";
+	return true;
+}
+
 function registerSub(){
 	if(checkPhoneNum3() && CheckPassowrdStrength() && CheckPassowrdStrength2() 
-			&& checkPin2() && checkAddress2() && checkName2()){
+			&& checkPin2() && checkAddress2() && checkName2() && checkTrueName()){
 		return true;
 	}
 	else{

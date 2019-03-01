@@ -106,7 +106,7 @@
 				<h3 class="col-md-10">物流查询</h4>
                 <div class="line col-md-12  "></div>
                 <br/>
-                
+                <div class="line2 col-md-12  "></div>
                 <div class="form-group ">
 					<h4 class="col-md-10"><strong>我的寄件</strong></h4>
                     <table class="table col-md-12 kuang" style="margin-top: 30px;">
@@ -151,7 +151,7 @@
 					</table>
             	</div>
 				
-				
+				<div class="line1 col-md-12"></div>
 				<div class="form-group">
 					<h4 class="col-md-10"><strong>我的收件</strong></h4>
                     <table class="table col-md-12 kuang" style="margin-top: 30px;">
@@ -188,6 +188,7 @@
 						</tbody>
 					</table>
             	</div>
+            	<div class="line3 col-md-12  "></div>
 			</div>
 		</div>
 		

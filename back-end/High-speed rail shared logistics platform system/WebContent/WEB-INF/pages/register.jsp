@@ -15,26 +15,6 @@
 </head>
 <body>
     <script src="js/1.js"></script>
-    <script>
-    function checkTrueName(){
-    	var trueName = document.getElementById("truename").value;
-    	var divTrueName=document.getElementById("truename_prompt");
-    	
-    	divTrueName.innerHTML="";
-    	if (trueName == ""){
-    		truename.value = "";
-    		divTrueName.innerHTML = "真实姓名不能为空！"
-    		return false;
-    	}
-    	else if (trueName.length > 10 || trueName.length < 2) {
-    		truename.value = "";
-    		divTrueName.innerHTML = "真实姓名长度要2~10位！"
-    		return false;
-    	}
-    	divTrueName.innerHTML="";
-    	return true;
-    }
-    </script>
 	
     <div class="container">
         <div class="col-md-8 col-md-offset-2">
