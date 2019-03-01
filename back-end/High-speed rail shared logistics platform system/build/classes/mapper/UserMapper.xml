@@ -58,6 +58,8 @@ select * from bill where giveUserID=#{userID}
 <result property="sendaddress" column="sendaddress"/>
 <result property="arriveaddress" column="arriveaddress"/>
 <result property="trainnumber" column="trainnumber"/>
+<result property="createtime" column="createtime"/>
+<result property="completetime" column="completetime"/>
 <result property="complete" column="complete"/>
 <result property="cost" column="cost"/>
 <association property="goods" column="trackingID" select="selectGoods" javaType="goods"></association>
@@ -65,5 +67,9 @@ select * from bill where giveUserID=#{userID}
 
 <select id="acceptGoods" resultMap="sendResult" parameterType="user">
 select * from bill where acceptUserID=#{userID}
+</select>
+
+<select id="receiveGoods" resultMap="sendResult" parameterType="Train">
+select * from bill where sendaddress REGEXP #{startpoint} and arriveaddress REGEXP #{arrivepoint} and complete=false
 </select>
 </mapper>

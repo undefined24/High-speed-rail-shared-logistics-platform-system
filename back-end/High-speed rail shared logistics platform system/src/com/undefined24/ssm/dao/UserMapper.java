@@ -6,6 +6,7 @@ import com.undefined24.ssm.vo.Bill;
 import com.undefined24.ssm.vo.Goods;
 import com.undefined24.ssm.vo.History;
 import com.undefined24.ssm.vo.Receiver;
+import com.undefined24.ssm.vo.Train;
 import com.undefined24.ssm.vo.User;
 
 public interface UserMapper {
@@ -21,4 +22,5 @@ public interface UserMapper {
 	public List<Goods> selectGoods(int trackingID);
 	public List<Bill> sendGoods(User user);
 	public List<Bill> acceptGoods(User user);
+	public List<Bill> receiveGoods(Train train);
 }

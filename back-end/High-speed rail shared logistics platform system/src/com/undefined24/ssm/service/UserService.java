@@ -9,8 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.undefined24.ssm.dao.UserMapper;
 import com.undefined24.ssm.vo.Bill;
 import com.undefined24.ssm.vo.Goods;
-import com.undefined24.ssm.vo.History;
 import com.undefined24.ssm.vo.Receiver;
+import com.undefined24.ssm.vo.Train;
 import com.undefined24.ssm.vo.User;
 
 @Service
@@ -83,5 +83,11 @@ public class UserService {
 	@Transactional
 	public List<Bill> acceptGoods(User user){
 		return userMapper.acceptGoods(user);
+	}
+	
+	//接件查询
+	@Transactional
+	public List<Bill> receiveGoods(Train train){
+		return userMapper.receiveGoods(train);
 	}
 }

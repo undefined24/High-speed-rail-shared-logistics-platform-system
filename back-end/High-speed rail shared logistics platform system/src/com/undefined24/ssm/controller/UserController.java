@@ -93,14 +93,26 @@ public class UserController {
 	public ModelAndView receive(@RequestParam("startpoint") String startpoint,
 			@RequestParam("trainnumber") String trainnumber,
 			@RequestParam("traintime") String traintime,
-			@RequestParam("arrivepoint") String arrivepoint) {
+			@RequestParam("arrivepoint") String arrivepoint,
+			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		Train train = new Train();
 		train.setStartpoint(startpoint);
 		train.setTrainnumber(trainnumber);
 		train.setTraintime(traintime);
 		train.setArrivepoint(arrivepoint);
-		
+		try {
+			List<Bill> ablegoodslist = userService.receiveGoods(train);
+			if(ablegoodslist!=null) {
+				mv.addObject("ablegoodslist", ablegoodslist);
+			}
+			else {
+				req.setAttribute("receive-msg", "没有合适您接件的物品");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		mv.setViewName("");
 		return mv;
 	}
 			
