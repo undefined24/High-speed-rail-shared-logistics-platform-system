@@ -69,4 +69,8 @@ select * from bill where giveUserID=#{userID}
 <result property="cost" column="cost"/>
 <association property="goods" column="trackingID" select="selectGoods" javaType="goods"></association>
 </resultMap>
+
+<select id="acceptGoods" resultMap="sendResult" parameterType="user">
+select * from bill where acceptUserID=#{userID}
+</select>
 </mapper>

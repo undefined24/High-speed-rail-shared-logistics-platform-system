@@ -90,4 +90,10 @@ public class UserService {
 	public List<Bill> sendGoods(User user){
 		return userMapper.sendGoods(user);
 	}
+	
+	//列出当前用户收件单
+	@Transactional
+	public List<Bill> acceptGoods(User user){
+		return userMapper.acceptGoods(user);
+	}
 }

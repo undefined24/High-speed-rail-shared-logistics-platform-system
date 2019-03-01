@@ -34,11 +34,11 @@
 		<div class="col-md-8 col-md-offset-2 ">
             <div class="col-md-6">
                 <a href="#revise_part" class="func_nav">修改资料</a>
-				<a href="#send_part" class="func_nav">我要寄件</a>
+				<a href="gotoSender" class="func_nav">我要寄件</a>
             </div>
 			<div class="col-md-6">
                 <a href="#search_part" class="func_nav">物流查询</a>
-				<a href="#receive_part" class="func_nav">我要接件</a>
+				<a href="gotoReceiver" class="func_nav">我要接件</a>
             </div>
         </div>
 		
@@ -168,35 +168,23 @@
 						</tr>
 						</thead>
 						<tbody>
+						 <c:forEach items="${acceptlist}" var="accept">
 						<tr>
-							<td>000001</td>
-							<td>0003</td>
-							<td>怡宝</td>
-							<td>Shenzhen</td>
-							<td>Guangzhou</td>
-							<td>C7300</td>
-							<td>10</td>
-							<td>是</td>
-						<tr>
-							<td>000010</td>
-							<td>0002</td>
-							<td>强生</td>
-							<td>Shenzhen</td>
-							<td>Jiangmen</td>
-							<td>C7500</td>
-							<td>15</td>
+							<td>${accept.trackingID}</td>
+							<td>${accept.goods.trackingID}</td>
+							<td>${accept.goods.name}</td>
+							<td>${accept.sendaddress}</td>
+							<td>${accept.arriveaddress}</td>
+							<td>${accept.trainnumber}</td>
+							<td>${accept.cost}</td>
+							<c:if test="${accept.complete==false}">
 							<td>否</td>
-						<tr>
-							<td>000001</td>
-							<td>0003</td>
-							<td>mac</td>
-							<td>Guangzhou</td>
-							<td>Jiangmen</td>
-							<td>C7100</td>
-							<td>20</td>
+							</c:if>
+							<c:if test="${accept.complete==true}">
 							<td>是</td>
+							</c:if>
 						</tr>
-
+						</c:forEach>
 						</tbody>
 					</table>
             	</div>

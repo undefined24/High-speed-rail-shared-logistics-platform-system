@@ -75,8 +75,14 @@ public class UserController {
 	 * 前往接件页面receiver.jsp
 	 */
 	@RequestMapping(value="/gotoReceiver",method=RequestMethod.GET)
-	public String gotoReceiver() {
-		return "receiver";
+	public ModelAndView gotoReceiver() {
+		ModelAndView mv = new ModelAndView();
+		if(this.isHave_user()==false) {
+			mv.setViewName("login");
+		}else {
+			mv.setViewName("receiver");
+		}
+		return mv;
 	}
 	
 	/*
@@ -153,8 +159,9 @@ public class UserController {
 			mv.setViewName("homepage");
 		}else {
 			List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
+			List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
 			mv.addObject("sendlist", sendlist);
-			System.out.println(sendlist);
+			mv.addObject("acceptlist", acceptlist);
 			mv.addObject("user",this.getCurrent_user());
 			mv.setViewName("user_center");
 		}
@@ -231,8 +238,9 @@ public class UserController {
 					this.setCurrent_user(user);
 					this.setHave_user(true);
 					List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
+					List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
 					mv.addObject("sendlist", sendlist);
-					System.out.println(sendlist);
+					mv.addObject("acceptlist", acceptlist);
 					mv.addObject("user", user);
 					mv.setViewName("user_center");
 				 }
@@ -255,8 +263,9 @@ public class UserController {
 			}else {
 				mv.addObject("user",this.getCurrent_user());
 				List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
+				List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
 				mv.addObject("sendlist", sendlist);
-				System.out.println(sendlist);
+				mv.addObject("acceptlist", acceptlist);
 				mv.setViewName("user_center");
 			}
 		return mv;	
@@ -282,8 +291,9 @@ public class UserController {
 			this.setCurrent_user(login_user);
 			this.setHave_user(true);
 			List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
+			List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
 			mv.addObject("sendlist", sendlist);
-			System.out.println(sendlist);
+			mv.addObject("acceptlist", acceptlist);
 			mv.addObject("user",login_user);
 			mv.setViewName("user_center");
 		}
@@ -341,7 +351,9 @@ public class UserController {
 				}
 			}
 			List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
+			List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
 			mv.addObject("sendlist", sendlist);
+			mv.addObject("acceptlist", acceptlist);
 			mv.setViewName("user_center");
 		}
 		return mv;
