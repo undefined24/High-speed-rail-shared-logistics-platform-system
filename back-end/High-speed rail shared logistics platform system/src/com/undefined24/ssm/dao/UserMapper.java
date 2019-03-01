@@ -13,8 +13,6 @@ public interface UserMapper {
 	public User CheckUser(User user);
 	public User Login(User user);
 	public int ChangeProfile(User user);
-	public List<History> giveUserHistory(int userID);
-	public List<History> acceptUserHistory(int userID);
 	
 	public User checkUserNumber(String usernumber);
 	public int addGoods(Goods goods);

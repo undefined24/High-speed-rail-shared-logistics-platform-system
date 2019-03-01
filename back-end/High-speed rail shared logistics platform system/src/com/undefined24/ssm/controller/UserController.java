@@ -18,6 +18,7 @@ import com.undefined24.ssm.service.UserService;
 import com.undefined24.ssm.vo.Bill;
 import com.undefined24.ssm.vo.Goods;
 import com.undefined24.ssm.vo.Receiver;
+import com.undefined24.ssm.vo.Train;
 import com.undefined24.ssm.vo.User;
 
 @Controller
@@ -85,6 +86,24 @@ public class UserController {
 		return mv;
 	}
 	
+	/*
+	 * 接件
+	 */
+	@RequestMapping(value="/receive",method=RequestMethod.POST)
+	public ModelAndView receive(@RequestParam("startpoint") String startpoint,
+			@RequestParam("trainnumber") String trainnumber,
+			@RequestParam("traintime") String traintime,
+			@RequestParam("arrivepoint") String arrivepoint) {
+		ModelAndView mv = new ModelAndView();
+		Train train = new Train();
+		train.setStartpoint(startpoint);
+		train.setTrainnumber(trainnumber);
+		train.setTraintime(traintime);
+		train.setArrivepoint(arrivepoint);
+		
+		return mv;
+	}
+			
 	/*
 	 * 前往寄件页面sender.jsp
 	 */

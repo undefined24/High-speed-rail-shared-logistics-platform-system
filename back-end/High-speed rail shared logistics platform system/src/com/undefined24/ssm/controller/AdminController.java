@@ -1,7 +1,9 @@
 package com.undefined24.ssm.controller;
 
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +24,7 @@ import com.undefined24.ssm.service.AdminService;
 import com.undefined24.ssm.vo.Administrator;
 import com.undefined24.ssm.vo.Bill;
 import com.undefined24.ssm.vo.Goods;
+import com.undefined24.ssm.vo.Receiver;
 import com.undefined24.ssm.vo.User;
 import com.undefined24.ssm.vo.Worker;
 
@@ -387,52 +390,6 @@ public class AdminController {
 	}
 	
 	/*
-	 * 添加物品
-	 */
-	@RequestMapping(value="/addgoods",method=RequestMethod.POST)
-	public ModelAndView addGoods(@RequestParam(value="pn",defaultValue="1") int pn,
-			@RequestParam("name") String name,
-			@RequestParam("giveUserID") int giveUserID,
-			@RequestParam("acceptUserID") int acceptUserID,
-			@RequestParam("type") String type,
-			@RequestParam("weight") float weight,
-			@RequestParam("trainnumber") String trainnumber,
-			@RequestParam("cost") float cost,
-			@RequestParam("complete") boolean complete,
-			HttpServletRequest req) {
-		ModelAndView mv = new ModelAndView();
-		Goods new_goods = new Goods();
-		new_goods.setWeight(weight);
-		new_goods.setName(name);
-		new_goods.setType(type);
-		Bill new_bill = new Bill();
-		new_bill.setAcceptUserID(acceptUserID);
-		new_bill.setGiveUserID(giveUserID);
-		new_bill.setCost(cost);
-		new_bill.setComplete(complete);
-		new_bill.setTrainnumber(trainnumber);
-		try {
-			int result_1 = adminService.addGoods(new_goods);
-			int result_2 = adminService.addBill(new_bill);
-			if(result_1==0||result_2==0) {
-				req.setAttribute("addgoods-msg", "物品添加失败，请重试");
-			}else {
-				//req.setAttribute("addgoods-msg", "物品添加成功！");
-				System.out.println("物品添加成功");
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
-		PageHelper.startPage(pn, page_show);
-		mv.addObject("login_admin",this.getCurrent_admin());
-		List<Goods> goodslist = adminService.goodsManage();
-		PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
-		mv.addObject("goodslist", page);
-		mv.setViewName("admin_goods");
-		return mv;
-	}
-	
-	/*
 	 * 打开删除物品界面
 	 */
 	@RequestMapping(value="/gotoDeleteGoods",method=RequestMethod.GET)
@@ -449,12 +406,15 @@ public class AdminController {
 		ModelAndView mv = new ModelAndView();
 		Goods delete_goods = new Goods();
 		Bill delete_bill = new Bill();
+		Receiver delete_rec = new Receiver();
 		delete_goods.setTrackingID(this.getDelete_trackingID());
 		delete_bill.setTrackingID(this.getDelete_trackingID());
+		delete_rec.setTrackingID(this.getDelete_trackingID());
 		try {
 			int result_1 = adminService.deleteGoods(delete_goods);
 			int result_2 = adminService.deleteBill(delete_bill);
-			if(result_1==0||result_2==0) {
+			int result_3 = adminService.deleteReceiver(delete_rec);
+			if(result_1==0||result_2==0||result_3==0) {
 				req.setAttribute("deletegoods-msg", "删除失败");
 			}else { 
 				//req.setAttribute("deletegoods-msg", "删除成功");
@@ -518,6 +478,10 @@ public class AdminController {
 		edit_bill.setTrainnumber(trainnumber);
 		edit_bill.setCost(cost);
 		edit_bill.setComplete(complete);
+		if(complete==true) {
+			System.out.println(new Timestamp(new Date().getTime()).toString());
+			edit_bill.setCompletetime(new Timestamp(new Date().getTime()).toString());
+		}
 		System.out.println(complete);
 		try {
 			int result_1 = adminService.editGoods(edit_goods);

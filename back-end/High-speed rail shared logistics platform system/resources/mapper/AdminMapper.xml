@@ -112,13 +112,9 @@ select * from goods_info where name REGEXP #{search}
 select * from goods_info where name=#{name}
 </select>
 
-<insert id="addGoods" parameterType="goods" useGeneratedKeys="true">
-insert into goods_info(name,weight,type) values(#{name},#{weight},#{type})
-</insert>
-
-<insert id="addBill" parameterType="bill" useGeneratedKeys="true">
-insert into bill(giveUserID,acceptUserID,trainnumber,cost,complete) values(#{giveUserID},#{acceptUserID},#{trainnumber},#{cost},#{complete})
-</insert>
+<delete id="deleteReceiver" parameterType="receiver">
+delete from receiver_info where trackingID = #{trackingID}
+</delete>
 
 <delete id="deleteGoods" parameterType="goods">
 delete from goods_info where trackingID = #{trackingID}
@@ -149,6 +145,7 @@ update bill
 <if test="acceptUserID!=null and acceptUserID!=''">acceptUserID=#{acceptUserID},</if>
 <if test="trainnumber!=null and trainnumber!=''">trainnumber=#{trainnumber},</if>
 <if test="cost!=null and cost!=''">cost=#{cost},</if>
+<if test="completetime!=null and completetime!=''">completetime=#{completetime},</if>
 <if test="complete!=null">complete=#{complete}</if>
 </set>
 where trackingID = #{trackingID}

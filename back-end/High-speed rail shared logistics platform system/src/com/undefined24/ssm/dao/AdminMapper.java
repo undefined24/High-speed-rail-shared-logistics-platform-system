@@ -5,6 +5,7 @@ import java.util.List;
 import com.undefined24.ssm.vo.Administrator;
 import com.undefined24.ssm.vo.Bill;
 import com.undefined24.ssm.vo.Goods;
+import com.undefined24.ssm.vo.Receiver;
 import com.undefined24.ssm.vo.User;
 import com.undefined24.ssm.vo.Worker;
 
@@ -32,10 +33,9 @@ public interface AdminMapper {
 	public List<Goods> goodsManage();
 	public List<Goods> searchGoods(String search);
 	public Goods checkGoods(String name);
-	public int addGoods(Goods goods);
-	public int addBill(Bill bill);
 	public int deleteGoods(Goods goods);
 	public int deleteBill(Bill bill);
+	public int deleteReceiver(Receiver rec);
 	public Goods showEditGoods(int trackingID);
 	public int editGoods(Goods goods);
 	public int editBill(Bill bill);

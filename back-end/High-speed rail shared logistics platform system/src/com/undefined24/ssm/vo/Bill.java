@@ -1,5 +1,7 @@
 package com.undefined24.ssm.vo;
 
+import java.sql.Timestamp;
+
 public class Bill {
 	private int trackingID;
 	private int giveUserID;
@@ -8,10 +10,24 @@ public class Bill {
 	private String arriveaddress;
 	private String trainnumber;
 	private boolean complete;
+	private String completetime;
+	private Timestamp createtime;
 	private float cost;
 	private Goods goods;
 	
 	
+	public String getCompletetime() {
+		return completetime;
+	}
+	public void setCompletetime(String completetime) {
+		this.completetime = completetime;
+	}
+	public Timestamp getCreatetime() {
+		return createtime;
+	}
+	public void setCreatetime(Timestamp createtime) {
+		this.createtime = createtime;
+	}
 	public Goods getGoods() {
 		return goods;
 	}
@@ -70,7 +86,8 @@ public class Bill {
 	public String toString() {
 		return "Bill [trackingID=" + trackingID + ", giveUserID=" + giveUserID + ", acceptUserID=" + acceptUserID
 				+ ", sendaddress=" + sendaddress + ", arriveaddress=" + arriveaddress + ", trainnumber=" + trainnumber
-				+ ", complete=" + complete + ", cost=" + cost + ", gooods=" + goods + "]";
+				+ ", complete=" + complete + ", completetime=" + completetime + ", createtime=" + createtime + ", cost="
+				+ cost + ", goods=" + goods + "]";
 	}
 	
 }

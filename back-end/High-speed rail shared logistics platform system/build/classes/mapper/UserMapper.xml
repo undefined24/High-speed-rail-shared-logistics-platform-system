@@ -28,14 +28,6 @@ update user_info
 where userID = #{userID}
 </update>
 
-<select id="giveUserHistory" parameterType="int">
-select * from history where giveUserID=#{giveUserID}
-</select>
-
-<select id="acceptUserHistory" parameterType="int">
-select * from history where acceptUserID=#{acceptUserID}
-</select>
-
 <select id="checkUserNumber" parameterType="string" resultType="user">
 select * from user_info where usernumber=#{usernumber}
 </select>
@@ -66,6 +58,7 @@ select * from bill where giveUserID=#{userID}
 <result property="sendaddress" column="sendaddress"/>
 <result property="arriveaddress" column="arriveaddress"/>
 <result property="trainnumber" column="trainnumber"/>
+<result property="complete" column="complete"/>
 <result property="cost" column="cost"/>
 <association property="goods" column="trackingID" select="selectGoods" javaType="goods"></association>
 </resultMap>

@@ -10,6 +10,7 @@ import com.undefined24.ssm.dao.AdminMapper;
 import com.undefined24.ssm.vo.Administrator;
 import com.undefined24.ssm.vo.Bill;
 import com.undefined24.ssm.vo.Goods;
+import com.undefined24.ssm.vo.Receiver;
 import com.undefined24.ssm.vo.User;
 import com.undefined24.ssm.vo.Worker;
 
@@ -134,22 +135,16 @@ public class AdminService {
 		return adminMapper.checkGoods(name);
 	}
 	
-	//增加物品
-	@Transactional
-	public int addGoods(Goods goods){
-		return adminMapper.addGoods(goods);
-	}
-	
-	//增加订单
-	@Transactional
-	public int addBill(Bill bill){
-		return adminMapper.addBill(bill);
-	}
-	
 	//删除商品
 	@Transactional
 	public int deleteGoods(Goods goods){
 		return adminMapper.deleteGoods(goods);
+	}
+	
+	//删除收货人
+	@Transactional
+	public int deleteReceiver(Receiver rec){
+		return adminMapper.deleteReceiver(rec);
 	}
 	
 	//删除订单

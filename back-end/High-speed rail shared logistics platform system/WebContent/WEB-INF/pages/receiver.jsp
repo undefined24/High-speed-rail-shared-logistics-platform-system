@@ -57,26 +57,33 @@
 				</div>
 			</nav>
 			
-            <form class="form-horizontal" name="receiver" id="receive" role="form" action="#" method="post" onSubmit="return on_submit2()">
+            <form class="form-horizontal" name="receiver" id="receive" role="form" action="receive" method="post" onSubmit="return on_submit2()">
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="start_pos">高铁出发点</label>
 					<div class="col-md-6">
-						<input class="form-control col-md-4 disabled" onblur="checkStartPos()" placeholder="请输入高铁出发点" id="start_pos" value="">
+						<input class="form-control col-md-4 disabled" onblur="checkStartPos()" name="startpoint" placeholder="请输入高铁出发点" id="start_pos" value="">
 						<div id="startpos_prompt"></div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="train_num">车次</label>
 					<div class="col-md-6">
-						<input class="form-control col-md-4 disabled" onblur="checkTrainNum()" placeholder="请输入车次" id="train_num" value="">
+						<input class="form-control col-md-4 disabled" onblur="checkTrainNum()" name="trainnumber" placeholder="请输入车次" id="train_num" value="">
 						<div id="trainnum_prompt"></div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="start_time">高铁出发时间</label>
 					<div class="col-md-6">
-						<input class="form-control col-md-4" onblur="checkStartTime()" placeholder="请输入高铁出发时间" id="start_time" value="">
+						<input class="form-control col-md-4" onblur="checkStartTime()" name="traintime" placeholder="请输入高铁出发时间" id="start_time" value="">
 						<div id="starttime_prompt"></div>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-md-2 col-md-offset-1" for="arrive_pos">高铁到达点</label>
+					<div class="col-md-6">
+						<input class="form-control col-md-4" onblur="" name="arrivepoint" placeholder="请输入高铁到达点" id="arrive_pos" value="">
+						<div id="arrivepos_prompt"></div>
 					</div>
 				</div>
 				<div class="form-group">

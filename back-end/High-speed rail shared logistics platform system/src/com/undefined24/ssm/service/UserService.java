@@ -49,18 +49,6 @@ public class UserService {
 		return userMapper.ChangeProfile(user);
 	}
 	
-	//下单用户历史订单
-	@Transactional
-	public List<History> giveUserHistory(int userID){
-		return userMapper.giveUserHistory(userID);
-	}
-	
-	//接单用户历史订单
-	@Transactional
-	public List<History> acceptUserHistory(int userID){
-		return userMapper.acceptUserHistory(userID);
-	}
-	
 	//下单时添加物品
 	@Transactional
 	public int addGoods(Goods goods){

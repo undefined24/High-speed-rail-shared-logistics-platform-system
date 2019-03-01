@@ -31,6 +31,8 @@ create table bill(
     arriveaddress varchar(50) ,
     trainnumber varchar(10) ,
     cost float(10,2) ,
+    createtime timestamp default now(),
+    completetime varchar(20),
     complete bool not null default false
 );
 create table receiver_info(
