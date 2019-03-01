@@ -9,8 +9,15 @@ public class Bill {
 	private String trainnumber;
 	private boolean complete;
 	private float cost;
+	private Goods goods;
 	
 	
+	public Goods getGoods() {
+		return goods;
+	}
+	public void setGoods(Goods goods) {
+		this.goods = goods;
+	}
 	public boolean isComplete() {
 		return complete;
 	}
@@ -63,7 +70,7 @@ public class Bill {
 	public String toString() {
 		return "Bill [trackingID=" + trackingID + ", giveUserID=" + giveUserID + ", acceptUserID=" + acceptUserID
 				+ ", sendaddress=" + sendaddress + ", arriveaddress=" + arriveaddress + ", trainnumber=" + trainnumber
-				+ ", cost=" + cost + "]";
+				+ ", complete=" + complete + ", cost=" + cost + ", gooods=" + goods + "]";
 	}
 	
 }

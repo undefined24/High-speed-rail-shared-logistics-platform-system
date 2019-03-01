@@ -78,4 +78,16 @@ public class UserService {
 	public int addReceiver(Receiver rec){
 		return userMapper.addReceiver(rec);
 	}
+	
+	//查询物品
+	@Transactional
+	public List<Goods> selectGoods(int trackingID){
+		return userMapper.selectGoods(trackingID);
+	}
+	
+	//列出当前用户寄件单
+	@Transactional
+	public List<Bill> sendGoods(User user){
+		return userMapper.sendGoods(user);
+	}
 }

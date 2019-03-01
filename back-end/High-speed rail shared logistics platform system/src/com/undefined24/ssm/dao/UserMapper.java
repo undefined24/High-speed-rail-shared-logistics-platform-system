@@ -20,5 +20,6 @@ public interface UserMapper {
 	public int addGoods(Goods goods);
 	public int addBill(Bill bill);
 	public int addReceiver(Receiver rec);
-	
+	public List<Goods> selectGoods(int trackingID);
+	public List<Bill> sendGoods(User user);
 }

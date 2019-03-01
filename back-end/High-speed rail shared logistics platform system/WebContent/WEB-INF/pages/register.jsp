@@ -83,7 +83,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="truename">真实姓名</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="truename" id="truename" placeholder="请输入真实姓名" onblur="checkTrueName()">
+                        <input type="text" class="form-control" name="username" id="truename" placeholder="请输入真实姓名" onblur="checkTrueName()">
                     	<div id="truename_prompt"></div>
                     </div>
                 </div>

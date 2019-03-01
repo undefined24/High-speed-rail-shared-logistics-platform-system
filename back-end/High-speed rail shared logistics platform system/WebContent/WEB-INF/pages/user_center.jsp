@@ -124,38 +124,29 @@
 						</tr>
 						</thead>
 						<tbody>
+						 <c:forEach items="${sendlist}" var="send">
 						<tr>
-							<td>000001</td>
-							<td>0003</td>
-							<td>怡宝</td>
-							<td>Shenzhen</td>
-							<td>Guangzhou</td>
-							<td>C7300</td>
-							<td>10</td>
-							<th>是</th>
+							<td>${send.trackingID}</td>
+							<td>${send.goods.trackingID }</td>
+							<td>${send.goods.name}</td>
+							<td>${send.sendaddress}</td>
+							<td>${send.arriveaddress}</td>
+							<td>${send.trainnumber }</td>
+							<td>${send.cost}</td>
+							<c:if test="${send.acceptUserID!=null}">
 							<td>是</td>
-						<tr>
-							<td>000010</td>
-							<td>0002</td>
-							<td>强生</td>
-							<td>Shenzhen</td>
-							<td>Jiangmen</td>
-							<td>C7500</td>
-							<td>15</td>
-							<th>是</th>
+							</c:if>
+							<c:if test="${send.acceptUserID==null}">
 							<td>否</td>
-						<tr>
-							<td>000001</td>
-							<td>0003</td>
-							<td>mac</td>
-							<td>Guangzhou</td>
-							<td>Jiangmen</td>
-							<td>C7100</td>
-							<td>20</td>
-							<th>否</th>
+							</c:if>
+							<c:if test="${send.complete==false}">
 							<td>否</td>
+							</c:if>
+							<c:if test="${send.complete==true}">
+							<td>是</td>
+							</c:if>
 						</tr>
-
+						</c:forEach>
 						</tbody>
 					</table>
             	</div>

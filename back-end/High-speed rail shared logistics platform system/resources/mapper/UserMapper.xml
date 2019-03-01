@@ -51,4 +51,22 @@ insert into bill(giveUserID,sendaddress,arriveaddress) values(#{giveUserID},#{se
 <insert id="addReceiver" parameterType="receiver" useGeneratedKeys="true">
 insert into receiver_info(name,phone,address) values(#{name},#{phone},#{address})
 </insert>
+
+<select id="selectGoods" resultType="goods" parameterType="int">
+select * from goods_info where trackingID=#{trackingID}
+</select>
+
+<select id="sendGoods" resultMap="sendResult" parameterType="user">
+select * from bill where giveUserID=#{userID}
+</select>
+<resultMap type="bill" id="sendResult">
+<id property="trackingID" column="trackingID"/>
+<result property="giveUserID" column="giveUserID"/>
+<result property="acceptUserID" column="acceptUserID"/>
+<result property="sendaddress" column="sendaddress"/>
+<result property="arriveaddress" column="arriveaddress"/>
+<result property="trainnumber" column="trainnumber"/>
+<result property="cost" column="cost"/>
+<association property="goods" column="trackingID" select="selectGoods" javaType="goods"></association>
+</resultMap>
 </mapper>

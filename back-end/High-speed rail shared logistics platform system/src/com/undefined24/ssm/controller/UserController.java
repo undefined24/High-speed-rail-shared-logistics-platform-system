@@ -1,18 +1,17 @@
 package com.undefined24.ssm.controller;
 
+import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
-import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.undefined24.ssm.service.UserService;
@@ -153,6 +152,9 @@ public class UserController {
 		if(this.isHave_user()==false) {
 			mv.setViewName("homepage");
 		}else {
+			List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
+			mv.addObject("sendlist", sendlist);
+			System.out.println(sendlist);
 			mv.addObject("user",this.getCurrent_user());
 			mv.setViewName("user_center");
 		}
@@ -226,6 +228,12 @@ public class UserController {
 					mv.setViewName("register");
 				}else {
 					req.setAttribute("register-msg", "注册成功");
+					this.setCurrent_user(user);
+					this.setHave_user(true);
+					List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
+					mv.addObject("sendlist", sendlist);
+					System.out.println(sendlist);
+					mv.addObject("user", user);
 					mv.setViewName("user_center");
 				 }
 			}
@@ -246,6 +254,9 @@ public class UserController {
 				mv.setViewName("login");
 			}else {
 				mv.addObject("user",this.getCurrent_user());
+				List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
+				mv.addObject("sendlist", sendlist);
+				System.out.println(sendlist);
 				mv.setViewName("user_center");
 			}
 		return mv;	
@@ -270,6 +281,9 @@ public class UserController {
 		}else {
 			this.setCurrent_user(login_user);
 			this.setHave_user(true);
+			List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
+			mv.addObject("sendlist", sendlist);
+			System.out.println(sendlist);
 			mv.addObject("user",login_user);
 			mv.setViewName("user_center");
 		}
@@ -326,28 +340,9 @@ public class UserController {
 					req.setAttribute("profile-msg", "系统异常请重试");
 				}
 			}
+			List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
+			mv.addObject("sendlist", sendlist);
 			mv.setViewName("user_center");
-		}
-		return mv;
-	}
-	
-	/*
-	 * 跳转去个人资料页面
-	 */
-	@RequestMapping(value="/user_center",method=RequestMethod.GET)
-	public ModelAndView gotoProfile(@ModelAttribute("attr1")String attr1, 
-			@ModelAttribute("attr2")String attr2,
-			HttpServletRequest req) {
-		ModelAndView mv = new ModelAndView();
-		User user = new User();
-		User current_user = null;
-		user.setNickname(attr1);
-		current_user = userService.CheckUser(user);
-		if(current_user==null) {
-			mv.setViewName("login");
-		}else {
-			mv.setViewName("profile");
-			//设置个人信息显示
 		}
 		return mv;
 	}

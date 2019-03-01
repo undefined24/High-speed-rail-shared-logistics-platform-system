@@ -39,8 +39,8 @@ public class Goods {
 
 	@Override
 	public String toString() {
-		return "Goods [trackingID=" + trackingID + ", weight=" + weight + ", type=" + type + ", name=" + name
-				 + ", bill=" + bill + "]";
+		return "Goods [trackingID=" + trackingID + ", weight=" + weight + ", type=" + type + ", name=" 
+	+ name + ", bill=" + bill + "]";
 	}
 	
 }
