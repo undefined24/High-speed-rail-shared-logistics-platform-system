@@ -24,7 +24,7 @@ select * from worker where workername=#{workername}
 select * from worker order by workerID
 </select>
 
-<select id="showEidtWorker" parameterType="int" resultType="worker">
+<select id="showEditWorker" parameterType="int" resultType="worker">
 select * from worker where workerID=#{workerID}
 </select>
 

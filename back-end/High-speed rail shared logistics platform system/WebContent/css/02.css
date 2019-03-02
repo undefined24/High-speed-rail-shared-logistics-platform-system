@@ -11,17 +11,14 @@ html,body{
 }
 @font-face {
     font-family:"yw";
-    src: url("../font/禹卫书法行书简体.ttf");
+    src: url("font/禹卫书法行书简体.ttf");
 }
 
 body{
-    background-image: url("../image/bg.jpg");
+    background-image: url("image/bg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment:fixed
-}
-.kuang{
-	border-bottom:1px solid rgba(255,250,240,0.85);
 }
 .col-md-6{
     height: 100%;
@@ -178,7 +175,7 @@ textarea:focus {
 .container_user_center{
     top: 0;
     background-color: rgba(0,0,0,0.5);
-    height: 400%;
+    height: 500%;
 }
 .container_api_apply{
     top: 0;
@@ -233,24 +230,6 @@ textarea:focus {
     margin-bottom: 40px;
     height: 1px;
     border: 1px solid rgba(255,255,255,0.5);
-}
-.line1{
-    margin-top: 40px;
-    margin-bottom: 40px;
-    height: 1px;
-    border: 1px solid rgba(255,255,255,0.3);
-}
-.line2{
-    margin-top: 0px;
-    margin-bottom: 40px;
-    height: 1px;
-    border: 1px solid rgba(255,255,255,0.3);
-}
-.line3{
-    margin-top: 40px;
-    margin-bottom: 0px;
-    height: 1px;
-    border: 1px solid rgba(255,255,255,0.3);
 }
 .revise,.search,.send,.receive{
     color: #e6e6e6;

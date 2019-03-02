@@ -19,7 +19,6 @@
     <div class="container">
         <div class="col-md-8 col-md-offset-2">
             <form class="form-horizontal" name="regform" id="register" role="form" action="register" method="post">
-                <span style="color:red;margin-left:120px"><%=request.getAttribute("check-name-msg")==null?"":request.getAttribute("check-name-msg") %></span>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="name">用户名</label>
                     <div class="col-md-6">
@@ -70,7 +69,7 @@
 				<div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="pin">身份证号</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="usernumber" id="pin" placeholder="请输入身份证号" onblur="checkPin2()">
+                        <input type="text" class="form-control" name="usernumber" id="pin" placeholder="请输入身份证号" onblur="checkNumber();checkPin2()">
                         <div id="pin_prompt"></div>
                     </div>
                     
@@ -104,17 +103,34 @@
     <%}%>	
     <script type="text/javascript">
     function checkUser(){
-    	// zt叫我注释的
-    	/*$.ajax({
+    	$.ajax({
     		type: "post",
     		url: "checkuser",
     		data: {
-    			"nickname": ${"nickname"}.val()
+    			"nickname": $("#name").val()
     		},
     		success: function(data){
-    			${"check-name-msg"}.text(data);
+    			$("#name_prompt").text(data);
+    		},
+    		error: function(data){
+    			console.log('error');
     		}
-    	});*/
+    	});
+    }
+    function checkNumber(){
+    	$.ajax({
+    		type: "post",
+    		url: "checknumber",
+    		data: {
+    			"usernumber": $("#pin").val()
+    		},
+    		success: function(data){
+    			$("#pin_prompt").text(data);
+    		},
+    		error: function(data){
+    			console.log('error');
+    		}
+    	});
     }
     </script>
 </body>

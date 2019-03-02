@@ -31,7 +31,16 @@ public class UserController {
 	private User current_user;
 	private boolean have_user = false;
 	private boolean same_name = false;
+	private boolean same_number = false;
 	
+	public boolean isSame_number() {
+		return same_number;
+	}
+
+	public void setSame_number(boolean same_number) {
+		this.same_number = same_number;
+	}
+
 	public boolean isSame_name() {
 		return same_name;
 	}
@@ -207,6 +216,7 @@ public class UserController {
 	public String checkUser(@RequestParam("nickname") String nickname) {
 		User user = new User();
 		this.setSame_name(false);
+		System.out.println(nickname);
 		String msg = "";
 		user.setNickname(nickname);
 		User user1 = null;
@@ -214,6 +224,30 @@ public class UserController {
 		if(user1!=null) {
 			msg= "此用户名已被占用";
 			this.setSame_name(true);
+		}else {
+			msg= "此用户名可用";
+		}
+		return msg;
+	}
+	
+	/*
+	 * 身份证号查重
+	 */
+	@RequestMapping(value="/checknumber",method=RequestMethod.POST,produces="text/plain;charset=utf-8")
+	@ResponseBody
+	public String checkNumber(@RequestParam("usernumber") String usernumber) {
+		User user = new User();
+		this.setSame_number(false);
+		String msg = "";
+		user.setUsernumber(usernumber);
+		User user1 = null;
+		user1 = userService.checkUserNumber(usernumber);
+		if(user1!=null) {
+			msg= "此身份证已被使用";
+			this.setSame_name(true);
+		}else {
+			msg= "此身份证可用";
+			
 		}
 		return msg;
 	}
@@ -252,10 +286,15 @@ public class UserController {
 			user.setUserpwd(userpwd);
 			user.setUsernumber(usernumber);
 			user.setUseraddress(useraddress);
+			if(nickname==""||username==""||usersex==""||userphone==""||userpwd==""||usernumber==""||useraddress=="") {
+				req.setAttribute("register-msg","注册失败");
+				mv.setViewName("register");
+				return mv;
+			}
 			if(this.isSame_name()==true) {
 				req.setAttribute("register-msg","用户名已被使用，请更改");
 				mv.setViewName("register");
-			}else if(userService.checkUserNumber(usernumber)!=null){
+			}else if(this.isSame_number()==true){
 				req.setAttribute("register-msg","身份证号已被使用，请更改");
 				mv.setViewName("register");
 			}

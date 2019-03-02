@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -434,15 +435,24 @@ public class AdminController {
 	}
 	
 	/*
+	 * test
+	 */
+	@RequestMapping(value="/edit",method=RequestMethod.GET)
+	@ResponseBody
+	public Goods edit(@RequestParam(value="edit_trackingID") int edit_trackingID) {
+		Goods edit_goods = adminService.showEditGoods(edit_trackingID);
+		return edit_goods;
+	}
+	
+	/*
 	 * 打开修改物品
 	 */
 	@RequestMapping(value="/gotoEditGoods",method=RequestMethod.GET)
-	public ModelAndView gotoEditGoods(Model model,@RequestParam(value="edit_trackingID") int edit_trackingID) {
+	public ModelAndView gotoEditGoods(@RequestParam(value="edit_trackingID") int edit_trackingID) {
 		ModelAndView mv = new ModelAndView();
 		System.out.println(edit_trackingID);
 		try {
 			mv.addObject("edit_goods", adminService.showEditGoods(edit_trackingID));
-			model.addAttribute("edit_goods", adminService.showEditGoods(edit_trackingID));
 			System.out.println(adminService.showEditGoods(edit_trackingID));
 		}catch(Exception e){
 			e.printStackTrace();

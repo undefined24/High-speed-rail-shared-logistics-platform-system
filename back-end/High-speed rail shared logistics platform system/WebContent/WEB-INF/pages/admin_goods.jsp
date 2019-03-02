@@ -48,7 +48,7 @@
 			<!-- 取消物品添加功能 -->
             <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#add_goods">添加物品</button> -->
             <div class="form-group">
-                <input class="form-control " type="text" name="search" placeholder="请输入需要查找的物品ID">
+                <input class="form-control " type="text" name="search" placeholder="请输入需要查找的物品ID" >
                 <button class="form-control btn btn-default">搜索</button>
             </div>
         </form>
@@ -90,7 +90,7 @@
 				<c:if test="${goods.bill.complete==true}">
 				<td>是</td>
 				</c:if>
-				<td><a data-toggle="modal" data-target="#goods_edit" href="gotoEditGoods?edit_trackingID=${goods.trackingID}">修改</a></td>
+				<td><a data-toggle="modal" data-target="#goods_edit" onclick="edit()" <%-- href="gotoEditGoods?edit_trackingID=${goods.trackingID}" --%>>修改</a></td>
                 <td><a data-toggle="modal" data-target="#goods_delete" href="gotoDeleteGoods?delete_trackingID=${goods.trackingID}">删除</a></td>
             </tr>
             </c:forEach>
@@ -130,7 +130,7 @@
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="goods_name">名称</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="name" id="goods_name" onBlur="checkGoodName()" value="">
+                            <input class="form-control col-md-4 disabled" name="name" id="goods_name" onBlur="checkGoodName()" value="${edit_goods.name}">
 							<div id="name_prompt"></div>
                         </div>
                     </div>
@@ -246,5 +246,17 @@
         alert("<%=deletegoods_msg%>");
     </script>
     <%}%>
+    <script type="text/javascript">
+    var name = document.getElementById("goods_name");
+    function edit(){
+    	$.ajax({
+    		type: "get",
+    		url: "edit",
+    		success:function(data){
+    			name.innerText = "1";
+    		}
+    	});
+    }
+    </script>
 </body>
 </html>
