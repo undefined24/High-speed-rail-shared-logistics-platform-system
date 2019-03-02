@@ -45,8 +45,6 @@
 <div class="container col-md-8 col-md-offset-3">
     <div class="col-md-11">
 		<form role="form" class="form-inline goods_search" action="searchGoods">
-			<!-- 取消物品添加功能 -->
-            <!-- <button type="button" class="btn btn-default" data-toggle="modal" data-target="#add_goods">添加物品</button> -->
             <div class="form-group">
                 <input class="form-control " type="text" name="search" placeholder="请输入需要查找的物品ID" >
                 <button class="form-control btn btn-default">搜索</button>
@@ -70,7 +68,7 @@
             <tbody>
             <c:forEach items="${goodslist.list}" var="goods">
             <tr>
-                <td>${goods.trackingID}</td>
+                <td id="trackingID">${goods.trackingID}</td>
                 <td>${goods.name}</td>
                 <td>${goods.bill.giveUserID}</td>
                 <td>${goods.bill.acceptUserID}</td>
@@ -90,8 +88,8 @@
 				<c:if test="${goods.bill.complete==true}">
 				<td>是</td>
 				</c:if>
-				<td><a data-toggle="modal" data-target="#goods_edit" onclick="edit()" <%-- href="gotoEditGoods?edit_trackingID=${goods.trackingID}" --%>>修改</a></td>
-                <td><a data-toggle="modal" data-target="#goods_delete" href="gotoDeleteGoods?delete_trackingID=${goods.trackingID}">删除</a></td>
+				<td><span data-toggle="modal" data-target="#goods_edit" onclick="edit(${goods.trackingID})" >修改</span></td>
+                <td><span data-toggle="modal" data-target="#goods_delete" onclick="deletegoods(${goods.trackingID})">删除</span></td>
             </tr>
             </c:forEach>
             </tbody>
@@ -130,21 +128,21 @@
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="goods_name">名称</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="name" id="goods_name" onBlur="checkGoodName()" value="${edit_goods.name}">
+                            <input class="form-control col-md-4 disabled" name="name" id="goods_name" onBlur="checkGoodName()">
 							<div id="name_prompt"></div>
                         </div>
                     </div>
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="sender_id">下单用户ID</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="sender_id" name="giveUserID" onBlur="checkSenderid()" value="<c:out value='${edit_goods.bill.giveUserID}'/>">
+                            <input class="form-control col-md-4 disabled" id="sender_id" name="giveUserID" onBlur="checkSenderid()">
 							<div id="senderid_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="receiver_id">接单用户ID</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="receiver_id" name="acceptUserID" onBlur="checkReceiverid()" value=${edit_goods.bill.acceptUserID}>
+                            <input class="form-control col-md-4" id="receiver_id" name="acceptUserID" onBlur="checkReceiverid()">
 							<div id="receiverid_prompt"></div>
                         </div>
                     </div>
@@ -164,21 +162,21 @@
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="weight">重量</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="weight" name="weight" onBlur="checkWeight()" value=${edit_goods.weight}>
+                            <input class="form-control col-md-4 disabled" id="weight" name="weight" onBlur="checkWeight()">
 							<div id="weight_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="train_num">车次</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="train_num" name="trainnumber" onBlur="checkTrainnum()" value=${edit_goods.bill.trainnumber}>
+                            <input class="form-control col-md-4 disabled" id="train_num" name="trainnumber" onBlur="checkTrainnum()">
 							<div id="trainnum_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="fee">运费</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="fee" name="cost" onBlur="checkFee()" value=${edit_goods.bill.cost}>
+                            <input class="form-control col-md-4" id="fee" name="cost" onBlur="checkFee()" >
 							<div id="fee_prompt"></div>
                         </div>
                     </div>
@@ -247,13 +245,32 @@
     </script>
     <%}%>
     <script type="text/javascript">
-    var name = document.getElementById("goods_name");
-    function edit(){
+    function edit(trackingID){
     	$.ajax({
-    		type: "get",
-    		url: "edit",
+    		type: "post",
+    		url: "showEditGoods",
+    		data: {
+    			"trackingID": trackingID
+    		},
     		success:function(data){
-    			name.innerText = "1";
+    			$("#goods_name").val(data.name);
+    			$("#sender_id").val(data.bill.giveUserID);
+    			$("#receiver_id").val(data.bill.acceptUserID);
+    			$("#weight").val(data.weight);
+    			$("#train_num").val(data.bill.trainnumber);
+    			$("#fee").val(data.bill.cost);
+    		},
+    		error:function(data){
+    			alert('error');
+    		}
+    	});
+    }
+    function deletegoods(trackingID){
+    	$.ajax({
+    		type: "post",
+    		url: "gotodeletegoods",
+    		data: {
+    			"trackingID": trackingID
     		}
     	});
     }

@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.undefined24.ssm.service.AdminService;
@@ -233,19 +234,20 @@ public class AdminController {
 	}
 	
 	/*
-	 * 打开修改员工界面
+	 * 员工修改时显示信息
 	 */
-	@RequestMapping(value="/editworker",method=RequestMethod.GET)
-	public ModelAndView gotoEditWorker(@RequestParam(value="edit_workerID") int edit_workerID) {
-		System.out.println(this.getEdit_worker_id());
-		ModelAndView mv = new ModelAndView();
+	@RequestMapping(value="/showEditWorker",method=RequestMethod.POST)
+	@ResponseBody
+	public Worker showEditWorker(@RequestParam("workerID") String workerID) {
+		System.out.println(workerID);
+		this.setEdit_worker_id(Integer.parseInt(workerID));
+		Worker worker = null;
 		try {
-		mv.addObject("edit_worker", adminService.showEidtWorker(edit_workerID));
-		}catch(Exception e){
+			 worker = adminService.showEidtWorker(Integer.parseInt(workerID));
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		this.setEdit_worker_id(edit_workerID);
-		return mv;
+		return worker;
 	}
 	
 	/*
@@ -292,11 +294,13 @@ public class AdminController {
 	}
 	
 	/*
-	 * 打开删除用户界面
+	 * 去删除员工
 	 */
-	@RequestMapping(value="/gotoDeleteWorker",method=RequestMethod.GET)
-	public void gotoDeleteWorker(@RequestParam("delete_workerID") int delete_workerID) {
-		this.setDelete_worker_id(delete_workerID);
+	@RequestMapping(value="/gotodeleteworker",method=RequestMethod.POST)
+	@ResponseBody
+	public void gotoDeleteWorker(@RequestParam("workerID") String workerID) {
+		System.out.println(workerID);
+		this.setDelete_worker_id(Integer.parseInt(workerID));
 	}
 	
 	/*
@@ -312,8 +316,7 @@ public class AdminController {
 		if(result==0) {
 			req.setAttribute("deleteworker-msg", "删除失败");
 		}else { 
-			//req.setAttribute("deleteworker-msg", "删除成功");
-			System.out.println("删除成功");
+			req.setAttribute("deleteworker-msg", "删除成功");
 		}
 		PageHelper.startPage(pn, page_show);
 		mv.addObject("login_admin",this.getCurrent_admin());
@@ -391,11 +394,13 @@ public class AdminController {
 	}
 	
 	/*
-	 * 打开删除物品界面
+	 * 去删除物品
 	 */
-	@RequestMapping(value="/gotoDeleteGoods",method=RequestMethod.GET)
-	public void gotoDeleteGoods(@RequestParam("delete_trackingID") int delete_trackingID) {
-		this.setDelete_trackingID(delete_trackingID);
+	@RequestMapping(value="/gotodeletegoods",method=RequestMethod.POST)
+	@ResponseBody
+	public void gotoDeleteGoods(@RequestParam("trackingID") String trackingID) {
+		System.out.println(trackingID);
+		this.setEdit_trackdingID(Integer.parseInt(trackingID));
 	}
 	
 	/*
@@ -435,30 +440,21 @@ public class AdminController {
 	}
 	
 	/*
-	 * test
+	 * 物品修改时显示信息
 	 */
-	@RequestMapping(value="/edit",method=RequestMethod.GET)
+	@RequestMapping(value="/showEditGoods",method=RequestMethod.POST)
 	@ResponseBody
-	public Goods edit(@RequestParam(value="edit_trackingID") int edit_trackingID) {
-		Goods edit_goods = adminService.showEditGoods(edit_trackingID);
-		return edit_goods;
-	}
-	
-	/*
-	 * 打开修改物品
-	 */
-	@RequestMapping(value="/gotoEditGoods",method=RequestMethod.GET)
-	public ModelAndView gotoEditGoods(@RequestParam(value="edit_trackingID") int edit_trackingID) {
-		ModelAndView mv = new ModelAndView();
-		System.out.println(edit_trackingID);
+	public Goods showEditGoods(@RequestParam("trackingID") String trackingID) {
+		System.out.println(trackingID);
+		this.setEdit_trackdingID(Integer.parseInt(trackingID));
+		Goods goods = null;
 		try {
-			mv.addObject("edit_goods", adminService.showEditGoods(edit_trackingID));
-			System.out.println(adminService.showEditGoods(edit_trackingID));
-		}catch(Exception e){
+			goods = adminService.showEditGoods(Integer.parseInt(trackingID));
+			
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		this.setEdit_trackdingID(edit_trackingID);
-		return mv;
+		return goods;
 	}
 	
 	/*
@@ -489,10 +485,12 @@ public class AdminController {
 		edit_bill.setCost(cost);
 		edit_bill.setComplete(complete);
 		if(complete==true) {
-			System.out.println(new Timestamp(new Date().getTime()).toString());
-			edit_bill.setCompletetime(new Timestamp(new Date().getTime()).toString());
+			String str[] = new Timestamp(new Date().getTime()).toString().split("\\.");
+			String time = str[0];
+			edit_bill.setCompletetime(time);
+		}else {
+			edit_bill.setCompletetime("");
 		}
-		System.out.println(complete);
 		try {
 			int result_1 = adminService.editGoods(edit_goods);
 			int result_2 = adminService.editBill(edit_bill);
@@ -536,19 +534,22 @@ public class AdminController {
 	}
 	
 	/*
-	 * 打开修改用户界面
+	 * 用户修改时显示信息
 	 */
-	@RequestMapping(value="/gotoEditUser",method=RequestMethod.GET)
-	public ModelAndView gotoEditUser(@RequestParam("edit_userID") int edit_userID) {
-		ModelAndView mv = new ModelAndView();
-		try{
-			mv.addObject("edit_user", adminService.showEditUser(edit_userID));
-		}catch(Exception e){
+	@RequestMapping(value="/showEditUser",method=RequestMethod.POST)
+	@ResponseBody
+	public User showEditUser(@RequestParam("userID") String userID) {
+		System.out.println(userID);
+		this.setEdit_user_id(Integer.parseInt(userID));
+		User user = null;
+		try {
+			user = adminService.showEditUser(Integer.parseInt(userID));
+		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		this.setEdit_user_id(edit_userID);
-		return mv;
+		return user;
 	}
+	
 	/*
 	 * 修改用户
 	 */
@@ -576,8 +577,7 @@ public class AdminController {
 			if(result==0||(nickname==""||usersex==""||usernumber==""||userphone==""||useraddress=="")) {
 				req.setAttribute("edituser-msg", "修改失败");
 			}else {
-				//req.setAttribute("edituser-msg", "修改成功");
-				System.out.println("修改成功");
+				req.setAttribute("edituser-msg", "修改成功");
 			}
 		}catch(Exception e) {
 			req.setAttribute("edituser-msg", "修改失败");
@@ -594,12 +594,15 @@ public class AdminController {
 	}
 	
 	/*
-	 * 打开删除用户界面
+	 * 去删除用户
 	 */
-	@RequestMapping(value="/gotoDeleteUser",method=RequestMethod.GET)
-	public void gotoDeleteUser(@RequestParam("delete_userID") int delete_userID) {
-		this.setDelete_user_id(delete_userID);
+	@RequestMapping(value="/gotodeleteuser",method=RequestMethod.POST)
+	@ResponseBody
+	public void gotoDeleteUser(@RequestParam("userID") String userID) {
+		System.out.println(userID);
+		this.setDelete_user_id(Integer.parseInt(userID));
 	}
+	
 	/*
 	 * 删除用户
 	 */
@@ -613,8 +616,7 @@ public class AdminController {
 		if(result==0) {
 			req.setAttribute("deleteuser-msg", "删除失败");
 		}else {
-			//req.setAttribute("deleteuser-msg", "删除成功");
-			System.out.println("删除成功");
+			req.setAttribute("deleteuser-msg", "删除成功");
 		}
 		PageHelper.startPage(pn, page_show);
 		mv.addObject("login_admin",this.getCurrent_admin());

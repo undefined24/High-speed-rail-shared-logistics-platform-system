@@ -71,8 +71,8 @@
                 <td>${user.userphone}</td>
 				<td>${user.usernumber}</td>
 				<td>${user.useraddress}</td>
-				<td><a href="gotoEditUser?edit_userID=${user.userID }" data-toggle="modal" data-target="#vip_edit">修改</a></td>
-                <td><a href="gotoDeleteUser?delete_userID=${user.userID}" data-toggle="modal" data-target="#vip_delete">删除</a></td>
+				<td><span onclick="edit(${user.userID})" data-toggle="modal" data-target="#vip_edit">修改</span></td>
+                <td><span onclick="deleteuser(${user.userID})" data-toggle="modal" data-target="#vip_delete">删除</span></td>
             </tr>
 			</c:forEach>
             </tbody>
@@ -126,21 +126,21 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="phone_num">电话号码</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="userphone" id="phone_num" onBlur="checkPhoneNum()" value=${edit_user.userphone}>
+                            <input class="form-control col-md-4" name="userphone" id="phone_num" onBlur="checkPhoneNum()">
                         	<div id="phonenum_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="pin">身份证号码</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="usernumber" id="pin" onBlur="checkPin()" value=${edit_user.usernumber}>
+                            <input class="form-control col-md-4" name="usernumber" id="pin" onBlur="checkPin()">
                         	<div id="pin_prompt"></div>
                         </div>
                     </div>
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="address">常用住址</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="useraddress" id="address" onBlur="checkAddress()" value=${edit_user.useraddress}>
+                            <input class="form-control col-md-4" name="useraddress" id="address" onBlur="checkAddress()">
                         	<div id="add_prompt"></div>
                         </div>
                     </div>
@@ -189,5 +189,35 @@
         alert("<%=deleteuser_msg%>");
     </script>
     <%}%>
+    <script type="text/javascript">
+    function edit(userID){
+    	$.ajax({
+    		type: "post",
+    		url: "showEditUser",
+    		data: {
+    			"userID": userID
+    		},
+    		success:function(data){
+    			$("#vip_name").val(data.nickname);
+    			$("#sex").val(data.usersex);
+    			$("#phone_num").val(data.userphone);
+    			$("#pin").val(data.usernumber);
+    			$("#address").val(data.useraddress);
+    		},
+    		error:function(data){
+    			alert('error');
+    		}
+    	});
+    }
+    function deleteuser(userID){
+    	$.ajax({
+    		type: "post",
+    		url: "gotodeleteuser",
+    		data: {
+    			"userID": userID
+    		}
+    	});
+    }
+    </script>
 </body>
 </html>

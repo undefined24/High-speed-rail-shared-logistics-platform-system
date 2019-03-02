@@ -71,8 +71,8 @@
             <td>${worker.workerposition}</td>
             <td>${worker.workersalary}</td>
             <td>${worker.workercheckcard}</td>
-            <td><a href="editworker?edit_workerID=${worker.workerID}" data-toggle="modal" data-target="#myModal">修改</a></td>
-            <td><a href="gotoDeleteWorker?delete_workerID=${worker.workerID}" data-toggle="modal" data-target="#staff_delete">删除</a></td>
+            <td><span onclick="edit(${worker.workerID})" data-toggle="modal" data-target="#myModal">修改</span></td>
+            <td><span onclick="deleteworker(${worker.workerID})" data-toggle="modal" data-target="#staff_delete">删除</span></td>
             </tr>
             </c:forEach>
             </tbody>
@@ -110,14 +110,14 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name">员工姓名</label>
                         <div class="col-md-8">
-                            <input class="form-control" id="staff_name" name="edit_worker_name" onBlur="checkStaffName()" value=${edit_worker.workername} >
+                            <input class="form-control" id="staff_name" name="edit_worker_name" onBlur="checkStaffName()">
 							<div id="staffname_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_pos">职务</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" name="edit_worker_position" id="staff_pos" onBlur="checkStaffPos()" value=${edit_worker.workerposition}>
+                            <input class="form-control col-md-4 disabled" name="edit_worker_position" id="staff_pos" onBlur="checkStaffPos()" >
 							<div id="staffpos_prompt"></div>
                         </div>
                     </div>
@@ -133,14 +133,14 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="salary">工资</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="salary" name="edit_worker_salary" onBlur="checkSalary()" value=${edit_worker.workersalary}>
+                            <input class="form-control col-md-4" id="salary" name="edit_worker_salary" onBlur="checkSalary()">
 							<div id="salary_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="card">卡号</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" id="card" name="edit_worker_checkcard" onBlur="checkCard()" value=${edit_worker.workercheckcard}>
+                            <input class="form-control col-md-4" id="card" name="edit_worker_checkcard" onBlur="checkCard()" >
 							<div id="card_prompt"></div>
                         </div>
                     </div>
@@ -187,14 +187,14 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name_1">员工姓名</label>
                         <div class="col-md-8">
-                            <input class="form-control" name="workername" id="staff_name_1" onBlur="checkStaffName1()" value="" >
+                            <input class="form-control" name="workername" id="staff_name_1" onBlur="checkStaffName1()"  >
 							<div id="staffname1_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_pos_1">职务</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="staff_pos_1" name="workerposition" onBlur="checkStaffPos1()" value="">
+                            <input class="form-control col-md-4 disabled" id="staff_pos_1" name="workerposition" onBlur="checkStaffPos1()" >
 							<div id="staffpos1_prompt"></div>
                         </div>
                     </div>
@@ -210,14 +210,14 @@
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="salary_1">工资</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="workersalary" id="salary_1" onBlur="checkSalary1()" value="">
+                            <input class="form-control col-md-4" name="workersalary" id="salary_1" onBlur="checkSalary1()">
 							<div id="salary1_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="card_1">卡号</label>
                         <div class="col-md-8">
-                            <input class="form-control col-md-4" name="workercheckcard" id="card_1" onBlur="checkCard1()" value="">
+                            <input class="form-control col-md-4" name="workercheckcard" id="card_1" onBlur="checkCard1()">
 							<div id="card1_prompt"></div>
                         </div>
                     </div>
@@ -255,5 +255,35 @@
         alert("<%=deleteworker_msg%>");
     </script>
     <%}%>
+    <script type="text/javascript">
+    function deleteworker(workerID){
+    	$.ajax({
+    		type: "post",
+    		url: "gotodeleteworker",
+    		data: {
+    			"workerID": workerID
+    		}
+    	});
+    }
+    function edit(workerID){
+    	$.ajax({
+    		type: "post",
+    		url: "showEditWorker",
+    		data: {
+    			workerID: workerID
+    		},
+    		success: function(data){
+    			$("#staff_name").val(data.workername);
+    			$("#staff_pos").val(data.workerposition);
+    			$("#sex").val(data.workersex);
+    			$("#salary").val(data.workersalary);
+    			$("#card").val(data.workercheckcard);
+    		},
+    		error: function(data){
+    			alert('error');
+    		}
+    	});
+    }
+    </script>
 </body>
 </html>
