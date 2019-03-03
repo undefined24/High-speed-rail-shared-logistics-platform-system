@@ -767,3 +767,7 @@ function vip_editSub(){
 function My_Order_Sub(){
 	orderNum = document.getElementById("order_num").value;
 }
+
+function showHideCode(){
+	$("#hidden").toggle();
+}

@@ -11,12 +11,14 @@
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-datetimepicker.fr.js"></script>
+    <script src="js/bootstrap-datetimepicker.js"></script>
     <link rel="stylesheet" href="css/1.css">
 	<link rel="stylesheet" href="css/senderreceiver.css">
+	<link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
+	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
 	<script src="js/3.js"></script>
-	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
-    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	
 </head>
 <body>
 	<nav class="navbar navbar-default" role="navigation">

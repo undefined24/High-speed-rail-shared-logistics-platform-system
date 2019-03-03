@@ -133,20 +133,6 @@
 							<div id="name_prompt"></div>
                         </div>
                     </div>
-					<div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="sender_id">下单用户ID</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" id="sender_id" name="giveUserID" onBlur="checkSenderid()">
-							<div id="senderid_prompt"></div>
-                        </div>
-                    </div>
-                    <div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="receiver_id">接单用户ID</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4" id="receiver_id" name="acceptUserID" onBlur="checkReceiverid()">
-							<div id="receiverid_prompt"></div>
-                        </div>
-                    </div>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="goods_type">类型</label>
                         <div class="col-md-8">
@@ -168,6 +154,30 @@
                         </div>
                     </div>
                     <div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="order">是否接单</label>
+                        <div class="col-md-8">
+                            <select class="form-control col-md-4" id="order" onchange="showHideCode()">
+                            	<option value="false">否</option>
+                                <option value="true" id="show_hid">是</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div id="hidden" style="display:none;">
+					<div class="form-group col-md-12 ">
+                        <label class="control-label col-md-4" for="sender_id">下单用户ID</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4 disabled" id="sender_id" name="giveUserID" onBlur="checkSenderid()">
+							<div id="senderid_prompt"></div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
+                        <label class="control-label col-md-4" for="receiver_id">接单用户ID</label>
+                        <div class="col-md-8">
+                            <input class="form-control col-md-4" id="receiver_id" name="acceptUserID" onBlur="checkReceiverid()">
+							<div id="receiverid_prompt"></div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="train_num">车次</label>
                         <div class="col-md-8">
                             <input class="form-control col-md-4 disabled" id="train_num" name="trainnumber" onBlur="checkTrainnum()">
@@ -181,15 +191,7 @@
 							<div id="fee_prompt"></div>
                         </div>
                     </div>
-					<div class="form-group col-md-12">
-                        <label class="control-label col-md-4" for="order">是否接单</label>
-                        <div class="col-md-8">
-                            <select class="form-control col-md-4" id="order">
-                                <option value="true">是</option>
-                                <option value="false">否</option>
-                            </select>
-                        </div>
-                    </div>
+					
 					<div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="order_finished">是否完成订单</label>
                         <div class="col-md-8">
@@ -198,6 +200,7 @@
                                 <option value="false">否</option>
                             </select>
                         </div>
+                    </div>
                     </div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>

@@ -1,5 +1,5 @@
 body:before{
-    background-image: url("../image/bg.jpg");
+    background-image: url("image/bg.jpg");
     position: fixed;
     background-size: cover;
     width: 100%;
@@ -11,7 +11,7 @@ body:before{
     z-index: -1;
 }
 @font-face {
-    src: url("../font/Sunydale Script demo.otf");
+    src: url("font/Sunydale Script demo.otf");
     font-family: "ss" ;
 }
 .slogan{

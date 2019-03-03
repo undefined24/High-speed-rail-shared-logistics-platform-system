@@ -187,5 +187,17 @@ function MySub2(){
 }
 
 $(function() {
-    $( "#start_time" ).datepicker({ minDate: 0});
+    $( "#start_time" ).datetimepicker({ 
+    	format: "yyyy-mm-dd-hh-ii",
+        todayBtn: true,
+        autoclose: true,
+        startView:2,
+        minView: 0,//最低视图 小时视图
+        maxView: 4, //最高视图 十年视图
+        showSecond : true,
+        showHours : true,
+        minuteStep:1,
+		minDate: 0,
+		startDate:new Date()
+    });
   });
