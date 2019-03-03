@@ -11,7 +11,7 @@ html,body{
 }
 @font-face {
     font-family:"yw";
-    src: url("font/禹卫书法行书简体.ttf");
+    src: url("../font/禹卫书法行书简体.ttf");
 }
 
 body{
