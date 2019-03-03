@@ -82,6 +82,38 @@ public class UserController {
 	}
 	
 	/*
+	 * 订单查询
+	 */
+	@RequestMapping(value="/search",method=RequestMethod.POST)
+	public ModelAndView search(@RequestParam("search_str") String search_str,
+			HttpServletRequest req) {
+		ModelAndView mv = new ModelAndView();
+		if(this.isHave_user()==false) {
+			mv.setViewName("login");
+		}else {
+			List<Bill> searchBillList = userService.searchBill(search_str);
+			if(searchBillList.isEmpty()) {
+				req.setAttribute("search-msg", "没有此订单");
+				mv.setViewName("main");
+				return mv;
+			}
+			if(searchBillList.get(0).getAcceptUserID()==this.getCurrent_user().getUserID()||(searchBillList.get(0).getGiveUserID()==this.getCurrent_user().getUserID())) {
+				mv.addObject("user",this.getCurrent_user());
+				List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
+				List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
+				mv.addObject("sendlist", sendlist);
+				mv.addObject("acceptlist", acceptlist);
+				mv.setViewName("user_center");
+			}else {
+				req.setAttribute("search-msg", "没有此订单");
+				mv.setViewName("main");
+				req.setAttribute("search-msg", "抱歉，您没有权限");
+			}
+		}
+		return mv;
+	}
+	
+	/*
 	 * 前往接件页面receiver.jsp
 	 */
 	@RequestMapping(value="/gotoReceiver",method=RequestMethod.GET)
@@ -429,7 +461,4 @@ public class UserController {
 		return mv;
 	}
 	
-	/*
-	 * 跳转去
-	 */
 }

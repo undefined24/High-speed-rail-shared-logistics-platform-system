@@ -233,11 +233,11 @@
                     <h4 class="modal-title" id="myModalLabel">订单查询</h4>
                 </div>
                 <div class="modal-body">
-					<form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="#" method="post">
+					<form class="form-horizontal col-md-10 col-md-offset-1" role="form" action="search" method="post">
 						<div class="form-group col-md-12">
 							<label class="control-label col-md-4" for="order_num">订单号</label>
 							<div class="col-md-8">
-								<input class="form-control" id="order_num" value="" >
+								<input class="form-control" id="order_num" name="search_str" value="" >
 							</div>
 						</div>
 						<div class="modal-footer">
@@ -251,5 +251,12 @@
 			</div>
 		</div><!-- /.modal-content -->
 </div><!-- /.modal -->
+<%--搜索订单时提示--%>
+    <%String search_msg=(String)request.getAttribute("search-msg");
+        if(search_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=search_msg%>");
+    </script>
+    <%}%>
 </body>
 </html>

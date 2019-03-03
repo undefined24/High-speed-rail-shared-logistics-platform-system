@@ -90,4 +90,10 @@ public class UserService {
 	public List<Bill> receiveGoods(Train train){
 		return userMapper.receiveGoods(train);
 	}
+	
+	//订单查询
+	@Transactional
+	public List<Bill> searchBill(String search_str){
+		return userMapper.searchBill(search_str);
+	}
 }
