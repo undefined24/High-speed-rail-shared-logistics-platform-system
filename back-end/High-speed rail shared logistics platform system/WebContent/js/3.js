@@ -188,7 +188,7 @@ function MySub2(){
 
 $(function() {
     $( "#start_time" ).datetimepicker({ 
-    	format: "yyyy-mm-dd-hh-ii",
+    	format: "yyyy-mm-dd hh:ii",
         todayBtn: true,
         autoclose: true,
         startView:2,
