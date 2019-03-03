@@ -11,14 +11,17 @@ html,body{
 }
 @font-face {
     font-family:"yw";
-    src: url("font/禹卫书法行书简体.ttf");
+    src: url("../font/禹卫书法行书简体.ttf");
 }
 
 body{
-    background-image: url("image/bg.jpg");
+    background-image: url("../image/bg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment:fixed
+}
+.kuang{
+	border-bottom:1px solid rgba(255,250,240,0.85);
 }
 .col-md-6{
     height: 100%;
@@ -121,8 +124,8 @@ textarea:focus {
     outline: 0;
 }
 .btn{
-    margin-top:5px;
-    margin-bottom:5px;
+    margin-top:0px;
+    margin-bottom:0px;
     color: rgba(255,255,255,0.8);
     background-color: rgba(0, 0, 0,0.9);
 }
@@ -134,6 +137,23 @@ textarea:focus {
     color: rgba(255,255,255,0.8);
 }
 .btn:focus,.btn:active:focus{
+    outline: none;
+    color: rgba(255,255,255,0.8);
+}
+.btn1{
+    margin-top:0px;
+    margin-bottom:0px;
+    color: rgba(255,255,255,0.8);
+    background-color: rgba(0, 0, 0,0.9);
+}
+.btn1-m:hover{
+    cursor:auto;
+    color: rgba(255,255,255,0.8);
+}
+.btn1:hover{
+    color: rgba(255,255,255,0.8);
+}
+.btn1:focus,.btn:active:focus{
     outline: none;
     color: rgba(255,255,255,0.8);
 }
@@ -175,7 +195,7 @@ textarea:focus {
 .container_user_center{
     top: 0;
     background-color: rgba(0,0,0,0.5);
-    height: 500%;
+    height: 300%;
 }
 .container_api_apply{
     top: 0;
@@ -229,7 +249,25 @@ textarea:focus {
     margin-top: 40px;
     margin-bottom: 40px;
     height: 1px;
-    border: 1px solid rgba(255,255,255,0.5);
+    border: 1.5px solid rgba(255,255,255,0.7);
+}
+.line1{
+    margin-top: 40px;
+    margin-bottom: 40px;
+    height: 1px;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+.line2{
+    margin-top: 0px;
+    margin-bottom: 40px;
+    height: 1px;
+    border: 1px solid rgba(255,255,255,0.3);
+}
+.line3{
+    margin-top: 40px;
+    margin-bottom: 0px;
+    height: 1px;
+    border: 1px solid rgba(255,255,255,0.3);
 }
 .revise,.search,.send,.receive{
     color: #e6e6e6;
@@ -347,7 +385,7 @@ textarea:focus {
     margin-bottom: 0;
 }
 #save .modal-footer button:hover{
-    background-color: #865d3f;
+    background-color: #0084ff;
     border-color: #e6e6e6;
 }
 #save .modal-footer button:active,#save .modal-footer button:link{
@@ -390,7 +428,7 @@ textarea:focus {
     box-shadow: none;
 }
 #myModal_reset .btn{
-    margin-bottom: 5px;
+    margin-bottom: 0px;
 }
 body>.info{
 	width:100%;
@@ -415,4 +453,11 @@ body>.info{
 	bottom:5px;
 	text-align:center;
 }
+span[data-toggle='modal']:hover{
+    cursor: pointer;
+    font-weight: bold;
 
+}
+.modal-dialog{
+    margin-top: 140px;
+}

@@ -34,17 +34,13 @@
 		<div class="col-md-8 col-md-offset-2 ">
             <div class="col-md-6">
                 <a href="#revise_part" class="func_nav">修改资料</a>
-				<a href="gotoSender" class="func_nav">我要寄件</a>
             </div>
 			<div class="col-md-6">
                 <a href="#search_part" class="func_nav">物流查询</a>
-				<a href="gotoReceiver" class="func_nav">我要接件</a>
             </div>
         </div>
 		
 		<div class="col-md-10 col-md-offset-1">
-
-
             <div class="revise" id="revise_part">
 				<h3 class="col-md-10">资料修改</h4>
                 <div class="line col-md-12  "></div>
@@ -120,7 +116,9 @@
 							<th>车次</th>
 							<th>花费</th>
 							<th>是否接单</th>
-							<th>是否到达</th>
+							<th>订单创建时间</th>
+							<th>订单完成时间</th>
+							<th></th>
 						</tr>
 						</thead>
 						<tbody>
@@ -139,12 +137,9 @@
 							<c:if test="${send.acceptUserID==null}">
 							<td>否</td>
 							</c:if>
-							<c:if test="${send.complete==false}">
-							<td>否</td>
-							</c:if>
-							<c:if test="${send.complete==true}">
-							<td>是</td>
-							</c:if>
+							<td></td>
+							<td></td>
+							<td><button class="btn btn-info" data-toggle="modal" data-target="#goods_delete">确认收货</button></td>
 						</tr>
 						</c:forEach>
 						</tbody>
@@ -169,7 +164,7 @@
 						</thead>
 						<tbody>
 						 <c:forEach items="${acceptlist}" var="accept">
-						<tr>
+						<tr height="50px">
 							<td>${accept.trackingID}</td>
 							<td>${accept.goods.trackingID}</td>
 							<td>${accept.goods.name}</td>
@@ -192,125 +187,6 @@
 			</div>
 		</div>
 		
-		<div class="col-md-10 col-md-offset-1">
-            <div class="send" id="send_part">
-				<h3 class="col-md-10">我要寄件</h4>
-                <div class="line col-md-12  "></div>
-                <br/>
-                
-                 <form method="post" action="#" class="form-horizontal col-md-10" name="centerSender" id="user_center_sender" role="form" onSubmit="return on_submit1()">
-					 <div class="form-group">
-                        <label class="control-label col-md-2" for="type">物品类型</label>
-                        <div class="col-md-6">
-                            <select class="form-control select1" id="type">
-                                <option value="1" style="color: black">文件</option>
-                                <option value="2" style="color: black">数码产品</option>
-								<option value="3" style="color: black">生活用品</option>
-                                <option value="4" style="color: black">服饰</option>
-								<option value="5" style="color: black">食品</option>
-                                <option value="6" style="color: black">其他</option>
-                            </select>
-                        </div>
-                    </div>
-					<div class="form-group">
-                        <label class="control-label col-md-2" for="weight">物品估重</label>
-                       	<div class="col-md-6">
-                            <select class="form-control select1" id="weight">
-                                <option value="1" style="color: black">小于1kg</option>
-                                <option value="2" style="color: black">1kg</option>
-								<option value="3" style="color: black">2kg</option>
-                                <option value="4" style="color: black">3kg</option>
-								<option value="5" style="color: black">4kg</option>
-                                <option value="6" style="color: black">大于4kg</option>
-                            </select>
-                        </div>
-                    </div>
-					<div class="form-group">
-                        <label class="control-label col-md-2" for="sender_name">寄件人姓名</label>
-                        <div class="col-md-6">
-                            <input type="text" onblur="checkSenderName()" class="form-control" id="sender_name" placeholder="请输入寄件人姓名" name="sendername">
-                            <div id="sendername_prompt"></div>
-						</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="sender_tel">寄件人手机号</label>
-                        <div class="col-md-6">
-                            <input type="text" onblur="checkSenderTel()" class="form-control" id="sender_tel" placeholder="请输入寄件人手机号" name="senderphone">
-                            <div id="sendernumber_prompt"></div>
-						</div>
-                    </div>
-					 <div class="form-group">
-                        <label class="control-label col-md-2" for="sender_address">寄件人地址</label>
-                        <div class="col-md-6">
-                            <input type="text" onblur="checkSenderAddress()" class="form-control" id="sender_address" placeholder="请输入寄件人地址" name="senderaddress" >
-							<div id="senderadderss_prompt"></div>
-                        </div>
-                    </div>
-					 <div class="form-group">
-                        <label class="control-label col-md-2" for="receiver_name">收件人姓名</label>
-                        <div class="col-md-6">
-                            <input type="text" onblur="checkReceiverName()" class="form-control" id="receiver_name" placeholder="请输入收件人姓名" name="receivername">
-                            <div id="receivername_prompt"></div>
-						</div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="receiver_tel">收件人手机号</label>
-                        <div class="col-md-6">
-                            <input type="text" onblur="checkReceiverTel()" class="form-control" id="receiver_tel" placeholder="请输入寄件人手机号" name="receiverphone">
-                            <div id="receivernumber_prompt"></div>
-						</div>
-                    </div>
-					 <div class="form-group">
-                        <label class="control-label col-md-2" for="receiver_address">收件人地址</label>
-                        <div class="col-md-6">
-                            <input type="text" onblur="checkReceiverAddress()" class="form-control" id="receiver_address" placeholder="请输入寄件人地址" name="receiveraddress" >
-							<div id="receiveradderss_prompt"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-2"> </label>
-                        <button class="btn btn-default " type="submit" onClick="mySub1()">提交</button>
-                    </div>
-                </form>
-            </div>
-		</div>
-		
-		<div class="col-md-10 col-md-offset-1">
-            <div class="receive" id="receive_part">
-				<h3 class="col-md-10">我要接件</h4>
-                <div class="line col-md-12"></div>
-                <br/>
-                
-                 <form method="post" action="#" class="form-horizontal col-md-10" id="user_center_receiver" name="centerReceiver" role="form" onSubmit="return on_submit2()">
-					 <div class="form-group">
-                        <label class="control-label col-md-2" for="start_pos">高铁出发点</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" onblur="checkStartPos()" placeholder="请输入高铁出发点" id="start_pos" value="">
-							<div id="startpos_prompt"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="train_num">车次</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4 disabled" onblur="checkTrainNum()" placeholder="请输入车次" id="train_num" value="">
-							<div id="trainnum_prompt"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="control-label col-md-2" for="start_time">高铁出发时间</label>
-                        <div class="col-md-8">
-                            <input class="form-control col-md-4" onblur="checkStartTime()" placeholder="请输入高铁出发时间" id="start_time" value="">
-							<div id="starttime_prompt"></div>
-                        </div>
-                    </div>
-                    
-                    <div class="form-group">
-                        <label class="control-label col-md-2"> </label>
-                        <button class="btn btn-default " type="submit" onClick="mySub2()">查询</button>
-                    </div>
-                </form>
-            </div>
-		</div>
 <!-- 模态框（Modal） -->
     <div class="modal fade" id="save" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -336,6 +212,26 @@
             </div><!-- /.modal-content -->
         </div><!-- /.modal -->
     </div>
+
+<!-- 模态框（Modal）确认删除 -->
+	<div class="modal fade" id="goods_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	                <h4 class="modal-title" id="delete1">确认收货</h4>
+	            </div>
+	            <div class="modal-body">
+	                您已确认收货?
+	            </div>
+	            <div class="modal-footer">
+					<button type="button" class="btn btn-info" >是</button>
+	                <button type="button" class="btn btn-primary" data-dismiss="modal">否</button>
+	                </div>
+	                <br />
+	        </div><!-- /.modal-content -->
+	    </div><!-- /.modal -->
+	</div>
 <%--修改用户详情成功时提示--%>
     <%String profile_success_msg=(String)request.getAttribute("profile-success-msg");
         if(profile_success_msg!=null){%>

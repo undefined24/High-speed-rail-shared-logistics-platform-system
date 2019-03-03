@@ -14,6 +14,9 @@
     <link rel="stylesheet" href="css/1.css">
 	<link rel="stylesheet" href="css/senderreceiver.css">
 	<script src="js/3.js"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-default" role="navigation">
@@ -82,7 +85,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="arrive_pos">高铁到达点</label>
 					<div class="col-md-6">
-						<input class="form-control col-md-4" onblur="" name="arrivepoint" placeholder="请输入高铁到达点" id="arrive_pos" value="">
+						<input class="form-control col-md-4" onblur="checkArrivePos()" name="arrivepoint" placeholder="请输入高铁到达点" id="arrive_pos" value="">
 						<div id="arrivepos_prompt"></div>
 					</div>
 				</div>
@@ -95,6 +98,73 @@
             </form>
         </div>
     </div>
-	
+    <div class="container3">
+	</div>
+	<div class="container">
+		<table class="table table-hover goods col-md-12 recieve_search">
+            <thead>
+            <tr>
+                <th>物品ID</th>
+				<th>下单用户ID</th>
+				<th>接单用户ID</th>
+                <th>类型</th>
+                <th>重量</th>
+				<th>车次</th>
+                <th>运费</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>000001</td>
+				<td>666666</td>
+				<td>111111</td>
+                <td>食品</td>
+                <td>1kg</td>
+				<td>C71000</td>
+                <td>5.40</td>
+                <td><button class="btn btn-default" data-toggle="modal" data-target="#goods_take">接单</button>
+            </tr>
+            <tr>
+                <td>000006</td>
+				<td>666666</td>
+				<td>111111</td>
+                <td>文件</td>
+                <td>0.1kg</td>
+				<td>C71000</td>
+                <td>15.40</td>
+                <td><button class="btn btn-default" data-toggle="modal" data-target="#goods_take">接单</button>
+            </tr>
+            <tr>
+                <td>000232</td>
+				<td>666666</td>
+				<td>111111</td>
+                <td>饮料</td>
+                <td>2kg</td>
+				<td>C71000</td>
+                <td>15.40</td>
+                <td><button class="btn btn-default" data-toggle="modal" data-target="#goods_take">接单</button>
+            </tr>
+           
+            </tbody>
+        </table>
+	</div>
+<!-- 模态框（Modal） -->
+	<div class="modal fade" id="goods_take" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+					<h4 class="modal-title" id="take">物品接单</h4>
+				</div>
+				<div class="modal-body">
+					您是否确定要接单？
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">否</button>
+					<button type="button" class="btn btn-primary">是</button>
+				</div>
+			</div><!-- /.modal-content -->
+		</div><!-- /.modal -->
+	</div>	
 </body>
 </html>

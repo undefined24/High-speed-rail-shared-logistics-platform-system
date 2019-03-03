@@ -18,7 +18,8 @@
 <body>
 <div class="header">
 	<div class="back">
-        <a href="adminlogout">注销</a>
+        <button class="btn btn-primary logout"><a href="adminlogout">注销</a></button>
+        <button class="btn btn-default"><a href="#">回到首页</a></button>
     </div>
 </div>
 <div class="col-md-2 list">

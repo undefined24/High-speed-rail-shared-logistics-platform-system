@@ -14,8 +14,11 @@
     <link rel="stylesheet" href="css/1.css">
 </head>
 <body>
-<div class="col-md-1 col-md-offset-11 text-right">
-    <span class="glyphicon text-right register"><a href="register">注册</a></span>
+<div class="header">
+	<div class="back">
+        <button class="btn btn-primary logout"><a href="register">注册</a></button>
+        <button class="btn btn-default"><a href="#">回到首页</a></button>
+    </div>
 </div>
     <div class="container">
 

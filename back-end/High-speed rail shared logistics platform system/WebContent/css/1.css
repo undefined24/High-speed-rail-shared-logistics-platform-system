@@ -29,8 +29,11 @@ body:before{
 }
 .register a,.register a:hover{
     cursor: pointer;
-    color: white;
+    color: #2F9AFF;
     text-decoration: none;
+}
+.logout a{
+	color:white;
 }
 .title{
     color: #fafffe;

@@ -1,4 +1,17 @@
 // JavaScript Document
+function checkName(){
+	var Name=document.getElementById("name").value;
+	var divNameId=document.getElementById("name_prompt");
+	divNameId.innerHTML="";
+	if(Name==""){
+		name.value="";
+		divNameId.innerHTML="物品姓名不能为空！";
+		return false;
+	}
+	divNameId.innerHTML="";
+	return true;
+}
+
 function checkSenderName(){
 	var name=document.getElementById("sender_name").value;
 	var divNameId=document.getElementById("sendername_prompt");
@@ -80,7 +93,7 @@ function checkReceiverAddress(){
 }
 
 function on_submit1(){
-	if(checkSenderName() && checkSenderTel() && checkSenderAddress() && checkReceiverName() && checkReceiverTel() && checkReceiverAddress()){
+	if(checkName() && checkSenderName() && checkSenderTel() && checkSenderAddress() && checkReceiverName() && checkReceiverTel() && checkReceiverAddress()){
 		alert("提交成功！");
 		return true;
 	}
@@ -107,6 +120,19 @@ function checkStartPos(){
 	if(pos==""){
 		start_pos.value="";
 		divPosId.innerHTML="高铁出发点不能为空！";
+		return false;
+	}
+	divPosId.innerHTML="";
+	return true;
+}
+
+function checkArrivePos(){
+	var pos=document.getElementById("arrive_pos").value;
+	var divPosId=document.getElementById("arrivepos_prompt");
+	divPosId.innerHTML="";
+	if(pos==""){
+		arrive_pos.value="";
+		divPosId.innerHTML="高铁到达点不能为空！";
 		return false;
 	}
 	divPosId.innerHTML="";
@@ -140,7 +166,7 @@ function checkStartTime(){
 }
 
 function on_submit2(){
-	if(checkStartPos() && checkTrainNum() && checkStartTime()){
+	if(checkStartPos() && checkArrivePos() && checkTrainNum() && checkStartTime()){
 		alert("查询成功！");
 		return true;
 	}
@@ -159,3 +185,7 @@ function MySub2(){
 //		alert("添加失败！");
 	}
 }
+
+$(function() {
+    $( "#start_time" ).datepicker({ minDate: 0});
+  });

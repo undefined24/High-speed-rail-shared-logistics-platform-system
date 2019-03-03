@@ -61,7 +61,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="name">物品名称</label>
 					<div class="col-md-6">
-						<input type="text" onblur="" class="form-control" id="name" placeholder="请输入物品名称" name="name">
+						<input type="text" onblur="checkName()" class="form-control" id="name" placeholder="请输入物品名称" name="name">
 						<div id="name_prompt"></div>
 					</div>
 				</div>

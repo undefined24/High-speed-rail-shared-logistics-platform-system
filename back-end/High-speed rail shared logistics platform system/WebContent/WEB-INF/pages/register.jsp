@@ -15,7 +15,11 @@
 </head>
 <body>
     <script src="js/1.js"></script>
-	
+	<div class="header">
+	<div class="back">
+        <button class="btn btn-default"><a href="#">回到首页</a></button>
+    </div>
+</div>	
     <div class="container">
         <div class="col-md-8 col-md-offset-2">
             <form class="form-horizontal" name="regform" id="register" role="form" action="register" method="post">
