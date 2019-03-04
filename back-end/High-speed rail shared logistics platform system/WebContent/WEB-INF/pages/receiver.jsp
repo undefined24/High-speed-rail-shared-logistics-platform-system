@@ -94,7 +94,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1"> </label>
 					<div class="col-md-6">
-						<button type="submit" class="btn btn-default col-md-12 " onClick="mySub2()">查询</button>
+						<button type="button" class="btn btn-default col-md-12 " onClick="getList();mySub2()">查询</button>
 					</div>
 				</div>
             </form>
@@ -103,49 +103,29 @@
     <div class="container3">
 	</div>
 	<div class="container">
-		<table class="table table-hover goods col-md-12 recieve_search">
+		<table class="table table-hover goods col-md-12 recieve_search" id="tbl">
             <thead>
             <tr>
                 <th>物品ID</th>
 				<th>下单用户ID</th>
-				<th>接单用户ID</th>
                 <th>类型</th>
-                <th>重量</th>
-				<th>车次</th>
-                <th>运费</th>
+                <th>重量(500g)</th>
+                <th>运费(元)</th>
             </tr>
             </thead>
-            <tbody>
+            <tbody id="add_tr">
+            <%--  <c:forEach items="${ablegoodslist}" var="bill">
             <tr>
-                <td>000001</td>
-				<td>666666</td>
-				<td>111111</td>
-                <td>食品</td>
-                <td>1kg</td>
-				<td>C71000</td>
-                <td>5.40</td>
+                <td>${bill.trackingID}</td>
+				<td>${bill.giveUserID}</td>
+				<td>${bill.acceptUserID}</td>
+                <td>${bill.goods.type}</td>
+                <td>${bill.goods.weight}</td>
+				<td>${bill.trainnumber}</td>
+                <td>${bill.cost}</td>
                 <td><button class="btn btn-default" data-toggle="modal" data-target="#goods_take">接单</button>
             </tr>
-            <tr>
-                <td>000006</td>
-				<td>666666</td>
-				<td>111111</td>
-                <td>文件</td>
-                <td>0.1kg</td>
-				<td>C71000</td>
-                <td>15.40</td>
-                <td><button class="btn btn-default" data-toggle="modal" data-target="#goods_take">接单</button>
-            </tr>
-            <tr>
-                <td>000232</td>
-				<td>666666</td>
-				<td>111111</td>
-                <td>饮料</td>
-                <td>2kg</td>
-				<td>C71000</td>
-                <td>15.40</td>
-                <td><button class="btn btn-default" data-toggle="modal" data-target="#goods_take">接单</button>
-            </tr>
+            </c:forEach> --%>
            
             </tbody>
         </table>
@@ -163,10 +143,73 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">否</button>
-					<button type="button" class="btn btn-primary">是</button>
+					<button type="button" class="btn btn-primary onclick="confirm()">是</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
 	</div>	
+     <script type="text/javascript">
+     var count = 0;
+     var last_length = 0;
+	function getList(){
+		$.ajax({
+			type : "post",
+			url : "receive",
+			data : {
+				"startpoint": $("#start_pos").val(),
+				"trainnumber": $("#train_num").val(),
+				"traintime": $("#start_time").val(),
+				"arrivepoint": $("#arrive_pos").val()
+			},
+			success : function(data) {
+				if(data.length==0){
+					/*  window.location.reload(); */
+					 alert("没有适合您接件的物品");
+					/*  return; */
+				}
+				if(count!=0){
+					for(var i=0;i<last_length;i++){
+						var add_tr = document.getElementById("add_tr");
+						var mark = document.getElementById("mark");
+						add_tr.removeChild(mark);
+					}
+				}
+				for(var i=0;i<data.length;i++){
+					var tr = document.createElement("tr");
+					tr.setAttribute('id','mark');
+					var td1 = document.createElement("td");
+					td1.innerText = data[i].trackingID;
+					td1.setAttribute('id',"trackingID"+i);
+					tr.appendChild(td1);
+					var td2 = document.createElement("td");
+					td2.innerText = data[i].giveUserID;
+					tr.appendChild(td2);
+					var td4 = document.createElement("td");
+					td4.innerText = data[i].goods.type;
+					tr.appendChild(td4);
+					var td5 = document.createElement("td");
+					td5.innerText = data[i].goods.weight;
+					tr.appendChild(td5);
+					var td6 = document.createElement("td");
+					td6.innerText = data[i].cost;
+					tr.appendChild(td6);
+					var td7 = document.createElement("td");
+					td7.innerText = data[i].goods.name;
+					tr.appendChild(td7);
+					var td8 = document.createElement("td");
+					td8.innerHTML = "<button class=\"btn btn-default\" data-toggle=\"modal\" id=\"recbtn\" data-target=\"#goods_take\">接单</button>"
+					tr.appendChild(td8);
+					document.getElementById("add_tr").appendChild(tr);
+					var rec_btn=document.getElementById("recbtn")
+					rec_btn.onclick=function(){
+						alert(1);
+					}
+				}
+				count += 1;
+				last_length=data.length;
+			}
+		});
+	}
+</script>
 </body>
 </html>

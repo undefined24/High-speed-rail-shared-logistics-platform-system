@@ -1,5 +1,6 @@
 package com.undefined24.ssm.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -97,15 +98,13 @@ public class UserController {
 				mv.setViewName("main");
 				return mv;
 			}
-			if(searchBillList.get(0).getAcceptUserID()==this.getCurrent_user().getUserID()||(searchBillList.get(0).getGiveUserID()==this.getCurrent_user().getUserID())) {
-				mv.addObject("user",this.getCurrent_user());
-				List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
-				List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
-				mv.addObject("sendlist", sendlist);
-				mv.addObject("acceptlist", acceptlist);
-				mv.setViewName("user_center");
+			if(searchBillList.get(0).getAcceptUserID()==this.getCurrent_user().getUserID()) {
+				req.setAttribute("search-msg", "1");
+				mv.setViewName("main");
+			}else if(searchBillList.get(0).getGiveUserID()==this.getCurrent_user().getUserID()){
+				req.setAttribute("search-msg", "2");
+				mv.setViewName("main");
 			}else {
-				req.setAttribute("search-msg", "没有此订单");
 				mv.setViewName("main");
 				req.setAttribute("search-msg", "抱歉，您没有权限");
 			}
@@ -131,30 +130,36 @@ public class UserController {
 	 * 接件
 	 */
 	@RequestMapping(value="/receive",method=RequestMethod.POST)
-	public ModelAndView receive(@RequestParam("startpoint") String startpoint,
+	@ResponseBody
+	public List<Bill> receive(@RequestParam("startpoint") String startpoint,
 			@RequestParam("trainnumber") String trainnumber,
 			@RequestParam("traintime") String traintime,
 			@RequestParam("arrivepoint") String arrivepoint,
 			HttpServletRequest req) {
-		ModelAndView mv = new ModelAndView();
+		if(startpoint==""||trainnumber==""||traintime==""||arrivepoint=="") {
+			return null;
+		}
 		Train train = new Train();
 		train.setStartpoint(startpoint);
 		train.setTrainnumber(trainnumber);
 		train.setTraintime(traintime);
 		train.setArrivepoint(arrivepoint);
-		try {
-			List<Bill> ablegoodslist = userService.receiveGoods(train);
-			if(ablegoodslist!=null) {
-				mv.addObject("ablegoodslist", ablegoodslist);
+		List<Bill> ablegoodslist = userService.receiveGoods(train);
+		if(ablegoodslist!=null) {
+			for(int i=0;i<ablegoodslist.size();i++) {
+				Receiver receiver = new Receiver();
+				int trackingID = ablegoodslist.get(i).getTrackingID();
+				receiver.setTrackingID(trackingID);
+				receiver.setAddress(arrivepoint);
+				System.out.println(receiver);
+				Receiver rec = userService.selectReceiver(receiver);
+				ablegoodslist.get(i).setReceiver(rec);
+				if(ablegoodslist.get(i).getReceiver()==null) {
+					ablegoodslist.remove(i);
+				}
 			}
-			else {
-				req.setAttribute("receive-msg", "没有合适您接件的物品");
-			}
-		}catch(Exception e) {
-			e.printStackTrace();
 		}
-		mv.setViewName("");
-		return mv;
+		return ablegoodslist;
 	}
 			
 	/*
@@ -279,7 +284,6 @@ public class UserController {
 			this.setSame_name(true);
 		}else {
 			msg= "此身份证可用";
-			
 		}
 		return msg;
 	}

@@ -96,4 +96,10 @@ public class UserService {
 	public List<Bill> searchBill(String search_str){
 		return userMapper.searchBill(search_str);
 	}
+	
+	//寻找收货人信息
+	@Transactional
+	public Receiver selectReceiver(Receiver receiver){
+		return userMapper.selectReceiver(receiver);
+	}
 }

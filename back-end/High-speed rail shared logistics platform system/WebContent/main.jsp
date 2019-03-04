@@ -253,9 +253,19 @@
 </div><!-- /.modal -->
 <%--搜索订单时提示--%>
     <%String search_msg=(String)request.getAttribute("search-msg");
-        if(search_msg!=null){%>
-    <script type="text/javascript">
+        if(search_msg!=null&&search_msg!="1"&&search_msg!="2"){%>
+	<script type="text/javascript">
         alert("<%=search_msg%>");
+    </script>
+     <%}%>
+     <% if(search_msg=="2"){ %>
+     <script type="text/javascript">
+           window.location.href="gotoUserCenter#my_give_bill"; 
+    </script>
+    <%}%>
+    <% if(search_msg=="1"){ %>
+     <script type="text/javascript">
+           window.location.href="gotoUserCenter#my_accept_bill"; 
     </script>
     <%}%>
 </body>

@@ -14,8 +14,15 @@ public class Bill {
 	private Timestamp createtime;
 	private float cost;
 	private Goods goods;
+	private Receiver receiver;
 	
 	
+	public Receiver getReceiver() {
+		return receiver;
+	}
+	public void setReceiver(Receiver receiver) {
+		this.receiver = receiver;
+	}
 	public String getCompletetime() {
 		return completetime;
 	}
@@ -87,7 +94,7 @@ public class Bill {
 		return "Bill [trackingID=" + trackingID + ", giveUserID=" + giveUserID + ", acceptUserID=" + acceptUserID
 				+ ", sendaddress=" + sendaddress + ", arriveaddress=" + arriveaddress + ", trainnumber=" + trainnumber
 				+ ", complete=" + complete + ", completetime=" + completetime + ", createtime=" + createtime + ", cost="
-				+ cost + ", goods=" + goods + "]";
+				+ cost + ", goods=" + goods + ", receiver=" + receiver + "]";
 	}
 	
 }

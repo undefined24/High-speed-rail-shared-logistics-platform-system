@@ -176,15 +176,15 @@ function on_submit2(){
 	}
 }
 
-function MySub2(){
-		if (on_submit2()){
-		document.receiver.submit();
-//		alert("添加成功！");
-	}
-	else{
-//		alert("添加失败！");
-	}
-}
+//function MySub2(){
+//		if (on_submit2()){
+//		document.receiver.submit();
+////		alert("添加成功！");
+//	}
+//	else{
+////		alert("添加失败！");
+//	}
+//}
 
 $(function() {
     $( "#start_time" ).datetimepicker({ 

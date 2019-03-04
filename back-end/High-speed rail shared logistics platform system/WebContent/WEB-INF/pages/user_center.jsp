@@ -103,7 +103,7 @@
                 <div class="line col-md-12  "></div>
                 <br/>
                 <div class="line2 col-md-12  "></div>
-                <div class="form-group ">
+                <div class="form-group " id="my_give_bill">
 					<h4 class="col-md-10"><strong>我的寄件</strong></h4>
                     <table class="table col-md-12 kuang" style="margin-top: 30px;">
 						<thead>
@@ -147,7 +147,7 @@
             	</div>
 				
 				<div class="line1 col-md-12"></div>
-				<div class="form-group">
+				<div class="form-group" id="my_accept_bill">
 					<h4 class="col-md-10"><strong>我的收件</strong></h4>
                     <table class="table col-md-12 kuang" style="margin-top: 30px;">
 						<thead>
