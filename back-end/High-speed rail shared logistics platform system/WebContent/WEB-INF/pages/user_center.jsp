@@ -112,11 +112,10 @@
 							<th>物品id</th>
 							<th>物品名称</th>
 							<th>发送的地址</th>
-							<th>接受的地址</th>
+							<th>接收的地址</th>
 							<th>车次</th>
 							<th>花费</th>
 							<th>是否接单</th>
-							<th>订单创建时间</th>
 							<th>订单完成时间</th>
 							<th></th>
 						</tr>
@@ -137,9 +136,7 @@
 							<c:if test="${send.acceptUserID==null}">
 							<td>否</td>
 							</c:if>
-							<td></td>
-							<td></td>
-							<td><button class="btn btn-info" data-toggle="modal" data-target="#goods_delete">确认收货</button></td>
+							<td>${send.completetime}</td>
 						</tr>
 						</c:forEach>
 						</tbody>
@@ -148,7 +145,7 @@
 				
 				<div class="line1 col-md-12"></div>
 				<div class="form-group" id="my_accept_bill">
-					<h4 class="col-md-10"><strong>我的收件</strong></h4>
+					<h4 class="col-md-10"><strong>我的接件</strong></h4>
                     <table class="table col-md-12 kuang" style="margin-top: 30px;">
 						<thead>
 						<tr>
@@ -156,7 +153,7 @@
 							<th>物品id</th>
 							<th>物品名称</th>
 							<th>发送的地址</th>
-							<th>接受的地址</th>
+							<th>接收的地址</th>
 							<th>车次</th>
 							<th>花费</th>
 							<th>是否到达</th>
@@ -174,6 +171,7 @@
 							<td>${accept.cost}</td>
 							<c:if test="${accept.complete==false}">
 							<td>否</td>
+							<td><span data-toggle="modal" data-target="#goods_delete" onclick="arrive(${accept.trackingID})" >确认送达</span></td>
 							</c:if>
 							<c:if test="${accept.complete==true}">
 							<td>是</td>
@@ -213,7 +211,7 @@
         </div><!-- /.modal -->
     </div>
 
-<!-- 模态框（Modal）确认删除 -->
+<!-- 模态框（Modal）确认收获 -->
 	<div class="modal fade" id="goods_delete" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-dialog">
 	        <div class="modal-content">
@@ -225,8 +223,8 @@
 	                您已确认收货?
 	            </div>
 	            <div class="modal-footer">
-					<button type="button" class="btn btn-info" >是</button>
 	                <button type="button" class="btn btn-primary" data-dismiss="modal">否</button>
+	                <a href="arriveConfirm"><button type="button" class="btn btn-info" >是</button></a>
 	                </div>
 	                <br />
 	        </div><!-- /.modal-content -->
@@ -239,6 +237,24 @@
         alert("<%=profile_success_msg%>");
     </script>
     <%}%>
+   <%--确认送达时提示--%>
+   <%String confirm_msg=(String)request.getAttribute("confirm-msg");
+       if(confirm_msg!=null){%>
+   <script type="text/javascript">
+       alert("<%=confirm_msg%>");
+   </script>
+   <%}%>
+<script type="text/javascript">
+function arrive(id){
+	$.ajax({
+		type: "post",
+		url: "gotoArriveConfirm",
+		data: {
+			"trackingID": id
+		}
+	});
+}
+    </script>
 </body>
 </html>
     

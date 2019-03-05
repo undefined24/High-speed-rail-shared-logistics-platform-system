@@ -24,6 +24,8 @@ public interface UserMapper {
 	
 	public List<Bill> receiveGoods(Train train);
 	public List<Bill> searchBill(String search_str);
+	public int changeBill(Bill bill);
+	public int arriveConfirm(Bill bill);
 	
 	public Receiver selectReceiver(Receiver receiver);
 }

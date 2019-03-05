@@ -114,19 +114,6 @@
             </tr>
             </thead>
             <tbody id="add_tr">
-            <%--  <c:forEach items="${ablegoodslist}" var="bill">
-            <tr>
-                <td>${bill.trackingID}</td>
-				<td>${bill.giveUserID}</td>
-				<td>${bill.acceptUserID}</td>
-                <td>${bill.goods.type}</td>
-                <td>${bill.goods.weight}</td>
-				<td>${bill.trainnumber}</td>
-                <td>${bill.cost}</td>
-                <td><button class="btn btn-default" data-toggle="modal" data-target="#goods_take">接单</button>
-            </tr>
-            </c:forEach> --%>
-           
             </tbody>
         </table>
 	</div>
@@ -143,7 +130,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">否</button>
-					<button type="button" class="btn btn-primary onclick="confirm()">是</button>
+					<a href="confirm"><button type="button" class="btn btn-primary">是</button></a>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->
@@ -179,6 +166,7 @@
 					tr.setAttribute('id','mark');
 					var td1 = document.createElement("td");
 					td1.innerText = data[i].trackingID;
+					var id=data[i].trackingID;
 					td1.setAttribute('id',"trackingID"+i);
 					tr.appendChild(td1);
 					var td2 = document.createElement("td");
@@ -197,13 +185,11 @@
 					td7.innerText = data[i].goods.name;
 					tr.appendChild(td7);
 					var td8 = document.createElement("td");
-					td8.innerHTML = "<button class=\"btn btn-default\" data-toggle=\"modal\" id=\"recbtn\" data-target=\"#goods_take\">接单</button>"
+					td8.innerHTML = "<a class=\"btn btn-default\" href=\"\" data-toggle=\"modal\" id=\"recbtn\" data-target=\"#goods_take\">接单</a>"
 					tr.appendChild(td8);
 					document.getElementById("add_tr").appendChild(tr);
-					var rec_btn=document.getElementById("recbtn")
-					rec_btn.onclick=function(){
-						alert(1);
-					}
+					var recbtn=document.getElementById("recbtn");
+					recbtn.href="recConfirm?id="+id;
 				}
 				count += 1;
 				last_length=data.length;
@@ -211,5 +197,12 @@
 		});
 	}
 </script>
+<%--确认接件时提示--%>
+    <%String confirm_msg=(String)request.getAttribute("confirm-msg");
+        if(confirm_msg!=null){%>
+    <script type="text/javascript">
+        alert("<%=confirm_msg%>");
+    </script>
+    <%}%>
 </body>
 </html>

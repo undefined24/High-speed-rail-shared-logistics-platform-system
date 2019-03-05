@@ -1,6 +1,8 @@
 package com.undefined24.ssm.controller;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -30,10 +32,37 @@ public class UserController {
 	UserService userService;
 	
 	private User current_user;
+	private String trainnumber;
+	private int rec_id = 0;
+	private int arriveID = 0;
 	private boolean have_user = false;
 	private boolean same_name = false;
 	private boolean same_number = false;
 	
+	public int getArriveID() {
+		return arriveID;
+	}
+
+	public void setArriveID(int arriveID) {
+		this.arriveID = arriveID;
+	}
+
+	public String getTrainnumber() {
+		return trainnumber;
+	}
+
+	public void setTrainnumber(String trainnumber) {
+		this.trainnumber = trainnumber;
+	}
+
+	public int getRec_id() {
+		return rec_id;
+	}
+
+	public void setRec_id(int rec_id) {
+		this.rec_id = rec_id;
+	}
+
 	public boolean isSame_number() {
 		return same_number;
 	}
@@ -142,6 +171,7 @@ public class UserController {
 		Train train = new Train();
 		train.setStartpoint(startpoint);
 		train.setTrainnumber(trainnumber);
+		this.setTrainnumber(trainnumber);
 		train.setTraintime(traintime);
 		train.setArrivepoint(arrivepoint);
 		List<Bill> ablegoodslist = userService.receiveGoods(train);
@@ -161,7 +191,42 @@ public class UserController {
 		}
 		return ablegoodslist;
 	}
-			
+	
+	/*
+	 * 前往确认接件
+	 */
+	@RequestMapping(value="/recConfirm",method=RequestMethod.GET)
+	public void recConfirm(@RequestParam("id") int id) {
+		this.setRec_id(id);
+		System.out.println(id);
+//		this.setTrainnumber(trainnumber);
+	}
+	
+	/*
+	 * 确认接件confirm
+	 */
+	@RequestMapping(value="/confirm",method=RequestMethod.GET)
+	public ModelAndView confirm(HttpServletRequest req) {
+		ModelAndView mv = new ModelAndView();
+		Bill bill = new Bill();
+		bill.setTrackingID(this.getRec_id());
+		bill.setTrainnumber(this.getTrainnumber());
+		bill.setAcceptUserID(this.getCurrent_user().getUserID());
+		System.out.println(bill);
+		try {
+			int result=userService.changeBill(bill);
+			if(result==0) {
+				req.setAttribute("confirm-msg", "接单失败，请重试");
+			}else {
+				req.setAttribute("confirm-msg", "接单成功");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		mv.setViewName("receiver");
+		return mv;
+	}
+	
 	/*
 	 * 前往寄件页面sender.jsp
 	 */
@@ -242,6 +307,50 @@ public class UserController {
 			mv.addObject("user",this.getCurrent_user());
 			mv.setViewName("user_center");
 		}
+		return mv;
+	}
+	
+	/*
+	 * 去确认送达
+	 */
+	@RequestMapping(value="/gotoArriveConfirm",method=RequestMethod.POST,produces="text/plain;charset=utf-8")
+	@ResponseBody
+	public void gotoArriveConfirm(@RequestParam("trackingID") int trackingID) {
+		this.setArriveID(trackingID);
+		System.out.println(trackingID);
+	}
+	/*
+	 * 确认送达
+	 */
+	@RequestMapping(value="/arriveConfirm",method=RequestMethod.GET)
+	public ModelAndView confirm1(HttpServletRequest req) {
+		ModelAndView mv = new ModelAndView();
+		Date date = new Date();
+		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		System.out.println(dateFormat.format(date));
+		Bill bill = new Bill();
+		bill.setTrackingID(this.getArriveID());
+		bill.setCompletetime(dateFormat.format(date));
+		Receiver rec = new Receiver();
+		rec.setTrackingID(this.getArriveID());
+		Receiver receiver = userService.selectReceiver(rec);
+		bill.setArriveaddress(receiver.getAddress());
+		try {
+			int result = userService.arriveConfirm(bill);
+			if(result==0) {
+				req.setAttribute("confirm-msg","确认失败");
+			}else {
+				req.setAttribute("confirm-msg","确认成功");
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
+		List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
+		mv.addObject("sendlist", sendlist);
+		mv.addObject("acceptlist", acceptlist);
+		mv.addObject("user",this.getCurrent_user());
+		mv.setViewName("user_center");
 		return mv;
 	}
 	

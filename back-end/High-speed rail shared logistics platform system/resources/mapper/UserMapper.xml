@@ -74,10 +74,29 @@ select * from receiver_info where trackingID=#{trackingID} and address REGEXP #{
 </select>
 
 <select id="receiveGoods" resultMap="sendResult" parameterType="Train">
-select * from bill where sendaddress REGEXP #{startpoint} and complete=false
+select * from bill where sendaddress REGEXP #{startpoint} and complete=false and acceptUserID is null
 </select>
 
 <select id="searchBill" resultMap="sendResult" parameterType="string">
 select * from bill where trackingID REGEXP #{search_str}
 </select>
+
+<update id="changeBill" parameterType="bill" >
+update bill
+<set>
+<if test="acceptUserID!=null and acceptUserID!=''">acceptUserID=#{acceptUserID},</if>
+<if test="trainnumber!=null and trainnumber!=''">trainnumber=#{trainnumber}</if>
+</set>
+where trackingID = #{trackingID}
+</update>
+
+<update id="arriveConfirm" parameterType="bill" >
+update bill
+<set>
+complete=true,
+completetime=#{completetime},
+arriveaddress=#{arriveaddress}
+</set>
+where trackingID = #{trackingID}
+</update>
 </mapper>

@@ -102,4 +102,16 @@ public class UserService {
 	public Receiver selectReceiver(Receiver receiver){
 		return userMapper.selectReceiver(receiver);
 	}
+	
+	//寻找收货人信息
+	@Transactional
+	public int changeBill(Bill bill){
+		return userMapper.changeBill(bill);
+	}
+	
+	//确认送达
+	@Transactional
+	public int arriveConfirm(Bill bill){
+		return userMapper.arriveConfirm(bill);
+	}
 }
