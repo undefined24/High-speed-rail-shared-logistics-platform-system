@@ -1,9 +1,7 @@
-package jisuapi.train;
+package com.undefined24.ssm.util;
 
-import java.awt.List;
 import java.util.ArrayList;
 
-import HttpUtil.HttpUtil;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 

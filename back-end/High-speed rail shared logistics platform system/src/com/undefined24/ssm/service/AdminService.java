@@ -143,8 +143,8 @@ public class AdminService {
 	
 	//删除收货人
 	@Transactional
-	public int deleteReceiver(Receiver rec){
-		return adminMapper.deleteReceiver(rec);
+	public int deleteReceiver(Receiver receiver){
+		return adminMapper.deleteReceiver(receiver);
 	}
 	
 	//删除订单

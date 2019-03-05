@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.undefined24.ssm.service.UserService;
+import com.undefined24.ssm.util.Line;
 import com.undefined24.ssm.vo.Bill;
 import com.undefined24.ssm.vo.Goods;
 import com.undefined24.ssm.vo.Receiver;
@@ -168,6 +169,13 @@ public class UserController {
 		if(startpoint==""||trainnumber==""||traintime==""||arrivepoint=="") {
 			return null;
 		}
+		List<String> poslist = Line.Get(trainnumber);
+		System.out.println(poslist);
+		System.out.println(startpoint);
+		System.out.println(arrivepoint);
+		if(poslist.contains(startpoint)==false||poslist.contains(arrivepoint)==false) {
+			return null;
+		}
 		Train train = new Train();
 		train.setStartpoint(startpoint);
 		train.setTrainnumber(trainnumber);
@@ -184,7 +192,7 @@ public class UserController {
 				System.out.println(receiver);
 				Receiver rec = userService.selectReceiver(receiver);
 				ablegoodslist.get(i).setReceiver(rec);
-				if(ablegoodslist.get(i).getReceiver()==null) {
+				if(ablegoodslist.get(i).getReceiver()==null||ablegoodslist.get(i).getGiveUserID()==this.getCurrent_user().getUserID()) {
 					ablegoodslist.remove(i);
 				}
 			}
@@ -199,7 +207,6 @@ public class UserController {
 	public void recConfirm(@RequestParam("id") int id) {
 		this.setRec_id(id);
 		System.out.println(id);
-//		this.setTrainnumber(trainnumber);
 	}
 	
 	/*
@@ -251,6 +258,7 @@ public class UserController {
 			@RequestParam("receivername") String receivername,
 			@RequestParam("receiverphone") String receiverphone,
 			@RequestParam("receiveraddress") String receiveraddress,
+			@RequestParam("startaddress") String startaddress,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		if(this.isHave_user()==false) {
@@ -264,7 +272,7 @@ public class UserController {
 			goods.setWeight(weight);
 			bill.setGiveUserID(this.getCurrent_user().getUserID());
 			bill.setArriveaddress(receiveraddress);
-			bill.setSendaddress(this.getCurrent_user().getUseraddress());
+			bill.setSendaddress(startaddress);
 			rec.setName(receivername);
 			rec.setPhone(receiverphone);
 			rec.setAddress(receiveraddress);
@@ -319,6 +327,7 @@ public class UserController {
 		this.setArriveID(trackingID);
 		System.out.println(trackingID);
 	}
+	
 	/*
 	 * 确认送达
 	 */

@@ -35,7 +35,7 @@ public interface AdminMapper {
 	public Goods checkGoods(String name);
 	public int deleteGoods(Goods goods);
 	public int deleteBill(Bill bill);
-	public int deleteReceiver(Receiver rec);
+	public int deleteReceiver(Receiver receiver);
 	public Goods showEditGoods(int trackingID);
 	public int editGoods(Goods goods);
 	public int editBill(Bill bill);

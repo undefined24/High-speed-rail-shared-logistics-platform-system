@@ -1,4 +1,4 @@
-package HttpUtil;
+package com.undefined24.ssm.util;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;

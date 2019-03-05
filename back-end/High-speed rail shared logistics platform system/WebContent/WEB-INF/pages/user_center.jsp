@@ -137,6 +137,9 @@
 							<td>否</td>
 							</c:if>
 							<td>${send.completetime}</td>
+							<c:if test="${send.completetime==null}">
+							<td><span data-toggle="modal" data-target="#goods_delete" onclick="arrive(${send.trackingID})" >确认送达</span></td>
+							</c:if>
 						</tr>
 						</c:forEach>
 						</tbody>
@@ -171,7 +174,6 @@
 							<td>${accept.cost}</td>
 							<c:if test="${accept.complete==false}">
 							<td>否</td>
-							<td><span data-toggle="modal" data-target="#goods_delete" onclick="arrive(${accept.trackingID})" >确认送达</span></td>
 							</c:if>
 							<c:if test="${accept.complete==true}">
 							<td>是</td>

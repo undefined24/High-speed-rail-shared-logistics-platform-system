@@ -364,6 +364,7 @@ public class AdminController {
 			List<Goods> goodslist = adminService.goodsManage();
 			PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
 			mv.addObject("goodslist",page);
+			mv.addObject("page","admingoods");
 			mv.addObject("login_admin",this.getCurrent_admin());
 			mv.setViewName("admin_goods");
 		}
@@ -400,7 +401,7 @@ public class AdminController {
 	@ResponseBody
 	public void gotoDeleteGoods(@RequestParam("trackingID") String trackingID) {
 		System.out.println(trackingID);
-		this.setEdit_trackdingID(Integer.parseInt(trackingID));
+		this.setDelete_trackingID(Integer.parseInt(trackingID));
 	}
 	
 	/*
@@ -417,13 +418,13 @@ public class AdminController {
 		delete_bill.setTrackingID(this.getDelete_trackingID());
 		delete_rec.setTrackingID(this.getDelete_trackingID());
 		try {
-			int result_1 = adminService.deleteGoods(delete_goods);
 			int result_2 = adminService.deleteBill(delete_bill);
+			int result_1 = adminService.deleteGoods(delete_goods);
 			int result_3 = adminService.deleteReceiver(delete_rec);
-			if(result_1==0||result_2==0||result_3==0) {
+			if(result_3==0||result_1==0||result_2==0) {
 				req.setAttribute("deletegoods-msg", "删除失败");
 			}else { 
-				//req.setAttribute("deletegoods-msg", "删除成功");
+				req.setAttribute("deletegoods-msg", "删除成功");
 				System.out.println("删除成功");
 			}
 		}catch(Exception e) {
@@ -434,7 +435,7 @@ public class AdminController {
 		List<Goods> goodslist = adminService.goodsManage();
 		PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
 		mv.addObject("goodslist",page);
-		mv.addObject("page","admin_goods");
+		mv.addObject("page","admingoods");
 		mv.setViewName("admin_goods");
 		return mv;
 	}
@@ -508,7 +509,7 @@ public class AdminController {
 		List<Goods> goodslist = adminService.goodsManage();
 		PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
 		mv.addObject("goodslist",page);
-		mv.addObject("page","admin_goods");
+		mv.addObject("page","admingoods");
 		mv.setViewName("admin_goods");
 		return mv;
 	}

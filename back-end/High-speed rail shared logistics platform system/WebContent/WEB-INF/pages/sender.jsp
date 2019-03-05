@@ -92,6 +92,13 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="control-label col-md-2 col-md-offset-1" for="receiver_address">起始站点</label>
+					<div class="col-md-6">
+						<input type="text" onblur="checkReceiverAddress()" class="form-control" id="receiver_address" placeholder="请输入起始地址" name="startaddress" >
+						<div id="receiveradderss_prompt"></div>
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="receiver_name">收件人姓名</label>
 					<div class="col-md-6">
 						<input type="text" onblur="checkReceiverName()" class="form-control" id="receiver_name" placeholder="请输入收件人姓名" name="receivername">
@@ -106,7 +113,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-2 col-md-offset-1" for="receiver_address">收件人地址</label>
+					<label class="control-label col-md-2 col-md-offset-1" for="receiver_address">收件人站点</label>
 					<div class="col-md-6">
 						<input type="text" onblur="checkReceiverAddress()" class="form-control" id="receiver_address" placeholder="请输入寄件人地址" name="receiveraddress" >
 						<div id="receiveradderss_prompt"></div>
