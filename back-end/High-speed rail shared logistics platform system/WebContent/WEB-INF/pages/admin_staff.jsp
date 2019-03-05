@@ -71,8 +71,8 @@
             <td>${worker.workerposition}</td>
             <td>${worker.workersalary}</td>
             <td>${worker.workercheckcard}</td>
-            <td><span onclick="edit(${worker.workerID})" data-toggle="modal" data-target="#myModal">修改</span></td>
-            <td><span onclick="deleteworker(${worker.workerID})" data-toggle="modal" data-target="#staff_delete">删除</span></td>
+            <td><span onclick="edit(${worker.workerID})" data-toggle="modal" data-target="#myModal" class="change_button">修改</span></td>
+            <td><span onclick="deleteworker(${worker.workerID})" data-toggle="modal" data-target="#staff_delete" class="change_button">删除</span></td>
             </tr>
             </c:forEach>
             </tbody>

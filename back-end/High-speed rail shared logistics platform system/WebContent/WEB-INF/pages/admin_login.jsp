@@ -20,12 +20,12 @@
 			var adminpwd = document.getElementById("adminpwd").value;
 			
 			if (adminName == ""){
-				alert("请输入用户名！");
+				//alert("请输入用户名！");
 				return false;
 			}
 			
 			else if (adminpwd == ""){
-				alert("请输入密码！");
+				//alert("请输入密码！");
 				return false;
 			}
 			
@@ -50,7 +50,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2 col-md-offset-1" for="password">Password</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="adminpwd" id="adminpwd" placeholder="请输入密码">
+                                <input type="password" class="form-control" name="adminpwd" id="adminpwd" placeholder="请输入密码">
                             </div>
                         </div>
                         <div class="form-group">

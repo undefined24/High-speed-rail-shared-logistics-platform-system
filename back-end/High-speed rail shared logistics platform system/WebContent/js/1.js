@@ -135,10 +135,21 @@ function staff_editSub(){
 		return false;
 	}
 	else {
-		alert("提交成功！");
+		//alert("提交成功！");
 		return true;
 	}
 }
+
+
+function staff_editForm(){
+	if(checkStaffName() && checkStaffPos() && checkSalary() && checkCard()){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 
 function checkStaffName1(){
 	var staffName=document.getElementById("staff_name_1").value;
@@ -177,6 +188,7 @@ function checkStaffPos1(){
 	divStaffPos.innerHTML="";
 	return true;
 }
+
 
 function checkSalary1(){
 	var staffSalary=document.getElementById("salary_1").value;
@@ -268,10 +280,21 @@ function staff_addSub(){
 		return false;
 	}
 	else {
-		alert("提交成功！");
+		//alert("提交成功！");
 		return true;
 	}
 }
+
+
+function staff_addsubForm(){
+	if(checkStaffName1() && checkStaffPos1() && checkSalary1() && checkCard1()){
+		return true;
+	}
+	else{
+		return false;
+	}
+}
+
 
 function checkSenderid(){
 	var senderID=document.getElementById("sender_id").value;
@@ -450,6 +473,17 @@ function goods_editSub(){
 	}
 	
 }
+
+
+function goods_editForm(){
+	if(checkSenderid() && checkReceiverid() && checkWeight() && checkTrainnum() && checkFee()){
+		return true;
+	}
+	else{
+		return false;
+	}
+} 
+
 
 function checkSenderid1(){
 	var senderID=document.getElementById("sender_id_1").value;
@@ -763,6 +797,17 @@ function vip_editSub(){
 		return true;
 	}
 }
+
+
+function vip_editForm(){
+	if(checkVipID() && checkVipName() && checkPhoneNum() && checkPin() && checkAddress()){
+		return true;
+	}
+	else{
+		return false;
+	}
+} 
+
 
 function My_Order_Sub(){
 	orderNum = document.getElementById("order_num").value;

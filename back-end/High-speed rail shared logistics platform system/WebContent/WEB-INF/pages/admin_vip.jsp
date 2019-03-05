@@ -71,8 +71,8 @@
                 <td>${user.userphone}</td>
 				<td>${user.usernumber}</td>
 				<td>${user.useraddress}</td>
-				<td><span onclick="edit(${user.userID})" data-toggle="modal" data-target="#vip_edit">修改</span></td>
-                <td><span onclick="deleteuser(${user.userID})" data-toggle="modal" data-target="#vip_delete">删除</span></td>
+				<td><span onclick="edit(${user.userID})" data-toggle="modal" data-target="#vip_edit" class="change_button">修改</span></td>
+                <td><span onclick="deleteuser(${user.userID})" data-toggle="modal" data-target="#vip_delete" class="change_button">删除</span></td>
             </tr>
 			</c:forEach>
             </tbody>

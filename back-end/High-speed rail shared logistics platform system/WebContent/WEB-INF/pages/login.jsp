@@ -20,17 +20,19 @@
 			var password = document.getElementById("password").value;
 			
 			if (userName == ""){
-				alert("请输入用户名！");
+				//alert("请输入用户名！");
+				//document.getElementById("wrong").innerText = "请输入用户名！";
 				return false;
 			}
 			
 			else if (password == ""){
-				alert("请输入密码！");
+				//document.getElementById("wrong").innerText = "请输入密码！";
+				//alert("请输入密码！");
 				return false;
 			}
 			
 			else{
-				alert("提交成功！");
+				document.getElementById("wrong").innerText = "登陆成功";
 				return true;
 			}
 		}
@@ -42,7 +44,7 @@
             <div class="col-md-5">
                 <div id="login">
                     <form class="form-horizontal" name="logform" action="login" role="form" method="post">
-                    <span style="color:red;margin-left:45px"><%=request.getAttribute("login-msg")==null?"":request.getAttribute("login-msg") %></span>
+                    <span id = "wrong" style="color:red;margin-left:45px"><%=request.getAttribute("login-msg")==null?"":request.getAttribute("login-msg") %></span>
                         <div class="form-group">
                             <label class="control-label col-md-2 col-md-offset-1" for="name">Name</label>
                             <div class="col-md-6">
@@ -52,7 +54,7 @@
                         <div class="form-group">
                             <label class="control-label col-md-2 col-md-offset-1" for="password">Password</label>
                             <div class="col-md-6">
-                                <input type="text" class="form-control" name="userpwd" id="password" placeholder="请输入密码">
+                                <input type="password" class="form-control" name="userpwd" id="password" placeholder="请输入密码">
                             </div>
                         </div>
                         <div class="form-group">

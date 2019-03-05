@@ -88,8 +88,8 @@
 				<c:if test="${goods.bill.complete==true}">
 				<td>是</td>
 				</c:if>
-				<td><span data-toggle="modal" data-target="#goods_edit" onclick="edit(${goods.trackingID})" >修改</span></td>
-                <td><span data-toggle="modal" data-target="#goods_delete" onclick="deletegoods(${goods.trackingID})">删除</span></td>
+				<td><span data-toggle="modal" data-target="#goods_edit" onclick="edit(${goods.trackingID})" class="change_button">修改</span></td>
+                <td><span data-toggle="modal" data-target="#goods_delete" onclick="deletegoods(${goods.trackingID})" class="change_button">删除</span></td>
             </tr>
             </c:forEach>
             </tbody>

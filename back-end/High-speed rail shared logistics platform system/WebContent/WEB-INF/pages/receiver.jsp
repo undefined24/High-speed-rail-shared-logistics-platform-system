@@ -80,7 +80,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="start_time">高铁出发时间</label>
 					<div class="col-md-6">
-						<input class="form-control col-md-4" onblur="checkStartTime()" name="traintime" placeholder="请输入高铁出发时间" id="start_time" value="">
+						<input class="form-control col-md-4" name="traintime" placeholder="请输入高铁出发时间" id="start_time" value="">
 						<div id="starttime_prompt"></div>
 					</div>
 				</div>
@@ -94,7 +94,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1"> </label>
 					<div class="col-md-6">
-						<button type="button" class="btn btn-default col-md-12 " onClick="getList();mySub2()">查询</button>
+						<button type="button" class="btn btn-default col-md-12 " onClick="getList()">查询</button>
 					</div>
 				</div>
             </form>
@@ -139,6 +139,7 @@
      var count = 0;
      var last_length = 0;
 	function getList(){
+		if(on_submit2() == false) return;
 		$.ajax({
 			type : "post",
 			url : "receive",

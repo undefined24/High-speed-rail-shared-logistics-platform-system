@@ -167,7 +167,7 @@ function checkStartTime(){
 
 function on_submit2(){
 	if(checkStartPos() && checkArrivePos() && checkTrainNum() && checkStartTime()){
-		alert("查询成功！");
+		//alert("查询成功！");
 		return true;
 	}
 	else{
