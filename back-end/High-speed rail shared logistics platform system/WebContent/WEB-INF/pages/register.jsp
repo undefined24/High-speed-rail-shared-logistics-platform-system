@@ -26,7 +26,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="name">用户名</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="nickname" id="name" placeholder="请输入3-10位用户名" onblur="checkUser();checkName2()">
+                        <input type="text" class="form-control" name="nickname" id="name" placeholder="请输入3-10位用户名" onblur="checkUser()">
                     	<span id="isCan" style="color: red;"></span>
                     	<div id="name_prompt"></div>
 					</div>
@@ -73,7 +73,7 @@
 				<div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="pin">身份证号</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="usernumber" id="pin" placeholder="请输入身份证号" onblur="checkNumber();checkPin2()">
+                        <input type="text" class="form-control" name="usernumber" id="pin" placeholder="请输入身份证号" onblur="checkNumber()">
                         <div id="pin_prompt"></div>
                     </div>
                     
@@ -105,6 +105,7 @@
     <%}%>	
     <script type="text/javascript">
     function checkUser(){
+    	if(!checkName2()) return;
     	$.ajax({
     		type: "post",
     		url: "checkuser",
@@ -120,6 +121,7 @@
     	});
     }
     function checkNumber(){
+    	if(!checkPin2()) return;
     	$.ajax({
     		type: "post",
     		url: "checknumber",

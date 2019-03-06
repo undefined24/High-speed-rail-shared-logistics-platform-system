@@ -23,16 +23,22 @@ function on_submit(){
 
 //手机号码验证
 function  checkTel(){
-	var tel1=document.getElementById("tel").value;
-	var DivTelId=document.getElementById("number_prompt");
-	DivTelId.innerHTML="";
-	var reg=/^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/;
-	if(reg.test(tel1)==false){
-		tel.value="";
-		DivTelId.innerHTML="手机号输入错误，请重新输入";
+	var phoneNum = document.getElementById("tel").value;
+	var divPhoneNum=document.getElementById("number_prompt");
+	
+	var reg_phone = /^1\d{10}$/
+	divPhoneNum.innerHTML="";
+	if (phoneNum == ""){
+		tel.value = "";
+		divPhoneNum.innerHTML = "用户电话号码不能为空！"
 		return false;
 	}
-	DivTelId.innerHTML="";
+	else if (!reg_phone.test(phoneNum)){
+		tel.value = "";
+		divPhoneNum.innerHTML = "用户电话号码格式错误！"
+		return false;
+	}
+	divPhoneNum.innerHTML="";
 	return true;
 }
 
@@ -41,7 +47,7 @@ function checkName(){
 	var userName=document.getElementById("name").value;
 	var divNameId=document.getElementById("name_prompt");
 	divNameId.innerHTML="";
-	if(userName.length<3 || userName.length>6){
+	if(userName.length<3 || userName.length>10){
 		name.value="";
 		divNameId.innerHTML="用户名格式不正确，请重新输入";
 		return false;
@@ -72,16 +78,69 @@ function checkPin(){
 }
 
 //密码
-function checkPwd(){
-	var pwd=document.getElementById("password").value;
-	var divPwdId=document.getElementById("pwd_prompt");
-	divPwdId.innerHTML="";
-	if(pwd.length < 6){
-		password.value="";
-		divPwdId.innerHTML="密码格式不正确，请重新输入";
+
+function CheckPassowrdStrength(){
+	var patrn=/^(\w){6,20}$/;
+	var Password = document.getElementById("password").value;
+	var divPassword=document.getElementById("pwd_prompt");
+	
+	divPassword.innerHTML="";
+	if (Password == ""){
+		password.value = "";
+		divPassword.innerHTML = "用户密码不能为空！"
 		return false;
 	}
-	divPwdId.innerHTML="";
+	else if (!patrn.test(Password)){
+		password.value = "";
+		divPassword.innerHTML = "用户密码要为6到20位由数字或字母组成！"
+		return false;
+	}
+	divPassword.innerHTML="";
+	return true;
+}
+
+function CheckPassowrdStrength2(){
+	var patrn=/^(\w){6,20}$/;  
+	var Password = document.getElementById("password_1").value;
+	var Password1 = document.getElementById("password").value;
+	var divPassword=document.getElementById("pas_prompt1");
+	
+	divPassword.innerHTML="";
+	if (Password == ""){
+		password_1.value = "";
+		divPassword.innerHTML = "用户密码不能为空！"
+		return false;
+	}
+	else if (!patrn.test(Password)){
+		password_1.value = "";
+		divPassword.innerHTML = "用户密码要为6到20位由数字或字母组成！"
+		return false;
+	}
+	else if(Password != Password1){
+		password_1.value = "";
+		divPassword.innerHTML = "前后两次密码不一致"
+		return false;
+	}
+	divPassword.innerHTML="";
+	return true;
+}
+
+function checkAddress2(){
+	var phoneNum = document.getElementById("address").value;
+	var divPhoneNum=document.getElementById("address_prompt");
+	
+	divPhoneNum.innerHTML="";
+	if (phoneNum == ""){
+		address.value = "";
+		divPhoneNum.innerHTML = "用户地址不能为空！"
+		return false;
+	}
+	else if (phoneNum.length > 20){
+		address.value = "";
+		divPhoneNum.innerHTML = "用户地址不能大于20位！"
+		return false;
+	}
+	divPhoneNum.innerHTML="";
 	return true;
 }
 

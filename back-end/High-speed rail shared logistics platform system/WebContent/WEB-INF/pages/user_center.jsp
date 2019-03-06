@@ -65,14 +65,15 @@
                     <div class="form-group">
                         <label class="control-label col-md-2" for="password">密码</label>
                         <div class="col-md-6">
-                            <input type="password" onblur="checkPwd()" class="form-control" id="password" placeholder="请输入密码(不少于6位)" name="userpwd" value="${user.userpwd}">
+                            <input type="password" onblur="CheckPassowrdStrength()" class="form-control" id="password" placeholder="请输入密码(不少于6位)" name="userpwd" value="${user.userpwd}">
                             <div id="pwd_prompt"></div>
 						</div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-2" for="password_confirm">确认密码</label>
                         <div class="col-md-6">
-                            <input type="password" class="form-control" id="password_1" placeholder="请再次输入密码" name="re_userpwd" value="">
+                            <input type="password" class="form-control" id="password_1" placeholder="请再次输入密码" name="re_userpwd" value="" onblur="CheckPassowrdStrength2()">
+                        	<div id="pas_prompt1"></div>
                         </div>
                     </div>
 					<div class="form-group">
@@ -85,7 +86,8 @@
 					 <div class="form-group">
                         <label class="control-label col-md-2" for="address">常用住址</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="address" placeholder="请输入常用住址" name="useraddress" value="${user.useraddress }">
+                            <input type="text" class="form-control" id="address" placeholder="请输入常用住址" name="useraddress" value="${user.useraddress } onblur="checkAddress2()">
+                        	<div id="address_prompt"></div>
                         </div>
                     </div>
                     <div class="form-group">

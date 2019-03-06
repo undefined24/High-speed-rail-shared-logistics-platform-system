@@ -820,7 +820,7 @@ function checkName2(){
 	var userName=document.getElementById("name").value;
 	var divNameId=document.getElementById("name_prompt");
 	divNameId.innerHTML="";
-	if(userName.length<3 || userName.length>6){
+	if(userName.length<3 || userName.length>10){
 		name.value="";
 		divNameId.innerHTML="用户名格式不正确，请重新输入";
 		return false;
@@ -855,12 +855,12 @@ function CheckPassowrdStrength(){
 	var divPassword=document.getElementById("pas_prompt");
 	
 	divPassword.innerHTML="";
-	if (phoneNum == ""){
+	if (Password == ""){
 		password.value = "";
 		divPassword.innerHTML = "用户密码不能为空！"
 		return false;
 	}
-	else if (!reg_phone.test(phoneNum)){
+	else if (!patrn.test(Password)){
 		password.value = "";
 		divPassword.innerHTML = "用户密码要为6到20位由数字或字母组成！"
 		return false;
@@ -876,12 +876,12 @@ function CheckPassowrdStrength2(){
 	var divPassword=document.getElementById("pas_prompt1");
 	
 	divPassword.innerHTML="";
-	if (phoneNum == ""){
+	if (Password == ""){
 		password_1.value = "";
 		divPassword.innerHTML = "用户密码不能为空！"
 		return false;
 	}
-	else if (!reg_phone.test(phoneNum)){
+	else if (!patrn.test(Password)){
 		password_1.value = "";
 		divPassword.innerHTML = "用户密码要为6到20位由数字或字母组成！"
 		return false;
