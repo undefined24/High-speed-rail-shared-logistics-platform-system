@@ -24,8 +24,7 @@
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container-fluid container">
 			<div id="nav" class="navbar-header" style="height: 70px;">
-	<!--            <a href="#"><img src="image/logo.png"  style="padding: 10px;"/></a>-->
-				<img src="image/logo.jpg" style="height: 100%" >
+				<img src="image/my_logo.jpg" style="padding: 12px;height: 100%" >
 			</div>
 			<div>
 				<ul class="nav navbar-nav ">
@@ -80,7 +79,7 @@
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="start_time">高铁出发时间</label>
 					<div class="col-md-6">
-						<input class="form-control col-md-4" name="traintime" placeholder="请输入高铁出发时间" id="start_time" value="">
+						<input  readonly="readonly" class="form-control col-md-4" name="traintime" placeholder="请输入高铁出发时间" id="start_time" value="">
 						<div id="starttime_prompt" style="color:red"></div>
 					</div>
 				</div>

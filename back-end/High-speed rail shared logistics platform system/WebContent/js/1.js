@@ -955,6 +955,24 @@ function checkAddress2(){
 	return true;
 }
 
+function checkCard2(){
+	var cardNum = document.getElementById("card").value;
+	var divCardNum=document.getElementById("card_prompt");
+	var pattern = /^([1-9]{1})(\d{14}|\d{18})$/;
+	divCardNum.innerHTML="";
+	if (cardNum == ""){
+		card.value = "";
+		divCardNum.innerHTML = "用户银行卡号不能为空！"
+		return false;
+	}
+	else if (!pattern.test(cardNum)){
+		card.value = "";
+		divCardNum.innerHTML = "用户银行卡号应为15或19位整数！"
+		return false;
+	}
+	divPhoneNum.innerHTML="";
+	return true;
+}
 
 
 function showHideCode(){

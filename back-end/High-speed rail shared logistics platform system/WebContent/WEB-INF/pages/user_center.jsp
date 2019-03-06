@@ -83,6 +83,13 @@
 							<div id="pin_prompt" style="color:red"></div>
                         </div>
                     </div>
+					<div class="form-group">
+	                    <label class="control-label col-md-2" for="card">银行卡号</label>
+	                    <div class="col-md-6">
+	                        <input type="text" class="form-control" name="card" id="card" placeholder="请输入银行卡号，用于转账" onblur="checkCard2()">
+	                    	<div id="card_prompt" style="color:red"></div>
+	                    </div>
+	                </div>
 					 <div class="form-group">
                         <label class="control-label col-md-2" for="address">常用住址</label>
                         <div class="col-md-6">

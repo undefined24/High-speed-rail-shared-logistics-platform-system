@@ -20,7 +20,7 @@
 		<div class="container-fluid container">
 			<div id="nav" class="navbar-header" style="height: 70px;">
 	<!--            <a href="#"><img src="image/logo.png"  style="padding: 10px;"/></a>-->
-				<img src="image/logo.jpg" style="height: 100%" >
+				<img src="image/my_logo.jpg" style="padding: 12px;height: 100%" >
 			</div>
 			<div>
 				<ul class="nav navbar-nav ">
@@ -113,9 +113,9 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-2 col-md-offset-1" for="receiver_address">收件人高铁站点</label>
+					<label class="control-label col-md-2 col-md-offset-1" for="receiver_address">收件高铁站点</label>
 					<div class="col-md-6">
-						<input type="text" onblur="checkReceiverAddress2()" class="form-control" id="receiver_address2" placeholder="请输入收件人高铁站点" name="receiveraddress" >
+						<input type="text" onblur="checkReceiverAddress2()" class="form-control" id="receiver_address2" placeholder="请输入收件高铁站点" name="receiveraddress" >
 						<div id="receiveradderss_prompt2" style="color:red"></div>
 					</div>
 				</div>

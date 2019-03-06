@@ -20,8 +20,7 @@
 <nav class="navbar navbar-default" role="navigation">
     <div class="container-fluid container">
         <div id="nav" class="navbar-header" style="height: 70px;">
-<!--            <a href="#"><img src="image/logo.png"  style="padding: 10px;"/></a>-->
-            <img src="image/logo.jpg" style="height: 100%" >
+            <img src="image/my_logo.jpg" style=" padding: 12px;height: 100%" >
         </div>
         <div>
             <ul class="nav navbar-nav ">
@@ -55,13 +54,13 @@
             <!-- 轮播（Carousel）项目 -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="image/test1.jpg" alt="First slide">
+                    <img src="image/my1.jpg" alt="First slide">
                 </div>
                 <div class="item">
-                    <img src="image/test2.jpg" alt="Second slide">
+                    <img src="image/my2.png" alt="Second slide">
                 </div>
 				<div class="item">
-                    <img src="image/test3.jpg" alt="Second slide">
+                    <img src="image/my3.jpg" alt="Second slide">
                 </div>
             </div>
             <!-- 轮播（Carousel）导航 -->
