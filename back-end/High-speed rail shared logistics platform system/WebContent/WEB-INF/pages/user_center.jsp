@@ -79,14 +79,14 @@
 					<div class="form-group">
                         <label class="control-label col-md-2" for="pin">身份证号</label>
                         <div class="col-md-6">
-                            <input type="text" onblur="checkPin()" class="form-control" id="pin" placeholder="请输入身份证号" name="usernumber" value="${user.usernumber }">
+                            <input type="text" onblur="checkPin()" class="form-control" id="pin" placeholder="请输入身份证号" name="usernumber" value="${user.usernumber}">
 							<div id="pin_prompt"></div>
                         </div>
                     </div>
 					 <div class="form-group">
                         <label class="control-label col-md-2" for="address">常用住址</label>
                         <div class="col-md-6">
-                            <input type="text" class="form-control" id="address" placeholder="请输入常用住址" name="useraddress" value="${user.useraddress } onblur="checkAddress2()">
+                            <input type="text" class="form-control" id="address" placeholder="请输入常用住址" name="useraddress"  onblur="checkAddress2()" value="${user.useraddress }">
                         	<div id="address_prompt"></div>
                         </div>
                     </div>
@@ -141,6 +141,9 @@
 							<td>${send.completetime}</td>
 							<c:if test="${send.completetime==null}">
 							<td><span data-toggle="modal" data-target="#goods_delete" onclick="arrive(${send.trackingID})" >确认送达</span></td>
+							</c:if>
+							<c:if test="${send.completetime!=null}">
+							<td></td>
 							</c:if>
 						</tr>
 						</c:forEach>
