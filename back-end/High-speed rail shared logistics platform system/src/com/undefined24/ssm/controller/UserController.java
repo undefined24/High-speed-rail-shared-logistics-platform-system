@@ -320,7 +320,6 @@ public class UserController {
 	@ResponseBody
 	public void gotoArriveConfirm(@RequestParam("trackingID") int trackingID) {
 		this.setArriveID(trackingID);
-		System.out.println(trackingID);
 	}
 	
 	/*
@@ -339,7 +338,6 @@ public class UserController {
 		Receiver rec = new Receiver();
 		rec.setTrackingID(this.getArriveID());
 		Receiver receiver = userService.selectReceiverX(rec);
-		System.out.println("???"+rec);
 		bill.setArriveaddress(receiver.getAddress());
 		try {
 			int result = userService.arriveConfirm(bill);
@@ -397,10 +395,10 @@ public class UserController {
 		user1 = userService.checkUserNumber(usernumber);
 		if(user1!=null) {
 			msg= "此身份证已被使用";
-			this.setSame_name(true);
+			this.setSame_number(true);
 		}else {
 			msg= "此身份证可用";
-			this.setSame_name(false);
+			this.setSame_number(false);
 		}
 		return msg;
 	}
@@ -564,19 +562,25 @@ public class UserController {
 				user.setUserpwd(userpwd);
 				user.setUsernumber(usernumber);
 				user.setUseraddress(useraddress);
-				try {
-					int result = userService.ChangeProfile(user);
-					if(result==0) {
-						req.setAttribute("profile-msg", "个人资料修改失败");
-					}else {
-						session = req.getSession();
-						session.setAttribute("current_user", user);
-						mv.addObject("user",user);
-						req.setAttribute("profile-msg", "修改成功");
-						//显示资料
+				System.out.println(this.isSame_name());
+				if(this.isSame_name()==true) {
+					req.setAttribute("profile-msg","用户名已被使用，请更改");
+					mv.addObject("user",current_user);
+				}else {
+					try {
+						int result = userService.ChangeProfile(user);
+						if(result==0) {
+							req.setAttribute("profile-msg", "个人资料修改失败");
+						}else {
+							session = req.getSession();
+							session.setAttribute("current_user", user);
+							mv.addObject("user",user);
+							req.setAttribute("profile-msg", "修改成功");
+							//显示资料
+						}
+					}catch(Exception e) {
+						req.setAttribute("profile-msg", "系统异常请重试");
 					}
-				}catch(Exception e) {
-					req.setAttribute("profile-msg", "系统异常请重试");
 				}
 			}
 			List<Bill> sendlist = userService.sendGoods(current_user);

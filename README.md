@@ -40,11 +40,8 @@ Q：
 
 Bug:
 
-+ **确认送达应放在寄件那里，要调整位置**(已调整，待测试)
 + 接件选择日期如果不选会变成1899年
-+ 前端页面显示接件统一称为接件 如图需要修改：![image-20190306001942582](/Users/zhongteng/Library/Application Support/typora-user-images/image-20190306001942582.png)
-+ js提示字改成红色
-+ sender起始站点css js需要修改
++ api找的是火车不是高铁
 
 
 

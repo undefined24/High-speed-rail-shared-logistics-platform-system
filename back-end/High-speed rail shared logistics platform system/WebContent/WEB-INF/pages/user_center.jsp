@@ -50,7 +50,7 @@
                      <div class="form-group"> 
                         <label class="control-label col-md-2" for="name">用户名</label>
                         <div class="col-md-6">
-                            <input type="text" onblur="checkName()" class="form-control" id="name" placeholder="请输入3-6位用户名" name="nickname" value="${user.nickname }">
+                            <input type="text" onblur="checkUser();checkName()" class="form-control" id="name" placeholder="请输入3-10位用户名" name="nickname" value="${user.nickname }">
                             <div id="name_prompt" style="color:red"></div>
 						</div>
                     </div>
@@ -258,6 +258,21 @@ function arrive(id){
 		url: "gotoArriveConfirm",
 		data: {
 			"trackingID": id
+		}
+	});
+}
+function checkUser(){
+	$.ajax({
+		type: "post",
+		url: "checkuser",
+		data: {
+			"nickname": $("#name").val()
+		},
+		success: function(data){
+			$("#name_prompt").text(data);
+		},
+		error: function(data){
+			console.log('error');
 		}
 	});
 }
