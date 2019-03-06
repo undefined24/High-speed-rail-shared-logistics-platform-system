@@ -51,14 +51,14 @@
                         <label class="control-label col-md-2" for="name">用户名</label>
                         <div class="col-md-6">
                             <input type="text" onblur="checkName()" class="form-control" id="name" placeholder="请输入3-6位用户名" name="nickname" value="${user.nickname }">
-                            <div id="name_prompt"></div>
+                            <div id="name_prompt" style="color:red"></div>
 						</div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-2" for="tel">手机号</label>
                         <div class="col-md-6">
                             <input type="text" onblur="checkTel()" class="form-control" id="tel" placeholder="请输入手机号" name="userphone" value="${user.userphone }">
-                            <div id="number_prompt"></div>
+                            <div id="number_prompt" style="color:red"></div>
 						</div>
                     </div>
                     
@@ -66,28 +66,28 @@
                         <label class="control-label col-md-2" for="password">密码</label>
                         <div class="col-md-6">
                             <input type="password" onblur="CheckPassowrdStrength()" class="form-control" id="password" placeholder="请输入密码(不少于6位)" name="userpwd" value="${user.userpwd}">
-                            <div id="pwd_prompt"></div>
+                            <div id="pwd_prompt" style="color:red"></div>
 						</div>
                     </div>
                     <div class="form-group">
                         <label class="control-label col-md-2" for="password_confirm">确认密码</label>
                         <div class="col-md-6">
                             <input type="password" class="form-control" id="password_1" placeholder="请再次输入密码" name="re_userpwd" value="" onblur="CheckPassowrdStrength2()">
-                        	<div id="pas_prompt1"></div>
+                        	<div id="pas_prompt1" style="color:red"></div>
                         </div>
                     </div>
 					<div class="form-group">
                         <label class="control-label col-md-2" for="pin">身份证号</label>
                         <div class="col-md-6">
                             <input type="text" onblur="checkPin()" class="form-control" id="pin" placeholder="请输入身份证号" name="usernumber" value="${user.usernumber}">
-							<div id="pin_prompt"></div>
+							<div id="pin_prompt" style="color:red"></div>
                         </div>
                     </div>
 					 <div class="form-group">
                         <label class="control-label col-md-2" for="address">常用住址</label>
                         <div class="col-md-6">
                             <input type="text" class="form-control" id="address" placeholder="请输入常用住址" name="useraddress"  onblur="checkAddress2()" value="${user.useraddress }">
-                        	<div id="address_prompt"></div>
+                        	<div id="address_prompt" style="color:red"></div>
                         </div>
                     </div>
                     <div class="form-group">

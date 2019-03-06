@@ -67,28 +67,28 @@
 					<label class="control-label col-md-2 col-md-offset-1" for="start_pos">高铁出发站点</label>
 					<div class="col-md-6">
 						<input class="form-control col-md-4 disabled" onblur="checkStartPos()" name="startpoint" placeholder="请输入高铁出发站点" id="start_pos" value="">
-						<div id="startpos_prompt"></div>
+						<div id="startpos_prompt" style="color:red"></div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="train_num">车次</label>
 					<div class="col-md-6">
 						<input class="form-control col-md-4 disabled" onblur="checkTrainNum()" name="trainnumber" placeholder="请输入车次" id="train_num" value="">
-						<div id="trainnum_prompt"></div>
+						<div id="trainnum_prompt" style="color:red"></div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="start_time">高铁出发时间</label>
 					<div class="col-md-6">
 						<input class="form-control col-md-4" name="traintime" placeholder="请输入高铁出发时间" id="start_time" value="">
-						<div id="starttime_prompt"></div>
+						<div id="starttime_prompt" style="color:red"></div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="arrive_pos">高铁到达站点</label>
 					<div class="col-md-6">
 						<input class="form-control col-md-4" onblur="checkArrivePos()" name="arrivepoint" placeholder="请输入高铁到达站点" id="arrive_pos" value="">
-						<div id="arrivepos_prompt"></div>
+						<div id="arrivepos_prompt" style="color:red"></div>
 					</div>
 				</div>
 				<div class="form-group">

@@ -80,9 +80,10 @@ function checkPin(){
 //密码
 
 function CheckPassowrdStrength(){
-	var patrn=/^(\w){6,20}$/;
+	var patrn=/^([a-zA-Z0-9]|[.]){3,20}$/;
 	var Password = document.getElementById("password").value;
 	var divPassword=document.getElementById("pwd_prompt");
+	console.log(patrn.test("Dickdick20."));
 	
 	divPassword.innerHTML="";
 	if (Password == ""){
@@ -100,7 +101,7 @@ function CheckPassowrdStrength(){
 }
 
 function CheckPassowrdStrength2(){
-	var patrn=/^(\w){6,20}$/;  
+	var patrn=/^[a-zA-Z]{1}([a-zA-Z0-9]|[._]){4,19}$/; ;
 	var Password = document.getElementById("password_1").value;
 	var Password1 = document.getElementById("password").value;
 	var divPassword=document.getElementById("pas_prompt1");

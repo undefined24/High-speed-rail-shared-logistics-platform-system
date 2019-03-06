@@ -92,6 +92,19 @@ function checkReceiverAddress(){
 	return true;
 }
 
+function checkReceiverAddress2(){
+	var add=document.getElementById("receiver_address2").value;
+	var divAddId=document.getElementById("receiveradderss_prompt2");
+	divAddId.innerHTML="";
+	if(add==""){
+		receiver_address.value="";
+		divAddId.innerHTML="地址不能为空！";
+		return false;
+	}
+	divAddId.innerHTML="";
+	return true;
+}
+
 function on_submit1(){
 	if(checkName() && checkSenderName() && checkSenderTel() && checkSenderAddress() && checkReceiverName() && checkReceiverTel() && checkReceiverAddress()){
 		alert("提交成功！");

@@ -62,7 +62,7 @@
 					<label class="control-label col-md-2 col-md-offset-1" for="name">物品名称</label>
 					<div class="col-md-6">
 						<input type="text" onblur="checkName()" class="form-control" id="name" placeholder="请输入物品名称" name="name">
-						<div id="name_prompt"></div>
+						<div id="name_prompt" style="color:red"></div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -92,31 +92,31 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-2 col-md-offset-1" for="receiver_address">起始站点</label>
+					<label class="control-label col-md-2 col-md-offset-1" for="receiver_address">高铁起始站点</label>
 					<div class="col-md-6">
-						<input type="text" onblur="checkReceiverAddress()" class="form-control" id="receiver_address" placeholder="请输入起始站点" name="startaddress" >
-						<div id="receiveradderss_prompt"></div>
+						<input type="text" onblur="checkReceiverAddress()" class="form-control" id="receiver_address" placeholder="请输入高铁起始站点" name="startaddress" >
+						<div id="receiveradderss_prompt" style="color:red"></div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="receiver_name">收件人姓名</label>
 					<div class="col-md-6">
 						<input type="text" onblur="checkReceiverName()" class="form-control" id="receiver_name" placeholder="请输入收件人姓名" name="receivername">
-						<div id="receivername_prompt"></div>
+						<div id="receivername_prompt" style="color:red"></div>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-md-2 col-md-offset-1" for="receiver_tel">收件人手机号</label>
 					<div class="col-md-6">
 						<input type="text" onblur="checkReceiverTel()" class="form-control" id="receiver_tel" placeholder="请输入寄件人手机号" name="receiverphone">
-						<div id="receivernumber_prompt"></div>
+						<div id="receivernumber_prompt" style="color:red"></div>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-2 col-md-offset-1" for="receiver_address">收件人站点</label>
+					<label class="control-label col-md-2 col-md-offset-1" for="receiver_address">收件人高铁站点</label>
 					<div class="col-md-6">
-						<input type="text" onblur="checkReceiverAddress()" class="form-control" id="receiver_address" placeholder="请输入寄件人地址" name="receiveraddress" >
-						<div id="receiveradderss_prompt"></div>
+						<input type="text" onblur="checkReceiverAddress2()" class="form-control" id="receiver_address2" placeholder="请输入收件人高铁站点" name="receiveraddress" >
+						<div id="receiveradderss_prompt2" style="color:red"></div>
 					</div>
 				</div>
 				<div class="form-group">

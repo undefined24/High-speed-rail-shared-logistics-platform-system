@@ -17,7 +17,7 @@
 <body>
 	<div class="header">
 	<div class="back">
-        <button class="btn btn-default"><a href="#">回到首页</a></button>
+        <button class="btn btn-default"><a href="main">回到首页</a></button>
     </div>
 </div>	
     <div class="container">
@@ -28,7 +28,7 @@
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="nickname" id="name" placeholder="请输入3-10位用户名" onblur="checkUser()">
                     	<span id="isCan" style="color: red;"></span>
-                    	<div id="name_prompt"></div>
+                    	<div id="name_prompt" style="color:red"></div>
 					</div>
                 </div>
                 <div class="form-group">
@@ -45,14 +45,14 @@
                     <label class="control-label col-md-2 col-md-offset-1" for="tel">手机号</label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="userphone" id="tel" placeholder="请输入手机号" onblur="checkPhoneNum3()">
-						<div id="phone_prompt"></div>
+						<div id="phone_prompt" style="color:red"></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="password">密码</label>
                     <div class="col-md-6">
                         <input type="password" class="form-control" name="userpwd" id="password" placeholder="请输入密码" onblur="CheckPassowrdStrength()">
-                        <div id="pas_prompt"></div>
+                        <div id="pas_prompt" style="color:red"></div>
                     </div>
                     
                 </div>
@@ -60,21 +60,21 @@
                     <label class="control-label col-md-2 col-md-offset-1" for="password_1">确认密码</label>
                     <div class="col-md-6">
                         <input type="password" class="form-control" name="password_1" id="password_1" placeholder="请再次输入密码" onblur="CheckPassowrdStrength2()">
-                    	<div id="pas_prompt1"></div>
+                    	<div id="pas_prompt1" style="color:red"></div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="truename">真实姓名</label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="username" id="truename" placeholder="请输入真实姓名" onblur="checkTrueName()">
-                    	<div id="truename_prompt"></div>
+                    	<div id="truename_prompt" style="color:red"></div>
                     </div>
                 </div>
 				<div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="pin">身份证号</label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="usernumber" id="pin" placeholder="请输入身份证号" onblur="checkNumber()">
-                        <div id="pin_prompt"></div>
+                        <div id="pin_prompt" style="color:red"></div>
                     </div>
                     
                 </div>
@@ -82,7 +82,7 @@
                     <label class="control-label col-md-2 col-md-offset-1" for="address">常用住址</label>
                     <div class="col-md-6">
                         <input type="text" class="form-control" name="useraddress" id="address" placeholder="请输入常用住址" onblur="checkAddress2()">
-                    	<div id="address_prompt"></div>
+                    	<div id="address_prompt" style="color:red"></div>
                     </div>
                     
                 </div>
