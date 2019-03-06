@@ -7,19 +7,19 @@ import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.undefined24.ssm.service.AdminService;
@@ -31,17 +31,15 @@ import com.undefined24.ssm.vo.User;
 import com.undefined24.ssm.vo.Worker;
 
 @Controller
-@SessionAttributes(value={"adminname","adminpwd"})
+@SessionAttributes(value={"admin"})
 public class AdminController {
 
 	private int edit_worker_id;
 	private int delete_worker_id;
 	private int edit_user_id;
 	private int delete_user_id;
-	private Administrator current_admin;
 	private int delete_trackingID;
 	private int edit_trackdingID;
-	private boolean have_admin=false;
 	public int page_show = 6;
 	
 	
@@ -82,21 +80,6 @@ public class AdminController {
 	public void setEdit_user_id(int edit_user_id) {
 		this.edit_user_id = edit_user_id;
 	}
-	public boolean isHave_admin() {
-		return have_admin;
-	}
-
-	public void setHave_admin(boolean have_admin) {
-		this.have_admin = have_admin;
-	}
-
-	public Administrator getCurrent_admin() {
-		return current_admin;
-	}
-
-	public void setCurrent_admin(Administrator current_admin) {
-		this.current_admin = current_admin;
-	}
 	public int getEdit_worker_id() {
 		return edit_worker_id;
 	}
@@ -112,17 +95,19 @@ public class AdminController {
 	 * 前往登录页面
 	 */
 	@RequestMapping(value="/adminlogin",method=RequestMethod.GET)
-	public ModelAndView gotoLogin(@RequestParam(value="pn",defaultValue="1") int pn) {
+	public ModelAndView gotoLogin(@RequestParam(value="pn",defaultValue="1") int pn,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		PageHelper.startPage(pn, page_show);
+		Administrator admin = (Administrator) session.getAttribute("admin");
 		//如果没有登录
-		if(this.isHave_admin()==false) {
+		if(admin==null) {
 			mv.setViewName("admin_login");
 		}else {
 			List<Worker> workerlist = adminService.showWorker();
 			PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
 			mv.addObject("workerlist",page);
-			mv.addObject("login_admin",this.getCurrent_admin());
+			mv.addObject("login_admin",admin);
 			mv.setViewName("admin_staff");
 		}
 		return mv;	
@@ -135,7 +120,8 @@ public class AdminController {
 	public ModelAndView Login(@RequestParam(value="pn",defaultValue="1") int pn,
 			@RequestParam("adminname") String adminname,
 			@RequestParam("adminpwd") String adminpwd,
-			HttpServletRequest req) {
+			HttpServletRequest req,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		Administrator admin = new Administrator();
 		Administrator login_admin = null;
@@ -144,18 +130,14 @@ public class AdminController {
 		login_admin = adminService.adminLogin(admin);
 		if(login_admin==null) {
 			req.setAttribute("admin-login-msg", "用户名或密码错误");
-			this.setHave_admin(false);
-			this.setCurrent_admin(null);
 			mv.setViewName("admin_login");
 		}else {
-			this.setHave_admin(true);
-			this.setCurrent_admin(login_admin);
+			session = req.getSession();
+			session.setAttribute("admin", login_admin);
 			PageHelper.startPage(pn, page_show);
 			List<Worker> workerlist = adminService.showWorker();
 			PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
 			mv.addObject("workerlist", page);
-			mv.addObject("attr1",login_admin.getAdminname());
-			mv.addObject("attr2", login_admin.getAdminpwd());
 			mv.addObject("login_admin",login_admin);
 			mv.setViewName("admin_staff");
 		}
@@ -166,10 +148,9 @@ public class AdminController {
 	 * 登出
 	 */
 	@RequestMapping(value="/adminlogout",method=RequestMethod.GET)
-	public ModelAndView Logout() {
+	public ModelAndView Logout(SessionStatus status) {
 		ModelAndView mv=new ModelAndView();
-		this.setHave_admin(false);
-		this.setCurrent_admin(null);
+		status.setComplete();
 		mv.setViewName("homepage");
 		return mv;
 	}
@@ -178,14 +159,16 @@ public class AdminController {
 	 * 前往员工管理页面
 	 */
 	@RequestMapping(value="/adminstaff",method=RequestMethod.GET)
-	public ModelAndView gotoAdminStaff(@RequestParam(value="pn",defaultValue="1") int pn,
+	public ModelAndView gotoAdminStaff(HttpSession session,
+			@RequestParam(value="pn",defaultValue="1") int pn,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
-		if(this.isHave_admin()==false) {
+		Administrator admin = (Administrator) session.getAttribute("admin");
+		if(admin==null) {
 			mv.setViewName("admin_login");
 		}else {
 			PageHelper.startPage(pn, page_show);
-			mv.addObject("login_admin",this.getCurrent_admin());
+			mv.addObject("login_admin",admin);
 			List<Worker> workerlist = adminService.showWorker();
 			PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
 			mv.addObject("workerlist", page);
@@ -200,6 +183,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/addworker",method=RequestMethod.POST)
 	public ModelAndView addWorker(@RequestParam(value="pn",defaultValue="1") int pn,
+			@ModelAttribute("admin") Administrator admin,
 			@RequestParam("workername") String workername,
 			@RequestParam("workerposition") String workerposition,
 			@RequestParam("workersex") String workersex,
@@ -224,7 +208,7 @@ public class AdminController {
 			}
 		}
 		PageHelper.startPage(pn, page_show);
-		mv.addObject("login_admin",this.getCurrent_admin());
+		mv.addObject("login_admin",admin);
 		List<Worker> workerlist = adminService.showWorker();
 		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
 		mv.addObject("workerlist", page);
@@ -239,7 +223,6 @@ public class AdminController {
 	@RequestMapping(value="/showEditWorker",method=RequestMethod.POST)
 	@ResponseBody
 	public Worker showEditWorker(@RequestParam("workerID") String workerID) {
-		System.out.println(workerID);
 		this.setEdit_worker_id(Integer.parseInt(workerID));
 		Worker worker = null;
 		try {
@@ -255,6 +238,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/editworker",method=RequestMethod.POST)
 	public ModelAndView editWorker(@RequestParam(value="pn",defaultValue="1") int pn,
+			@ModelAttribute("admin") Administrator admin,
 			@RequestParam("edit_worker_name") String name,
 			@RequestParam("edit_worker_position") String position,
 			@RequestParam("edit_worker_sex") String sex,
@@ -262,8 +246,6 @@ public class AdminController {
 			@RequestParam("edit_worker_checkcard") String checkcard,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
-		System.out.println(this.getEdit_worker_id());
-		
 		Worker edit_worker = new Worker();
 		edit_worker.setWorkerID(this.getEdit_worker_id());
 		edit_worker.setWorkername(name);
@@ -277,14 +259,13 @@ public class AdminController {
 				System.out.println(1);
 				req.setAttribute("editworker-msg", "修改失败");
 			}else {
-				//req.setAttribute("editworker-msg", "修改成功");
-				System.out.println("修改成功");
+				req.setAttribute("editworker-msg", "修改成功");
 			}
 		}catch(Exception e) {
-			System.out.println("error");
+			e.printStackTrace();
 		}
 		PageHelper.startPage(pn, page_show);
-		mv.addObject("login_admin",this.getCurrent_admin());
+		mv.addObject("login_admin",admin);
 		List<Worker> workerlist = adminService.showWorker();
 		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
 		mv.addObject("workerlist",page);
@@ -299,7 +280,6 @@ public class AdminController {
 	@RequestMapping(value="/gotodeleteworker",method=RequestMethod.POST)
 	@ResponseBody
 	public void gotoDeleteWorker(@RequestParam("workerID") String workerID) {
-		System.out.println(workerID);
 		this.setDelete_worker_id(Integer.parseInt(workerID));
 	}
 	
@@ -308,6 +288,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/deleteworker",method=RequestMethod.GET)
 	public ModelAndView deleteWorker(@RequestParam(value="pn",defaultValue="1") int pn,
+			@ModelAttribute("admin") Administrator admin,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		Worker delete_worker = new Worker();
@@ -319,7 +300,7 @@ public class AdminController {
 			req.setAttribute("deleteworker-msg", "删除成功");
 		}
 		PageHelper.startPage(pn, page_show);
-		mv.addObject("login_admin",this.getCurrent_admin());
+		mv.addObject("login_admin",admin);
 		List<Worker> workerlist = adminService.showWorker();
 		PageInfo<Worker> page = new PageInfo<Worker>(workerlist);
 		mv.addObject("workerlist",page);
@@ -333,10 +314,11 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/searchWorker")
 	public ModelAndView searchWorker(@RequestParam(value="pn",defaultValue="1") int pn,
+			@ModelAttribute("admin") Administrator admin,
 			@RequestParam("search") String search) {
 		ModelAndView mv = new ModelAndView();
 		PageHelper.startPage(pn, page_show);
-		mv.addObject("login_admin",this.getCurrent_admin());
+		mv.addObject("login_admin",admin);
 		List<Worker> workerlist = new ArrayList<>();
 		if(search==""){
 			workerlist = adminService.showWorker();
@@ -355,9 +337,11 @@ public class AdminController {
 	 * 前往寄件管理页面
 	 */
 	@RequestMapping(value="/admingoods",method=RequestMethod.GET)
-	public ModelAndView gotoAdminGoods(@RequestParam(value="pn",defaultValue="1") int pn) {
+	public ModelAndView gotoAdminGoods(@RequestParam(value="pn",defaultValue="1") int pn,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		if(this.isHave_admin()==false) {
+		Administrator admin = (Administrator) session.getAttribute("admin");
+		if(admin==null) {
 			mv.setViewName("admin_login");
 		}else {
 			PageHelper.startPage(pn, page_show);
@@ -365,7 +349,7 @@ public class AdminController {
 			PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
 			mv.addObject("goodslist",page);
 			mv.addObject("page","admingoods");
-			mv.addObject("login_admin",this.getCurrent_admin());
+			mv.addObject("login_admin",admin);
 			mv.setViewName("admin_goods");
 		}
 		return mv;	
@@ -376,9 +360,10 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/searchGoods")
 	public ModelAndView searchGoods(@RequestParam(value="pn",defaultValue="1") int pn,
+			@ModelAttribute("admin") Administrator admin,
 			@RequestParam("search") String search) {
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("login_admin",this.getCurrent_admin());
+		mv.addObject("login_admin",admin);
 		List<Goods> goodslist = new ArrayList<>();
 		if(search==""){
 			goodslist = adminService.goodsManage();
@@ -400,7 +385,6 @@ public class AdminController {
 	@RequestMapping(value="/gotodeletegoods",method=RequestMethod.POST)
 	@ResponseBody
 	public void gotoDeleteGoods(@RequestParam("trackingID") String trackingID) {
-		System.out.println(trackingID);
 		this.setDelete_trackingID(Integer.parseInt(trackingID));
 	}
 	
@@ -409,6 +393,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/deletegoods",method=RequestMethod.GET)
 	public ModelAndView deleteGoods(@RequestParam(value="pn",defaultValue="1") int pn,
+			@ModelAttribute("admin") Administrator admin,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		Goods delete_goods = new Goods();
@@ -431,7 +416,7 @@ public class AdminController {
 			e.printStackTrace();
 		}
 		PageHelper.startPage(pn, page_show);
-		mv.addObject("login_admin",this.getCurrent_admin());
+		mv.addObject("login_admin",admin);
 		List<Goods> goodslist = adminService.goodsManage();
 		PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
 		mv.addObject("goodslist",page);
@@ -446,7 +431,6 @@ public class AdminController {
 	@RequestMapping(value="/showEditGoods",method=RequestMethod.POST)
 	@ResponseBody
 	public Goods showEditGoods(@RequestParam("trackingID") String trackingID) {
-		System.out.println(trackingID);
 		this.setEdit_trackdingID(Integer.parseInt(trackingID));
 		Goods goods = null;
 		try {
@@ -463,6 +447,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/editgoods",method=RequestMethod.POST)
 	public ModelAndView editGoods(@RequestParam(value="pn",defaultValue="1") int pn,
+			@ModelAttribute("admin") Administrator admin,
 			@RequestParam("name") String name,
 			@RequestParam("giveUserID") int giveUserID,
 			@RequestParam("acceptUserID") int acceptUserID,
@@ -498,14 +483,13 @@ public class AdminController {
 			if(result_1==0||result_2==0) {
 				req.setAttribute("editgoods-msg", "修改失败");
 			}else {
-				//req.setAttribute("editgoods-msg", "修改成功");
 				System.out.println("修改成功");
 			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		PageHelper.startPage(pn, page_show);
-		mv.addObject("login_admin",this.getCurrent_admin());
+		mv.addObject("login_admin",admin);
 		List<Goods> goodslist = adminService.goodsManage();
 		PageInfo<Goods> page = new PageInfo<Goods>(goodslist);
 		mv.addObject("goodslist",page);
@@ -518,16 +502,18 @@ public class AdminController {
 	 * 前往用户管理页面
 	 */
 	@RequestMapping(value="/adminvip",method=RequestMethod.GET)
-	public ModelAndView gotoAdminVip(@RequestParam(value="pn",defaultValue="1") int pn) {
+	public ModelAndView gotoAdminVip(@RequestParam(value="pn",defaultValue="1") int pn,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		if(this.isHave_admin()==false) {
+		Administrator admin = (Administrator) session.getAttribute("admin");
+		if(admin==null) {
 			mv.setViewName("admin_login");
 		}else {
 			PageHelper.startPage(pn, page_show);
 			List<User> userlist = adminService.showUser();
 			PageInfo<User> page = new PageInfo<User>(userlist);
 			mv.addObject("userlist",page);
-			mv.addObject("login_admin",this.getCurrent_admin());
+			mv.addObject("login_admin",admin);
 			mv.addObject("page", "adminvip");
 			mv.setViewName("admin_vip");
 		}
@@ -540,7 +526,6 @@ public class AdminController {
 	@RequestMapping(value="/showEditUser",method=RequestMethod.POST)
 	@ResponseBody
 	public User showEditUser(@RequestParam("userID") String userID) {
-		System.out.println(userID);
 		this.setEdit_user_id(Integer.parseInt(userID));
 		User user = null;
 		try {
@@ -556,6 +541,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/editUser",method=RequestMethod.POST)
 	public ModelAndView editUser(@RequestParam(value="pn",defaultValue="1") int pn,
+			@ModelAttribute("admin") Administrator admin,
 			@RequestParam("nickname") String nickname,
 			@RequestParam("usersex") String usersex,
 			@RequestParam("usernumber") String usernumber,
@@ -588,7 +574,7 @@ public class AdminController {
 		List<User> userlist = adminService.showUser();
 		PageInfo<User> page = new PageInfo<User>(userlist);
 		mv.addObject("userlist",page);
-		mv.addObject("login_admin",this.getCurrent_admin());
+		mv.addObject("login_admin",admin);
 		mv.addObject("page", "adminvip");
 		mv.setViewName("admin_vip");
 		return mv;
@@ -600,7 +586,6 @@ public class AdminController {
 	@RequestMapping(value="/gotodeleteuser",method=RequestMethod.POST)
 	@ResponseBody
 	public void gotoDeleteUser(@RequestParam("userID") String userID) {
-		System.out.println(userID);
 		this.setDelete_user_id(Integer.parseInt(userID));
 	}
 	
@@ -609,6 +594,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/deleteUser",method=RequestMethod.GET)
 	public ModelAndView deleteUser(@RequestParam(value="pn",defaultValue="1") int pn,
+			@ModelAttribute("admin") Administrator admin,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		User delete_user = new User();
@@ -620,7 +606,7 @@ public class AdminController {
 			req.setAttribute("deleteuser-msg", "删除成功");
 		}
 		PageHelper.startPage(pn, page_show);
-		mv.addObject("login_admin",this.getCurrent_admin());
+		mv.addObject("login_admin",admin);
 		List<User> userlist = adminService.showUser();
 		PageInfo<User> page = new PageInfo<User>(userlist);
 		mv.addObject("userlist",page);
@@ -634,6 +620,7 @@ public class AdminController {
 	 */
 	@RequestMapping(value="/searchUser")
 	public ModelAndView searchUser(@RequestParam(value="pn",defaultValue="1") int pn,
+			@ModelAttribute("admin") Administrator admin,
 			@RequestParam("userSearch") String userSearch) {
 		ModelAndView mv = new ModelAndView();
 		List<User> userlist = new ArrayList<>();
@@ -646,7 +633,7 @@ public class AdminController {
 		PageInfo<User> page = new PageInfo<User>(userlist);
 		mv.addObject("userlist",page);
 		mv.addObject("userSearch",userSearch);
-		mv.addObject("login_admin",this.getCurrent_admin());
+		mv.addObject("login_admin",admin);
 		mv.addObject("page", "searchUser");
 		mv.setViewName("admin_vip");
 		return mv;	

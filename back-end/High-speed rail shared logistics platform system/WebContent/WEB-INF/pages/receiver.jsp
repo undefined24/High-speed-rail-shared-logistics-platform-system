@@ -55,7 +55,7 @@
 					<div>
 						<ul class="nav navbar-nav navbar-right">
 							<li id="crftag"><a href="gotoSender">我要寄件</a></li>
-							<li class="active" id="crftag"><a href="#">我要收件</a></li>
+							<li class="active" id="crftag"><a href="#">我要接件</a></li>
 							<li id="crftag"><a href="#">服务支持</a></li>
 						</ul>
 					</div>
