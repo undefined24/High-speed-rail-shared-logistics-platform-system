@@ -64,9 +64,9 @@
 			
             <form class="form-horizontal" name="receiver" id="receive" role="form" action="receive" method="post" onSubmit="return on_submit2()">
 				<div class="form-group">
-					<label class="control-label col-md-2 col-md-offset-1" for="start_pos">高铁出发点</label>
+					<label class="control-label col-md-2 col-md-offset-1" for="start_pos">高铁出发站点</label>
 					<div class="col-md-6">
-						<input class="form-control col-md-4 disabled" onblur="checkStartPos()" name="startpoint" placeholder="请输入高铁出发点" id="start_pos" value="">
+						<input class="form-control col-md-4 disabled" onblur="checkStartPos()" name="startpoint" placeholder="请输入高铁出发站点" id="start_pos" value="">
 						<div id="startpos_prompt"></div>
 					</div>
 				</div>
@@ -85,9 +85,9 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-md-2 col-md-offset-1" for="arrive_pos">高铁到达点</label>
+					<label class="control-label col-md-2 col-md-offset-1" for="arrive_pos">高铁到达站点</label>
 					<div class="col-md-6">
-						<input class="form-control col-md-4" onblur="checkArrivePos()" name="arrivepoint" placeholder="请输入高铁到达点" id="arrive_pos" value="">
+						<input class="form-control col-md-4" onblur="checkArrivePos()" name="arrivepoint" placeholder="请输入高铁到达站点" id="arrive_pos" value="">
 						<div id="arrivepos_prompt"></div>
 					</div>
 				</div>
