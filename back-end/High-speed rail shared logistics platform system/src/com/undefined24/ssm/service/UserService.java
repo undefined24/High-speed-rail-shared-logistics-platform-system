@@ -103,6 +103,12 @@ public class UserService {
 		return userMapper.selectReceiver(receiver);
 	}
 	
+	//寻找收货人信息（无站点匹配）
+	@Transactional
+	public Receiver selectReceiverX(Receiver receiver){
+		return userMapper.selectReceiverX(receiver);
+	}
+	
 	//寻找收货人信息
 	@Transactional
 	public int changeBill(Bill bill){

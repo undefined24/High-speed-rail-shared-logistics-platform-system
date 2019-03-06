@@ -34,12 +34,9 @@ import com.undefined24.ssm.vo.Worker;
 @SessionAttributes(value={"admin"})
 public class AdminController {
 
-	private int edit_worker_id;
 	private int delete_worker_id;
-	private int edit_user_id;
 	private int delete_user_id;
 	private int delete_trackingID;
-	private int edit_trackdingID;
 	public int page_show = 6;
 	
 	
@@ -49,14 +46,6 @@ public class AdminController {
 
 	public void setDelete_trackingID(int delete_trackingID) {
 		this.delete_trackingID = delete_trackingID;
-	}
-
-	public int getEdit_trackdingID() {
-		return edit_trackdingID;
-	}
-
-	public void setEdit_trackdingID(int edit_trackdingID) {
-		this.edit_trackdingID = edit_trackdingID;
 	}
 
 	public int getDelete_worker_id() {
@@ -72,20 +61,6 @@ public class AdminController {
 
 	public void setDelete_user_id(int delete_user_id) {
 		this.delete_user_id = delete_user_id;
-	}
-	public int getEdit_user_id() {
-		return edit_user_id;
-	}
-
-	public void setEdit_user_id(int edit_user_id) {
-		this.edit_user_id = edit_user_id;
-	}
-	public int getEdit_worker_id() {
-		return edit_worker_id;
-	}
-
-	public void setEdit_worker_id(int edit_worker_id) {
-		this.edit_worker_id = edit_worker_id;
 	}
 	
 	@Autowired
@@ -223,7 +198,6 @@ public class AdminController {
 	@RequestMapping(value="/showEditWorker",method=RequestMethod.POST)
 	@ResponseBody
 	public Worker showEditWorker(@RequestParam("workerID") String workerID) {
-		this.setEdit_worker_id(Integer.parseInt(workerID));
 		Worker worker = null;
 		try {
 			 worker = adminService.showEidtWorker(Integer.parseInt(workerID));
@@ -244,10 +218,11 @@ public class AdminController {
 			@RequestParam("edit_worker_sex") String sex,
 			@RequestParam("edit_worker_salary") String salary,
 			@RequestParam("edit_worker_checkcard") String checkcard,
+			@RequestParam("hidden_edit_workerID") String hidden_edit_workerID,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		Worker edit_worker = new Worker();
-		edit_worker.setWorkerID(this.getEdit_worker_id());
+		edit_worker.setWorkerID(Integer.parseInt(hidden_edit_workerID));
 		edit_worker.setWorkername(name);
 		edit_worker.setWorkerposition(position);
 		edit_worker.setWorkersex(sex);
@@ -431,7 +406,6 @@ public class AdminController {
 	@RequestMapping(value="/showEditGoods",method=RequestMethod.POST)
 	@ResponseBody
 	public Goods showEditGoods(@RequestParam("trackingID") String trackingID) {
-		this.setEdit_trackdingID(Integer.parseInt(trackingID));
 		Goods goods = null;
 		try {
 			goods = adminService.showEditGoods(Integer.parseInt(trackingID));
@@ -456,15 +430,16 @@ public class AdminController {
 			@RequestParam("trainnumber") String trainnumber,
 			@RequestParam("cost") float cost,
 			@RequestParam("complete") boolean complete,
+			@RequestParam("hidden_edit_trackingID") String hidden_edit_trackingID,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		Goods edit_goods = new Goods();
 		Bill edit_bill = new Bill();
 		edit_goods.setName(name);
-		edit_goods.setTrackingID(this.getEdit_trackdingID());
+		edit_goods.setTrackingID(Integer.parseInt(hidden_edit_trackingID));
 		edit_goods.setType(type);
 		edit_goods.setWeight(weight);
-		edit_bill.setTrackingID(this.getEdit_trackdingID());
+		edit_bill.setTrackingID(Integer.parseInt(hidden_edit_trackingID));
 		edit_bill.setGiveUserID(giveUserID);
 		edit_bill.setAcceptUserID(acceptUserID);
 		edit_bill.setTrainnumber(trainnumber);
@@ -526,7 +501,6 @@ public class AdminController {
 	@RequestMapping(value="/showEditUser",method=RequestMethod.POST)
 	@ResponseBody
 	public User showEditUser(@RequestParam("userID") String userID) {
-		this.setEdit_user_id(Integer.parseInt(userID));
 		User user = null;
 		try {
 			user = adminService.showEditUser(Integer.parseInt(userID));
@@ -547,18 +521,16 @@ public class AdminController {
 			@RequestParam("usernumber") String usernumber,
 			@RequestParam("userphone") String userphone,
 			@RequestParam("useraddress") String useraddress,
+			@RequestParam("hidden_edit_userID") String hidden_edit_userID,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
-		
 		User edit_user = new User();
-		edit_user.setUserID(this.getEdit_user_id());
+		edit_user.setUserID(Integer.parseInt(hidden_edit_userID));
 		edit_user.setNickname(nickname);
 		edit_user.setUsersex(usersex);
 		edit_user.setUsernumber(usernumber);
 		edit_user.setUserphone(userphone);
 		edit_user.setUseraddress(useraddress);
-		System.out.println(edit_user);
-		
 		try {
 			int result = adminService.editUser(edit_user);
 			if(result==0||(nickname==""||usersex==""||usernumber==""||userphone==""||useraddress=="")) {

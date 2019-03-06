@@ -107,6 +107,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal col-md-10 col-md-offset-1" role="form" name="vip_edit" action="editUser" method="post" onsubmit="return vip_editSub()">
+                    <input type="hidden" name="hidden_edit_userID" id="hidden_edit_input"/>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="vip_name">姓名</label>
                         <div class="col-md-8">
@@ -203,6 +204,7 @@
     			$("#phone_num").val(data.userphone);
     			$("#pin").val(data.usernumber);
     			$("#address").val(data.useraddress);
+    			$("#hidden_edit_input").val(data.userID);
     		},
     		error:function(data){
     			alert('error');

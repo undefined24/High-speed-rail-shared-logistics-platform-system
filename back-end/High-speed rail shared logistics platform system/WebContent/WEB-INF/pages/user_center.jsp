@@ -233,10 +233,10 @@
 	    </div><!-- /.modal -->
 	</div>
 <%--修改用户详情成功时提示--%>
-    <%String profile_success_msg=(String)request.getAttribute("profile-success-msg");
-        if(profile_success_msg!=null){%>
+    <%String profile_msg=(String)request.getAttribute("profile-msg");
+        if(profile_msg!=null){%>
     <script type="text/javascript">
-        alert("<%=profile_success_msg%>");
+        alert("<%=profile_msg%>");
     </script>
     <%}%>
    <%--确认送达时提示--%>

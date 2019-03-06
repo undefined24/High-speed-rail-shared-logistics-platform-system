@@ -73,6 +73,10 @@ select * from bill where acceptUserID=#{userID}
 select * from receiver_info where trackingID=#{trackingID} and address REGEXP #{address}
 </select>
 
+<select id="selectReceiverX" resultType="receiver" parameterType="receiver">
+select * from receiver_info where trackingID=#{trackingID}
+</select>
+
 <select id="receiveGoods" resultMap="sendResult" parameterType="Train">
 select * from bill where sendaddress REGEXP #{startpoint} and complete=false and acceptUserID is null
 </select>

@@ -107,6 +107,7 @@
             </div>
             <div class="modal-body">
                 <form class="form-horizontal col-md-10 col-md-offset-1" role="form" name="staff_edit" action="editworker" method="post" onsubmit="return staff_editSub()">
+                     <input type="hidden" name="hidden_edit_workerID" id="hidden_edit_input"/>
                     <div class="form-group col-md-12">
                         <label class="control-label col-md-4" for="staff_name">员工姓名</label>
                         <div class="col-md-8">
@@ -256,6 +257,7 @@
     </script>
     <%}%>
     <script type="text/javascript">
+    var hidden_input = document.getElementById("hidden_input");
     function deleteworker(workerID){
     	$.ajax({
     		type: "post",
@@ -278,6 +280,7 @@
     			$("#sex").val(data.workersex);
     			$("#salary").val(data.workersalary);
     			$("#card").val(data.workercheckcard);
+    			$("#hidden_edit_input").val(data.workerID);
     		},
     		error: function(data){
     			alert('error');

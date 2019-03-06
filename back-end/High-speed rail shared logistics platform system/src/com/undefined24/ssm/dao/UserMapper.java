@@ -28,4 +28,5 @@ public interface UserMapper {
 	public int arriveConfirm(Bill bill);
 	
 	public Receiver selectReceiver(Receiver receiver);
+	public Receiver selectReceiverX(Receiver receiver);
 }

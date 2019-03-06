@@ -143,16 +143,17 @@ public class UserController {
 	}
 	
 	/*
-	 * 接件
+	 * 接件显示
 	 */
 	@RequestMapping(value="/receive",method=RequestMethod.POST)
 	@ResponseBody
-	public List<Bill> receive(@RequestParam("current_user") User current_user,
-			@RequestParam("startpoint") String startpoint,
+	public List<Bill> receive(@RequestParam("startpoint") String startpoint,
 			@RequestParam("trainnumber") String trainnumber,
 			@RequestParam("traintime") String traintime,
 			@RequestParam("arrivepoint") String arrivepoint,
-			HttpServletRequest req) {
+			HttpServletRequest req,
+			HttpSession session) {
+		User current_user = (User) session.getAttribute("current_user");
 		if(startpoint==""||trainnumber==""||traintime==""||arrivepoint=="") {
 			return null;
 		}
@@ -200,12 +201,14 @@ public class UserController {
 	 * 确认接件confirm
 	 */
 	@RequestMapping(value="/confirm",method=RequestMethod.GET)
-	public ModelAndView confirm(@RequestParam("current_user") User current_user,
+	public ModelAndView confirm(HttpSession session,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		Bill bill = new Bill();
 		bill.setTrackingID(this.getRec_id());
 		bill.setTrainnumber(this.getTrainnumber());
+		bill.setTrainnumber(trainnumber);
+		User current_user = (User) session.getAttribute("current_user");
 		bill.setAcceptUserID(current_user.getUserID());
 		System.out.println(bill);
 		try {
@@ -324,18 +327,19 @@ public class UserController {
 	 * 确认送达
 	 */
 	@RequestMapping(value="/arriveConfirm",method=RequestMethod.GET)
-	public ModelAndView confirm1(@RequestParam("current_user") User current_user,
+	public ModelAndView confirm1(HttpSession session,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
+		User current_user = (User) session.getAttribute("current_user");
 		Date date = new Date();
 		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		System.out.println(dateFormat.format(date));
 		Bill bill = new Bill();
 		bill.setTrackingID(this.getArriveID());
 		bill.setCompletetime(dateFormat.format(date));
 		Receiver rec = new Receiver();
 		rec.setTrackingID(this.getArriveID());
-		Receiver receiver = userService.selectReceiver(rec);
+		Receiver receiver = userService.selectReceiverX(rec);
+		System.out.println("???"+rec);
 		bill.setArriveaddress(receiver.getAddress());
 		try {
 			int result = userService.arriveConfirm(bill);
@@ -374,6 +378,7 @@ public class UserController {
 			this.setSame_name(true);
 		}else {
 			msg= "此用户名可用";
+			this.setSame_name(false);
 		}
 		return msg;
 	}
@@ -395,6 +400,7 @@ public class UserController {
 			this.setSame_name(true);
 		}else {
 			msg= "此身份证可用";
+			this.setSame_name(false);
 		}
 		return msg;
 	}
@@ -566,7 +572,7 @@ public class UserController {
 						session = req.getSession();
 						session.setAttribute("current_user", user);
 						mv.addObject("user",user);
-						req.setAttribute("profile-success-msg", "修改成功");
+						req.setAttribute("profile-msg", "修改成功");
 						//显示资料
 					}
 				}catch(Exception e) {
