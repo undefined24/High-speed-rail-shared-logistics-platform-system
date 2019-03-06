@@ -1,12 +1,12 @@
 package com.undefined24.ssm.controller;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.undefined24.ssm.service.UserService;
@@ -26,17 +27,15 @@ import com.undefined24.ssm.vo.Train;
 import com.undefined24.ssm.vo.User;
 
 @Controller
-@SessionAttributes(value={"attr1","attr2"})
+@SessionAttributes(value={"current_user"})
 public class UserController {
 
 	@Autowired
 	UserService userService;
 	
-	private User current_user;
 	private String trainnumber;
 	private int rec_id = 0;
 	private int arriveID = 0;
-	private boolean have_user = false;
 	private boolean same_name = false;
 	private boolean same_number = false;
 	
@@ -80,22 +79,6 @@ public class UserController {
 		this.same_name = same_name;
 	}
 
-	public User getCurrent_user() {
-		return current_user;
-	}
-
-	public void setCurrent_user(User current_user) {
-		this.current_user = current_user;
-	}
-
-	public boolean isHave_user() {
-		return have_user;
-	}
-
-	public void setHave_user(boolean have_user) {
-		this.have_user = have_user;
-	}
-
 	/*
 	 * 前往主页
 	 */
@@ -117,9 +100,11 @@ public class UserController {
 	 */
 	@RequestMapping(value="/search",method=RequestMethod.POST)
 	public ModelAndView search(@RequestParam("search_str") String search_str,
-			HttpServletRequest req) {
+			HttpServletRequest req,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		if(this.isHave_user()==false) {
+		User current_user = (User) session.getAttribute("current_user");
+		if(current_user==null) {
 			mv.setViewName("login");
 		}else {
 			List<Bill> searchBillList = userService.searchBill(search_str);
@@ -128,10 +113,10 @@ public class UserController {
 				mv.setViewName("main");
 				return mv;
 			}
-			if(searchBillList.get(0).getAcceptUserID()==this.getCurrent_user().getUserID()) {
+			if(searchBillList.get(0).getAcceptUserID()==current_user.getUserID()) {
 				req.setAttribute("search-msg", "1");
 				mv.setViewName("main");
-			}else if(searchBillList.get(0).getGiveUserID()==this.getCurrent_user().getUserID()){
+			}else if(searchBillList.get(0).getGiveUserID()==current_user.getUserID()){
 				req.setAttribute("search-msg", "2");
 				mv.setViewName("main");
 			}else {
@@ -146,9 +131,10 @@ public class UserController {
 	 * 前往接件页面receiver.jsp
 	 */
 	@RequestMapping(value="/gotoReceiver",method=RequestMethod.GET)
-	public ModelAndView gotoReceiver() {
+	public ModelAndView gotoReceiver(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		if(this.isHave_user()==false) {
+		User current_user = (User) session.getAttribute("current_user");
+		if(current_user==null) {
 			mv.setViewName("login");
 		}else {
 			mv.setViewName("receiver");
@@ -161,7 +147,8 @@ public class UserController {
 	 */
 	@RequestMapping(value="/receive",method=RequestMethod.POST)
 	@ResponseBody
-	public List<Bill> receive(@RequestParam("startpoint") String startpoint,
+	public List<Bill> receive(@RequestParam("current_user") User current_user,
+			@RequestParam("startpoint") String startpoint,
 			@RequestParam("trainnumber") String trainnumber,
 			@RequestParam("traintime") String traintime,
 			@RequestParam("arrivepoint") String arrivepoint,
@@ -192,7 +179,7 @@ public class UserController {
 				System.out.println(receiver);
 				Receiver rec = userService.selectReceiver(receiver);
 				ablegoodslist.get(i).setReceiver(rec);
-				if(ablegoodslist.get(i).getReceiver()==null||ablegoodslist.get(i).getGiveUserID()==this.getCurrent_user().getUserID()) {
+				if(ablegoodslist.get(i).getReceiver()==null||ablegoodslist.get(i).getGiveUserID()==current_user.getUserID()) {
 					ablegoodslist.remove(i);
 				}
 			}
@@ -213,12 +200,13 @@ public class UserController {
 	 * 确认接件confirm
 	 */
 	@RequestMapping(value="/confirm",method=RequestMethod.GET)
-	public ModelAndView confirm(HttpServletRequest req) {
+	public ModelAndView confirm(@RequestParam("current_user") User current_user,
+			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		Bill bill = new Bill();
 		bill.setTrackingID(this.getRec_id());
 		bill.setTrainnumber(this.getTrainnumber());
-		bill.setAcceptUserID(this.getCurrent_user().getUserID());
+		bill.setAcceptUserID(current_user.getUserID());
 		System.out.println(bill);
 		try {
 			int result=userService.changeBill(bill);
@@ -238,9 +226,10 @@ public class UserController {
 	 * 前往寄件页面sender.jsp
 	 */
 	@RequestMapping(value="/gotoSender",method=RequestMethod.GET)
-	public ModelAndView gotoSender() {
+	public ModelAndView gotoSender(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		if(this.isHave_user()==false) {
+		User current_user = (User) session.getAttribute("current_user");
+		if(current_user==null) {
 			mv.setViewName("login");
 		}else {
 			mv.setViewName("sender");
@@ -259,9 +248,11 @@ public class UserController {
 			@RequestParam("receiverphone") String receiverphone,
 			@RequestParam("receiveraddress") String receiveraddress,
 			@RequestParam("startaddress") String startaddress,
-			HttpServletRequest req) {
+			HttpServletRequest req,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		if(this.isHave_user()==false) {
+		User current_user = (User) session.getAttribute("current_user");
+		if(current_user==null) {
 			mv.setViewName("login");
 		}else {
 			Goods goods = new Goods();
@@ -270,7 +261,7 @@ public class UserController {
 			goods.setName(name);
 			goods.setType(type);
 			goods.setWeight(weight);
-			bill.setGiveUserID(this.getCurrent_user().getUserID());
+			bill.setGiveUserID(current_user.getUserID());
 			bill.setArriveaddress(receiveraddress);
 			bill.setSendaddress(startaddress);
 			rec.setName(receivername);
@@ -303,16 +294,17 @@ public class UserController {
 	 * 前往个人中心user_center.jsp
 	 */
 	@RequestMapping(value="/gotoUserCenter",method=RequestMethod.GET)
-	public ModelAndView gotoUserCenter() {
+	public ModelAndView gotoUserCenter(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		if(this.isHave_user()==false) {
+		User current_user = (User) session.getAttribute("current_user");
+		if(current_user==null) {
 			mv.setViewName("homepage");
 		}else {
-			List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
-			List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
+			List<Bill> sendlist = userService.sendGoods(current_user);
+			List<Bill> acceptlist = userService.acceptGoods(current_user);
 			mv.addObject("sendlist", sendlist);
 			mv.addObject("acceptlist", acceptlist);
-			mv.addObject("user",this.getCurrent_user());
+			mv.addObject("user",current_user);
 			mv.setViewName("user_center");
 		}
 		return mv;
@@ -332,7 +324,8 @@ public class UserController {
 	 * 确认送达
 	 */
 	@RequestMapping(value="/arriveConfirm",method=RequestMethod.GET)
-	public ModelAndView confirm1(HttpServletRequest req) {
+	public ModelAndView confirm1(@RequestParam("current_user") User current_user,
+			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
 		Date date = new Date();
 		SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
@@ -354,11 +347,11 @@ public class UserController {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
-		List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
+		List<Bill> sendlist = userService.sendGoods(current_user);
+		List<Bill> acceptlist = userService.acceptGoods(current_user);
 		mv.addObject("sendlist", sendlist);
 		mv.addObject("acceptlist", acceptlist);
-		mv.addObject("user",this.getCurrent_user());
+		mv.addObject("user",current_user);
 		mv.setViewName("user_center");
 		return mv;
 	}
@@ -425,7 +418,8 @@ public class UserController {
 			@RequestParam("userpwd") String userpwd,
 			@RequestParam("usernumber") String usernumber,
 			@RequestParam("useraddress") String useraddress,
-			HttpServletRequest req) {
+			HttpServletRequest req,
+			HttpSession session) {
 		//获取用户输入
 		User user = new User();
 		ModelAndView mv = new ModelAndView();
@@ -458,11 +452,11 @@ public class UserController {
 					req.setAttribute("register-msg", "注册失败，请重试");
 					mv.setViewName("register");
 				}else {
+					session = req.getSession();
+					session.setAttribute("current_user", user);
 					req.setAttribute("register-msg", "注册成功");
-					this.setCurrent_user(user);
-					this.setHave_user(true);
-					List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
-					List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
+					List<Bill> sendlist = userService.sendGoods(user);
+					List<Bill> acceptlist = userService.acceptGoods(user);
 					mv.addObject("sendlist", sendlist);
 					mv.addObject("acceptlist", acceptlist);
 					mv.addObject("user", user);
@@ -480,14 +474,16 @@ public class UserController {
 	 * 前往登录页面
 	 */
 	@RequestMapping(value="/login",method=RequestMethod.GET)
-	public ModelAndView gotoLogin() {
+	public ModelAndView gotoLogin(HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-			if(this.isHave_user()==false) {
+		User current_user = (User) session.getAttribute("current_user");
+			if(current_user==null) {
 				mv.setViewName("login");
 			}else {
-				mv.addObject("user",this.getCurrent_user());
-				List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
-				List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
+				
+				mv.addObject("user",current_user);
+				List<Bill> sendlist = userService.sendGoods(current_user);
+				List<Bill> acceptlist = userService.acceptGoods(current_user);
 				mv.addObject("sendlist", sendlist);
 				mv.addObject("acceptlist", acceptlist);
 				mv.setViewName("user_center");
@@ -501,7 +497,8 @@ public class UserController {
 	@RequestMapping(value="/login",method=RequestMethod.POST)
 	public ModelAndView Login(@RequestParam("nickname") String nickname,
 			@RequestParam("userpwd") String userpwd,
-			HttpServletRequest req) {
+			HttpServletRequest req,
+			HttpSession session) {
 		ModelAndView mv = new ModelAndView();
 		User user = new User();
 		user.setNickname(nickname);
@@ -512,10 +509,10 @@ public class UserController {
 			req.setAttribute("login-msg", "用户名或密码错误");
 			mv.setViewName("login");
 		}else {
-			this.setCurrent_user(login_user);
-			this.setHave_user(true);
-			List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
-			List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
+			session = req.getSession();
+			session.setAttribute("current_user", login_user);
+			List<Bill> sendlist = userService.sendGoods(login_user);
+			List<Bill> acceptlist = userService.acceptGoods(login_user);
 			mv.addObject("sendlist", sendlist);
 			mv.addObject("acceptlist", acceptlist);
 			mv.addObject("user",login_user);
@@ -528,10 +525,9 @@ public class UserController {
 	 * 用户登出
 	 */
 	@RequestMapping(value="/userLogout",method=RequestMethod.GET)
-	public ModelAndView Logout() {
+	public ModelAndView Logout(SessionStatus status) {
 		ModelAndView mv=new ModelAndView("homepage");
-		this.setHave_user(false);
-		this.setCurrent_user(null);
+		status.setComplete();
 		return mv;
 	}
 	
@@ -545,16 +541,18 @@ public class UserController {
 			@RequestParam("re_userpwd") String re_userpwd,
 			@RequestParam("usernumber") String usernumber,
 			@RequestParam("useraddress") String useraddress,
-    		HttpServletRequest req) {
+    		HttpServletRequest req,
+    		HttpSession session) {
 		ModelAndView mv = new ModelAndView();
-		if(this.isHave_user()==false) {
+		User current_user = (User) session.getAttribute("current_user");
+		if(current_user==null) {
 			mv.setViewName("homepage");
 		}else {
 			if(userpwd.equals(re_userpwd)==false) {
 				req.setAttribute("profile-msg", "确认密码错误");
 			}else {
 				User user = new User();
-				user.setUserID(this.getCurrent_user().getUserID());
+				user.setUserID(current_user.getUserID());
 				user.setNickname(nickname);
 				user.setUserphone(userphone);
 				user.setUserpwd(userpwd);
@@ -565,7 +563,8 @@ public class UserController {
 					if(result==0) {
 						req.setAttribute("profile-msg", "个人资料修改失败");
 					}else {
-						this.setCurrent_user(user);
+						session = req.getSession();
+						session.setAttribute("current_user", user);
 						mv.addObject("user",user);
 						req.setAttribute("profile-success-msg", "修改成功");
 						//显示资料
@@ -574,8 +573,8 @@ public class UserController {
 					req.setAttribute("profile-msg", "系统异常请重试");
 				}
 			}
-			List<Bill> sendlist = userService.sendGoods(this.getCurrent_user());
-			List<Bill> acceptlist = userService.acceptGoods(this.getCurrent_user());
+			List<Bill> sendlist = userService.sendGoods(current_user);
+			List<Bill> acceptlist = userService.acceptGoods(current_user);
 			mv.addObject("sendlist", sendlist);
 			mv.addObject("acceptlist", acceptlist);
 			mv.setViewName("user_center");
