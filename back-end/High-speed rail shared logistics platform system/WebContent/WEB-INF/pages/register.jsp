@@ -12,9 +12,9 @@
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/1.css">
+    <script src="js/1.js"></script>
 </head>
 <body>
-    <script src="js/1.js"></script>
 	<div class="header">
 	<div class="back">
         <button class="btn btn-default"><a href="#">回到首页</a></button>
@@ -51,7 +51,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="password">密码</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="userpwd" id="password" placeholder="请输入密码" onblur="CheckPassowrdStrength()">
+                        <input type="password" class="form-control" name="userpwd" id="password" placeholder="请输入密码" onblur="CheckPassowrdStrength()">
                         <div id="pas_prompt"></div>
                     </div>
                     
@@ -59,7 +59,7 @@
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="password_1">确认密码</label>
                     <div class="col-md-6">
-                        <input type="text" class="form-control" name="password_1" id="password_1" placeholder="请再次输入密码" onblur="CheckPassowrdStrength2()">
+                        <input type="password" class="form-control" name="password_1" id="password_1" placeholder="请再次输入密码" onblur="CheckPassowrdStrength2()">
                     	<div id="pas_prompt1"></div>
                     </div>
                 </div>
@@ -91,9 +91,7 @@
                     <div class="col-md-6">
                         <button type="submit" class="btn btn-default col-md-12 " onClick="registerForm()">注册</button>
                     </div>
-
                 </div>
-
 
             </form>
         </div>
