@@ -54,13 +54,13 @@
             <!-- 轮播（Carousel）项目 -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="image/my1.jpg" alt="First slide">
+                    <img src="../image/my1.jpg" alt="First slide">
                 </div>
                 <div class="item">
-                    <img src="image/my2.png" alt="Second slide">
+                    <img src="../image/my2.jpg" alt="Second slide">
                 </div>
 				<div class="item">
-                    <img src="image/my3.jpg" alt="Second slide">
+                    <img src="../image/my3.jpg" alt="Second slide">
                 </div>
             </div>
             <!-- 轮播（Carousel）导航 -->
@@ -79,7 +79,6 @@
           <img class="img-circle" src="image/mail_send.png" width="140" height="140">
 			<p><a class="btn btn-default content-button" href="gotoSender" role="button"> 我要寄件 &raquo;</a></p>
 		  <hr class="featurette-divider">
-          <p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>
 			<hr class="featurette-divider">
 			
         </div><!-- /.col-lg-4 -->
@@ -87,7 +86,6 @@
           <img class="img-circle" src="image/mail_receive.png" alt="Generic placeholder image" width="140" height="140" >
 			<p><a class="btn btn-default content-button"  href="gotoReceiver" role="button"> 我要接件 &raquo;</a></p>
 			<hr class="featurette-divider">
-          <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Cras mattis consectetur purus sit amet fermentum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.</p>
           <hr class="featurette-divider">
 			
         </div><!-- /.col-lg-4 -->
@@ -95,7 +93,6 @@
           <img class="img-circle" src="image/find.png" alt="Generic placeholder image" width="140" height="140">
           <p><a class="btn btn-default content-button" onclick='#search' data-toggle='modal' data-target='#search' role="button"> 订单查询 &raquo;</a></p>
 			<hr class="featurette-divider">
-          <p>Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Vestibulum id ligula porta felis euismod semper. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.</p>
 			<hr class="featurette-divider">
         </div><!-- /.col-lg-4 -->
       </div>
