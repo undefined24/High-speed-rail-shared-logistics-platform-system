@@ -97,33 +97,30 @@
                 </div>
                 
                 <div class="form-group">
-					<div class="custom-file-container"
-						data-upload-id="myUniqueUploadId" style="width: 300px" >
-						 <label class="control-label col-md-2 col-md-offset-1" for="idcard">上传身份证<a href="javascript:void(0)"
-							class="custom-file-container__image-clear"
-							title="Clear Image"></a></label> <label
-							class="custom-file-container__custom-file"> <input
-							type="file" name="idphoto"
-							class="custom-file-container__custom-file__custom-file-input"
-							accept="*" multiple> <input type="hidden"
-							name="MAX_FILE_SIZE" value="10485760" /> <span
-							class="custom-file-container__custom-file__custom-file-control"></span>
+					<div class="custom-file-container" data-upload-id="myUniqueUploadId">
+						 <label class="control-label col-md-2 col-md-offset-1" for="idcard">上传身份证
+						 	<a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image"></a>
+						 </label> 
+						 <div class="col-md-6">
+						 <label class="custom-file-container__custom-file"> 
+						 <input type="file" name="idphoto" class="custom-file-container__custom-file__custom-file-input" accept="*" multiple> 
+						 <span class="custom-file-container__custom-file__custom-file-control" style="width: 320px;" ></span>
 						</label>
+						</div>
 						<div class="custom-file-container__image-preview"
-							style="height: 153px; width: 243px "></div>
+							style="height: 120px; width: 150px; position:absolute; margin-top: -30px; margin-left: 590px "></div>
 					</div>
 
 					<script src="js/file-upload-with-preview.min.js"></script>
 					<script>
-						var upload = new FileUploadWithPreview(
-								'myUniqueUploadId')
+						var upload = new FileUploadWithPreview('myUniqueUploadId')
 					</script>
 				</div>
             
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1"> </label>
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-default col-md-12 " onClick="registerForm()">注册</button>
+                        <button type="submit" class="btn btn-default col-md-12 " style="width:300px; margin-top: 20px;"  onClick="registerForm()">注册</button>
                     </div>
                 </div>
 

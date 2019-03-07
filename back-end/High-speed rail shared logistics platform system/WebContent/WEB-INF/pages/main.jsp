@@ -96,8 +96,6 @@
 			<hr class="featurette-divider">
         </div><!-- /.col-lg-4 -->
       </div>
-       
-	<hr class="featurette-divider">
 		
     </div>
     <div id="well_sold" class="col-md-3">
@@ -161,7 +159,7 @@
             </tbody>
         </table>
     </div>
-	<h1 style="color: #0084ff" align="center"><strong>优惠活动</strong></h2>
+	<h1 style="color: #0084ff" align="center"><strong>优惠活动</strong></h1>
 	<h4 style="color: #0084ff" align="center">第一时间分享，最新促销活动</h4>
 	<hr class="featurette-divider">
 

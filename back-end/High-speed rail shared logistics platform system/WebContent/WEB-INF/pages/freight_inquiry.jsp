@@ -20,7 +20,7 @@
 		<div class="container-fluid container">
 			<div id="nav" class="navbar-header" style="height: 70px;">
 	<!--            <a href="#"><img src="image/logo.png"  style="padding: 10px;"/></a>-->
-				<img src="image/my_logo.jpg" style="height: 100%" >
+				<img src="image/my_logo.jpg" style="padding: 12px; height: 100%" >
 			</div>
 			<div>
 				<ul class="nav navbar-nav ">
@@ -56,7 +56,7 @@
 					</div>
 				</div>
 			</nav>
-			<div class="container2">
+			<div class="container2" style="padding: 50px">
 			<h4><strong>运费计算基于以下计费规则：</strong></h4>
 				<p><strong>一、 体积重量计算方法</strong></p>
 				<p>托寄物的计费重量取体积重量与实际重量两者之间的较大值，体积重量的计算方法为：<br>
