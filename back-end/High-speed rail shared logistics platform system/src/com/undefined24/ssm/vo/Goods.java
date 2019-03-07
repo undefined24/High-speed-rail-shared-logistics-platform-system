@@ -5,7 +5,15 @@ public class Goods {
 	private float weight;
 	private String type;
 	private String name;
+	private String picture;
 	private Bill bill;
+	
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 	public Bill getBill() {
 		return bill;
 	}
@@ -39,8 +47,8 @@ public class Goods {
 
 	@Override
 	public String toString() {
-		return "Goods [trackingID=" + trackingID + ", weight=" + weight + ", type=" + type + ", name=" 
-	+ name + ", bill=" + bill + "]";
+		return "Goods [trackingID=" + trackingID + ", weight=" + weight + ", type=" + type + ", name=" + name
+				+ ", picture=" + picture + ", bill=" + bill + "]";
 	}
 	
 }

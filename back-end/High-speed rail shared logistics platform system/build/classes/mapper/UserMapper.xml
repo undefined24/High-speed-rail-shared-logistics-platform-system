@@ -5,7 +5,7 @@
 <mapper namespace="com.undefined24.ssm.dao.UserMapper">
 
 <insert id="Register" parameterType="user" useGeneratedKeys="true">
-insert into user_info(nickname,username,userpwd,userphone,useraddress,usersex,usernumber) values(#{nickname},#{username},#{userpwd},#{userphone},#{useraddress},#{usersex},#{usernumber})
+insert into user_info(nickname,username,userpwd,userphone,useraddress,usersex,usernumber,picture) values(#{nickname},#{username},#{userpwd},#{userphone},#{useraddress},#{usersex},#{usernumber},#{picture})
 </insert>
 
 <select id="Login" resultType="user" parameterType="user">

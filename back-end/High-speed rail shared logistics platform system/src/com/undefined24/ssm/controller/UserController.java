@@ -1,5 +1,7 @@
 package com.undefined24.ssm.controller;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -16,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.undefined24.ssm.service.UserService;
@@ -423,8 +426,9 @@ public class UserController {
 			@RequestParam("userpwd") String userpwd,
 			@RequestParam("usernumber") String usernumber,
 			@RequestParam("useraddress") String useraddress,
+			@RequestParam("idphoto") MultipartFile idphoto,
 			HttpServletRequest req,
-			HttpSession session) {
+			HttpSession session) throws IllegalStateException, IOException {
 		//获取用户输入
 		User user = new User();
 		ModelAndView mv = new ModelAndView();
@@ -439,6 +443,24 @@ public class UserController {
 			user.setUserpwd(userpwd);
 			user.setUsernumber(usernumber);
 			user.setUseraddress(useraddress);
+			
+			String uploadPath =req.getServletContext().getRealPath("upload");
+			System.out.println(uploadPath);
+			File uploadDir = new File(uploadPath);
+			if (!uploadDir.exists()) {
+				uploadDir.mkdir();
+			}
+			String realFileName = idphoto.getOriginalFilename();
+			String[] tmp = realFileName.split("\\.");
+			String type =tmp[tmp.length-1];
+			String fileName = ""+System.currentTimeMillis()+"."+type;
+			String filePath = uploadPath + File.separator + fileName;
+			System.out.println("filepath:"+filePath);
+			idphoto.transferTo(new File(filePath));
+			String displayFileName=req.getContextPath()+File.separator + "upload"+File.separator +fileName;
+			System.out.println(displayFileName);
+			user.setPicture(displayFileName);
+			
 			if(nickname==""||username==""||usersex==""||userphone==""||userpwd==""||usernumber==""||useraddress=="") {
 				req.setAttribute("register-msg","注册失败");
 				mv.setViewName("register");

@@ -7,10 +7,13 @@
     <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
+    <meta http-equiv="Content-Type" content="multipart/form-data;         charset=utf-8" />
     <title>register</title>
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/file-upload-with-preview.min.css">
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    
     <link rel="stylesheet" href="css/1.css">
     <script src="js/1.js"></script>
 </head>
@@ -22,7 +25,7 @@
 </div>	
     <div class="container">
         <div class="col-md-8 col-md-offset-2">
-            <form class="form-horizontal" name="regform" id="register" role="form" action="register" method="post">
+            <form class="form-horizontal" name="regform" id="register" role="form" action="register" method="post" enctype="multipart/form-data">
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1" for="name">用户名</label>
                     <div class="col-md-6">
@@ -92,6 +95,31 @@
                     	<div id="address_prompt" style="color:red"></div>
                     </div>
                 </div>
+                
+                <div class="form-group">
+					<div class="custom-file-container"
+						data-upload-id="myUniqueUploadId" style="width: 300px" >
+						 <label class="control-label col-md-2 col-md-offset-1" for="idcard">上传身份证<a href="javascript:void(0)"
+							class="custom-file-container__image-clear"
+							title="Clear Image"></a></label> <label
+							class="custom-file-container__custom-file"> <input
+							type="file" name="idphoto"
+							class="custom-file-container__custom-file__custom-file-input"
+							accept="*" multiple> <input type="hidden"
+							name="MAX_FILE_SIZE" value="10485760" /> <span
+							class="custom-file-container__custom-file__custom-file-control"></span>
+						</label>
+						<div class="custom-file-container__image-preview"
+							style="height: 153px; width: 243px "></div>
+					</div>
+
+					<script src="js/file-upload-with-preview.min.js"></script>
+					<script>
+						var upload = new FileUploadWithPreview(
+								'myUniqueUploadId')
+					</script>
+				</div>
+            
                 <div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1"> </label>
                     <div class="col-md-6">

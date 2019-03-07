@@ -10,6 +10,14 @@ public class User {
 	private String usersex;
 	private String usernumber;
 	private String note;
+	private String picture;
+	
+	public String getPicture() {
+		return picture;
+	}
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 	public int getUserID() {
 		return userID;
 	}
@@ -66,9 +74,9 @@ public class User {
 	}
 	@Override
 	public String toString() {
-		return "User [userID=" + userID + ", nickname=" + nickname + ", userpwd=" + userpwd + ", useraddress="
-				+ useraddress + ", usersex=" + usersex + ", note=" + note
-				+ ", username=" + username + ", userphone=" + userphone + ", usernumber=" + usernumber + "]";
+		return "User [userID=" + userID + ", nickname=" + nickname + ", userpwd=" + userpwd + ", username=" + username
+				+ ", userphone=" + userphone + ", useraddress=" + useraddress + ", usersex=" + usersex + ", usernumber="
+				+ usernumber + ", note=" + note + ", picture=" + picture + "]";
 	}
 	
 	

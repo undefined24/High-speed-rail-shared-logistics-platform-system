@@ -145,6 +145,12 @@
                         	<div id="add_prompt"></div>
                         </div>
                     </div>
+                    <div class="form-group col-md-12">
+                   	 	<label class="control-label col-md-4" for="idcard">身份证</label>
+	                    	<div class="col-md-8">
+	                            <img height="153px" width="243px" src="" id="idcard">
+                        </div>
+                    </div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 						<button type="submit" class="btn btn-primary" onClick="vip_editForm();">提交更改</button>
@@ -205,6 +211,7 @@
     			$("#pin").val(data.usernumber);
     			$("#address").val(data.useraddress);
     			$("#hidden_edit_input").val(data.userID);
+    			$("#idcard").attr('src',data.picture);
     		},
     		error:function(data){
     			alert('error');
