@@ -119,10 +119,16 @@
 						<div id="receiveradderss_prompt2" style="color:red"></div>
 					</div>
 				</div>
+				<div class="form-group" style="display:none;" id="pay">
+					<label class="control-label col-md-2 col-md-offset-1" for="receiver_address">支付</label>
+					<div class="col-md-6">
+						<img src="image/pay.png" height="58px" width="58px">
+					</div>
+				</div>
 				<div class="form-group">
                     <label class="control-label col-md-2 col-md-offset-1"> </label>
                     <div class="col-md-6">
-                        <button type="submit" class="btn btn-default col-md-12 " onClick="mySub1()">提交</button>
+                        <button type="submit" class="btn btn-default col-md-12 " onmousemove="pay()" onClick="mySub1()">提交</button>
                     </div>
 
                 </div>
@@ -136,5 +142,10 @@
         alert("<%=send_msg%>");
     </script>
     <%}%>
+     <script type="text/javascript">
+     function pay(){
+    	 document.getElementById("pay").style.display="";//显示
+     }
+     </script>
 </body>
 </html>

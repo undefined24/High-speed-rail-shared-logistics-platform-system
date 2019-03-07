@@ -267,6 +267,7 @@ public class UserController {
 			bill.setGiveUserID(current_user.getUserID());
 			bill.setArriveaddress(receiveraddress);
 			bill.setSendaddress(startaddress);
+			bill.setCost(5);
 			rec.setName(receivername);
 			rec.setPhone(receiverphone);
 			rec.setAddress(receiveraddress);

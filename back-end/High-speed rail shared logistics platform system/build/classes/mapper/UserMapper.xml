@@ -37,7 +37,7 @@ insert into goods_info(name,type,weight) values(#{name},#{type},#{weight})
 </insert>
 
 <insert id="addBill" parameterType="bill" useGeneratedKeys="true">
-insert into bill(giveUserID,sendaddress,arriveaddress) values(#{giveUserID},#{sendaddress},#{arriveaddress})
+insert into bill(giveUserID,sendaddress,arriveaddress,cost) values(#{giveUserID},#{sendaddress},#{arriveaddress},#{cost})
 </insert>
 
 <insert id="addReceiver" parameterType="receiver" useGeneratedKeys="true">

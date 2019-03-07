@@ -173,7 +173,19 @@
 					td2.innerText = data[i].giveUserID;
 					tr.appendChild(td2);
 					var td4 = document.createElement("td");
-					td4.innerText = data[i].goods.type;
+					if(data[i].goods.type==1){
+						td4.innerText = "文件";
+					}else if(data[i].goods.type==2){
+						td4.innerText = "数码产品";
+					}else if(data[i].goods.type==3){
+						td4.innerText = "生活用品";
+					}else if(data[i].goods.type==4){
+						td4.innerText = "服饰";
+					}else if(data[i].goods.type==5){
+						td4.innerText = "食品";
+					}else if(data[i].goods.type==6){
+						td4.innerText = "其他";
+					}
 					tr.appendChild(td4);
 					var td5 = document.createElement("td");
 					td5.innerText = data[i].goods.weight;
