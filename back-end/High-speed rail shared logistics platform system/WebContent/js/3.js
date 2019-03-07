@@ -168,18 +168,10 @@ function checkTrainNum(){
 function checkStartTime(){
 	var time=document.getElementById("start_time").value;
 	var divTimeId=document.getElementById("starttime_prompt");
-
-	var reg_start = /^(?:(?!0000)[0-9]{4}-(?:(?:0[1-9]|1[0-2])-(?:0[1-9]|1[0-9]|2[0-8])|(?:0[13-9]|1[0-2])-(?:29|30)|(?:0[13578]|1[02])-31)|(?:[0-9]{2}(?:0[48]|[2468][048]|[13579][26])|(?:0[48]|[2468][048]|[13579][26])00)-02-29)$/;
-	
 	divTimeId.innerHTML="";
 	if(time==""){
 		start_time.value="";
 		divTimeId.innerHTML="高铁出发时间不能为空！";
-		return false;
-	}
-	else if(!reg_start.test(time)){
-		start_time.value="";
-		divTimeId.innerHTML="高铁出发时间不合法！";
 		return false;
 	}
 	divTimeId.innerHTML="";
