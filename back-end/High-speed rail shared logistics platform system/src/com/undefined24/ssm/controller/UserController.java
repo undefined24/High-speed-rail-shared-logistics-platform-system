@@ -91,6 +91,14 @@ public class UserController {
 	}
 	
 	/*
+	 * 前往运费查询
+	 */
+	@RequestMapping(value="/feight",method=RequestMethod.GET)
+	public String gotoFeight() {
+		return "freight_inquiry";
+	}
+	
+	/*
 	 * 前往登录页面homepage.jsp
 	 */
 	@RequestMapping(value="/gotoHomepage",method=RequestMethod.GET)

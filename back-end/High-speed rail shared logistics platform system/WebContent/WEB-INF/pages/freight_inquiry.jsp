@@ -8,24 +8,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <title>freight_inquiry</title>
-    <link rel="stylesheet" href="../bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css">
-    <script src="../js/jquery-3.2.1.min.js"></script>
-    <script src="../bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" href="../css/1.css">
-	<link rel="stylesheet" href="../css/senderreceiver.css">
-	<script src="../js/3.js"></script>
+    <link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css">
+    <script src="js/jquery-3.2.1.min.js"></script>
+    <script src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/1.css">
+	<link rel="stylesheet" href="css/senderreceiver.css">
+	<script src="js/3.js"></script>
 </head>
 <body>
 	<nav class="navbar navbar-default" role="navigation">
 		<div class="container-fluid container">
 			<div id="nav" class="navbar-header" style="height: 70px;">
 	<!--            <a href="#"><img src="image/logo.png"  style="padding: 10px;"/></a>-->
-				<img src="../image/logo.jpg" style="height: 100%" >
+				<img src="image/my_logo.jpg" style="height: 100%" >
 			</div>
 			<div>
 				<ul class="nav navbar-nav ">
 
-					<li class="active" id="crftag"><a href="#">首页</a></li>
+					<li class="active" id="crftag"><a href="main">首页</a></li>
 					<li id="crftag"><a href="#">服务支持</a></li>
 					<li id="crftag"><a href="#">金融</a></li>
 					<li id="crftag"><a href="#">加盟合作</a></li>
@@ -35,8 +35,8 @@
 			</div>
 			<div>
 				<ul class="nav navbar-nav navbar-right">
-					<li id="crftag"><a href="#">快速登录/注册</a></li>
-					<li id="crftag"><a href="#">个人中心</a></li>
+					<li id="crftag"><a href="register">快速登录/注册</a></li>
+					<li id="crftag"><a href="gotoUserCenter">个人中心</a></li>
 				</ul>
 			</div>
 		</div>

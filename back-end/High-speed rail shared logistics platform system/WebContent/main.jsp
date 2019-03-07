@@ -25,7 +25,7 @@
         <div>
             <ul class="nav navbar-nav ">
 				
-                <li class="active" id="crftag"><a href="#">首页</a></li>
+                <li class="active" id="crftag"><a href="main">首页</a></li>
 				<li id="crftag"><a href="#">服务支持</a></li>
 				<li id="crftag"><a href="#">金融</a></li>
 				<li id="crftag"><a href="#">加盟合作</a></li>
@@ -54,13 +54,13 @@
             <!-- 轮播（Carousel）项目 -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="../image/my1.jpg" alt="First slide">
+                    <img src="image/my1.jpg" alt="First slide">
                 </div>
                 <div class="item">
-                    <img src="../image/my2.jpg" alt="Second slide">
+                    <img src="image/my2.jpg" alt="Second slide">
                 </div>
 				<div class="item">
-                    <img src="../image/my3.jpg" alt="Second slide">
+                    <img src="image/my3.jpg" alt="Second slide">
                 </div>
             </div>
             <!-- 轮播（Carousel）导航 -->

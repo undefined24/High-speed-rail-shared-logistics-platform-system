@@ -51,7 +51,7 @@
 						<ul class="nav navbar-nav navbar-right">
 							<li class="active" id="crftag"><a href="gotoSender">我要寄件</a></li>
 							<li id="crftag"><a href="gotoReceiver">我要接件</a></li>
-							<li id="crftag"><a href="#">运费查询</a></li>
+							<li id="crftag"><a href="feight">运费查询</a></li>
 						</ul>
 					</div>
 				</div>
