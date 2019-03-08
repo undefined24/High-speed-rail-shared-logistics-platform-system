@@ -169,7 +169,7 @@
 		  <h4 class="featurette-heading" align="center" style="color: red">活动时间：2019-01-02 - 2019-03-30</h4>
 		  <h4 class="featurette-heading" align="center" style="color: red">活动范围：中国内地</h4>
 		  <a href="#">
-		  	<button class="btn btn-default" style="display:block;margin:0 auto">View details &raquo;</button>
+		  	<button class="btn btn-default" style="display:block;margin:0 auto">查看详情&raquo;</button>
 		  </a>
           <p class="lead"></p>
         </div>
@@ -186,7 +186,7 @@
 		  <h4 class="featurette-heading" align="center" style="color: red">活动时间：2019-01-02 - 2019-03-30</h4>
 		  <h4 class="featurette-heading" align="center" style="color: red">活动范围：中国内地</h4>
 		  <a href="#">
-		  	<button class="btn btn-default" style="display:block;margin:0 auto">View details &raquo;</button>
+		  	<button class="btn btn-default" style="display:block;margin:0 auto">查看详情&raquo;</button>
 		  </a>
           <p class="lead"></p>
         </div>
@@ -203,7 +203,7 @@
 		  <h4 class="featurette-heading" align="center" style="color: red">活动时间：2019-01-02 - 2019-03-30</h4>
 		  <h4 class="featurette-heading" align="center" style="color: red">活动范围：中国内地</h4>
 		  <a href="#">
-		  	<button class="btn btn-default" style="display:block;margin:0 auto">View details &raquo;</button>
+		  	<button class="btn btn-default" style="display:block;margin:0 auto">查看详情&raquo;</button>
 			</a> 
           <p class="lead"></p>
         </div>
@@ -215,8 +215,8 @@
       <hr class="featurette-divider">
 	<!-- FOOTER -->
       <footer>
-        <p class="pull-right"><a href="#">Back to top</a></p>
-        <p>&copy; 2019 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+        <p class="pull-right"><a href="#">回到顶部</a></p>
+        <p>&copy; 2019 Undefined24, Org. &middot; <a href="#">版权</a> &middot; <a href="#">条款</a></p>
 	</footer>
 </div>
 <!-- 模态框（Modal） -->
