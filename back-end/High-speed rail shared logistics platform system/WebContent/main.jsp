@@ -7,7 +7,7 @@
     <!-- Required meta tags -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
-    <title>index</title>
+    <title>首页</title>
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <script src="js/jquery-3.2.1.min.js"></script>
     <script src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
@@ -55,7 +55,7 @@
             <!-- 轮播（Carousel）项目 -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="image/my1.jpg" alt="First slide">
+                    <img src="image/my4.jpeg" alt="First slide">
                 </div>
                 <div class="item">
                     <img src="image/my2.jpg" alt="Second slide">

@@ -8,7 +8,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no">
     <meta http-equiv="Content-Type" content="multipart/form-data;         charset=utf-8" />
-    <title>register</title>
+    <title>注册</title>
     <link rel="stylesheet" href="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="css/file-upload-with-preview.min.css">
     <script src="js/jquery-3.2.1.min.js"></script>
