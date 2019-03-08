@@ -13,6 +13,7 @@
     <script src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/02.css">
 	<script src="js/2.js"></script>
+    <link rel="shortcut  icon" href="image/favicon.ico" type="image/x-icon" />
 
 </head>
 <body>

@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../../css/1.css">
     <script src="../../js/1.js"></script>
     <link rel="stylesheet" href="../../css/staff&admin.css">
+    <link rel="shortcut  icon" href="image/favicon.ico" type="image/x-icon" />
 </head>
 <body>
   <h3>Successful</h3>

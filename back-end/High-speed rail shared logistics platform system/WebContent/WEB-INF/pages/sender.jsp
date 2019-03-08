@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="css/1.css">
 	<link rel="stylesheet" href="css/senderreceiver.css">
 	<script src="js/3.js"></script>
+    <link rel="shortcut  icon" href="image/favicon.ico" type="image/x-icon" />
 </head>
 <body>
 	<nav class="navbar navbar-default" role="navigation">

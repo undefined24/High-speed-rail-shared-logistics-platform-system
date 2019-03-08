@@ -18,6 +18,7 @@
 	<link rel="stylesheet" href="css/bootstrap-datetimepicker.css">
 	<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
 	<script src="js/3.js"></script>
+    <link rel="shortcut  icon" href="image/favicon.ico" type="image/x-icon" />
 	
 </head>
 <body>

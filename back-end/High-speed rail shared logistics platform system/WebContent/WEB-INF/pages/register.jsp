@@ -15,6 +15,7 @@
     <script src="bootstrap-3.3.7-dist/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
     
     <link rel="stylesheet" href="css/1.css">
+    <link rel="shortcut  icon" href="image/favicon.ico" type="image/x-icon" />
     <script src="js/1.js"></script>
 </head>
 <body>
