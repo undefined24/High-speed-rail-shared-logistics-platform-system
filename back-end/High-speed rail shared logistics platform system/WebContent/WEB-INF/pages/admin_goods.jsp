@@ -73,7 +73,24 @@
                 <td>${goods.name}</td>
                 <td>${goods.bill.giveUserID}</td>
                 <td>${goods.bill.acceptUserID}</td>
-				<td>${goods.type}</td>
+                <c:if test="${goods.type==1}">
+				<td>文件</td>
+				</c:if>
+				<c:if test="${goods.type==2}">
+				<td>数码产品</td>
+				</c:if>
+				<c:if test="${goods.type==3}">
+				<td>生活用品</td>
+				</c:if>
+				<c:if test="${goods.type==4}">
+				<td>服饰</td>
+				</c:if>
+				<c:if test="${goods.type==5}">
+				<td>食品</td>
+				</c:if>
+				<c:if test="${goods.type==6}">
+				<td>其他</td>
+				</c:if>
                 <td>${goods.weight}</td>
                 <td>${goods.bill.trainnumber}</td>
                 <td>${goods.bill.cost}</td>
