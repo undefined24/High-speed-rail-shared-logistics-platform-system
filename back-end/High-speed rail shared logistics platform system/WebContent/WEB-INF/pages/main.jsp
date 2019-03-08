@@ -55,7 +55,7 @@
             <!-- 轮播（Carousel）项目 -->
             <div class="carousel-inner">
                 <div class="item active">
-                    <img src="image/my4.jpeg" alt="First slide">
+                    <img src="image/my4.jpg" alt="First slide">
                 </div>
                 <div class="item">
                     <img src="image/my2.jpg" alt="Second slide">
