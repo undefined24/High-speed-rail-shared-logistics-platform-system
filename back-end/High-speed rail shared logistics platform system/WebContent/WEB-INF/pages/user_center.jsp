@@ -140,10 +140,10 @@
 							<td>${send.arriveaddress}</td>
 							<td>${send.trainnumber }</td>
 							<td>${send.cost}</td>
-							<c:if test="${send.acceptUserID!=null}">
+							<c:if test="${send.acceptUserID!=0}">
 							<td>是</td>
 							</c:if>
-							<c:if test="${send.acceptUserID==null}">
+							<c:if test="${send.acceptUserID==0}">
 							<td>否</td>
 							</c:if>
 							<td>${send.completetime}</td>

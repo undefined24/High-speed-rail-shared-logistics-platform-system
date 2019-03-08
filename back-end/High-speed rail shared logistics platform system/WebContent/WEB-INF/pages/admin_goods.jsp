@@ -72,7 +72,12 @@
                 <td id="trackingID">${goods.trackingID}</td>
                 <td>${goods.name}</td>
                 <td>${goods.bill.giveUserID}</td>
+                 <c:if test="${goods.bill.acceptUserID!=0}">
                 <td>${goods.bill.acceptUserID}</td>
+                 </c:if>
+                 <c:if test="${goods.bill.acceptUserID==0}">
+                <td></td>
+                 </c:if>
                 <c:if test="${goods.type==1}">
 				<td>文件</td>
 				</c:if>
@@ -94,10 +99,10 @@
                 <td>${goods.weight}</td>
                 <td>${goods.bill.trainnumber}</td>
                 <td>${goods.bill.cost}</td>
-                <c:if test="${goods.bill.acceptUserID!=null}">
+                <c:if test="${goods.bill.acceptUserID!=0}">
 				<td>是</td>
 				</c:if>
-				<c:if test="${goods.bill.acceptUserID==null}">
+				<c:if test="${goods.bill.acceptUserID==0}">
 				<td>否</td>
 				</c:if>
 				<c:if test="${goods.bill.complete==false}">

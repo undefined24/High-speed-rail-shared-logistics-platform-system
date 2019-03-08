@@ -86,7 +86,7 @@ public class UserController {
 	 * 前往主页
 	 */
 	@RequestMapping(value="/main",method=RequestMethod.GET)
-	public String gotoMain() {
+	public String gotoMain(HttpSession session) {
 		return "main";
 	}
 	
@@ -94,7 +94,7 @@ public class UserController {
 	 * 前往运费查询
 	 */
 	@RequestMapping(value="/feight",method=RequestMethod.GET)
-	public String gotoFeight() {
+	public String gotoFeight(HttpSession session) {
 		return "freight_inquiry";
 	}
 	
@@ -102,7 +102,7 @@ public class UserController {
 	 * 前往登录页面homepage.jsp
 	 */
 	@RequestMapping(value="/gotoHomepage",method=RequestMethod.GET)
-	public String gotoHomepage() {
+	public String gotoHomepage(HttpSession session) {
 		return "homepage";
 	}
 	
@@ -203,7 +203,7 @@ public class UserController {
 	 * 前往确认接件
 	 */
 	@RequestMapping(value="/recConfirm",method=RequestMethod.GET)
-	public void recConfirm(@RequestParam("id") int id) {
+	public void recConfirm(HttpSession session,@RequestParam("id") int id) {
 		this.setRec_id(id);
 		System.out.println(id);
 	}
@@ -215,11 +215,12 @@ public class UserController {
 	public ModelAndView confirm(HttpSession session,
 			HttpServletRequest req) {
 		ModelAndView mv = new ModelAndView();
+		User current_user = (User) session.getAttribute("current_user");
+		System.out.println(current_user);
 		Bill bill = new Bill();
 		bill.setTrackingID(this.getRec_id());
 		bill.setTrainnumber(this.getTrainnumber());
 		bill.setTrainnumber(trainnumber);
-		User current_user = (User) session.getAttribute("current_user");
 		bill.setAcceptUserID(current_user.getUserID());
 		System.out.println(bill);
 		try {
